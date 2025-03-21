@@ -7,6 +7,8 @@ find_package(Qt6 COMPONENTS Core Widgets Gui OpenGLWidgets REQUIRED)
 
 add_executable(usw 
     Main.cpp
+
+    logo.rc
 )
 
 target_compile_options(usw PRIVATE "/Zc:__cplusplus" "/permissive-" "/utf-8")
