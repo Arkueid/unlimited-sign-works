@@ -1,21 +1,15 @@
-set(CMAKE_PREFIX_PATH "D:/Qt/6.8.2/msvc2022_64/")
-set(CMAKE_AUTOMOC ON)   # 自动处理 Q_OBJECT 宏的元对象编译（moc）
-set(CMAKE_AUTOUIC ON)   # 自动编译 UI 文件（.ui → .h）
-set(CMAKE_AUTORCC ON)   # 自动编译资源文件（.qrc → .cpp）
-
-find_package(Qt6 COMPONENTS Core Widgets Gui OpenGLWidgets REQUIRED)
-
 add_executable(usw 
     Main.cpp
+    win/scene/GLScene.cpp
+    utils/Camera.cpp
+    render/Drawable.cpp
 
     logo.rc
 )
 
-target_compile_options(usw PRIVATE "/Zc:__cplusplus" "/permissive-" "/utf-8")
+target_include_directories(usw PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_compile_definitions(usw
-    PRIVATE UNICODE _UNICODE
-)
+target_compile_options(usw PRIVATE "/Zc:__cplusplus" "/permissive-" "/utf-8")
 
 set_target_properties(usw PROPERTIES
     LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
@@ -25,8 +19,8 @@ target_link_libraries(usw
     PRIVATE
     Qt6::Core
     Qt6::Widgets
-    Qt6::Gui
     Qt6::OpenGLWidgets 
+    core
 )
 
 set_target_properties(usw PROPERTIES

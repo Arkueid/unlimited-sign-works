@@ -1,10 +1,13 @@
 #include <QApplication>
-#include <QWidget>
+#include <win/scene/GLScene.hpp>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QWidget w;
+    GLScene w;
     w.show();
-    return app.exec();
+    app.exec();
+
+    // printf("shit\n");
+    return 0;
 }

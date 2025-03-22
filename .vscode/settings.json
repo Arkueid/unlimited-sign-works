@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "qmatrix4x4": "cpp",
+        "qopenglshaderprogram": "cpp",
+        "qopenglbuffer": "cpp",
+        "xutility": "cpp"
+    }
+}
