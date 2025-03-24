@@ -23,7 +23,7 @@ void GLScene::initializeGL()
 
     if (!program.isLinked())
     {
-        printf("Shader program is not linked\n");
+        qDebug() << "Shader program is not linked\n";
     }
 
     drawables.append({&pole.mainPole, &pole.mainPoleMat});

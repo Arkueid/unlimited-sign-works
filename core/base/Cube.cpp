@@ -1,51 +1,70 @@
 #include <base/Cube.hpp>
 #include "Cube.hpp"
 
-static unsigned short indices[cubeIndexCount] = {
-    0, 1, 2, 0, 2, 3,
-    1, 5, 6, 1, 2, 6,
-    5, 4, 7, 5, 6, 7,
-    4, 0, 3, 4, 3, 7,
-    0, 1, 5, 0, 4, 5,
-    3, 2, 6, 3, 7, 6};
+static unsigned short indices[cubeIndexCount] = {0, 1, 2, 0, 2, 3,
+                                          1, 5, 6, 1, 2, 6,
+                                          5, 4, 7, 5, 6, 7,
+                                          4, 0, 3, 4, 3, 7,
+                                          0, 1, 5, 0, 4, 5,
+                                          3, 2, 6, 3, 7, 6};
+
+static float normals[cubeIndexCount * 3] = {
+    // x, y, z
+    //  0, 1, 2, 0, 2, 3,
+    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
+    //  1, 5, 6, 1, 2, 6,
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+    //  5, 4, 7, 5, 6, 7,
+    0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
+    //  4, 0, 3, 4, 3, 7,
+    -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
+    //  0, 1, 5, 0, 4, 5,
+    0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
+    //  3, 2, 6, 3, 7, 6
+    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0};
 
 Cube::Cube(float a, float b, float c)
 {
+    float points[8 * 3];
+
     const float x = -a / 2, z = b / 2, y = -c / 2;
-    vertices[0] = x;
-    vertices[1] = y;
-    vertices[2] = z;
 
-    vertices[3] = -x;
-    vertices[4] = y;
-    vertices[5] = z;
+    points[0] = x;
+    points[1] = y;
+    points[2] = z;
+    points[3] = -x;
+    points[4] = y;
+    points[5] = z;
+    points[6] = -x;
+    points[7] = -y;
+    points[8] = z;
+    points[9] = x;
+    points[10] = -y;
+    points[11] = z;
+    points[12] = x;
+    points[13] = y;
+    points[14] = -z;
+    points[15] = -x;
+    points[16] = y;
+    points[17] = -z;
+    points[18] = -x;
+    points[19] = -y;
+    points[20] = -z;
+    points[21] = x;
+    points[22] = -y;
+    points[23] = -z;
 
-    vertices[6] = -x;
-    vertices[7] = -y;
-    vertices[8] = z;
+    int index = 0;
 
-    vertices[9] = x;
-    vertices[10] = -y;
-    vertices[11] = z;
-
-    vertices[12] = x;
-    vertices[13] = y;
-    vertices[14] = -z;
-
-    vertices[15] = -x;
-    vertices[16] = y;
-    vertices[17] = -z;
-
-    vertices[18] = -x;
-    vertices[19] = -y;
-    vertices[20] = -z;
-
-    vertices[21] = x;
-    vertices[22] = -y;
-    vertices[23] = -z;
+    for (int i = 0; i < cubeIndexCount; i++)
+    {
+        vertices[index++] = points[indices[i] * 3 + 0];
+        vertices[index++] = points[indices[i] * 3 + 1];
+        vertices[index++] = points[indices[i] * 3 + 2];
+    }
 }
 
-unsigned short *Cube::getIndices()
+float *Cube::getNormals()
 {
-    return indices;
+    return normals;
 }

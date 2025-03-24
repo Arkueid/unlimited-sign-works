@@ -8,9 +8,9 @@
 class Cylinder : public Mesh {
 
     int indexCount;
-    unsigned short *indices;
-    int vertexCount;
+    int pointCount;
     float *vertices;
+    float *normals;
     float h;
     float d;
 public:
@@ -21,20 +21,16 @@ public:
     Cylinder(float d, float h, float precision = 1.0f / 20.0f);
     ~Cylinder() override;
 
-    int getIndexCount() override
-    {
-        return indexCount;
-    }
-    unsigned short* getIndices() override
-    {
-        return indices;
-    }
     int getVertexCount() override
     {
-        return vertexCount;
+        return indexCount;
     }
     float* getVertices() override
     {
         return vertices;
+    }
+    float* getNormals() override
+    {
+        return normals;
     }
 };

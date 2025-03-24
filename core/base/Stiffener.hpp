@@ -6,14 +6,14 @@
 
 #include <base/Mesh.hpp>
 
-#define stiffenerVertexCount 10
 #define siffenerIndexCount 48
 
 
 /// @brief 加劲板
 class Stiffener : public Mesh
 {
-    float vertices[stiffenerVertexCount * 3];
+    float vertices[siffenerIndexCount * 3];
+    float normals[siffenerIndexCount * 3];
 public:
 
     /// @brief 加劲板
@@ -31,15 +31,14 @@ public:
         return vertices;
     }
 
-    unsigned short* getIndices() override;
-
     int getVertexCount() override
-    {
-        return stiffenerVertexCount;
-    }
-
-    int getIndexCount() override
     {
         return siffenerIndexCount;
     }
+
+    float *getNormals() override
+    {
+        return normals;
+    }
+
 };

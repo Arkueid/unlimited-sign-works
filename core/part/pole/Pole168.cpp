@@ -13,8 +13,8 @@ Pole168::Pole168():
     mainPoleMat.setToIdentity();
 
     sideBeam1Mat.setToIdentity();
-    sideBeam1Mat.translate(-250.0f, 6700.0f - 300.0f, 0.0f);
-    sideBeam1Mat.rotate(-90.0f, 0.0f, 0.0f, 1.0f);
+    sideBeam1Mat.translate(-250.0f, 6700.0f - 300.0f, 0.0f); // originX, originY, originZ
+    sideBeam1Mat.rotate(-90.0f, 0.0f, 0.0f, 1.0f); // rotateX, rotateY, rotateZ
 
     sideBeam2Mat.setToIdentity();
     sideBeam2Mat.translate(-250.0f, 6700.0f - 300.0f - 600.0f, 0.0f);

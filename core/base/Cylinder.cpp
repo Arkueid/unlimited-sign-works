@@ -6,36 +6,38 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
 {
     const int numOnCircle = static_cast<int>(PI * d * precision);
     indexCount = numOnCircle * 3 * 4;
-    vertexCount = numOnCircle * 2 + 2;
+    pointCount = numOnCircle * 2 + 2;
 
-    indices = new unsigned short[indexCount];
-    vertices = new float[vertexCount * 3];
+    unsigned short *indices = new unsigned short[indexCount];
+    float *points = new float[pointCount * 3];
+    vertices = new float[indexCount * 3];
+    normals = new float[indexCount * 3];
 
     const float angleStep = 2 * PI / numOnCircle;
-    const int upperCenter = vertexCount - 2;
-    const int lowerCenter = vertexCount - 1;
+    const int upperCenter = pointCount - 2;
+    const int lowerCenter = pointCount - 1;
     const float r = d / 2;
     // 上圆顶点|底圆顶点|上圆心|下圆心|
-    for (int i = 0; i < vertexCount - 2; i++)
+    for (int i = 0; i < pointCount - 2; i++)
     {
         const float angle = i * angleStep;
-        vertices[i * 3] = r * cos(angle);
+        points[i * 3] = r * cos(angle);
         if (i < numOnCircle)
         {
-            vertices[i * 3 + 1] = h;
+            points[i * 3 + 1] = h;
         }
         else
         {
-            vertices[i * 3 + 1] = 0;
+            points[i * 3 + 1] = 0;
         }
-        vertices[i * 3 + 2] = r * sin(angle);
+        points[i * 3 + 2] = r * sin(angle);
     }
-    vertices[vertexCount * 3 - 6] = 0;
-    vertices[vertexCount * 3 - 5] = 0;
-    vertices[vertexCount * 3 - 4] = 0;
-    vertices[vertexCount * 3 - 3] = 0;
-    vertices[vertexCount * 3 - 2] = h;
-    vertices[vertexCount * 3 - 1] = 0;
+    points[upperCenter * 3 + 0] = 0;
+    points[upperCenter * 3 + 1] = h;
+    points[upperCenter * 3 + 2] = 0;
+    points[lowerCenter * 3 + 0] = 0;
+    points[lowerCenter * 3 + 1] = 0;
+    points[lowerCenter * 3 + 2] = 0;
 
     int index = 0;
     for (int i = 0; i < numOnCircle; i++)
@@ -57,10 +59,52 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
         indices[index++] = (i + 1) % numOnCircle;
         indices[index++] = (i + 1) % numOnCircle + numOnCircle;
     }
+
+    index = 0;
+    for (int i = 0; i < numOnCircle; i++)
+    {
+        // 上
+        for (int j = 0; j < 3; j++)
+        {
+            vertices[index * 3 + 0] = points[indices[index] * 3 + 0];
+            vertices[index * 3 + 1] = points[indices[index] * 3 + 1];
+            vertices[index * 3 + 2] = points[indices[index] * 3 + 2];
+            normals[index * 3 + 0] = 0;
+            normals[index * 3 + 1] = 1;
+            normals[index * 3 + 2] = 0;
+            index++;
+        }
+
+        // 下
+        for (int j = 0; j < 3; j++)
+        {
+            vertices[index * 3 + 0] = points[indices[index] * 3 + 0];
+            vertices[index * 3 + 1] = points[indices[index] * 3 + 1];
+            vertices[index * 3 + 2] = points[indices[index] * 3 + 2];
+            normals[index * 3 + 0] = 0;
+            normals[index * 3 + 1] = -1;
+            normals[index * 3 + 2] = 0;
+            index++;
+        }
+
+        // 侧面1，侧面2
+        for (int j = 0; j < 6; j++)
+        {
+            vertices[index * 3 + 0] = points[indices[index] * 3 + 0];
+            vertices[index * 3 + 1] = points[indices[index] * 3 + 1];
+            vertices[index * 3 + 2] = points[indices[index] * 3 + 2];
+            normals[index * 3 + 0] = vertices[index * 3 + 0];
+            normals[index * 3 + 1] = 0;
+            normals[index * 3 + 2] = vertices[index * 3 + 2];
+            index++;
+        }
+    }
+    delete[] indices;
+    delete[] points;
 }
 
 Cylinder::~Cylinder()
 {
-    delete[] indices;
     delete[] vertices;
+    delete[] normals;
 }

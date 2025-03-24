@@ -11,11 +11,14 @@
 
 class Drawable : protected QOpenGLFunctions
 {
-    Mesh* mesh;
-    QMatrix4x4* modelMatrix;
-    QOpenGLBuffer vbo;
-public:
-    Drawable(Mesh* mesh, QMatrix4x4* modelMatrix);
+    Mesh *mesh;
+    QMatrix4x4 *modelMatrix;
+    QOpenGLBuffer vertexBuffer; // TODO: arraybuffer manager
+    QOpenGLBuffer normalBuffer;
+    // TODO: bool visible
 
-    void draw(QOpenGLShaderProgram* program);
+public:
+    Drawable(Mesh *mesh, QMatrix4x4 *modelMatrix);
+
+    void draw(QOpenGLShaderProgram *program);
 };
