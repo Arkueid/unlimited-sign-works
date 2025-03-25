@@ -1,0 +1,191 @@
+{
+    "id": "Pole168",
+    "parts": [
+        {
+            "name": "sideBeam1",
+            "shapeRef": 0,
+            "textureRefs": [0, 0, 0],
+            "position": [-250.0, 6400.0, 0.0],
+            "rotation": [0.0, 0.0, -90.0]
+        },
+        {
+            "name": "sideBeam2",
+            "shapeRef": 0,
+            "textureRefs": [0, 0, 0],
+            "position": [-250.0, 5800.0, 0.0],
+            "rotation": [0.0, 0.0, -90.0]
+        },
+        {
+            "name": "panel",
+            "shapeRef": 3,
+            "textureRefs": [1, 1, 1, 1, 1, 1],
+            "position": [2500.0, 6100.0, 64.0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "bottom",
+            "shapeRef": 6,
+            "textureRefs": [1, 1, 1, 1, 1, 1],
+            "position": [0, 10.0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "flange1",
+            "shapeRef": 2,
+            "textureRefs": [1, 1, 1],
+            "position": [250.0, 6400.0, 0.0],
+            "rotation": [0, 0, -90.0]
+        },
+        {
+            "name": "flange2",
+            "shapeRef": 2,
+            "textureRefs": [1, 1, 1],
+            "position": [250.0, 5800.0, 0],
+            "rotation": [0, 0, -90.0]
+        },
+        {
+            "name": "sideStiffener1",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [-250.0, 6454.0, 0],
+            "rotation": [0.0, 0, 0]
+        },
+        {
+            "name": "sideStiffener2",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [-250.0, 6400.0, 54.0],
+            "rotation": [90.0, 0, 0]
+        },
+        {
+            "name": "sideStiffener3",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [-250.0, 6346.0, 0],
+            "rotation": [180.0, 0, 0]
+        },
+        {
+            "name": "sideStiffener4",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [-250.0, 6400.0, -54.0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "sideStiffener5",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "sideStiffener6",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "sideStiffener7",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "sideStiffener8",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "bottomStiffener1",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "bottomStiffener2",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "bottomStiffener3",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "name": "bottomStiffener4",
+            "shapeRef": 0,
+            "textureRefs": [0],
+            "position": [0, 0, 0],
+            "rotation": [0, 0, 0]
+        }
+    ],
+    "shapes": [
+        {
+            "name": "sideBeam",
+            "type": "Cylinder",
+            "r": 108.0,
+            "h": 4000.0
+        },
+        {
+            "name": "mainPole",
+            "type": "Cylinder",
+            "r": 168.0,
+            "h": 6700.0
+        },
+        {
+            "name": "flange",
+            "type": "Cylinder",
+            "r": 300.0,
+            "h": 20.0
+        },
+        {
+            "name": "panel",
+            "type": "Cube",
+            "a": 2500.0,
+            "b": 10.0,
+            "c": 2000.0
+        },
+        {
+            "name": "bottom",
+            "type": "Cube",
+            "a": 400.0,
+            "b": 400.0,
+            "c": 20.0
+        },
+        {
+            "name": "sideStiffener",
+            "type": "Stiffener",
+            "a": 30.0,
+            "b": 104.0,
+            "h1": 550.0,
+            "h2": 750.0,
+            "c": 8.0,
+            "offsetH": 0.0,
+            "offsetV": 20.0
+        },
+        {
+            "name": "bottomStiffener",
+            "type": "Stiffener",
+            "a": 50.0,
+            "b": 200.0,
+            "h1": 30.0,
+            "h2": 110.0,
+            "c": 8.0,
+            "offsetH": 20.0,
+            "offsetV": 0.0
+        }
+    ],
+    "textures": [
+        "textures/metal/metal6.bmp",
+        "textures/metal/metal7.bmp"
+    ]
+}

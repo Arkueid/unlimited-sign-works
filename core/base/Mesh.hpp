@@ -1,6 +1,7 @@
 #pragma once
 
 #include <core.hpp>
+#include <render/Drawable.hpp>
 
 class Mesh
 {

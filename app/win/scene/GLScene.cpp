@@ -4,7 +4,7 @@
 #include <QKeyEvent>
 
 GLScene::GLScene() : camera(QVector3D(0.0f, 0.0f, 3.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                     deltaTime(0.0f), lastFrame(0.0f)
+                     deltaTime(0.0f)
 {
 }
 
@@ -51,15 +51,11 @@ void GLScene::initializeGL()
     drawables.append({&pole.bottomStiffener, &pole.bottomStiffener3Mat});
     drawables.append({&pole.bottomStiffener, &pole.bottomStiffener4Mat});
 
-    startTimer(1000 / 30);
+    deltaTime = 1.0f / 60.0f;
 }
 
 void GLScene::paintGL()
 {
-    float currentFrame = float(QTime::currentTime().msecsSinceStartOfDay()) / 1000.0f;
-    deltaTime = currentFrame - lastFrame;
-    lastFrame = currentFrame;
-
     glEnable(GL_DEPTH_TEST);
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -116,10 +112,7 @@ void GLScene::keyPressEvent(QKeyEvent *event)
     { // 下降
         camera.processKeyboardForVerticalMovement(-1, deltaTime);
     }
-}
 
-void GLScene::timerEvent(QTimerEvent *event)
-{
     update();
 }
 
@@ -144,4 +137,5 @@ void GLScene::mouseMoveEvent(QMouseEvent *event)
     lastY = event->y();
 
     camera.processMouseMovement(xoffset, yoffset);
+    update();
 }

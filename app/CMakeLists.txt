@@ -2,13 +2,19 @@ add_executable(usw
     Main.cpp
     win/scene/GLScene.hpp
     win/scene/GLScene.cpp
+    win/scene/GLScene2.hpp
+    win/scene/GLScene2.cpp
+
     utils/Camera.hpp
     utils/Camera.cpp
     utils/Camera.cpp
     utils/TextureManager.hpp    
     utils/TextureManager.cpp
+
     render/GLObject.hpp
     render/GLObject.cpp
+    render/GLRenderer.hpp
+    render/GLRenderer.cpp
 
     logo.rc
 )

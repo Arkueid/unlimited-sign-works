@@ -8,8 +8,14 @@ add_library(core STATIC
     ${PROJECT_ROOT}/core/base/Mesh.hpp
 
     ${PROJECT_ROOT}/core/part/pole/Pole.hpp
+    ${PROJECT_ROOT}/core/part/pole/Pole.cpp
     ${PROJECT_ROOT}/core/part/pole/Pole168.hpp
     ${PROJECT_ROOT}/core/part/pole/Pole168.cpp
+    ${PROJECT_ROOT}/core/part/Part.hpp
+    ${PROJECT_ROOT}/core/part/Part.cpp
+
+    ${PROJECT_ROOT}/core/render/Drawable.hpp
+    ${PROJECT_ROOT}/core/render/Renderer.hpp
 
     ${PROJECT_ROOT}/core/core.hpp
 )

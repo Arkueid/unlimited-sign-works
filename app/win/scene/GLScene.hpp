@@ -14,7 +14,6 @@ class GLScene : public QOpenGLWidget, protected QOpenGLFunctions
 
     QOpenGLShaderProgram program;
     Camera camera;
-    float lastFrame;
     float deltaTime;
 
     Pole168 pole;
@@ -33,7 +32,6 @@ public:
     void paintGL() override;
     void resizeGL(int w, int h) override;
     void keyPressEvent(QKeyEvent *event) override;
-    void timerEvent(QTimerEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override; // 添加鼠标移动事件处理器
 };

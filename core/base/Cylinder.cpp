@@ -1,6 +1,7 @@
 #include <base/Cylinder.hpp>
 #include <core.hpp>
 #include <cmath>
+#include "Cylinder.hpp"
 
 Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
 {
