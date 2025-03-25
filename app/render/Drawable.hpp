@@ -14,7 +14,6 @@ class Drawable : protected QOpenGLFunctions
     Mesh *mesh;
     QMatrix4x4 *modelMatrix;
     QOpenGLBuffer vertexBuffer; // TODO: arraybuffer manager
-    QOpenGLBuffer normalBuffer;
     // TODO: bool visible
 
 public:

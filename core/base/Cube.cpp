@@ -1,29 +1,13 @@
 #include <base/Cube.hpp>
-#include "Cube.hpp"
 
-static unsigned short indices[cubeIndexCount] = {0, 1, 2, 0, 2, 3,
+static unsigned short indices[cubeVertexCount] = {0, 1, 2, 0, 2, 3,
                                           1, 5, 6, 1, 2, 6,
                                           5, 4, 7, 5, 6, 7,
                                           4, 0, 3, 4, 3, 7,
                                           0, 1, 5, 0, 4, 5,
                                           3, 2, 6, 3, 7, 6};
 
-static float normals[cubeIndexCount * 3] = {
-    // x, y, z
-    //  0, 1, 2, 0, 2, 3,
-    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
-    //  1, 5, 6, 1, 2, 6,
-    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
-    //  5, 4, 7, 5, 6, 7,
-    0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
-    //  4, 0, 3, 4, 3, 7,
-    -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
-    //  0, 1, 5, 0, 4, 5,
-    0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
-    //  3, 2, 6, 3, 7, 6
-    0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0};
-
-Cube::Cube(float a, float b, float c)
+Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
 {
     float points[8 * 3];
 
@@ -54,17 +38,58 @@ Cube::Cube(float a, float b, float c)
     points[22] = -y;
     points[23] = -z;
 
-    int index = 0;
-
-    for (int i = 0; i < cubeIndexCount; i++)
+    for (int i = 0; i < cubeVertexCount; i++)
     {
-        vertices[index++] = points[indices[i] * 3 + 0];
-        vertices[index++] = points[indices[i] * 3 + 1];
-        vertices[index++] = points[indices[i] * 3 + 2];
+        vertices[i].x = points[indices[i] * 3 + 0];
+        vertices[i].y = points[indices[i] * 3 + 1];
+        vertices[i].z = points[indices[i] * 3 + 2];
     }
-}
 
-float *Cube::getNormals()
-{
-    return normals;
+    // front
+    for (int i = 0; i < 6; i++)
+    {
+        vertices[i].nx = 0.0f;
+        vertices[i].ny = 0.0f;
+        vertices[i].nz = 1.0f;
+    }
+
+    // right
+    for (int i = 6; i < 12; i++)
+    {
+        vertices[i].nx = 1.0f;
+        vertices[i].ny = 0.0f;
+        vertices[i].nz = 0.0f;
+    }
+
+    // back
+    for (int i = 12; i < 18; i++)
+    {
+        vertices[i].nx = 0.0f;
+        vertices[i].ny = 0.0f;
+        vertices[i].nz = -1.0f;
+    }
+
+    // left
+    for (int i = 18; i < 24; i++)
+    {
+        vertices[i].nx = -1.0f;
+        vertices[i].ny = 0.0f;
+        vertices[i].nz = 0.0f;
+    }
+
+    // bottom
+    for (int i = 24; i < 30; i++)
+    {
+        vertices[i].nx = 0.0f;
+        vertices[i].ny = -1.0f;
+        vertices[i].nz = 0.0f;
+    }
+
+    // top
+    for (int i = 30; i < 36; i++)
+    {
+        vertices[i].nx = 0.0f;
+        vertices[i].ny = 1.0f;
+        vertices[i].nz = 0.0f;
+    }
 }

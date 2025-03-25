@@ -10,8 +10,7 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
 
     unsigned short *indices = new unsigned short[indexCount];
     float *points = new float[pointCount * 3];
-    vertices = new float[indexCount * 3];
-    normals = new float[indexCount * 3];
+    vertices = new Vertex[indexCount];
 
     const float angleStep = 2 * PI / numOnCircle;
     const int upperCenter = pointCount - 2;
@@ -66,36 +65,36 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
         // 上
         for (int j = 0; j < 3; j++)
         {
-            vertices[index * 3 + 0] = points[indices[index] * 3 + 0];
-            vertices[index * 3 + 1] = points[indices[index] * 3 + 1];
-            vertices[index * 3 + 2] = points[indices[index] * 3 + 2];
-            normals[index * 3 + 0] = 0;
-            normals[index * 3 + 1] = 1;
-            normals[index * 3 + 2] = 0;
+            vertices[index].x = points[indices[index] * 3 + 0];
+            vertices[index].y = points[indices[index] * 3 + 1];
+            vertices[index].z = points[indices[index] * 3 + 2];
+            vertices[index].nx = 0;
+            vertices[index].ny = 1;
+            vertices[index].nz = 0;
             index++;
         }
 
         // 下
         for (int j = 0; j < 3; j++)
         {
-            vertices[index * 3 + 0] = points[indices[index] * 3 + 0];
-            vertices[index * 3 + 1] = points[indices[index] * 3 + 1];
-            vertices[index * 3 + 2] = points[indices[index] * 3 + 2];
-            normals[index * 3 + 0] = 0;
-            normals[index * 3 + 1] = -1;
-            normals[index * 3 + 2] = 0;
+            vertices[index].x = points[indices[index] * 3 + 0];
+            vertices[index].y = points[indices[index] * 3 + 1];
+            vertices[index].z = points[indices[index] * 3 + 2];
+            vertices[index].nx = 0;
+            vertices[index].ny = -1;
+            vertices[index].nz = 0;
             index++;
         }
 
         // 侧面1，侧面2
         for (int j = 0; j < 6; j++)
         {
-            vertices[index * 3 + 0] = points[indices[index] * 3 + 0];
-            vertices[index * 3 + 1] = points[indices[index] * 3 + 1];
-            vertices[index * 3 + 2] = points[indices[index] * 3 + 2];
-            normals[index * 3 + 0] = vertices[index * 3 + 0];
-            normals[index * 3 + 1] = 0;
-            normals[index * 3 + 2] = vertices[index * 3 + 2];
+            vertices[index].x = points[indices[index] * 3 + 0];
+            vertices[index].y = points[indices[index] * 3 + 1];
+            vertices[index].z = points[indices[index] * 3 + 2];
+            vertices[index].nx = vertices[index].x;
+            vertices[index].ny = 0;
+            vertices[index].nz = vertices[index].z;
             index++;
         }
     }
@@ -106,5 +105,4 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
 Cylinder::~Cylinder()
 {
     delete[] vertices;
-    delete[] normals;
 }

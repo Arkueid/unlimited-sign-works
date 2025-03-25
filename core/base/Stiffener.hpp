@@ -12,8 +12,8 @@
 /// @brief 加劲板
 class Stiffener : public Mesh
 {
-    float vertices[siffenerIndexCount * 3];
-    float normals[siffenerIndexCount * 3];
+    Vertex vertices[siffenerIndexCount];
+    float a, b, c, h1, h2, offsetH, offsetV;
 public:
 
     /// @brief 加劲板
@@ -26,7 +26,7 @@ public:
     Stiffener(float a, float b, float h1, float h2, float c, float offsetH = 20.0f, float offsetV = 0.0f);
     ~Stiffener() override = default;
 
-    float* getVertices() override
+    Vertex* getVertices() override
     {
         return vertices;
     }
@@ -34,11 +34,6 @@ public:
     int getVertexCount() override
     {
         return siffenerIndexCount;
-    }
-
-    float *getNormals() override
-    {
-        return normals;
     }
 
 };

@@ -9,8 +9,7 @@ class Cylinder : public Mesh {
 
     int indexCount;
     int pointCount;
-    float *vertices;
-    float *normals;
+    Vertex *vertices;
     float h;
     float d;
 public:
@@ -25,12 +24,8 @@ public:
     {
         return indexCount;
     }
-    float* getVertices() override
+    Vertex* getVertices() override
     {
         return vertices;
-    }
-    float* getNormals() override
-    {
-        return normals;
     }
 };

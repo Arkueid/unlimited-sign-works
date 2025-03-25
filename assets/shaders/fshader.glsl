@@ -4,7 +4,7 @@ in vec3 Normal;
 in vec3 FragPos;
 
 // 平行光参数
-uniform vec3 lightPos = vec3(1000, 3000, 3000);
+uniform vec3 lightPos = vec3(0, 0, 3000);
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);  // 光颜色
 uniform vec3 objectColor = vec3(0.5, 0.5, 0.5); // 物体基础颜色
 

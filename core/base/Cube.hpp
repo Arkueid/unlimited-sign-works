@@ -3,22 +3,22 @@
 
 #include <base/Mesh.hpp>
 
-#define cubeIndexCount 6 * 2 * 3
+#define cubeVertexCount 6 * 2 * 3
 
 class Cube : public Mesh
 {
-    float vertices[cubeIndexCount * 3];
+    Vertex vertices[cubeVertexCount];
+    float a, b, c;
 
 public:
     Cube(float a, float b, float c);
     ~Cube() override = default;
     int getVertexCount() override
     {
-        return cubeIndexCount;
+        return cubeVertexCount;
     }
-    float *getVertices() override
+    Vertex *getVertices() override
     {
         return vertices;
     }
-    float* getNormals() override;
 };
