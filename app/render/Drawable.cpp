@@ -1,5 +1,4 @@
 #include <render/Drawable.hpp>
-#include "Drawable.hpp"
 
 Drawable::Drawable(Mesh *mesh, QMatrix4x4 *modelMatrix) : mesh(mesh),
                                                           vertexBuffer(QOpenGLBuffer::VertexBuffer),
