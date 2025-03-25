@@ -1,10 +1,10 @@
 #include <base/Cube.hpp>
 
-static unsigned short indices[cubeVertexCount] = {0, 1, 2, 0, 2, 3,
+static unsigned short indices[cubeVertexCount] = {0, 1, 2, 0, 3, 2,
                                           1, 5, 6, 1, 2, 6,
                                           5, 4, 7, 5, 6, 7,
-                                          4, 0, 3, 4, 3, 7,
-                                          0, 1, 5, 0, 4, 5,
+                                          4, 0, 3, 4, 7, 3,
+                                          4, 0, 1, 4, 5, 1,
                                           3, 2, 6, 3, 7, 6};
 
 Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
@@ -38,6 +38,7 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
     points[22] = -y;
     points[23] = -z;
 
+    // 坐标
     for (int i = 0; i < cubeVertexCount; i++)
     {
         vertices[i].x = points[indices[i] * 3 + 0];
@@ -45,6 +46,7 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[i].z = points[indices[i] * 3 + 2];
     }
 
+    // 法线
     // front
     for (int i = 0; i < 6; i++)
     {
@@ -52,7 +54,6 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[i].ny = 0.0f;
         vertices[i].nz = 1.0f;
     }
-
     // right
     for (int i = 6; i < 12; i++)
     {
@@ -60,7 +61,6 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[i].ny = 0.0f;
         vertices[i].nz = 0.0f;
     }
-
     // back
     for (int i = 12; i < 18; i++)
     {
@@ -68,7 +68,6 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[i].ny = 0.0f;
         vertices[i].nz = -1.0f;
     }
-
     // left
     for (int i = 18; i < 24; i++)
     {
@@ -76,7 +75,6 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[i].ny = 0.0f;
         vertices[i].nz = 0.0f;
     }
-
     // bottom
     for (int i = 24; i < 30; i++)
     {
@@ -84,12 +82,35 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[i].ny = -1.0f;
         vertices[i].nz = 0.0f;
     }
-
     // top
     for (int i = 30; i < 36; i++)
     {
         vertices[i].nx = 0.0f;
         vertices[i].ny = 1.0f;
         vertices[i].nz = 0.0f;
+    }
+
+    // 纹理
+    int index = 0;
+    for (int i = 0; i < 6; i++)
+    {
+        vertices[index].u = 0.0f;
+        vertices[index].v = 0.0f;
+        index++;
+        vertices[index].u = 1.0f;
+        vertices[index].v = 0.0f;
+        index++;
+        vertices[index].u = 1.0f;
+        vertices[index].v = 1.0f;
+        index++;
+        vertices[index].u = 0.0f;
+        vertices[index].v = 0.0f;
+        index++;
+        vertices[index].u = 0.0f;
+        vertices[index].v = 1.0f;
+        index++;
+        vertices[index].u = 1.0f;
+        vertices[index].v = 1.0f;
+        index++;
     }
 }

@@ -9,7 +9,7 @@
 #include <QOpenGLShaderProgram>
 #include <QMatrix4x4>
 
-class Drawable : protected QOpenGLFunctions
+class GLObject : protected QOpenGLFunctions
 {
     Mesh *mesh;
     QMatrix4x4 *modelMatrix;
@@ -17,7 +17,7 @@ class Drawable : protected QOpenGLFunctions
     // TODO: bool visible
 
 public:
-    Drawable(Mesh *mesh, QMatrix4x4 *modelMatrix);
+    GLObject(Mesh *mesh, QMatrix4x4 *modelMatrix);
 
     void draw(QOpenGLShaderProgram *program);
 };

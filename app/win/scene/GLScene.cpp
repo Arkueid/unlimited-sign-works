@@ -1,5 +1,4 @@
 #include <win/scene/GLScene.hpp>
-#include "GLScene.hpp"
 
 #include <QTime>
 #include <QKeyEvent>

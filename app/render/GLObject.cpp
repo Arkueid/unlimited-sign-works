@@ -1,6 +1,6 @@
-#include <render/Drawable.hpp>
+#include <render/GLObject.hpp>
 
-Drawable::Drawable(Mesh *mesh, QMatrix4x4 *modelMatrix) : mesh(mesh),
+GLObject::GLObject(Mesh *mesh, QMatrix4x4 *modelMatrix) : mesh(mesh),
                                                           vertexBuffer(QOpenGLBuffer::VertexBuffer),
                                                           modelMatrix(modelMatrix)
 {
@@ -14,7 +14,7 @@ Drawable::Drawable(Mesh *mesh, QMatrix4x4 *modelMatrix) : mesh(mesh),
     vertexBuffer.release();
 }
 
-void Drawable::draw(QOpenGLShaderProgram *program)
+void GLObject::draw(QOpenGLShaderProgram *program)
 {
     QMatrix4x4 scale;
     scale.setToIdentity();
@@ -27,6 +27,8 @@ void Drawable::draw(QOpenGLShaderProgram *program)
     glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(float) * 8, (void *)0);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(float) * 8, (void *)(3 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(float) * 8, (void *)(6 * sizeof(float)));
     glDrawArrays(GL_TRIANGLES, 0, mesh->getVertexCount());
     vertexBuffer.release();
 }

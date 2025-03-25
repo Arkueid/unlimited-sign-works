@@ -7,8 +7,8 @@ add_executable(usw
     utils/Camera.cpp
     utils/TextureManager.hpp    
     utils/TextureManager.cpp
-    render/Drawable.hpp
-    render/Drawable.cpp
+    render/GLObject.hpp
+    render/GLObject.cpp
 
     logo.rc
 )

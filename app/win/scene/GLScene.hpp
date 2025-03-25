@@ -6,7 +6,7 @@
 #include <utils/Camera.hpp>
 #include <part/pole/Pole168.hpp>
 #include <QVector>
-#include <render/Drawable.hpp>
+#include <render/GLObject.hpp>
 
 class GLScene : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -19,7 +19,7 @@ class GLScene : public QOpenGLWidget, protected QOpenGLFunctions
 
     Pole168 pole;
 
-    QVector<Drawable> drawables;
+    QVector<GLObject> drawables;
 
     QMatrix4x4 projection;
 
