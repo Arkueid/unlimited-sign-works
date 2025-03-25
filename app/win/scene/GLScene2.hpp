@@ -6,7 +6,7 @@
 #include <utils/Camera.hpp>
 #include <part/pole/Pole168.hpp>
 #include <QVector>
-#include <render/GLObject.hpp>
+#include <render/Drawable.hpp>
 
 class GLScene2 : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -17,6 +17,7 @@ class GLScene2 : public QOpenGLWidget, protected QOpenGLFunctions
     float deltaTime;
 
     Pole168 pole;
+    QVector<Drawable> drawables;
 
     QMatrix4x4 projection;
 

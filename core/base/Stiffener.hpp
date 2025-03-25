@@ -36,4 +36,12 @@ public:
         return siffenerIndexCount;
     }
 
+
+    // 通过 Mesh 继承
+    int getDrawableCount() override;
+
+    int getDrawableOffset(int index) override;
+
+    int getDrawableSize(int index) override;
+
 };

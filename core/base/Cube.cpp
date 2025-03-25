@@ -7,6 +7,8 @@ static unsigned short indices[cubeVertexCount] = {0, 1, 2, 0, 3, 2,
                                           4, 0, 1, 4, 5, 1,
                                           3, 2, 6, 3, 7, 6};
 
+static int drawableOffset[] = {0, 6, 12, 18, 24, 30};
+
 Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
 {
     float points[8 * 3];
@@ -113,4 +115,19 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[index].v = 1.0f;
         index++;
     }
+}
+
+int Cube::getDrawableCount()
+{
+    return 6;  // 六个面
+}
+
+int Cube::getDrawableOffset(int index)
+{
+    return drawableOffset[index];
+}
+
+int Cube::getDrawableSize(int index)
+{
+    return 6;
 }

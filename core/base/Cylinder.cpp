@@ -1,7 +1,6 @@
 #include <base/Cylinder.hpp>
 #include <core.hpp>
 #include <cmath>
-#include "Cylinder.hpp"
 
 Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
 {
@@ -67,9 +66,10 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
         indices[index++] = (i + 1) % numOnCircle;
         indices[index++] = (i + 1) % numOnCircle + numOnCircle;
     }
-
     index = 0;
     // 上
+    drawableOffset[0] = index;
+    drawableSize[0] = numOnCircle * 3;
     for (int i = 0; i < numOnCircle /* 三角形个数 */; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -86,6 +86,8 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
         }
     }
     // 下
+    drawableOffset[1] = index;
+    drawableSize[1] = numOnCircle * 3;
     for (int i = 0; i < numOnCircle /* 三角形个数 */; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -102,6 +104,8 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
         }
     }
     // 侧面
+    drawableOffset[2] = index;
+    drawableSize[2] = numOnCircle * 6;
     for (int i = 0; i < numOnCircle /* 三角形个数 */; i++)
     {
         vertices[index].x = points[indices[index] * 3 + 0];
@@ -166,4 +170,19 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
 Cylinder::~Cylinder()
 {
     delete[] vertices;
+}
+
+int Cylinder::getDrawableCount()
+{
+    return 3;  // 上下底面、侧面
+}
+
+int Cylinder::getDrawableOffset(int index)
+{
+    return drawableOffset[index];
+}
+
+int Cylinder::getDrawableSize(int index)
+{
+    return drawableSize[index];
 }

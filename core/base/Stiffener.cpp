@@ -11,6 +11,9 @@ static unsigned short indices[siffenerIndexCount] = {
     5, 9, 4, 5, 0, 4,          // 侧面 bc
 };
 
+static int drawableSize[7] = { 9, 9, 6, 6, 6, 6, 6 };
+static int drawableOffset[7] = { 0, 9, 18, 24, 30, 36, 42 };
+
 Stiffener::Stiffener(float a, float b, float h1, float h2, float c, float offsetH, float offsetV) : a(a), b(b), c(c), h1(h1), h2(h2), offsetH(offsetH), offsetV(offsetV)
 {
     float z = c / 2;
@@ -140,4 +143,19 @@ Stiffener::Stiffener(float a, float b, float h1, float h2, float c, float offset
         vertices[i * 9 + 2].u = 1;
         vertices[i * 9 + 2].v = 1;
     }
+}
+
+int Stiffener::getDrawableCount()
+{
+    return 7;
+}
+
+int Stiffener::getDrawableOffset(int index)
+{
+    return drawableOffset[index];
+}
+
+int Stiffener::getDrawableSize(int index)
+{
+    return drawableSize[index];
 }

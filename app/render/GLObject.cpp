@@ -9,7 +9,7 @@ GLObject::GLObject(Mesh *mesh, QMatrix4x4 *modelMatrix) : mesh(mesh),
     vertexBuffer.create();
 
     vertexBuffer.bind();
-    vertexBuffer.allocate(mesh->getVertices(), mesh->getVertexCount() * 8 * sizeof(float));
+    vertexBuffer.allocate(mesh->getVertices(), mesh->getVertexCount() * sizeof(Vertex));
     
     vertexBuffer.release();
 }
@@ -24,11 +24,11 @@ void GLObject::draw(QOpenGLShaderProgram *program)
     program->setUniformValue("normalMatrix", scale.normalMatrix());
     vertexBuffer.bind();
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(float) * 8, (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), (void*)0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(float) * 8, (void *)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, nx));
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(float) * 8, (void *)(6 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, u));
     glDrawArrays(GL_TRIANGLES, 0, mesh->getVertexCount());
     vertexBuffer.release();
 }

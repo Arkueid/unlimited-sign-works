@@ -13,5 +13,5 @@ public:
     void createFromJsonFile(const QString& fileName);
     virtual ~Pole() = default;
 
-    QVector<Part> getParts() const;
+    QVector<Part>& getParts();
 };

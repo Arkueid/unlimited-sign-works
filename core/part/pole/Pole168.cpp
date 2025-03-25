@@ -9,7 +9,7 @@ Pole168::Pole168() : sideBeam(108.0f, 500.0f + 1000.0f + 2500.0f),
                      bottomStiffener(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f)
 {
     mainPoleMat.setToIdentity();
-    parts.append({&sideBeam, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    parts.append({&mainPole, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
 
     sideBeam1Mat.setToIdentity();
     sideBeam1Mat.translate(-250.0f, 6700.0f - 300.0f, 0.0f); // originX, originY, originZ

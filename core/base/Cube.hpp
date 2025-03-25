@@ -21,4 +21,8 @@ public:
     {
         return vertices;
     }
+
+    int getDrawableCount() override;
+    int getDrawableOffset(int index) override;
+    int getDrawableSize(int index) override;
 };

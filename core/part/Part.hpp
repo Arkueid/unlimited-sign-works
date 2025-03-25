@@ -8,50 +8,45 @@ class Part
 {
     float originX, originY, originZ;
     float rotationX, rotationY, rotationZ;
-    Mesh* mesh;
-    QMatrix4x4 modelMatrix;
+    Mesh *mesh;
 
 public:
-    Part(Mesh* mesh, float originX, float originY, float originZ, float rotationX, float rotationY, float rotationZ);
+    Part(Mesh *mesh,
+         float originX,
+         float originY,
+         float originZ,
+         float rotationX,
+         float rotationY,
+         float rotationZ);
+
     virtual ~Part() = default;
 
-    QMatrix4x4 getModelMatrix()
-    {
-        return modelMatrix;
-    }
-
-    Vertex *getVertices() const
-    {
-        return mesh->getVertices();
-    }
-
-    int getVertexCount() const
-    {
-        return mesh->getVertexCount();
-    }
-
-    float getOriginX()
+    float getOriginX() const
     {
         return originX;
     }
-    float getOriginY()
+    float getOriginY() const
     {
         return originY;
     }
-    float getOriginZ()
+    float getOriginZ() const
     {
         return originZ;
     }
-    float getRotationX()
+    float getRotationX() const
     {
         return rotationX;
     }
-    float getRotationY()
+    float getRotationY() const
     {
         return rotationY;
     }
-    float getRotationZ()
+    float getRotationZ() const
     {
         return rotationZ;
+    }
+    Mesh *getMesh() const
+    {
+        return mesh;
     }
 };

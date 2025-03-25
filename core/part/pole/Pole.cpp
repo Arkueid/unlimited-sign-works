@@ -8,7 +8,7 @@ void Pole::createFromJsonFile(const QString &fileName)
     
 }
 
-QVector<Part> Pole::getParts() const
+QVector<Part>& Pole::getParts()
 {
     return parts;
 }

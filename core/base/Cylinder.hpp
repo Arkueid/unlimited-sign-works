@@ -12,6 +12,8 @@ class Cylinder : public Mesh {
     Vertex *vertices;
     float h;
     float d;
+    int drawableSize[3];
+    int drawableOffset[3];
 public:
     /// @brief 圆柱
     /// @param d 直径
@@ -28,4 +30,8 @@ public:
     {
         return vertices;
     }
+
+    int getDrawableCount() override;
+    int getDrawableOffset(int index) override;
+    int getDrawableSize(int index) override;
 };

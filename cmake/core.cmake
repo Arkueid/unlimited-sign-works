@@ -14,9 +14,6 @@ add_library(core STATIC
     ${PROJECT_ROOT}/core/part/Part.hpp
     ${PROJECT_ROOT}/core/part/Part.cpp
 
-    ${PROJECT_ROOT}/core/render/Drawable.hpp
-    ${PROJECT_ROOT}/core/render/Renderer.hpp
-
     ${PROJECT_ROOT}/core/core.hpp
 )
 

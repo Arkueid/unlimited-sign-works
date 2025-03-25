@@ -3,7 +3,7 @@
 #include <QTime>
 #include <QKeyEvent>
 
-GLScene2::GLScene2() : camera(QVector3D(0.0f, 0.0f, 3.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
+GLScene2::GLScene2() : camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
                      deltaTime(0.0f)
 {
 }
@@ -25,31 +25,10 @@ void GLScene2::initializeGL()
         qDebug() << "Shader program is not linked\n";
     }
 
-    // drawables.append({&pole.mainPole, &pole.mainPoleMat});
-
-    // drawables.append({&pole.sideBeam, &pole.sideBeam1Mat});
-    // drawables.append({&pole.sideBeam, &pole.sideBeam2Mat});
-
-    // drawables.append({&pole.panel, &pole.panelMat});
-    // drawables.append({&pole.bottom, &pole.bottomMat});
-
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener1Mat});
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener2Mat});
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener3Mat});
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener4Mat});
-
-    // drawables.append({&pole.flange, &pole.flange1Mat});
-    // drawables.append({&pole.flange, &pole.flange2Mat});
-
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener5Mat});
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener6Mat});
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener7Mat});
-    // drawables.append({&pole.sideStiffener, &pole.sideStiffener8Mat});
-
-    // drawables.append({&pole.bottomStiffener, &pole.bottomStiffener1Mat});
-    // drawables.append({&pole.bottomStiffener, &pole.bottomStiffener2Mat});
-    // drawables.append({&pole.bottomStiffener, &pole.bottomStiffener3Mat});
-    // drawables.append({&pole.bottomStiffener, &pole.bottomStiffener4Mat});
+    for (auto& part : pole.getParts())
+    {
+        drawables.append(&part);
+    }
 
     deltaTime = 1.0f / 60.0f;
 }
@@ -66,6 +45,10 @@ void GLScene2::paintGL()
     program.setUniformValue("projection", projection);
     program.setUniformValue("view", camera.getViewMatrix());
 
+    for (auto& d : drawables)
+    {
+        d.draw(program);
+    }
 
     program.release();
 
