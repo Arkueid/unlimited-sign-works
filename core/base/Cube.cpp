@@ -1,4 +1,4 @@
-#include <base/Cube.hpp>
+﻿#include <base/Cube.hpp>
 
 static unsigned short indices[cubeVertexCount] = {0, 1, 2, 0, 3, 2,
                                           1, 5, 6, 1, 2, 6,

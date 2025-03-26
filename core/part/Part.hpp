@@ -2,51 +2,63 @@
 
 #include <base/Mesh.hpp>
 
-#include <QMatrix4x4>
+#include <vector>
+#include <string>
 
-class Part
+
+// 代理模式
+class Part: public Mesh
 {
-    float originX, originY, originZ;
-    float rotationX, rotationY, rotationZ;
+    Point origin;
+    Rotation rotation;
     Mesh *mesh;
+    std::vector<int> textureRefs;
+    const std::vector<std::string>* texturePaths;
 
 public:
     Part(Mesh *mesh,
-         float originX,
-         float originY,
-         float originZ,
-         float rotationX,
-         float rotationY,
-         float rotationZ);
+         const Point &origin,
+         const Rotation &rotation,
+         const std::vector<int>& textureRefs, 
+         const std::vector<std::string>* texturePaths);
 
     virtual ~Part() = default;
 
     float getOriginX() const
     {
-        return originX;
+        return origin.x;
     }
     float getOriginY() const
     {
-        return originY;
+        return origin.y;
     }
     float getOriginZ() const
     {
-        return originZ;
+        return origin.z;
     }
     float getRotationX() const
     {
-        return rotationX;
+        return rotation.rx;
     }
     float getRotationY() const
     {
-        return rotationY;
+        return rotation.ry;
     }
     float getRotationZ() const
     {
-        return rotationZ;
+        return rotation.rz;
     }
-    Mesh *getMesh() const
-    {
-        return mesh;
-    }
+
+    const std::string& getTexturePath(int index) const;
+
+    // Mesh
+    Vertex* getVertices() override;
+
+    int getVertexCount() override;
+
+    int getDrawableCount() override;
+
+    int getDrawableOffset(int index) override;
+
+    int getDrawableSize(int index) override;
 };

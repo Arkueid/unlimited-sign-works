@@ -8,41 +8,47 @@ Pole168::Pole168() : sideBeam(108.0f, 500.0f + 1000.0f + 2500.0f),
                      sideStiffener(30.0f, 104.0f, 550.0f, 750.0f, 8.0f, 0.0f, 20.0f),
                      bottomStiffener(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f)
 {
-    parts.append({&mainPole, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    textures.push_back("../../assets/textures/panel/D25.bmp");
+    textures.push_back("../../assets/textures/metal/metal6.bmp");
+    textures.push_back("../../assets/textures/metal/metal7.bmp");
+    textures.push_back("../../assets/textures/metal/metal3.bmp");
+    textures.push_back("../../assets/textures/metal/metal5.bmp");
 
-    parts.append({&sideBeam, -250.0f, 6700.0f - 300.0f, 0.0f, 0.0f, 0.0f, -90.0f});
+    parts.push_back({&mainPole, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {3, 3, 1}, &textures});
 
-    parts.append({&sideBeam, -250.0f, 6700.0f - 300.0f - 600.0f, 0.0f, 0.0f, 0.0f, -90.0f});
+    parts.push_back({&sideBeam, {-250.0f, 6700.0f - 300.0f, 0.0f}, {0.0f, 0.0f, -90.0f}, {3, 3, 1}, &textures});
 
-    parts.append({&panel, 4000.0f - 250.0f - 1250.0f, 6700.0f - 300.0f - 300.0f, 10.0f + 54.0f, 0.0f, 0.0f, 0.0f});
+    parts.push_back({&sideBeam, {-250.0f, 6700.0f - 300.0f - 600.0f, 0.0f}, {0.0f, 0.0f, -90.0f}, {3, 3, 1}, &textures});
 
-    parts.append({&bottom, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    parts.push_back({&panel, {4000.0f - 250.0f - 1250.0f, 6700.0f - 300.0f - 300.0f, 10.0f + 54.0f}, {0.0f, 0.0f, 0.0f}, {0, 4, 4, 4, 4, 4}, &textures});
 
-    parts.append({&flange, 250.0f, 6700.0f - 300.0f, 0.0f, 0.0f, 0.0f, -90.0f});
+    parts.push_back({&bottom, {0.0f, 10.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&flange, 250.0f, 6700.0f - 300.0f - 600.0f, 0.0f, 0.0f, 0.0f, -90.0f});
+    parts.push_back({&flange, {250.0f, 6700.0f - 300.0f, 0.0f}, {0.0f, 0.0f, -90.0f}, {2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f + 54.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    parts.push_back({&flange, {250.0f, 6700.0f - 300.0f - 600.0f, 0.0f}, {0.0f, 0.0f, -90.0f}, {2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f + 54.0f, 0.0f, 90.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f + 54.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f - 54.0f, 0.0f, 180.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f, 0.0f + 54.0f}, {90.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f, 0.0f - 54.0f, 270.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f - 54.0f, 0.0f}, {180.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f - 600.0f + 54.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f, 0.0f - 54.0f}, {270.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f - 600.0f, 0.0f + 54.0f, 90.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f - 600.0f + 54.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f - 600.0f - 54.0f, 0.0f, 180.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f - 600.0f, 0.0f + 54.0f}, {90.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&sideStiffener, -250.0f, 6700.0f - 300.0f - 600.0f, 0.0f - 54.0f, 270.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f - 600.0f - 54.0f, 0.0f}, {180.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&bottomStiffener, 84.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    parts.push_back({&sideStiffener, {-250.0f, 6700.0f - 300.0f - 600.0f, 0.0f - 54.0f},{ 270.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&bottomStiffener, 0.0f, 0.0f, 0.0f - 84.0f, 0.0f, 90.0f, 0.0f});
+    parts.push_back({&bottomStiffener, {84.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&bottomStiffener, 0.0f - 84.0f, 0.0f, 0.0f, 0.0f, 180.0f, 0.0f});
+    parts.push_back({&bottomStiffener, {0.0f, 0.0f, 0.0f - 84.0f}, {0.0f, 90.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 
-    parts.append({&bottomStiffener, 0.0f, 0.0f, 0.0f + 84.0f, 0.0f, 270.0f, 0.0f});
+    parts.push_back({&bottomStiffener, {0.0f - 84.0f, 0.0f, 0.0f}, {0.0f, 180.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
+
+    parts.push_back({&bottomStiffener, {0.0f, 0.0f, 0.0f + 84.0f}, {0.0f, 270.0f, 0.0f}, {2, 2, 2, 2, 2, 2, 2}, &textures});
 }

@@ -1,14 +1,39 @@
 #include <utils/TextureManager.hpp>
+#include <QDebug>
 
-static QMap<QString, unsigned int> textures;
-unsigned int TextureManager::loadTexture(const char *path)
+static QMap<QString, QOpenGLTexture*> textures;
+QOpenGLTexture* TextureManager::loadTexture(const char *path)
 {
     if (textures.contains(path))
     {
         return textures[path];
     }
 
+    QImage image(path);
+
+    if (!image.isNull())
+    {
+        QOpenGLTexture* texture = new QOpenGLTexture(image.mirrored().convertToFormat(QImage::Format_RGBA8888));
+        texture->setWrapMode(QOpenGLTexture::ClampToEdge);
+        texture->setMinificationFilter(QOpenGLTexture::Linear);
+        texture->setMagnificationFilter(QOpenGLTexture::Linear);
+        textures[path] = texture;
+        return texture;
+    }
+    else
+    {
+        qDebug() << "Failed to load texture: " << path;
+    }
     
-    
-    return 0;
+    return nullptr;
+}
+
+void TextureManager::releaseTextures()
+{
+    for (auto& texture : textures)
+    {
+        texture->destroy();
+        delete texture;
+    }
+    textures.clear();
 }

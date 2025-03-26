@@ -6,7 +6,7 @@ in vec2 TexCoord;
 
 uniform sampler2D tex;
 // 平行光参数
-uniform vec3 lightPos = vec3(0, 0, 3000);
+uniform vec3 lightPos = vec3(1000, 1000, 3000);
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);  // 光颜色
 uniform vec3 objectColor = vec3(0.5, 0.5, 0.5); // 物体基础颜色
 
@@ -18,13 +18,13 @@ void main()
     vec3 texColor = texture(tex, TexCoord).rgb;
     
     // 环境光计算
-    vec3 ambient = ambientColor * objectColor;
+    vec3 ambient = ambientColor * texColor;
     
     // 漫反射计算
     vec3 norm = normalize(Normal);
     vec3 lightDirNorm = normalize(vec3(lightPos - FragPos));  // 指向光源方向
     float diff = max(dot(norm, lightDirNorm), 0.0);
-    vec3 diffuse = diff * lightColor * objectColor;
+    vec3 diffuse = diff * lightColor * texColor;
 
     // 最终颜色合成
     vec3 result = ambient + diffuse;

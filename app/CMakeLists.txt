@@ -27,6 +27,7 @@ target_link_libraries(usw
     Qt6::Core
     Qt6::Widgets
     Qt6::OpenGLWidgets 
+    Qt6::Gui
     core
 )
 

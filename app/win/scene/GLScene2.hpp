@@ -17,13 +17,15 @@ class GLScene2 : public QOpenGLWidget, protected QOpenGLFunctions
     float deltaTime;
 
     Pole168 pole;
-    QVector<Drawable> drawables;
+    QVector<Drawable*> drawables;
 
     QMatrix4x4 projection;
 
     bool firstMouse = true;
     float lastX;
     float lastY;
+
+    void releaseDrawables();
 public:
     GLScene2();
     ~GLScene2() override;

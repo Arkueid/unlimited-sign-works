@@ -1,8 +1,10 @@
 #pragma once
 
 #include <QMap>
+#include <QOpenGLTexture>
 
 class TextureManager {    
 public:
-    static unsigned int loadTexture(const char *path);
+    static QOpenGLTexture* loadTexture(const char *path);
+    static void releaseTextures();
 };

@@ -23,4 +23,4 @@ target_include_directories(core PUBLIC
 
 target_compile_definitions(core PRIVATE UNICODE _UNICODE)
 
-target_link_libraries(core Qt6::Gui)
+target_link_libraries(core)

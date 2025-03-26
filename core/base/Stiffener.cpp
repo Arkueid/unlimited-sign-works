@@ -1,4 +1,4 @@
-#include <base/Stiffener.hpp>
+﻿#include <base/Stiffener.hpp>
 
 // 加劲板共用索引
 static unsigned short indices[siffenerIndexCount] = {
@@ -127,7 +127,7 @@ Stiffener::Stiffener(float a, float b, float h1, float h2, float c, float offset
         vertices[i * 9 + 8].v = 1;
     }
     // 侧面
-    for (int i = 0; i < 5 /* 五个面 */; i++)
+    for (int i = 2; i < 7 /* 五个面 */; i++)
     {
         vertices[i * 9 + 0].u = 0;
         vertices[i * 9 + 0].v = 0;

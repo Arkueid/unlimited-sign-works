@@ -6,11 +6,15 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <part/Part.hpp>
+#include <QVector>
+#include <QOpenGLTexture>
+#include <QImage>
 
 class Drawable: protected QOpenGLFunctions
 {
 	QOpenGLBuffer vertexBuffer;
 	QMatrix4x4 modelMatrix;
+	QVector<QOpenGLTexture*> textures;
 	Part* part;
 
 public:

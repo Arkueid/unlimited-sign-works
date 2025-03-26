@@ -10,6 +10,16 @@ GLScene2::GLScene2() : camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f,
 
 GLScene2::~GLScene2()
 {
+    releaseDrawables();
+}
+
+void GLScene2::releaseDrawables()
+{
+    for (auto& d : drawables)
+    {
+        delete d;
+    }
+    drawables.clear();
 }
 
 void GLScene2::initializeGL()
@@ -27,7 +37,7 @@ void GLScene2::initializeGL()
 
     for (auto& part : pole.getParts())
     {
-        drawables.append(&part);
+        drawables.append(new Drawable(&part));
     }
 
     deltaTime = 1.0f / 60.0f;
@@ -47,7 +57,7 @@ void GLScene2::paintGL()
 
     for (auto& d : drawables)
     {
-        d.draw(program);
+        d->draw(program);
     }
 
     program.release();

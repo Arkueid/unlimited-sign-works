@@ -1,5 +1,6 @@
 #include <render/Drawable.hpp>
 #include <stddef.h>
+#include <utils/TextureManager.hpp>
 
 Drawable::Drawable(Part* part): part(part), vertexBuffer(QOpenGLBuffer::VertexBuffer)
 {
@@ -7,7 +8,7 @@ Drawable::Drawable(Part* part): part(part), vertexBuffer(QOpenGLBuffer::VertexBu
 
 	vertexBuffer.create();
 	vertexBuffer.bind();
-	vertexBuffer.allocate(part->getMesh()->getVertices(), part->getMesh()->getVertexCount() * sizeof(Vertex));
+	vertexBuffer.allocate(part->getVertices(), part->getVertexCount() * sizeof(Vertex));
 	vertexBuffer.release();
 
 	modelMatrix.setToIdentity();
@@ -15,11 +16,17 @@ Drawable::Drawable(Part* part): part(part), vertexBuffer(QOpenGLBuffer::VertexBu
 	modelMatrix.rotate(part->getRotationX(), 1, 0, 0);
 	modelMatrix.rotate(part->getRotationY(), 0, 1, 0);
 	modelMatrix.rotate(part->getRotationZ(), 0, 0, 1);
+
+	for (int i = 0; i < part->getDrawableCount(); i++)
+	{
+		const std::string& path = part->getTexturePath(i);
+		textures.append(TextureManager::loadTexture(path.c_str()));
+	}
 }
 
 Drawable::~Drawable()
 {
-
+	vertexBuffer.destroy();
 }
 
 void Drawable::draw(QOpenGLShaderProgram& program)
@@ -37,11 +44,12 @@ void Drawable::draw(QOpenGLShaderProgram& program)
 	glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, nx));
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, u));
-	//for (int i = 0; i < part->getMesh()->getDrawableCount(); i++)
-	//{
-	//	int offset = part->getMesh()->getDrawableOffset(i);
-	//	int count = part->getMesh()->getDrawableSize(i);
-	glDrawArrays(GL_TRIANGLES, 0, part->getMesh()->getVertexCount());
-	//}
+	for (int i = 0; i < part->getDrawableCount(); i++)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		textures[i]->bind();
+		glDrawArrays(GL_TRIANGLES, part->getDrawableOffset(i), part->getDrawableSize(i));
+		textures[i]->release();
+	}
 	vertexBuffer.release();
 }

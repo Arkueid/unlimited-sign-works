@@ -3,12 +3,17 @@
 Pole::Pole()
 {
 }
-void Pole::createFromJsonFile(const QString &fileName)
+void Pole::createFromJsonFile(const char* fileName)
 {
     
 }
 
-QVector<Part>& Pole::getParts()
+std::vector<Part>& Pole::getParts()
 {
     return parts;
+}
+
+std::vector<std::string> &Pole::getTextures()
+{
+    return textures;
 }
