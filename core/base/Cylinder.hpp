@@ -19,7 +19,7 @@ public:
     /// @param d 直径
     /// @param h 高
     /// @param precision 每单位长度的顶点数 
-    Cylinder(float d, float h, float precision = 1.0f / 20.0f);
+    Cylinder(float d, float h, float precision = PRECISION_DEFAULT);
     ~Cylinder() override;
 
     int getVertexCount() override

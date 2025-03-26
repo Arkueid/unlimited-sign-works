@@ -4,15 +4,18 @@
 #include <base/Cylinder.hpp>
 #include <base/Stiffener.hpp>
 #include <base/Cube.hpp>
+#include <base/RoundedCube.h>
 
 class Pole168 : public Pole {
     Cylinder sideBeam;
     Cylinder mainPole;
     Cylinder flange;
-    Cube panel;
+    RoundedCube panel;
     Cube bottom;
     Stiffener sideStiffener;
     Stiffener bottomStiffener;
+
+    // RoundedCube test;
 public:
     Pole168();
     ~Pole168() override = default;

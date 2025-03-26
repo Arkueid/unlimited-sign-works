@@ -5,6 +5,8 @@ add_library(core STATIC
     base/Stiffener.cpp
     base/Cube.hpp
     base/Cube.cpp
+    base/RoundedCube.cpp
+    base/RoundedCube.h
     base/Mesh.hpp
 
     part/pole/Pole.hpp
