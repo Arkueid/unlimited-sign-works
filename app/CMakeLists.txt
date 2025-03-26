@@ -14,6 +14,8 @@ add_executable(usw
     logo.rc
 )
 
+target_compile_definitions(usw PRIVATE UNICODE _UNICODE)
+
 target_include_directories(usw PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_compile_options(usw PRIVATE "/Zc:__cplusplus" "/permissive-" "/utf-8")

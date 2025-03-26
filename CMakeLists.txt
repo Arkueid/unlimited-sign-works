@@ -10,6 +10,5 @@ set(CMAKE_AUTORCC ON)   # 自动编译资源文件（.qrc → .cpp）
 
 find_package(Qt6 COMPONENTS Core Widgets Gui OpenGLWidgets REQUIRED)
 
-
-include(cmake/core.cmake)
-include(cmake/app.cmake)
+add_subdirectory(${PROJECT_ROOT}/core)
+add_subdirectory(${PROJECT_ROOT}/app)
