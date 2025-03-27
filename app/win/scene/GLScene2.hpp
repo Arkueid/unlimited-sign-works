@@ -5,6 +5,7 @@
 
 #include <utils/Camera.hpp>
 #include <part/pole/Pole168.hpp>
+#include <part/pole/Pole89.hpp>
 #include <QVector>
 #include <render/Drawable.hpp>
 
@@ -16,7 +17,6 @@ class GLScene2 : public QOpenGLWidget, protected QOpenGLFunctions
     Camera camera;
     float deltaTime;
 
-    Pole168 pole;
     QVector<Drawable*> drawables;
 
     QMatrix4x4 projection;
@@ -24,6 +24,13 @@ class GLScene2 : public QOpenGLWidget, protected QOpenGLFunctions
     bool firstMouse = true;
     float lastX;
     float lastY;
+
+#pragma region hack properties
+    Pole168 pole168;
+    Pole89 pole89;
+    int pole89DrawableOffset;
+#pragma endregion
+
 
     void releaseDrawables();
 public:

@@ -21,5 +21,5 @@ public:
 	Drawable(Part* part);
 	~Drawable();
 
-	void draw(QOpenGLShaderProgram& program);
+	void draw(QOpenGLShaderProgram& program, QMatrix4x4& transform);
 };

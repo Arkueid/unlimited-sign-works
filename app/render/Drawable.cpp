@@ -29,12 +29,12 @@ Drawable::~Drawable()
 	vertexBuffer.destroy();
 }
 
-void Drawable::draw(QOpenGLShaderProgram& program)
+void Drawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 {
 	QMatrix4x4 scale;
 	scale.setToIdentity();
 	scale.scale(0.0001f);
-	scale = scale * modelMatrix;
+	scale = transform * scale * modelMatrix;
 	program.setUniformValue("model", scale);
 	program.setUniformValue("normalMatrix", scale.normalMatrix());
 	vertexBuffer.bind();

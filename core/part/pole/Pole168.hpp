@@ -4,7 +4,8 @@
 #include <base/Cylinder.hpp>
 #include <base/Stiffener.hpp>
 #include <base/Cube.hpp>
-#include <base/RoundedCube.h>
+#include <base/RoundedCube.hpp>
+#include <base/RoundedRegTriPrism.hpp>
 
 class Pole168 : public Pole {
     Cylinder sideBeam;
@@ -15,7 +16,7 @@ class Pole168 : public Pole {
     Stiffener sideStiffener;
     Stiffener bottomStiffener;
 
-    // RoundedCube test;
+    // RoundedRegTriPrism test;
 public:
     Pole168();
     ~Pole168() override = default;

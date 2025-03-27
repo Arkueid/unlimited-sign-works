@@ -35,7 +35,13 @@ void GLScene2::initializeGL()
         qDebug() << "Shader program is not linked\n";
     }
 
-    for (auto& part : pole.getParts())
+    for (auto& part : pole168.getParts())
+    {
+        drawables.append(new Drawable(&part));
+    }
+
+    pole89DrawableOffset = drawables.size();
+    for (auto& part : pole89.getParts())
     {
         drawables.append(new Drawable(&part));
     }
@@ -48,16 +54,31 @@ void GLScene2::paintGL()
 
     glEnable(GL_DEPTH_TEST);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     program.bind();
     program.setUniformValue("projection", projection);
     program.setUniformValue("view", camera.getViewMatrix());
 
+    QMatrix4x4 transform168;
+    transform168.setToIdentity();
+
+    QMatrix4x4 transform89;
+    transform89.setToIdentity();
+    transform89.translate(-0.30f, 0.0f, 0.0f);
+    int idx = 0;
     for (auto& d : drawables)
     {
-        d->draw(program);
+        if (idx < pole89DrawableOffset)
+        {
+            d->draw(program, transform168);
+        }
+        else
+        {
+            d->draw(program, transform89);
+        }
+        idx++;
     }
 
     program.release();

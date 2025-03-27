@@ -7,15 +7,13 @@ Pole168::Pole168() : sideBeam(108.0f, 500.0f + 1000.0f + 2500.0f),
                      bottom(400.0f, 400.0f, 20.0f),
                      sideStiffener(30.0f, 104.0f, 550.0f, 750.0f, 8.0f, 0.0f, 20.0f),
                      bottomStiffener(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f)
-                    //  test(2500.0f, 2000.0f, 100.0f, 210.0f)
 {
+    // textures.push_back("../../assets/textures/panel/CN_road_sign.png");
     textures.push_back("../../assets/textures/panel/D25.bmp");
     textures.push_back("../../assets/textures/metal/metal6.bmp");
     textures.push_back("../../assets/textures/metal/metal7.bmp");
     textures.push_back("../../assets/textures/metal/metal3.bmp");
     textures.push_back("../../assets/textures/metal/metal5.bmp");
-
-    // parts.push_back({&test, {0.0f, 0.0f, 0.0f}, {90.0, 0.0f, 0.0f}, {0, 4, 4}, &textures});
 
     parts.push_back({&mainPole, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {3, 3, 1}, &textures});
 
