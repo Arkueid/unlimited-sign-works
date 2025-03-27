@@ -1,4 +1,4 @@
-#include <base/RoundedRegTriPrism.hpp>
+﻿#include <base/RoundedRegTriPrism.hpp>
 #include <algorithm>
 
 RoundedRegTriPrism::RoundedRegTriPrism(float a, float h, float radius, float precision) : a(a), h(h), radius(radius)
