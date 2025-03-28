@@ -14,10 +14,10 @@ GLScene2::GLScene2(QWidget* parent) : QOpenGLWidget(parent), camera(QVector3D(0.
 GLScene2::~GLScene2()
 {
     makeCurrent();
-    TextureManager::releaseTextures();
-    VertexBufferManager::releaseVertexBuffers();
-    program.removeAllShaders();
     releaseDrawables();
+    TextureManager::releaseTextures();
+    program.removeAllShaders();
+    VertexBufferManager::releaseVertexBuffers();
     doneCurrent();
 }
 

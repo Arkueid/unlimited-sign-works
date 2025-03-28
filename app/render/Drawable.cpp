@@ -24,6 +24,7 @@ Drawable::Drawable(Part* part): part(part), vertexBuffer(nullptr)
 
 Drawable::~Drawable()
 {
+	VertexBufferManager::unregisterVertexBuffer(part->getVertices());
 }
 
 void Drawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)

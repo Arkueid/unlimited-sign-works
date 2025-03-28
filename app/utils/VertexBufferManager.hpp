@@ -6,5 +6,6 @@
 class VertexBufferManager {
 public:
     static QOpenGLBuffer* registerVertexBuffer(Vertex* vertices, int vertexCount);
+    static void unregisterVertexBuffer(Vertex* vertices);
     static void releaseVertexBuffers();
 };
