@@ -50,6 +50,8 @@ void GLScene2::initializeGL()
      }
 
     deltaTime = 1.0f / 60.0f;
+
+    grabKeyboard();
 }
 
 void GLScene2::paintGL()

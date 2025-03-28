@@ -1,5 +1,4 @@
 #include <part/pole/Pole168.hpp>
-#include "Pole168.hpp"
 
 Pole168::Pole168() : sideBeam(new Cylinder(108.0f, 500.0f + 1000.0f + 2500.0f)),
                      mainPole(new Cylinder(168.0f, 6700.0f)),

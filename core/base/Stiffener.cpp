@@ -1,5 +1,4 @@
-﻿#include <base/Stiffener.hpp>
-#include "Stiffener.hpp"
+#include <base/Stiffener.hpp>
 
 // 加劲板共用索引
 static unsigned short indices[siffenerIndexCount] = {
@@ -128,21 +127,22 @@ Stiffener::Stiffener(float a, float b, float h1, float h2, float c, float offset
         vertices[i * 9 + 8].v = 1;
     }
     // 侧面
-    for (int i = 2; i < 7 /* 五个面 */; i++)
+    const int offset = 18;
+    for (int i = 0; i < 5 /* 五个面 */; i++)
     {
-        vertices[i * 9 + 0].u = 0;
-        vertices[i * 9 + 0].v = 0;
-        vertices[i * 9 + 1].u = 1;
-        vertices[i * 9 + 1].v = 0;
-        vertices[i * 9 + 2].u = 1;
-        vertices[i * 9 + 2].v = 1;
+        vertices[offset + i * 6 + 0].u = 0;
+        vertices[offset + i * 6 + 0].v = 0;
+        vertices[offset + i * 6 + 1].u = 1;
+        vertices[offset + i * 6 + 1].v = 0;
+        vertices[offset + i * 6 + 2].u = 1;
+        vertices[offset + i * 6 + 2].v = 1;
 
-        vertices[i * 9 + 0].u = 0;
-        vertices[i * 9 + 0].v = 0;
-        vertices[i * 9 + 1].u = 1;
-        vertices[i * 9 + 1].v = 0;
-        vertices[i * 9 + 2].u = 1;
-        vertices[i * 9 + 2].v = 1;
+        vertices[offset + i * 6 + 3].u = 0;
+        vertices[offset + i * 6 + 3].v = 0;
+        vertices[offset + i * 6 + 4].u = 1;
+        vertices[offset + i * 6 + 4].v = 0;
+        vertices[offset + i * 6 + 5].u = 1;
+        vertices[offset + i * 6 + 5].v = 1;
     }
 }
 
