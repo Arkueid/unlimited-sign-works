@@ -24,7 +24,7 @@ public:
     /// @param c 厚
     /// @param offset 嵌入偏移
     Stiffener(float a, float b, float h1, float h2, float c, float offsetH = 20.0f, float offsetV = 0.0f);
-    ~Stiffener() override = default;
+    ~Stiffener() override;
 
     Vertex* getVertices() override
     {

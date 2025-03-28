@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <base/Mesh.hpp>
 
@@ -18,7 +18,7 @@ public:
 	/// @param radius 圆角半径
 	/// @param precision 圆角上圆周每单位长度的顶点个数
 	RoundedRegTriPrism(float a, float h, float radius, float precision = PRECISION_DEFAULT);
-	~RoundedRegTriPrism();
+	~RoundedRegTriPrism() override;
 
 	// 通过 Mesh 继承
 	Vertex* getVertices() override;

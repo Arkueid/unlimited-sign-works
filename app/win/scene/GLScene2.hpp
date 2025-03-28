@@ -28,13 +28,14 @@ class GLScene2 : public QOpenGLWidget, protected QOpenGLFunctions
 #pragma region hack properties
     Pole168 pole168;
     Pole89 pole89;
+
     int pole89DrawableOffset;
 #pragma endregion
 
 
     void releaseDrawables();
 public:
-    GLScene2();
+    explicit GLScene2(QWidget* parent = nullptr);
     ~GLScene2() override;
     void initializeGL() override;
     void paintGL() override;

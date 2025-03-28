@@ -2,11 +2,14 @@ add_executable(usw
     Main.cpp
     win/scene/GLScene2.hpp
     win/scene/GLScene2.cpp
+    win/Designer.hpp
+    win/Designer.cpp
+    win/Designer.ui
 
     utils/Camera.hpp
     utils/Camera.cpp
     utils/TextureManager.hpp    
-    utils/TextureManager.cpp
+    utils/TextureManager.cpp  
     
     render/Drawable.hpp
     render/Drawable.cpp
@@ -16,7 +19,7 @@ add_executable(usw
 
 target_compile_definitions(usw PRIVATE UNICODE _UNICODE)
 
-target_include_directories(usw PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(usw PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_compile_options(usw PRIVATE "/Zc:__cplusplus" "/permissive-" "/utf-8")
 

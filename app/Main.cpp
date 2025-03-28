@@ -2,12 +2,13 @@
 #include <win/scene/GLScene2.hpp>
 #include <utils/TextureManager.hpp>
 
+#include <win/Designer.hpp>
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    GLScene2 w;
+    Designer w;
     w.show();
-    app.exec();
-    TextureManager::releaseTextures();
-    return 0;
+    // TextureManager::releaseTextures();
+    return app.exec();
 }

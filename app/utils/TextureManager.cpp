@@ -30,10 +30,6 @@ QOpenGLTexture* TextureManager::loadTexture(const char *path)
 
 void TextureManager::releaseTextures()
 {
-    for (auto& texture : textures)
-    {
-        texture->destroy();
-        delete texture;
-    }
+    qDeleteAll(textures);
     textures.clear();
 }

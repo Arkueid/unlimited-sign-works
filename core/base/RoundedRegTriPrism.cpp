@@ -1,4 +1,4 @@
-﻿#include <base/RoundedRegTriPrism.hpp>
+#include <base/RoundedRegTriPrism.hpp>
 #include <algorithm>
 
 RoundedRegTriPrism::RoundedRegTriPrism(float a, float h, float radius, float precision) : a(a), h(h), radius(radius)
@@ -219,10 +219,13 @@ RoundedRegTriPrism::RoundedRegTriPrism(float a, float h, float radius, float pre
 	vertices[vertexIndex++] = {v2->x, 0, v2->z, (v->x + v2->x) / 2, 0, (v->z + v2->z) / 2, uStage2[2], 1};
 	vertices[vertexIndex++] = {v->x, 0, v->z, (v->x + v2->x) / 2, 0, (v->z + v2->z) / 2, uStage[0], 0};
 	drawableSize[2] = vertexIndex - drawableOffset[2];
+
+	vertexCount = vertexIndex;
 }
 
 RoundedRegTriPrism::~RoundedRegTriPrism()
 {
+	 delete[] vertices;
 }
 
 Vertex *RoundedRegTriPrism::getVertices()

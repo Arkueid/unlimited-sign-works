@@ -3,22 +3,25 @@
 #include <QTime>
 #include <QKeyEvent>
 
-GLScene2::GLScene2() : camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                     deltaTime(0.0f)
+#include <utils/TextureManager.hpp>
+
+GLScene2::GLScene2(QWidget* parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
+                     deltaTime(0.0f), drawables(0)
 {
 }
 
 GLScene2::~GLScene2()
 {
+    makeCurrent();
+    TextureManager::releaseTextures();
+    program.removeAllShaders();
     releaseDrawables();
+    doneCurrent();
 }
 
 void GLScene2::releaseDrawables()
 {
-    for (auto& d : drawables)
-    {
-        delete d;
-    }
+    qDeleteAll(drawables.begin(), drawables.end());
     drawables.clear();
 }
 
@@ -35,16 +38,16 @@ void GLScene2::initializeGL()
         qDebug() << "Shader program is not linked\n";
     }
 
-    for (auto& part : pole168.getParts())
-    {
-        drawables.append(new Drawable(&part));
-    }
+     for (auto part : pole168.getParts())
+     {
+         drawables.append(new Drawable(part));
+     }
 
-    pole89DrawableOffset = drawables.size();
-    for (auto& part : pole89.getParts())
-    {
-        drawables.append(new Drawable(&part));
-    }
+     pole89DrawableOffset = drawables.size();
+     for (auto part : pole89.getParts())
+     {
+         drawables.append(new Drawable(part));
+     }
 
     deltaTime = 1.0f / 60.0f;
 }

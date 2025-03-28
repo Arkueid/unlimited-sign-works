@@ -1,4 +1,5 @@
 ﻿#include <base/Stiffener.hpp>
+#include "Stiffener.hpp"
 
 // 加劲板共用索引
 static unsigned short indices[siffenerIndexCount] = {
@@ -145,6 +146,9 @@ Stiffener::Stiffener(float a, float b, float h1, float h2, float c, float offset
     }
 }
 
+Stiffener::~Stiffener()
+{
+}
 int Stiffener::getDrawableCount()
 {
     return 7;

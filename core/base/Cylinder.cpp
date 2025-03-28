@@ -1,4 +1,4 @@
-﻿#include <base/Cylinder.hpp>
+#include <base/Cylinder.hpp>
 #include <core.hpp>
 #include <cmath>
 
@@ -165,11 +165,13 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
     }
     delete[] indices;
     delete[] points;
+
+    indexCount = index;
 }
 
 Cylinder::~Cylinder()
 {
-    delete[] vertices;
+     delete[] vertices;
 }
 
 int Cylinder::getDrawableCount()
