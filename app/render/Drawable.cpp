@@ -1,15 +1,13 @@
 #include <render/Drawable.hpp>
 #include <stddef.h>
 #include <utils/TextureManager.hpp>
+#include <utils/VertexBufferManager.hpp>
 
-Drawable::Drawable(Part* part): part(part), vertexBuffer(QOpenGLBuffer::VertexBuffer)
+Drawable::Drawable(Part* part): part(part), vertexBuffer(nullptr)
 {
 	initializeOpenGLFunctions();
 
-	vertexBuffer.create();
-	vertexBuffer.bind();
-	vertexBuffer.allocate(part->getVertices(), part->getVertexCount() * sizeof(Vertex));
-	vertexBuffer.release();
+	vertexBuffer = VertexBufferManager::registerVertexBuffer(part->getVertices(), part->getVertexCount());
 
 	modelMatrix.setToIdentity();
 	modelMatrix.translate(part->getOriginX(), part->getOriginY(), part->getOriginZ());
@@ -26,7 +24,6 @@ Drawable::Drawable(Part* part): part(part), vertexBuffer(QOpenGLBuffer::VertexBu
 
 Drawable::~Drawable()
 {
-	vertexBuffer.destroy();
 }
 
 void Drawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
@@ -37,7 +34,7 @@ void Drawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 	scale = transform * scale * modelMatrix;
 	program.setUniformValue("model", scale);
 	program.setUniformValue("normalMatrix", scale.normalMatrix());
-	vertexBuffer.bind();
+	vertexBuffer->bind();
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), (void*)0);
 	glEnableVertexAttribArray(1);
@@ -51,5 +48,5 @@ void Drawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 		glDrawArrays(GL_TRIANGLES, part->getDrawableOffset(i), part->getDrawableSize(i));
 		textures[i]->release();
 	}
-	vertexBuffer.release();
+	vertexBuffer->release();
 }

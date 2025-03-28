@@ -12,7 +12,7 @@
 
 class Drawable: protected QOpenGLFunctions
 {
-	QOpenGLBuffer vertexBuffer;
+	QOpenGLBuffer* vertexBuffer;
 	QMatrix4x4 modelMatrix;
 	QVector<QOpenGLTexture*> textures;
 	Part* part;

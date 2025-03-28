@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 
 #include <utils/TextureManager.hpp>
+#include <utils/VertexBufferManager.hpp>
 
 GLScene2::GLScene2(QWidget* parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
                      deltaTime(0.0f), drawables(0)
@@ -14,6 +15,7 @@ GLScene2::~GLScene2()
 {
     makeCurrent();
     TextureManager::releaseTextures();
+    VertexBufferManager::releaseVertexBuffers();
     program.removeAllShaders();
     releaseDrawables();
     doneCurrent();

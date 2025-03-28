@@ -10,6 +10,9 @@ add_executable(usw
     utils/Camera.cpp
     utils/TextureManager.hpp    
     utils/TextureManager.cpp  
+    utils/VertexBufferManager.hpp  
+    utils/VertexBufferManager.cpp  
+
     
     render/Drawable.hpp
     render/Drawable.cpp
