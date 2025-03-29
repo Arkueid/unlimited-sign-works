@@ -5,24 +5,32 @@
 #include <vector>
 #include <string>
 
-
 // 代理模式
-class Part: public Mesh
+// part
+class Part : public Mesh
 {
     Point origin;
     Rotation rotation;
     Mesh *mesh;
     std::vector<int> textureRefs;
-    const std::vector<std::string>* texturePaths;
+    const std::vector<std::string> *texturePaths;
+
+    std::string name;
 
 public:
     Part(Mesh *mesh,
+         const std::string &name,
          const Point &origin,
          const Rotation &rotation,
-         const std::vector<int>& textureRefs, 
-         const std::vector<std::string>* texturePaths);
+         const std::vector<int> &textureRefs,
+         const std::vector<std::string> *texturePaths);
 
     virtual ~Part() = default;
+
+    std::string getName()
+    {
+        return name;
+    }
 
     float getOriginX() const
     {
@@ -49,10 +57,10 @@ public:
         return rotation.rz;
     }
 
-    const std::string& getTexturePath(int index) const;
+    const std::string &getTexturePath(int index) const;
 
     // Mesh
-    Vertex* getVertices() override;
+    Vertex *getVertices() override;
 
     int getVertexCount() override;
 
@@ -61,4 +69,8 @@ public:
     int getDrawableOffset(int index) override;
 
     int getDrawableSize(int index) override;
+
+    int getType() override;
+
+    Mesh *getMesh() const;
 };

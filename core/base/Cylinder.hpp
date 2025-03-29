@@ -22,6 +22,11 @@ public:
     Cylinder(float d, float h, float precision = PRECISION_DEFAULT);
     ~Cylinder() override;
 
+    int getType() override
+    {
+        return MeshType_Cylinder;
+    }
+
     int getVertexCount() override
     {
         return indexCount;

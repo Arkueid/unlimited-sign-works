@@ -2,10 +2,21 @@
 
 #include <core.hpp>
 
+enum MeshType
+{
+    MeshType_Cube,
+    MeshType_Cylinder,
+    MeshType_RoundedCube,
+    MeshType_RoundedRegTriPrism,
+    MeshType_Stiffener,
+};
+
 class Mesh
 {
 public:
     virtual ~Mesh() = default;
+
+    virtual int getType() = 0;
 
     virtual Vertex *getVertices() = 0;
 

@@ -20,6 +20,11 @@ public:
 	RoundedRegTriPrism(float a, float h, float radius, float precision = PRECISION_DEFAULT);
 	~RoundedRegTriPrism() override;
 
+	int getType() override
+	{
+		return MeshType_RoundedRegTriPrism;
+	}
+
 	// 通过 Mesh 继承
 	Vertex* getVertices() override;
 

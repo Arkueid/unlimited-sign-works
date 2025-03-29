@@ -8,13 +8,6 @@
 #include <base/RoundedRegTriPrism.hpp>
 
 class Pole168 : public Pole {
-    Cylinder* sideBeam;
-    Cylinder* mainPole;
-    Cylinder* flange;
-    RoundedCube* panel;
-    Cube* bottom;
-    Stiffener* sideStiffener;
-    Stiffener* bottomStiffener;
 public:
     Pole168();
     ~Pole168() override;

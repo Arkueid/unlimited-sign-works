@@ -13,6 +13,11 @@ class Cube : public Mesh
 public:
     Cube(float a, float b, float c);
     ~Cube() override = default;
+
+    int getType() override
+    {
+        return MeshType_Cube;
+    }
     int getVertexCount() override
     {
         return cubeVertexCount;

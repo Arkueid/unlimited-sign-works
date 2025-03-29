@@ -1,9 +1,9 @@
-#include <render/Drawable.hpp>
+#include <render/PartDrawable.hpp>
 #include <stddef.h>
 #include <utils/TextureManager.hpp>
 #include <utils/VertexBufferManager.hpp>
 
-Drawable::Drawable(Part* part): part(part), vertexBuffer(nullptr)
+PartDrawable::PartDrawable(Part* part): part(part), vertexBuffer(nullptr), visible(true)
 {
 	initializeOpenGLFunctions();
 
@@ -22,12 +22,12 @@ Drawable::Drawable(Part* part): part(part), vertexBuffer(nullptr)
 	}
 }
 
-Drawable::~Drawable()
+PartDrawable::~PartDrawable()
 {
 	VertexBufferManager::unregisterVertexBuffer(part->getVertices());
 }
 
-void Drawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
+void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 {
 	QMatrix4x4 scale;
 	scale.setToIdentity();
@@ -51,3 +51,4 @@ void Drawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 	}
 	vertexBuffer->release();
 }
+

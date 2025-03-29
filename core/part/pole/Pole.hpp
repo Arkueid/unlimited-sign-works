@@ -8,6 +8,7 @@ class Pole
 {
 protected:
     std::vector<Part*> parts;
+    std::vector<Mesh*> shapes;
     std::vector<std::string> textures;
     
 public:
@@ -18,4 +19,10 @@ public:
     std::vector<Part*>& getParts();
 
     std::vector<std::string>& getTextures();
+
+    std::vector<Mesh*>& getShapes();
+
+    void addPart(Part* part);
+
+    void addShape(Mesh* shape);
 };

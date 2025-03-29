@@ -26,6 +26,11 @@ public:
     Stiffener(float a, float b, float h1, float h2, float c, float offsetH = 20.0f, float offsetV = 0.0f);
     ~Stiffener() override;
 
+    int getType() override
+    {
+        return MeshType_Stiffener;
+    }
+
     Vertex* getVertices() override
     {
         return vertices;

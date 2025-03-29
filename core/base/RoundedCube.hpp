@@ -24,6 +24,11 @@ public:
     /// @param precision 圆角离散精度
     RoundedCube(float a, float b, float c, float radius, float precision = PRECISION_DEFAULT);
     ~RoundedCube() override;
+
+    int getType() override
+    {
+        return MeshType_RoundedCube;
+    }
     // 通过 Mesh 继承
     Vertex* getVertices() override;
     int getVertexCount() override;

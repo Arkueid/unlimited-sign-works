@@ -1,4 +1,4 @@
-#include <win/scene/GLScene2.hpp>
+#include <win/scene/PoleScene.hpp>
 
 #include <QTime>
 #include <QKeyEvent>
@@ -6,28 +6,61 @@
 #include <utils/TextureManager.hpp>
 #include <utils/VertexBufferManager.hpp>
 
-GLScene2::GLScene2(QWidget* parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                     deltaTime(0.0f), drawables(0)
+#include <part/pole/Pole168.hpp>
+#include <part/pole/Pole89.hpp>
+#include "PoleScene.hpp"
+
+PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
+                                        deltaTime(0.0f), drawables(0)
 {
+    pole = new Pole168();
+    setFocusPolicy(Qt::ClickFocus);
 }
 
-GLScene2::~GLScene2()
+PoleScene::~PoleScene()
 {
+    // qDebug() << "PoleScene::~PoleScene";
     makeCurrent();
     releaseDrawables();
-    TextureManager::releaseTextures();
-    program.removeAllShaders();
     VertexBufferManager::releaseVertexBuffers();
+    program.removeAllShaders();
+    TextureManager::releaseTextures();
+    delete pole;
     doneCurrent();
 }
 
-void GLScene2::releaseDrawables()
+PartDrawable *PoleScene::getDrawable(int index)
 {
-    qDeleteAll(drawables.begin(), drawables.end());
+    return drawables[index];
+}
+
+void PoleScene::removeDrawable(PartDrawable *drawable)
+{
+    drawables.removeOne(drawable);
+    delete drawable;
+    update();
+}
+
+void PoleScene::addDrawable(Part *part)
+{
+    pole->addPart(part);
+    pole->addShape(part->getMesh());
+    PartDrawable *drawable = new PartDrawable(part);
+    drawables.append(drawable);
+    emit drawableAdded(drawable);
+    update();
+}
+
+void PoleScene::releaseDrawables()
+{
+    if (!drawables.isEmpty())
+    {
+        qDeleteAll(drawables);
+    }
     drawables.clear();
 }
 
-void GLScene2::initializeGL()
+void PoleScene::initializeGL()
 {
     initializeOpenGLFunctions();
 
@@ -40,25 +73,19 @@ void GLScene2::initializeGL()
         qDebug() << "Shader program is not linked\n";
     }
 
-     for (auto part : pole168.getParts())
-     {
-         drawables.append(new Drawable(part));
-     }
-
-     pole89DrawableOffset = drawables.size();
-     for (auto part : pole89.getParts())
-     {
-         drawables.append(new Drawable(part));
-     }
+    const std::vector<Part*>& parts = pole->getParts();
+    for (auto part : parts)
+    {
+        PartDrawable *drawable = new PartDrawable(part);
+        drawables.append(drawable);
+        emit drawableAdded(drawable);
+    }
 
     deltaTime = 1.0f / 60.0f;
-
-    grabKeyboard();
 }
 
-void GLScene2::paintGL()
+void PoleScene::paintGL()
 {
-
     glEnable(GL_DEPTH_TEST);
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -68,24 +95,12 @@ void GLScene2::paintGL()
     program.setUniformValue("projection", projection);
     program.setUniformValue("view", camera.getViewMatrix());
 
-    QMatrix4x4 transform168;
-    transform168.setToIdentity();
-
-    QMatrix4x4 transform89;
-    transform89.setToIdentity();
-    transform89.translate(-0.30f, 0.0f, 0.0f);
-    int idx = 0;
-    for (auto& d : drawables)
+    for (auto &d : drawables)
     {
-        if (idx < pole89DrawableOffset)
+        if (d->isVisible())
         {
-            d->draw(program, transform168);
+            d->draw(program, transform);
         }
-        else
-        {
-            d->draw(program, transform89);
-        }
-        idx++;
     }
 
     program.release();
@@ -93,7 +108,7 @@ void GLScene2::paintGL()
     // qDebug() << "updated";
 }
 
-void GLScene2::resizeGL(int w, int h)
+void PoleScene::resizeGL(int w, int h)
 {
     glViewport(0, 0, w, h);
     float fov = 45.0f;                       // 视野角度
@@ -105,7 +120,7 @@ void GLScene2::resizeGL(int w, int h)
     projection.perspective(fov, aspectRatio, nearPlane, farPlane);
 }
 
-void GLScene2::keyPressEvent(QKeyEvent *event)
+void PoleScene::keyPressEvent(QKeyEvent *event)
 {
     float cameraSpeed = 2.5f * deltaTime; // 控制相机移动速度
     if (event->key() == Qt::Key_W)
@@ -136,13 +151,13 @@ void GLScene2::keyPressEvent(QKeyEvent *event)
     update();
 }
 
-void GLScene2::mousePressEvent(QMouseEvent *event)
+void PoleScene::mousePressEvent(QMouseEvent *event)
 {
     lastX = event->x();
     lastY = event->y();
 }
 
-void GLScene2::mouseMoveEvent(QMouseEvent *event)
+void PoleScene::mouseMoveEvent(QMouseEvent *event)
 {
     if (firstMouse)
     {
@@ -158,5 +173,16 @@ void GLScene2::mouseMoveEvent(QMouseEvent *event)
 
     camera.processMouseMovement(xoffset, yoffset);
     update();
+}
 
+void PoleScene::focusInEvent(QFocusEvent *event)
+{
+    // qDebug() << "focusInEvent";
+    grabKeyboard();
+}
+
+void PoleScene::focusOutEvent(QFocusEvent *event)
+{
+    // qDebug() << "focusOutEvent";
+    releaseKeyboard();
 }

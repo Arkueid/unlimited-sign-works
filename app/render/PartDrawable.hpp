@@ -10,16 +10,33 @@
 #include <QOpenGLTexture>
 #include <QImage>
 
-class Drawable: protected QOpenGLFunctions
+class PartDrawable: protected QOpenGLFunctions
 {
 	QOpenGLBuffer* vertexBuffer;
 	QMatrix4x4 modelMatrix;
 	QVector<QOpenGLTexture*> textures;
 	Part* part;
 
+	bool visible;
+
 public:
-	Drawable(Part* part);
-	~Drawable();
+	PartDrawable(Part* part);
+	~PartDrawable();
 
 	void draw(QOpenGLShaderProgram& program, QMatrix4x4& transform);
+
+	bool isVisible() const
+	{
+		return visible;
+	}
+
+	void setVisible(bool value)
+	{
+		visible = value;
+	}
+
+	QString getName() const
+	{
+		return part->getName().c_str();
+	}
 };
