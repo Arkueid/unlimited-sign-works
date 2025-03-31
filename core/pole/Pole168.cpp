@@ -5,7 +5,7 @@ Pole168::Pole168()
     shapes.push_back(new Cylinder(108.0f, 500.0f + 1000.0f + 2500.0f));
     shapes.push_back(new Cylinder(168.0f, 6700.0f));
     shapes.push_back(new Cylinder(300.0f, 20.0f));
-    shapes.push_back(new RoundedCube(2500.0f, 2000.0f, 10.0f, 210.0f));
+    shapes.push_back(new RoundedCube(2500.0f, 2000.0f, 10.0f, 100.0f));
     shapes.push_back(new Cube(400.0f, 400.0f, 20.0f));
     shapes.push_back(new Stiffener(30.0f, 104.0f, 550.0f, 750.0f, 8.0f, 0.0f, 20.0f));
     shapes.push_back(new Stiffener(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f));
@@ -30,7 +30,7 @@ Pole168::Pole168()
 
     parts.push_back(new Part{shapes[sideBeami], "sideBeam2", {-250.0f, 6700.0f - 300.0f - 600.0f, 0.0f}, {0.0f, 0.0f, -90.0f}, {4, 4, 7}});
 
-    parts.push_back(new Part{shapes[paneli], "panel1", {4000.0f - 250.0f - 1250.0f, 6700.0f - 300.0f - 300.0f, 10.0f + 54.0f}, {90.0f, 0.0f, 0.0f}, {7, 6, 6, 6, 6, 6}});
+    parts.push_back(new Part{shapes[paneli], "panel1", {4000.0f - 250.0f - 1250.0f, 6700.0f - 300.0f - 300.0f, 10.0f + 54.0f}, {90.0f, 0.0f, 0.0f}, {1, 6, 6, 6, 6, 6}});
 
     parts.push_back(new Part{shapes[bottomi], "bottom", {0.0f, 10.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {8, 8, 8, 8, 8, 8}});
 

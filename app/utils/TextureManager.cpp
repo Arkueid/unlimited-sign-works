@@ -5,7 +5,7 @@
 static QMap<QString, QOpenGLTexture*> textures;
 static std::vector<std::string> texturePaths = {
     "../../assets/textures/panel/CN_road_sign.png",
-    "../../assets/textures/panel/D25.bmp",
+    "../../assets/textures/panel/CN_road_sign2.png",
     "../../assets/textures/metal/metal1.bmp",
     "../../assets/textures/metal/metal2.bmp",
     "../../assets/textures/metal/metal3.bmp",
