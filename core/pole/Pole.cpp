@@ -1,4 +1,4 @@
-#include <part/pole/Pole.hpp>
+#include <pole/Pole.hpp>
 #include "Pole.hpp"
 
 Pole::Pole()
@@ -26,11 +26,6 @@ Pole::~Pole()
 std::vector<Part*>& Pole::getParts()
 {
     return parts;
-}
-
-std::vector<std::string> &Pole::getTextures()
-{
-    return textures;
 }
 
 std::vector<Mesh *> &Pole::getShapes()

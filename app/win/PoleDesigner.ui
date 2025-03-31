@@ -131,11 +131,11 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>487</width>
+         <width>481</width>
          <height>693</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,1">
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0">
         <item>
          <widget class="QStackedWidget" name="paramPanel">
           <property name="sizePolicy">
@@ -151,9 +151,9 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
-          <widget class="QWidget" name="page1">
+          <widget class="QWidget" name="cylinderPanel">
            <property name="sizePolicy">
             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
@@ -266,7 +266,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="page2">
+          <widget class="QWidget" name="cubePanel">
            <property name="sizePolicy">
             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
@@ -423,7 +423,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="page3">
+          <widget class="QWidget" name="stiffenerPanel">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
              <horstretch>0</horstretch>
@@ -626,7 +626,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="page4">
+          <widget class="QWidget" name="rCubePanel">
            <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,1">
             <property name="leftMargin">
              <number>0</number>
@@ -741,7 +741,7 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="page5">
+          <widget class="QWidget" name="rRegTriPrismPanel">
            <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1">
             <property name="leftMargin">
              <number>0</number>
@@ -846,104 +846,129 @@
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="empty"/>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_12">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QFrame" name="transformPanel">
+          <property name="frameShape">
+           <enum>QFrame::Shape::StyledPanel</enum>
           </property>
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Raised</enum>
           </property>
-          <property name="text">
-           <string>变换</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignmentFlag::AlignCenter</set>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,1">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_12">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>变换</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QFormLayout" name="formLayout_3">
+             <property name="leftMargin">
+              <number>6</number>
+             </property>
+             <property name="topMargin">
+              <number>6</number>
+             </property>
+             <property name="rightMargin">
+              <number>6</number>
+             </property>
+             <property name="bottomMargin">
+              <number>6</number>
+             </property>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="centerX"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="yLabel">
+               <property name="text">
+                <string>中心y</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="centerY"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="zLabel">
+               <property name="text">
+                <string>中心z</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="centerZ"/>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="xLabel_2">
+               <property name="text">
+                <string>x轴旋转角度</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="rotationX"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="yLabel_2">
+               <property name="text">
+                <string>y轴旋转角度</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLineEdit" name="rotationY"/>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="zLabel_2">
+               <property name="text">
+                <string>z轴旋转角度</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="rotationZ"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="xLabel">
+               <property name="text">
+                <string>中心x</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item>
-         <layout class="QFormLayout" name="formLayout_3">
-          <property name="leftMargin">
-           <number>6</number>
-          </property>
-          <property name="topMargin">
-           <number>6</number>
-          </property>
-          <property name="rightMargin">
-           <number>6</number>
-          </property>
-          <property name="bottomMargin">
-           <number>6</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="xLabel">
-            <property name="text">
-             <string>中心x</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="centerX"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="yLabel">
-            <property name="text">
-             <string>中心y</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="centerY"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="zLabel">
-            <property name="text">
-             <string>中心z</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="centerZ"/>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="xLabel_2">
-            <property name="text">
-             <string>x轴旋转角度</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="rotationX"/>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="yLabel_2">
-            <property name="text">
-             <string>y轴旋转角度</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="rotationY"/>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="zLabel_2">
-            <property name="text">
-             <string>z轴旋转角度</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLineEdit" name="rotationZ"/>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>

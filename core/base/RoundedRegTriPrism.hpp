@@ -36,4 +36,18 @@ public:
 
 	int getDrawableSize(int index) override;
 
+	float getA() const
+	{
+		return a;
+	}
+
+	float getH() const
+	{
+		return h;
+	}
+
+	float getRadius() const
+	{
+		return radius;
+	}
 };

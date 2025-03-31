@@ -49,4 +49,38 @@ public:
 
     int getDrawableSize(int index) override;
 
+    float getA() const
+    {
+        return a;
+    }
+
+    float getB() const
+    {
+        return b;
+    }
+
+    float getC() const
+    {
+        return c;
+    }
+
+    float getH1() const
+    {
+        return h1;
+    }
+
+    float getH2() const
+    {
+        return h2;
+    }
+
+    float getOffsetH() const
+    {
+        return offsetH;
+    }
+
+    float getOffsetV() const
+    {
+        return offsetV;
+    }
 };

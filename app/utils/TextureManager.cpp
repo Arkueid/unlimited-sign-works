@@ -4,15 +4,21 @@
 
 static QMap<QString, QOpenGLTexture*> textures;
 static std::vector<std::string> texturePaths = {
+    "../../assets/textures/panel/CN_road_sign.png",
     "../../assets/textures/panel/D25.bmp",
+    "../../assets/textures/metal/metal1.bmp",
+    "../../assets/textures/metal/metal2.bmp",
+    "../../assets/textures/metal/metal3.bmp",
+    "../../assets/textures/metal/metal4.bmp",
+    "../../assets/textures/metal/metal5.bmp",
     "../../assets/textures/metal/metal6.bmp",
     "../../assets/textures/metal/metal7.bmp",
-    "../../assets/textures/metal/metal3.bmp",
-    "../../assets/textures/metal/metal5.bmp"
 };
 
 QOpenGLTexture* TextureManager::loadTexture(const char *path)
 {
+    // qDebug() << "Loading texture: " << path;
+
     if (textures.contains(path))
     {
         return textures[path];
@@ -27,6 +33,7 @@ QOpenGLTexture* TextureManager::loadTexture(const char *path)
         texture->setMinificationFilter(QOpenGLTexture::Linear);
         texture->setMagnificationFilter(QOpenGLTexture::Linear);
         textures[path] = texture;
+        // qDebug() << "Loaded texture: " << path;
         return texture;
     }
     else
@@ -37,7 +44,7 @@ QOpenGLTexture* TextureManager::loadTexture(const char *path)
     return nullptr;
 }
 
-const std::vector<std::string> *TextureManager::getTexturePaths()
+std::vector<std::string> *TextureManager::getTexturePaths()
 {
     return &texturePaths;
 }

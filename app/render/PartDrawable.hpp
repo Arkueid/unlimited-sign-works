@@ -39,4 +39,9 @@ public:
 	{
 		return part->getName().c_str();
 	}
+
+	Part* getPart() const
+	{
+		return part;
+	}
 };

@@ -43,8 +43,7 @@ void CubePanel::onSubmit()
                               ui->rotationY->text().toFloat(),
                               ui->rotationZ->text().toFloat(),
                           },
-                          {0, 1, 1, 1, 1, 1},
-                          TextureManager::getTexturePaths());
+                          {0, 1, 1, 1, 1, 1});
 
     scene->addDrawable(part);
     // qDebug() << "CubeParamPanel::onSubmit()";

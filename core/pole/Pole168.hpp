@@ -1,6 +1,6 @@
 #pragma once
 
-#include <part/pole/Pole.hpp>
+#include <pole/Pole.hpp>
 #include <base/Cylinder.hpp>
 #include <base/Stiffener.hpp>
 #include <base/Cube.hpp>

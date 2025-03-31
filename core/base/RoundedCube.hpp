@@ -35,5 +35,25 @@ public:
     int getDrawableCount() override;
     int getDrawableOffset(int index) override;
     int getDrawableSize(int index) override;
+
+    float getA() const
+    {
+        return a;
+    }
+
+    float getB() const
+    {
+        return b;
+    }
+
+    float getC() const
+    {
+        return c;
+    }
+
+    float getRadius() const
+    {
+        return radius;
+    }
 };
 

@@ -6,7 +6,7 @@
 #include <utils/Camera.hpp>
 #include <QVector>
 #include <render/PartDrawable.hpp>
-#include <part/pole/Pole.hpp>
+#include <pole/Pole.hpp>
 
 #include <render/AxisDrawable.hpp>
 

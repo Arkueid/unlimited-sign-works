@@ -6,8 +6,8 @@
 #include <utils/TextureManager.hpp>
 #include <utils/VertexBufferManager.hpp>
 
-#include <part/pole/Pole168.hpp>
-#include <part/pole/Pole89.hpp>
+#include <pole/Pole168.hpp>
+#include <pole/Pole89.hpp>
 
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
                                         deltaTime(0.0f), drawables(0)

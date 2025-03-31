@@ -39,4 +39,14 @@ public:
     int getDrawableCount() override;
     int getDrawableOffset(int index) override;
     int getDrawableSize(int index) override;
+
+    float getD() const
+    {
+        return d;
+    }
+
+    float getH() const
+    {
+        return h;
+    }
 };

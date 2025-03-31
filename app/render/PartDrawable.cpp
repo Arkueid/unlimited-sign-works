@@ -15,9 +15,10 @@ PartDrawable::PartDrawable(Part* part): part(part), vertexBuffer(nullptr), visib
 	modelMatrix.rotate(part->getRotationY(), 0, 1, 0);
 	modelMatrix.rotate(part->getRotationZ(), 0, 0, 1);
 
-	for (int i = 0; i < part->getDrawableCount(); i++)
+	std::vector<std::string>* texturePaths = TextureManager::getTexturePaths();
+	for (int i : part->getTextureRefs())
 	{
-		const std::string& path = part->getTexturePath(i);
+		std::string path = (*texturePaths)[i];
 		textures.append(TextureManager::loadTexture(path.c_str()));
 	}
 }

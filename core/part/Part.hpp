@@ -13,7 +13,6 @@ class Part : public Mesh
     Rotation rotation;
     Mesh *mesh;
     std::vector<int> textureRefs;
-    const std::vector<std::string> *texturePaths;
 
     std::string name;
 
@@ -22,8 +21,7 @@ public:
          const std::string &name,
          const Point &origin,
          const Rotation &rotation,
-         const std::vector<int> &textureRefs,
-         const std::vector<std::string> *texturePaths);
+         const std::vector<int> &textureRefs);
 
     virtual ~Part() = default;
 
@@ -57,8 +55,6 @@ public:
         return rotation.rz;
     }
 
-    const std::string &getTexturePath(int index) const;
-
     // Mesh
     Vertex *getVertices() override;
 
@@ -73,4 +69,9 @@ public:
     int getType() override;
 
     Mesh *getMesh() const;
+
+    const std::vector<int> &getTextureRefs() const
+    {
+        return textureRefs;
+    }
 };

@@ -4,19 +4,12 @@ Part::Part(Mesh *mesh,
            const std::string &name,
            const Point &origin,
            const Rotation &rotation,
-           const std::vector<int> &textureRefs,
-           const std::vector<std::string> *texturePaths) : name(name),
+           const std::vector<int> &textureRefs) : name(name),
                                                            mesh(mesh),
                                                            origin(origin),
                                                            rotation(rotation),
-                                                           textureRefs(textureRefs),
-                                                           texturePaths(texturePaths)
+                                                           textureRefs(textureRefs)
 {
-}
-
-const std::string &Part::getTexturePath(int index) const
-{
-    return (*texturePaths)[textureRefs[index]];
 }
 
 Vertex *Part::getVertices()

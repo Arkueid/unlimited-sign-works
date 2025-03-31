@@ -11,12 +11,12 @@ add_library(core STATIC
     base/RoundedRegTriPrism.cpp
     base/Mesh.hpp
 
-    part/pole/Pole.hpp
-    part/pole/Pole.cpp
-    part/pole/Pole89.hpp
-    part/pole/Pole89.cpp
-    part/pole/Pole168.hpp
-    part/pole/Pole168.cpp
+    pole/Pole.hpp
+    pole/Pole.cpp
+    pole/Pole89.hpp
+    pole/Pole89.cpp
+    pole/Pole168.hpp
+    pole/Pole168.cpp
     part/Part.hpp
     part/Part.cpp
 
