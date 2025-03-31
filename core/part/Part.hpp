@@ -80,6 +80,11 @@ public:
         return textureRefs;
     }
 
+    void setTextureRef(int index, int value)
+    {
+        textureRefs[index] = value;
+    }
+
     void setName(const std::string &value)
     {
         this->name = value;

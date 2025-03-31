@@ -147,7 +147,8 @@ void PoleDesigner::bindCube(Part *part)
 	ui->rotationY->setText(QString::number(part->getRotationY()));
 	ui->rotationZ->setText(QString::number(part->getRotationZ()));
 
-	// 绑定事件
+#pragma region 事件绑定
+	// 名称
 	connect(ui->cubeName, &QLineEdit::textChanged,
 			[=](const QString &text)
 			{
@@ -156,6 +157,25 @@ void PoleDesigner::bindCube(Part *part)
 				DrawableListItem *widget = reinterpret_cast<DrawableListItem *>(ui->drawableList->itemWidget(item));
 				widget->getName()->setText(text);
 			});
+
+	// 纹理
+	QComboBox* comboBoxes[6] = {
+		ui->cubeTexFront,
+		ui->cubeTexLeft,
+		ui->cubeTexBack,
+		ui->cubeTexRight,
+		ui->cubeTexBottom,
+		ui->cubeTexTop
+	};
+	for (int i = 0; i < 6; i++)
+	{
+		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
+			[=](int index)
+			{
+				part->setTextureRef(i, index);
+				ui->poleScene->update();
+			});
+	}
 
 	// 变换
 	connect(ui->originX, &QLineEdit::textChanged,
@@ -194,6 +214,7 @@ void PoleDesigner::bindCube(Part *part)
 				part->setRotationZ(text.toFloat());
 				ui->poleScene->update();
 			});
+#pragma endregion
 }
 
 void PoleDesigner::bindCylinder(Part *part)
@@ -229,6 +250,8 @@ void PoleDesigner::hidePanels()
 void PoleDesigner::initializeLineEdits()
 {
 	doubleValidator.setRange(-1000000000, 1000000000, 5);
+	doubleValidator.setNotation(QDoubleValidator::StandardNotation);
+
 	ui->originX->setValidator(&doubleValidator);
 	ui->originY->setValidator(&doubleValidator);
 	ui->originZ->setValidator(&doubleValidator);

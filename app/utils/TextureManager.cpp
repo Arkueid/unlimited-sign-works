@@ -46,7 +46,8 @@ QOpenGLTexture* TextureManager::loadTexture(const QString& path)
 
 QOpenGLTexture *TextureManager::getTexture(int ref)
 {
-    return textures[texturePaths[ref]];
+    const QString& path = texturePaths[ref];
+    return loadTexture(path);
 }
 
 QStringList *TextureManager::getTexturePaths()
