@@ -37,8 +37,14 @@ PartDrawable *PoleScene::getDrawable(int index)
 
 void PoleScene::removeDrawable(PartDrawable *drawable)
 {
+    makeCurrent();
     drawables.removeOne(drawable);
+    Part* part = drawable->getPart();
     delete drawable;
+
+    pole->removePart(part);
+    doneCurrent();
+
     update();
 }
 

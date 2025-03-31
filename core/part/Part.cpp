@@ -15,7 +15,7 @@ Part::Part(Mesh *mesh,
 
 Part::~Part()
 {
-    printf("Part::~Part()");
+    // printf("Part::~Part()");
     releaseMesh();
 }
 

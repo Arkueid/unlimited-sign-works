@@ -29,6 +29,6 @@ void Pole::addPart(Part *part)
 
 void Pole::removePart(Part *part)
 {
-    parts.erase(std::remove(parts.begin(), parts.end(), part), parts.end());
+    parts.erase(std::find(parts.begin(), parts.end(), part));
     delete part;
 }

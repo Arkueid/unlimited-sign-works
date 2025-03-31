@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <core.hpp>
 
@@ -21,7 +21,7 @@ public:
     Mesh() : refCount(0) {}
     virtual ~Mesh()
     {
-        printf("deleted\n");
+        // printf("deleted\n");
     }
 
     virtual int getType() = 0;
