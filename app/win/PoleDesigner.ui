@@ -151,7 +151,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>4</number>
           </property>
           <widget class="QWidget" name="cylinderPanel">
            <property name="sizePolicy">
@@ -244,13 +244,13 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QComboBox" name="comboBox"/>
+               <widget class="QComboBox" name="cylinderTexTop"/>
               </item>
               <item row="4" column="1">
-               <widget class="QComboBox" name="comboBox_2"/>
+               <widget class="QComboBox" name="cylinderTexBottom"/>
               </item>
               <item row="5" column="1">
-               <widget class="QComboBox" name="comboBox_3"/>
+               <widget class="QComboBox" name="cylinderTexSide"/>
               </item>
               <item row="0" column="0">
                <widget class="QLabel" name="Label_16">
@@ -550,7 +550,7 @@
                </widget>
               </item>
               <item row="8" column="1">
-               <widget class="QComboBox" name="comboBox_4"/>
+               <widget class="QComboBox" name="stiffenerTexFront"/>
               </item>
               <item row="9" column="0">
                <widget class="QLabel" name="Label_10">
@@ -589,18 +589,12 @@
                 </property>
                </widget>
               </item>
-              <item row="12" column="1">
-               <widget class="QLineEdit" name="stiffenerTexSlope"/>
-              </item>
               <item row="13" column="0">
                <widget class="QLabel" name="Label_14">
                 <property name="text">
                  <string>纹理（上）</string>
                 </property>
                </widget>
-              </item>
-              <item row="13" column="1">
-               <widget class="QLineEdit" name="stiffenerTexTop"/>
               </item>
               <item row="14" column="0">
                <widget class="QLabel" name="Label_15">
@@ -621,6 +615,12 @@
               </item>
               <item row="0" column="1">
                <widget class="QLineEdit" name="stiffenerName"/>
+              </item>
+              <item row="12" column="1">
+               <widget class="QComboBox" name="stiffenerTexSlope"/>
+              </item>
+              <item row="13" column="1">
+               <widget class="QComboBox" name="stiffenerTexTop"/>
               </item>
              </layout>
             </item>
@@ -729,13 +729,13 @@
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QComboBox" name="comboBox_5"/>
+               <widget class="QComboBox" name="rCubeTexTop"/>
               </item>
               <item row="6" column="1">
-               <widget class="QComboBox" name="comboBox_6"/>
+               <widget class="QComboBox" name="rCubeTexBottom"/>
               </item>
               <item row="7" column="1">
-               <widget class="QComboBox" name="comboBox_7"/>
+               <widget class="QComboBox" name="rCubeTexSide"/>
               </item>
              </layout>
             </item>
@@ -840,7 +840,7 @@
                </widget>
               </item>
               <item row="6" column="1">
-               <widget class="QLineEdit" name="rRegTriPrismTexSide"/>
+               <widget class="QComboBox" name="rRegTriPrismTexSide"/>
               </item>
              </layout>
             </item>

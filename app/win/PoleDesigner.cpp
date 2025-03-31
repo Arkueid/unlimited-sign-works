@@ -119,7 +119,7 @@ void PoleDesigner::bindCube(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->cubePanel);
 
-#pragma region 绑定数据
+	// 绑定基本数据
 	ui->cubeName->setText(part->getName().c_str());
 	cube = (Cube *)part->getMesh();
 
@@ -127,30 +127,7 @@ void PoleDesigner::bindCube(Part *part)
 	ui->cubeB->setText(QString::number(cube->getB()));
 	ui->cubeC->setText(QString::number(cube->getC()));
 
-	ui->cubeTexFront->addItems(*TextureManager::getTexturePaths());
-	ui->cubeTexLeft->addItems(*TextureManager::getTexturePaths());
-	ui->cubeTexBack->addItems(*TextureManager::getTexturePaths());
-	ui->cubeTexRight->addItems(*TextureManager::getTexturePaths());
-	ui->cubeTexBottom->addItems(*TextureManager::getTexturePaths());
-	ui->cubeTexTop->addItems(*TextureManager::getTexturePaths());
-
-	ui->cubeTexFront->setCurrentIndex(part->getTextureRefs()[0]);
-	ui->cubeTexLeft->setCurrentIndex(part->getTextureRefs()[1]);
-	ui->cubeTexBack->setCurrentIndex(part->getTextureRefs()[2]);
-	ui->cubeTexRight->setCurrentIndex(part->getTextureRefs()[3]);
-	ui->cubeTexBottom->setCurrentIndex(part->getTextureRefs()[4]);
-	ui->cubeTexTop->setCurrentIndex(part->getTextureRefs()[5]);
-
-	ui->originX->setText(QString::number(part->getOriginX()));
-	ui->originY->setText(QString::number(part->getOriginY()));
-	ui->originZ->setText(QString::number(part->getOriginZ()));
-
-	ui->rotationX->setText(QString::number(part->getRotationX()));
-	ui->rotationY->setText(QString::number(part->getRotationY()));
-	ui->rotationZ->setText(QString::number(part->getRotationZ()));
-#pragma endregion
-
-#pragma region 事件绑定
+	// 事件绑定
 	// 名称
 	ui->cubeName->disconnect();
 	connect(ui->cubeName, &QLineEdit::textEdited,
@@ -191,8 +168,7 @@ void PoleDesigner::bindCube(Part *part)
 				Cube *newCube = Cube::create(oldCube->getA(), oldCube->getB(), text.toFloat());
 				part->setMesh(newCube);
 				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-			}
-	);
+			});
 
 	// 纹理
 	QComboBox *comboBoxes[6] = {
@@ -205,6 +181,9 @@ void PoleDesigner::bindCube(Part *part)
 	for (int i = 0; i < 6; i++)
 	{
 		comboBoxes[i]->disconnect();
+		comboBoxes[i]->clear();
+		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
 		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
 				[=](int index)
 				{
@@ -214,73 +193,335 @@ void PoleDesigner::bindCube(Part *part)
 	}
 
 	// 变换
-	ui->originX->disconnect();
-	connect(ui->originX, &QLineEdit::textEdited,
-			[=](const QString &text)
-			{
-				part->setOriginX(text.toFloat());
-				ui->poleScene->update();
-			});
-	ui->originY->disconnect();
-	connect(ui->originY, &QLineEdit::textEdited,
-			[=](const QString &text)
-			{
-				part->setOriginY(text.toFloat());
-				ui->poleScene->update();
-			});
-	ui->originZ->disconnect();
-	connect(ui->originZ, &QLineEdit::textEdited,
-			[=](const QString &text)
-			{
-				part->setOriginZ(text.toFloat());
-				ui->poleScene->update();
-			});
-	ui->rotationX->disconnect();
-	connect(ui->rotationX, &QLineEdit::textEdited,
-			[=](const QString &text)
-			{
-				part->setRotationX(text.toFloat());
-				ui->poleScene->update();
-			});
-	ui->rotationY->disconnect();
-	connect(ui->rotationY, &QLineEdit::textEdited,
-			[=](const QString &text)
-			{
-				part->setRotationY(text.toFloat());
-				ui->poleScene->update();
-			});
-	ui->rotationZ->disconnect();
-	connect(ui->rotationZ, &QLineEdit::textEdited,
-			[=](const QString &text)
-			{
-				part->setRotationZ(text.toFloat());
-				ui->poleScene->update();
-			});
-#pragma endregion
+	bindTransforms(part);
 }
 
 void PoleDesigner::bindCylinder(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->cylinderPanel);
+
 	ui->cylinderName->setText(part->getName().c_str());
+	cylinder = (Cylinder *)part->getMesh();
+
+	ui->cylinderD->setText(QString::number(cylinder->getD()));
+	ui->cylinderH->setText(QString::number(cylinder->getH()));
+
+	// 事件绑定
+	ui->cylinderName->disconnect();
+	connect(ui->cylinderName, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setName(text.toStdString());
+				QListWidgetItem *item = ui->drawableList->currentItem();
+				DrawableListItem *widget = reinterpret_cast<DrawableListItem *>(ui->drawableList->itemWidget(item));
+				widget->getName()->setText(text);
+			});
+	ui->cylinderD->disconnect();
+	connect(ui->cylinderD, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Cylinder *oldCylinder = (Cylinder *)part->getMesh();
+				Cylinder *newCylinder = Cylinder::create(text.toFloat(), oldCylinder->getH());
+				part->setMesh(newCylinder);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->cylinderH->disconnect();
+	connect(ui->cylinderH, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Cylinder *oldCylinder = (Cylinder *)part->getMesh();
+				Cylinder *newCylinder = Cylinder::create(oldCylinder->getD(), text.toFloat());
+				part->setMesh(newCylinder);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+
+	QComboBox *comboBoxes[3] = {ui->cylinderTexTop, ui->cylinderTexBottom, ui->cylinderTexSide};
+	for (int i = 0; i < 3; i++)
+	{
+		comboBoxes[i]->disconnect();
+		comboBoxes[i]->clear();
+		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
+		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
+				[=](int index)
+				{
+					part->setTextureRef(i, index);
+					ui->poleScene->update();
+				});
+	}
+#pragma endregion
+
+	bindTransforms(part);
 }
 
 void PoleDesigner::bindStiffener(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->stiffenerPanel);
+
+	// 绑定数据
 	ui->stiffenerName->setText(part->getName().c_str());
+	stiffener = (Stiffener *)part->getMesh();
+	ui->stiffenerA->setText(QString::number(stiffener->getA()));
+	ui->stiffenerB->setText(QString::number(stiffener->getB()));
+	ui->stiffenerC->setText(QString::number(stiffener->getC()));
+	ui->stiffenerH1->setText(QString::number(stiffener->getH1()));
+	ui->stiffenerH2->setText(QString::number(stiffener->getH2()));
+	ui->stiffenerHOff->setText(QString::number(stiffener->getOffsetH()));
+	ui->stiffenerVOff->setText(QString::number(stiffener->getOffsetV()));
+
+	// 事件绑定
+	ui->stiffenerName->disconnect();
+	connect(ui->stiffenerName, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setName(text.toStdString());
+				QListWidgetItem *item = ui->drawableList->currentItem();
+				DrawableListItem *widget = reinterpret_cast<DrawableListItem *>(ui->drawableList->itemWidget(item));
+				widget->getName()->setText(text);
+			});
+	ui->stiffenerA->disconnect();
+	connect(ui->stiffenerA, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
+				Stiffener *newStiffener = Stiffener::create(text.toFloat(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
+				part->setMesh(newStiffener);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->stiffenerB->disconnect();
+	connect(ui->stiffenerB, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
+				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), text.toFloat(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
+				part->setMesh(newStiffener);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->stiffenerH1->disconnect();
+	connect(ui->stiffenerH1, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
+				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), text.toFloat(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
+				part->setMesh(newStiffener);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->stiffenerH2->disconnect();
+	connect(ui->stiffenerH2, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
+				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), text.toFloat(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
+				part->setMesh(newStiffener);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->stiffenerC->disconnect();
+	connect(ui->stiffenerC, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
+				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), text.toFloat(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
+				part->setMesh(newStiffener);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->stiffenerHOff->disconnect();
+	connect(ui->stiffenerHOff, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
+				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), text.toFloat(), oldStiffener->getOffsetV());
+				part->setMesh(newStiffener);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->stiffenerVOff->disconnect();
+	connect(ui->stiffenerVOff, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
+				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), text.toFloat());
+				part->setMesh(newStiffener);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+
+	// 纹理
+	QComboBox *comboBoxes[7] = {
+		ui->stiffenerTexFront,
+		ui->stiffenerTexBack,
+		ui->stiffenerTexRight,
+		ui->stiffenerTexBottom,
+		ui->stiffenerTexSlope,
+		ui->stiffenerTexTop,
+		ui->stiffenerTexLeft};
+	for (int i = 0; i < 7; ++i)
+	{
+		comboBoxes[i]->disconnect();
+		comboBoxes[i]->clear();
+		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
+		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
+				[=](int index)
+				{
+					part->setTextureRef(i, index);
+					ui->poleScene->update();
+				});
+	}
+
+	// 变换
+	bindTransforms(part);
+
+#pragma endregion
 }
 
 void PoleDesigner::bindRoundedCube(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->rCubePanel);
+
+	RoundedCube *roundedCube = (RoundedCube *)part->getMesh();
+
+	// 绑定数据
 	ui->rCubeName->setText(part->getName().c_str());
+	ui->rCubeA->setText(QString::number(roundedCube->getA()));
+	ui->rCubeB->setText(QString::number(roundedCube->getB()));
+	ui->rCubeC->setText(QString::number(roundedCube->getC()));
+	ui->rCubeRadius->setText(QString::number(roundedCube->getRadius()));
+
+	// 纹理
+	QComboBox *comboBoxes[3] = {
+		ui->rCubeTexTop,
+		ui->rCubeTexBottom,
+		ui->rCubeTexSide};
+	for (int i = 0; i < 3; i++)
+	{
+		comboBoxes[i]->clear();
+		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
+		connect(comboBoxes[i], QOverload<int>::of(&QComboBox::currentIndexChanged),
+				[=](int index)
+				{
+					part->setTextureRef(i, index);
+					ui->poleScene->update();
+				});
+	}
+
+	// 绑定信号
+	// 基础参数
+	ui->rCubeA->disconnect();
+	connect(ui->rCubeA, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
+				RoundedCube *newRCube = RoundedCube::create(text.toFloat(), oldRCube->getB(), oldRCube->getC(), oldRCube->getRadius());
+				part->setMesh(newRCube);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->rCubeB->disconnect();
+	connect(ui->rCubeB, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
+				RoundedCube *newRCube = RoundedCube::create(oldRCube->getA(), text.toFloat(), oldRCube->getC(), oldRCube->getRadius());
+				part->setMesh(newRCube);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->rCubeC->disconnect();
+	connect(ui->rCubeC, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
+				RoundedCube *newRCube = RoundedCube::create(oldRCube->getA(), oldRCube->getB(), text.toFloat(), oldRCube->getRadius());
+				part->setMesh(newRCube);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->rCubeRadius->disconnect();
+	connect(ui->rCubeRadius, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
+				RoundedCube *newRCube = RoundedCube::create(oldRCube->getA(), oldRCube->getB(), oldRCube->getC(), text.toFloat());
+				part->setMesh(newRCube);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+
+	// 变换
+	bindTransforms(part);
 }
 
 void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->rRegTriPrismPanel);
+
+	// 绑定数据
 	ui->rRegTriPrismName->setText(part->getName().c_str());
+	RoundedRegTriPrism *roundedRegTriPrism = (RoundedRegTriPrism *)part->getMesh();
+
+	ui->rRegTriPrismA->setText(QString::number(roundedRegTriPrism->getA()));
+	ui->rRegTriPrismH->setText(QString::number(roundedRegTriPrism->getH()));
+	ui->rRegTriPrismRadius->setText(QString::number(roundedRegTriPrism->getRadius()));
+
+	// 绑定信号
+	// 基础参数
+	ui->rRegTriPrismA->disconnect();
+	connect(ui->rRegTriPrismA, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				RoundedRegTriPrism *oldRrtp = (RoundedRegTriPrism *)part->getMesh();
+				RoundedRegTriPrism *newRrtp = RoundedRegTriPrism::create(text.toFloat(), oldRrtp->getH(), oldRrtp->getRadius());
+				part->setMesh(newRrtp);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->rRegTriPrismH->disconnect();
+	connect(ui->rRegTriPrismH, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				RoundedRegTriPrism *oldRrtp = (RoundedRegTriPrism *)part->getMesh();
+				RoundedRegTriPrism *newRrtp = RoundedRegTriPrism::create(oldRrtp->getA(), text.toFloat(), oldRrtp->getRadius());
+				part->setMesh(newRrtp);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->rRegTriPrismRadius->disconnect();
+	connect(ui->rRegTriPrismRadius, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				RoundedRegTriPrism *oldRrtp = (RoundedRegTriPrism *)part->getMesh();
+				RoundedRegTriPrism *newRrtp = RoundedRegTriPrism::create(oldRrtp->getA(), oldRrtp->getH(), text.toFloat());
+				part->setMesh(newRrtp);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+
+	// 纹理
+	QComboBox *comboBoxes[3] = {ui->rRegTriPrismTexTop, ui->rRegTriPrismTexBottom, ui->rRegTriPrismTexSide};
+	for (int i = 0; i < 3; i++)
+	{
+		comboBoxes[i]->disconnect();
+		comboBoxes[i]->clear();
+		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
+		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
+				[=](int index)
+				{
+					part->setTextureRef(i, index);
+					ui->poleScene->update();
+				});
+	}
+
+	// 变换
+	bindTransforms(part);
 }
 
 void PoleDesigner::hidePanels()
@@ -324,4 +565,58 @@ void PoleDesigner::initializeLineEdits()
 	ui->stiffenerH2->setValidator(&doubleValidator);
 	ui->stiffenerHOff->setValidator(&doubleValidator);
 	ui->stiffenerVOff->setValidator(&doubleValidator);
+}
+
+void PoleDesigner::bindTransforms(Part *part)
+{
+	ui->originX->setText(QString::number(part->getOriginX()));
+	ui->originY->setText(QString::number(part->getOriginY()));
+	ui->originZ->setText(QString::number(part->getOriginZ()));
+
+	ui->rotationX->setText(QString::number(part->getRotationX()));
+	ui->rotationY->setText(QString::number(part->getRotationY()));
+	ui->rotationZ->setText(QString::number(part->getRotationZ()));
+
+	ui->originX->disconnect();
+	connect(ui->originX, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setOriginX(text.toFloat());
+				ui->poleScene->update();
+			});
+	ui->originY->disconnect();
+	connect(ui->originY, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setOriginY(text.toFloat());
+				ui->poleScene->update();
+			});
+	ui->originZ->disconnect();
+	connect(ui->originZ, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setOriginZ(text.toFloat());
+				ui->poleScene->update();
+			});
+	ui->rotationX->disconnect();
+	connect(ui->rotationX, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setRotationX(text.toFloat());
+				ui->poleScene->update();
+			});
+	ui->rotationY->disconnect();
+	connect(ui->rotationY, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setRotationY(text.toFloat());
+				ui->poleScene->update();
+			});
+	ui->rotationZ->disconnect();
+	connect(ui->rotationZ, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setRotationZ(text.toFloat());
+				ui->poleScene->update();
+			});
 }

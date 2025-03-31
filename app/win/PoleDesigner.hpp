@@ -37,6 +37,8 @@ class PoleDesigner: public QWidget
 
 	void initializeLineEdits();
 
+	void bindTransforms(Part* part);
+
 public:
 	explicit PoleDesigner(QWidget* parent = nullptr);
 	~PoleDesigner() override;

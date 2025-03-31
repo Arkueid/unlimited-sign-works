@@ -12,8 +12,8 @@
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
                                         deltaTime(0.0f), drawables(0)
 {
-    pole = new Pole168();
-    // pole = new Pole89();
+    // pole = new Pole168();
+    pole = new Pole89();
     setFocusPolicy(Qt::ClickFocus);
 }
 
@@ -113,7 +113,7 @@ void PoleScene::paintGL()
     program.bind();
     program.setUniformValue("projection", projection);
     program.setUniformValue("view", view);
-    for (auto &d : drawables)
+    for (auto d : drawables)
     {
         if (d->isVisible())
         {

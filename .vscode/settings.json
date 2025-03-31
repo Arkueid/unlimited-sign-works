@@ -75,6 +75,7 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "qdoublevalidator": "cpp"
     }
 }
