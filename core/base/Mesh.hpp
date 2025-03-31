@@ -11,12 +11,35 @@ enum MeshType
     MeshType_Stiffener,
 };
 
+#include <iostream>
+
 class Mesh
 {
+    int refCount;
+
 public:
-    virtual ~Mesh() = default;
+    Mesh() : refCount(0) {}
+    virtual ~Mesh()
+    {
+        // printf("deleted\n");
+    }
 
     virtual int getType() = 0;
+
+    void incRef()
+    {
+        refCount++;
+    }
+
+    void decRef()
+    {
+        refCount--;
+    }
+
+    int getRefCount()
+    {
+        return refCount;
+    }
 
     virtual Vertex *getVertices() = 0;
 

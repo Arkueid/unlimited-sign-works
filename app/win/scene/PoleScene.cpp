@@ -45,7 +45,6 @@ void PoleScene::removeDrawable(PartDrawable *drawable)
 void PoleScene::addDrawable(Part *part)
 {
     pole->addPart(part);
-    pole->addShape(part->getMesh());
     PartDrawable *drawable = new PartDrawable(part);
     drawables.append(drawable);
     emit drawableAdded(drawable);

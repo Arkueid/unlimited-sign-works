@@ -5,7 +5,8 @@
 
 class TextureManager {    
 public:
-    static QOpenGLTexture* loadTexture(const char *path);
-    static std::vector<std::string>* getTexturePaths();
+    static QOpenGLTexture* loadTexture(const QString& path);
+    static QOpenGLTexture* getTexture(int ref);
+    static QStringList* getTexturePaths();
     static void releaseTextures();
 };

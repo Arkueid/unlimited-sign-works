@@ -8,7 +8,6 @@ class Pole
 {
 protected:
     std::vector<Part*> parts;
-    std::vector<Mesh*> shapes;
     
 public:
     Pole();
@@ -17,9 +16,7 @@ public:
 
     std::vector<Part*>& getParts();
 
-    std::vector<Mesh*>& getShapes();
-
     void addPart(Part* part);
 
-    void addShape(Mesh* shape);
+    void removePart(Part* part);
 };

@@ -3,7 +3,7 @@
 #include "TextureManager.hpp"
 
 static QMap<QString, QOpenGLTexture*> textures;
-static std::vector<std::string> texturePaths = {
+static QStringList texturePaths = {
     "../../assets/textures/panel/CN_road_sign.png",
     "../../assets/textures/panel/CN_road_sign2.png",
     "../../assets/textures/metal/metal1.bmp",
@@ -15,7 +15,7 @@ static std::vector<std::string> texturePaths = {
     "../../assets/textures/metal/metal7.bmp",
 };
 
-QOpenGLTexture* TextureManager::loadTexture(const char *path)
+QOpenGLTexture* TextureManager::loadTexture(const QString& path)
 {
     // qDebug() << "Loading texture: " << path;
 
@@ -44,7 +44,12 @@ QOpenGLTexture* TextureManager::loadTexture(const char *path)
     return nullptr;
 }
 
-std::vector<std::string> *TextureManager::getTexturePaths()
+QOpenGLTexture *TextureManager::getTexture(int ref)
+{
+    return textures[texturePaths[ref]];
+}
+
+QStringList *TextureManager::getTexturePaths()
 {
     return &texturePaths;
 }

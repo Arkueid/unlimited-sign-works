@@ -23,7 +23,7 @@ public:
          const Rotation &rotation,
          const std::vector<int> &textureRefs);
 
-    virtual ~Part() = default;
+    virtual ~Part();
 
     std::string getName()
     {
@@ -68,10 +68,50 @@ public:
 
     int getType() override;
 
+    void setMesh(Mesh *value)
+    {
+        mesh = value;
+    }
+
     Mesh *getMesh() const;
 
     const std::vector<int> &getTextureRefs() const
     {
         return textureRefs;
+    }
+
+    void setName(const std::string &value)
+    {
+        this->name = value;
+    }
+
+    void setRotationX(float value)
+    {
+        this->rotation.rx = value;
+    }
+
+    void setRotationY(float value)
+    {
+        this->rotation.ry = value;
+    }
+
+    void setRotationZ(float value)
+    {
+        this->rotation.rz = value;
+    }
+
+    void setOriginX(float value)
+    {
+        this->origin.x = value;
+    }
+
+    void setOriginY(float value)
+    {
+        this->origin.y = value;
+    }
+
+    void setOriginZ(float value)
+    {
+        this->origin.z = value;
     }
 };

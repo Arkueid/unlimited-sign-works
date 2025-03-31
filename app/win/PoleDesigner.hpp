@@ -9,6 +9,8 @@
 #include <base/RoundedCube.hpp>
 #include <base/RoundedRegTriPrism.hpp>
 
+#include <QDoubleValidator>
+
 class PoleDesigner: public QWidget
 {
 	Ui::PoleDesigner* ui;
@@ -21,6 +23,8 @@ class PoleDesigner: public QWidget
 	RoundedCube* roundedCube;
 	RoundedRegTriPrism* rrTriPrism;
 
+	QDoubleValidator doubleValidator;
+
 	void bindPart(Part* part);
 
 	void bindCube(Part* part);
@@ -28,6 +32,10 @@ class PoleDesigner: public QWidget
 	void bindStiffener(Part* part);
 	void bindRoundedCube(Part* part);
 	void bindRoundedRegTriPrism(Part* part);
+
+	void hidePanels();
+
+	void initializeLineEdits();
 
 public:
 	explicit PoleDesigner(QWidget* parent = nullptr);

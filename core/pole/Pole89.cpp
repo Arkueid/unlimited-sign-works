@@ -2,6 +2,7 @@
 
 Pole89::Pole89()
 {
+	std::vector<Mesh*> shapes;
 	shapes.push_back(new Cylinder(89.0f, 4500.0f));
 	shapes.push_back(new RoundedRegTriPrism(900.0f, 10.0f, 40.0f));
 	shapes.push_back(new Cube(200.0f, 200.0f, 20.0f));

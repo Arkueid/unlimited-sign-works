@@ -10,6 +10,17 @@ Part::Part(Mesh *mesh,
                                                            rotation(rotation),
                                                            textureRefs(textureRefs)
 {
+    mesh->incRef();
+}
+
+Part::~Part()
+{
+    // printf("Part::~Part()");
+    mesh->decRef();
+    if (mesh->getRefCount() == 0)
+    {
+        delete mesh;
+    }
 }
 
 Vertex *Part::getVertices()

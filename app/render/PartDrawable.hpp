@@ -14,7 +14,6 @@ class PartDrawable: protected QOpenGLFunctions
 {
 	QOpenGLBuffer* vertexBuffer;
 	QMatrix4x4 modelMatrix;
-	QVector<QOpenGLTexture*> textures;
 	Part* part;
 
 	bool visible;

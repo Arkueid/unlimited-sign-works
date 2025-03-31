@@ -3,14 +3,16 @@
 #include <win/list/DrawableListItem.hpp>
 #include <win/panel/CubePanel.hpp>
 #include <QMenu>
+#include <utils/TextureManager.hpp>
 
 PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
-                                              ui(new Ui::PoleDesigner),
+											  ui(new Ui::PoleDesigner),
 											  cube(nullptr),
 											  cylinder(nullptr),
 											  stiffener(nullptr),
 											  roundedCube(nullptr),
-											  rrTriPrism(nullptr)
+											  rrTriPrism(nullptr),
+											  doubleValidator(this)
 {
 	ui->setupUi(this);
 	ui->leftSplitter->setStretchFactor(0, 1);
@@ -19,6 +21,8 @@ PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 	ui->rightSplitter->setStretchFactor(1, 1);
 
 	resize(1280, 720);
+
+	initializeLineEdits();
 
 	connect(ui->poleScene, &PoleScene::drawableAdded,
 			[=](PartDrawable *d)
@@ -64,6 +68,7 @@ PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 					QListWidgetItem *item = ui->drawableList->takeItem(ui->drawableList->currentRow());
 					ui->poleScene->removeDrawable(item->data(Qt::UserRole).value<PartDrawable *>());
 					delete item;
+					hidePanels();
 				}
 			});
 
@@ -84,8 +89,7 @@ PoleDesigner::~PoleDesigner()
 	delete ui;
 }
 
-
-void PoleDesigner::bindPart(Part * part)
+void PoleDesigner::bindPart(Part *part)
 {
 	switch (part->getType())
 	{
@@ -111,39 +115,148 @@ void PoleDesigner::bindPart(Part * part)
 	ui->transformPanel->setVisible(true);
 }
 
-void PoleDesigner::bindCube(Part* part)
+void PoleDesigner::bindCube(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->cubePanel);
 	ui->cubeName->setText(part->getName().c_str());
-	cube = (Cube*)part->getMesh();
+	cube = (Cube *)part->getMesh();
 
 	ui->cubeA->setText(QString::number(cube->getA()));
 	ui->cubeB->setText(QString::number(cube->getB()));
 	ui->cubeC->setText(QString::number(cube->getC()));
 
-	// ui->cubeTexFront->addItems();
+	ui->cubeTexFront->addItems(*TextureManager::getTexturePaths());
+	ui->cubeTexLeft->addItems(*TextureManager::getTexturePaths());
+	ui->cubeTexBack->addItems(*TextureManager::getTexturePaths());
+	ui->cubeTexRight->addItems(*TextureManager::getTexturePaths());
+	ui->cubeTexBottom->addItems(*TextureManager::getTexturePaths());
+	ui->cubeTexTop->addItems(*TextureManager::getTexturePaths());
+
+	ui->cubeTexFront->setCurrentIndex(part->getTextureRefs()[0]);
+	ui->cubeTexLeft->setCurrentIndex(part->getTextureRefs()[1]);
+	ui->cubeTexBack->setCurrentIndex(part->getTextureRefs()[2]);
+	ui->cubeTexRight->setCurrentIndex(part->getTextureRefs()[3]);
+	ui->cubeTexBottom->setCurrentIndex(part->getTextureRefs()[4]);
+	ui->cubeTexTop->setCurrentIndex(part->getTextureRefs()[5]);
+
+	ui->originX->setText(QString::number(part->getOriginX()));
+	ui->originY->setText(QString::number(part->getOriginY()));
+	ui->originZ->setText(QString::number(part->getOriginZ()));
+
+	ui->rotationX->setText(QString::number(part->getRotationX()));
+	ui->rotationY->setText(QString::number(part->getRotationY()));
+	ui->rotationZ->setText(QString::number(part->getRotationZ()));
+
+	// 绑定事件
+	connect(ui->cubeName, &QLineEdit::textChanged,
+			[=](const QString &text)
+			{
+				part->setName(text.toStdString());
+				QListWidgetItem *item = ui->drawableList->currentItem();
+				DrawableListItem *widget = reinterpret_cast<DrawableListItem *>(ui->drawableList->itemWidget(item));
+				widget->getName()->setText(text);
+			});
+
+	// 变换
+	connect(ui->originX, &QLineEdit::textChanged,
+			[=](const QString &text)
+			{
+				part->setOriginX(text.toFloat());
+				ui->poleScene->update();
+			});
+	connect(ui->originY, &QLineEdit::textChanged,
+			[=](const QString &text)
+			{
+				part->setOriginY(text.toFloat());
+				ui->poleScene->update();
+			});
+	connect(ui->originZ, &QLineEdit::textChanged,
+			[=](const QString &text)
+			{
+				part->setOriginZ(text.toFloat());
+				ui->poleScene->update();
+			});
+	connect(ui->rotationX, &QLineEdit::textChanged,
+			[=](const QString &text)
+			{
+				part->setRotationX(text.toFloat());
+				ui->poleScene->update();
+			});
+	connect(ui->rotationY, &QLineEdit::textChanged,
+			[=](const QString &text)
+			{
+				part->setRotationY(text.toFloat());
+				ui->poleScene->update();
+			});
+	connect(ui->rotationZ, &QLineEdit::textChanged,
+			[=](const QString &text)
+			{
+				part->setRotationZ(text.toFloat());
+				ui->poleScene->update();
+			});
 }
 
-void PoleDesigner::bindCylinder(Part* part)
+void PoleDesigner::bindCylinder(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->cylinderPanel);
 	ui->cylinderName->setText(part->getName().c_str());
 }
 
-void PoleDesigner::bindStiffener(Part* part)
+void PoleDesigner::bindStiffener(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->stiffenerPanel);
 	ui->stiffenerName->setText(part->getName().c_str());
 }
 
-void PoleDesigner::bindRoundedCube(Part* part)
+void PoleDesigner::bindRoundedCube(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->rCubePanel);
 	ui->rCubeName->setText(part->getName().c_str());
 }
 
-void PoleDesigner::bindRoundedRegTriPrism(Part* part)
+void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->rRegTriPrismPanel);
 	ui->rRegTriPrismName->setText(part->getName().c_str());
+}
+
+void PoleDesigner::hidePanels()
+{
+	ui->transformPanel->setVisible(false);
+	ui->paramPanel->setCurrentWidget(ui->empty);
+}
+
+void PoleDesigner::initializeLineEdits()
+{
+	doubleValidator.setRange(-1000000000, 1000000000, 5);
+	ui->originX->setValidator(&doubleValidator);
+	ui->originY->setValidator(&doubleValidator);
+	ui->originZ->setValidator(&doubleValidator);
+	ui->rotationX->setValidator(&doubleValidator);
+	ui->rotationY->setValidator(&doubleValidator);
+	ui->rotationZ->setValidator(&doubleValidator);
+
+	ui->cubeA->setValidator(&doubleValidator);
+	ui->cubeB->setValidator(&doubleValidator);
+	ui->cubeC->setValidator(&doubleValidator);
+
+	ui->cylinderD->setValidator(&doubleValidator);
+	ui->cylinderH->setValidator(&doubleValidator);
+
+	ui->rCubeA->setValidator(&doubleValidator);
+	ui->rCubeB->setValidator(&doubleValidator);
+	ui->rCubeC->setValidator(&doubleValidator);
+	ui->rCubeRadius->setValidator(&doubleValidator);
+
+	ui->rRegTriPrismA->setValidator(&doubleValidator);
+	ui->rRegTriPrismH->setValidator(&doubleValidator);
+	ui->rRegTriPrismRadius->setValidator(&doubleValidator);
+
+	ui->stiffenerA->setValidator(&doubleValidator);
+	ui->stiffenerB->setValidator(&doubleValidator);
+	ui->stiffenerC->setValidator(&doubleValidator);
+	ui->stiffenerH1->setValidator(&doubleValidator);
+	ui->stiffenerH2->setValidator(&doubleValidator);
+	ui->stiffenerHOff->setValidator(&doubleValidator);
+	ui->stiffenerVOff->setValidator(&doubleValidator);
 }

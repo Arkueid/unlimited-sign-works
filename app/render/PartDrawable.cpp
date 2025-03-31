@@ -9,17 +9,10 @@ PartDrawable::PartDrawable(Part* part): part(part), vertexBuffer(nullptr), visib
 
 	vertexBuffer = VertexBufferManager::registerVertexBuffer(part->getVertices(), part->getVertexCount());
 
-	modelMatrix.setToIdentity();
-	modelMatrix.translate(part->getOriginX(), part->getOriginY(), part->getOriginZ());
-	modelMatrix.rotate(part->getRotationX(), 1, 0, 0);
-	modelMatrix.rotate(part->getRotationY(), 0, 1, 0);
-	modelMatrix.rotate(part->getRotationZ(), 0, 0, 1);
-
-	std::vector<std::string>* texturePaths = TextureManager::getTexturePaths();
+	QStringList* texturePaths = TextureManager::getTexturePaths();
 	for (int i : part->getTextureRefs())
 	{
-		std::string path = (*texturePaths)[i];
-		textures.append(TextureManager::loadTexture(path.c_str()));
+		TextureManager::loadTexture((*texturePaths)[i]);
 	}
 }
 
@@ -30,6 +23,11 @@ PartDrawable::~PartDrawable()
 
 void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 {
+	modelMatrix.setToIdentity();
+	modelMatrix.translate(part->getOriginX(), part->getOriginY(), part->getOriginZ());
+	modelMatrix.rotate(part->getRotationX(), 1, 0, 0);
+	modelMatrix.rotate(part->getRotationY(), 0, 1, 0);
+	modelMatrix.rotate(part->getRotationZ(), 0, 0, 1);
 	QMatrix4x4 scale;
 	scale.setToIdentity();
 	scale.scale(0.0001f);
@@ -43,12 +41,15 @@ void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 	glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, nx));
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, u));
+	const std::vector<int> textureRefs = part->getTextureRefs();
+	QOpenGLTexture* texture;
 	for (int i = 0; i < part->getDrawableCount(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		textures[i]->bind();
+		texture = TextureManager::getTexture(textureRefs[i]);
+		texture->bind();
 		glDrawArrays(GL_TRIANGLES, part->getDrawableOffset(i), part->getDrawableSize(i));
-		textures[i]->release();
+		texture->release();
 	}
 	vertexBuffer->release();
 }
