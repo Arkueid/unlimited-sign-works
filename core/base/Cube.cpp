@@ -1,4 +1,5 @@
 ﻿#include <base/Cube.hpp>
+#include <vector>
 
 static unsigned short indices[cubeVertexCount] = {0, 1, 2, 0, 3, 2,
                                           1, 5, 6, 1, 2, 6,
@@ -8,6 +9,8 @@ static unsigned short indices[cubeVertexCount] = {0, 1, 2, 0, 3, 2,
                                           3, 2, 6, 3, 7, 6};
 
 static int drawableOffset[] = {0, 6, 12, 18, 24, 30};
+
+static std::vector<Cube*> instances;
 
 Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
 {
@@ -115,6 +118,26 @@ Cube::Cube(float a, float b, float c): a(a), b(b), c(c)
         vertices[index].v = 1.0f;
         index++;
     }
+}
+
+Cube::~Cube()
+{
+    instances.erase(std::find(instances.begin(), instances.end(), this));
+}
+
+Cube* Cube::create(float a, float b, float c)
+{
+    for (auto cube : instances)
+    {
+        if (cube->a == a && cube->b == b && cube->c == c)
+        {
+            return cube;
+        }
+    }
+
+    Cube* cube = new Cube(a, b, c);
+    instances.push_back(cube);
+    return cube;
 }
 
 int Cube::getDrawableCount()

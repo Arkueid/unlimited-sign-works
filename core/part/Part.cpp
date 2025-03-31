@@ -1,21 +1,26 @@
-#include "Part.hpp"
+#include <part/Part.hpp>
 
 Part::Part(Mesh *mesh,
            const std::string &name,
            const Point &origin,
            const Rotation &rotation,
            const std::vector<int> &textureRefs) : name(name),
-                                                           mesh(mesh),
-                                                           origin(origin),
-                                                           rotation(rotation),
-                                                           textureRefs(textureRefs)
+                                                  mesh(mesh),
+                                                  origin(origin),
+                                                  rotation(rotation),
+                                                  textureRefs(textureRefs)
 {
     mesh->incRef();
 }
 
 Part::~Part()
 {
-    // printf("Part::~Part()");
+    printf("Part::~Part()");
+    releaseMesh();
+}
+
+void Part::releaseMesh()
+{
     mesh->decRef();
     if (mesh->getRefCount() == 0)
     {
@@ -53,6 +58,11 @@ int Part::getType()
     return mesh->getType();
 }
 
+void Part::setMesh(Mesh *value)
+{
+    releaseMesh();
+    mesh = value;
+}
 Mesh *Part::getMesh() const
 {
     return mesh;

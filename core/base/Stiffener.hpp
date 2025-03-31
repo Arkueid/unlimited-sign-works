@@ -8,13 +8,11 @@
 
 #define siffenerIndexCount 48
 
-
 /// @brief 加劲板
 class Stiffener : public Mesh
 {
     Vertex vertices[siffenerIndexCount];
     float a, b, c, h1, h2, offsetH, offsetV;
-public:
 
     /// @brief 加劲板
     /// @param a 短底
@@ -24,14 +22,18 @@ public:
     /// @param c 厚
     /// @param offset 嵌入偏移
     Stiffener(float a, float b, float h1, float h2, float c, float offsetH = 20.0f, float offsetV = 0.0f);
+
+public:
     ~Stiffener() override;
+
+    static Stiffener *create(float a, float b, float h1, float h2, float c, float offsetH = 20.0f, float offsetV = 0.0f);
 
     int getType() override
     {
         return MeshType_Stiffener;
     }
 
-    Vertex* getVertices() override
+    Vertex *getVertices() override
     {
         return vertices;
     }
@@ -40,7 +42,6 @@ public:
     {
         return siffenerIndexCount;
     }
-
 
     // 通过 Mesh 继承
     int getDrawableCount() override;

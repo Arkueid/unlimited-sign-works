@@ -16,6 +16,7 @@ class Part : public Mesh
 
     std::string name;
 
+    void releaseMesh();
 public:
     Part(Mesh *mesh,
          const std::string &name,
@@ -68,11 +69,8 @@ public:
 
     int getType() override;
 
-    void setMesh(Mesh *value)
-    {
-        mesh = value;
-    }
-
+    void setMesh(Mesh *value);
+    
     Mesh *getMesh() const;
 
     const std::vector<int> &getTextureRefs() const

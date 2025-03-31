@@ -30,7 +30,7 @@ void CubePanel::onSubmit()
     if (!isParamValid())
         return;
 
-    Mesh *mesh = new Cube(ui->a->text().toFloat(), ui->b->text().toFloat(), ui->c->text().toFloat());
+    Mesh *mesh = Cube::create(ui->a->text().toFloat(), ui->b->text().toFloat(), ui->c->text().toFloat());
 
     Part *part = new Part(mesh, ui->name->text().toStdString(),
                           {

@@ -10,9 +10,11 @@ class Cube : public Mesh
     Vertex vertices[cubeVertexCount];
     float a, b, c;
 
-public:
     Cube(float a, float b, float c);
-    ~Cube() override = default;
+public:
+    ~Cube() override;
+
+    static Cube* create(float a, float b, float c);
 
     int getType() override
     {

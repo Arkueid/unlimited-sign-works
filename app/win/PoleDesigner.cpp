@@ -118,6 +118,8 @@ void PoleDesigner::bindPart(Part *part)
 void PoleDesigner::bindCube(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->cubePanel);
+
+#pragma region 绑定数据
 	ui->cubeName->setText(part->getName().c_str());
 	cube = (Cube *)part->getMesh();
 
@@ -146,10 +148,12 @@ void PoleDesigner::bindCube(Part *part)
 	ui->rotationX->setText(QString::number(part->getRotationX()));
 	ui->rotationY->setText(QString::number(part->getRotationY()));
 	ui->rotationZ->setText(QString::number(part->getRotationZ()));
+#pragma endregion
 
 #pragma region 事件绑定
 	// 名称
-	connect(ui->cubeName, &QLineEdit::textChanged,
+	ui->cubeName->disconnect();
+	connect(ui->cubeName, &QLineEdit::textEdited,
 			[=](const QString &text)
 			{
 				part->setName(text.toStdString());
@@ -169,6 +173,7 @@ void PoleDesigner::bindCube(Part *part)
 	};
 	for (int i = 0; i < 6; i++)
 	{
+		comboBoxes[i]->disconnect();
 		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
 			[=](int index)
 			{
@@ -178,37 +183,43 @@ void PoleDesigner::bindCube(Part *part)
 	}
 
 	// 变换
-	connect(ui->originX, &QLineEdit::textChanged,
+	ui->originX->disconnect();
+	connect(ui->originX, &QLineEdit::textEdited,
 			[=](const QString &text)
 			{
 				part->setOriginX(text.toFloat());
 				ui->poleScene->update();
 			});
-	connect(ui->originY, &QLineEdit::textChanged,
+	ui->originY->disconnect();
+	connect(ui->originY, &QLineEdit::textEdited,
 			[=](const QString &text)
 			{
 				part->setOriginY(text.toFloat());
 				ui->poleScene->update();
 			});
-	connect(ui->originZ, &QLineEdit::textChanged,
+	ui->originZ->disconnect();
+	connect(ui->originZ, &QLineEdit::textEdited,
 			[=](const QString &text)
 			{
 				part->setOriginZ(text.toFloat());
 				ui->poleScene->update();
 			});
-	connect(ui->rotationX, &QLineEdit::textChanged,
+	ui->rotationX->disconnect();
+	connect(ui->rotationX, &QLineEdit::textEdited,
 			[=](const QString &text)
 			{
 				part->setRotationX(text.toFloat());
 				ui->poleScene->update();
 			});
-	connect(ui->rotationY, &QLineEdit::textChanged,
+	ui->rotationY->disconnect();
+	connect(ui->rotationY, &QLineEdit::textEdited,
 			[=](const QString &text)
 			{
 				part->setRotationY(text.toFloat());
 				ui->poleScene->update();
 			});
-	connect(ui->rotationZ, &QLineEdit::textChanged,
+	ui->rotationZ->disconnect();
+	connect(ui->rotationZ, &QLineEdit::textEdited,
 			[=](const QString &text)
 			{
 				part->setRotationZ(text.toFloat());

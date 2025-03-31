@@ -3,13 +3,13 @@
 Pole168::Pole168()
 {
 	std::vector<Mesh*> shapes;
-    shapes.push_back(new Cylinder(108.0f, 500.0f + 1000.0f + 2500.0f));
-    shapes.push_back(new Cylinder(168.0f, 6700.0f));
-    shapes.push_back(new Cylinder(300.0f, 20.0f));
-    shapes.push_back(new RoundedCube(2500.0f, 2000.0f, 10.0f, 100.0f));
-    shapes.push_back(new Cube(400.0f, 400.0f, 20.0f));
-    shapes.push_back(new Stiffener(30.0f, 104.0f, 550.0f, 750.0f, 8.0f, 0.0f, 20.0f));
-    shapes.push_back(new Stiffener(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f));
+    shapes.push_back(Cylinder::create(108.0f, 500.0f + 1000.0f + 2500.0f));
+    shapes.push_back(Cylinder::create(168.0f, 6700.0f));
+    shapes.push_back(Cylinder::create(300.0f, 20.0f));
+    shapes.push_back(RoundedCube::create(2500.0f, 2000.0f, 10.0f, 100.0f));
+    shapes.push_back(Cube::create(400.0f, 400.0f, 20.0f));
+    shapes.push_back(Stiffener::create(30.0f, 104.0f, 550.0f, 750.0f, 8.0f, 0.0f, 20.0f));
+    shapes.push_back(Stiffener::create(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f));
 
     const int sideBeami = 0;
     const int mainPolei = 1;
@@ -59,9 +59,9 @@ Pole168::Pole168()
 
     parts.push_back(new Part{shapes[bottomStiffeneri], "bottomStiffener2", {0.0f, 0.0f, 0.0f - 84.0f}, {0.0f, 90.0f, 0.0f}, {8, 8, 8, 8, 8, 8, 8}});
 
-    parts.push_back(new Part{shapes[bottomStiffeneri], "bottomStiffener3", {0.0f - 84.0f, 0.0f, 0.0f}, {0.0f, 180.0f, 0.0f}, {8, 8, 8, 8, 8, 8, 8}});
+    parts.push_back(new Part{Stiffener::create(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f), "bottomStiffener3", {0.0f - 84.0f, 0.0f, 0.0f}, {0.0f, 180.0f, 0.0f}, {8, 8, 8, 8, 8, 8, 8}});
 
-    parts.push_back(new Part{shapes[bottomStiffeneri], "bottomStiffener4", {0.0f, 0.0f, 0.0f + 84.0f}, {0.0f, 270.0f, 0.0f}, {8, 8, 8, 8, 8, 8, 8}});
+    parts.push_back(new Part{Stiffener::create(50.0f, 200.0f, 30.0f, 110.0f, 8.0f, 20.0f, 0.0f), "bottomStiffener4", {0.0f, 0.0f, 0.0f + 84.0f}, {0.0f, 270.0f, 0.0f}, {8, 8, 8, 8, 8, 8, 8}});
 }
 Pole168::~Pole168()
 {

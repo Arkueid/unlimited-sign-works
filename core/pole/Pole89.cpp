@@ -3,10 +3,10 @@
 Pole89::Pole89()
 {
 	std::vector<Mesh*> shapes;
-	shapes.push_back(new Cylinder(89.0f, 4500.0f));
-	shapes.push_back(new RoundedRegTriPrism(900.0f, 10.0f, 40.0f));
-	shapes.push_back(new Cube(200.0f, 200.0f, 20.0f));
-	shapes.push_back(new Stiffener(30.0f, 150.0f, 20.0f, 50.0f, 20.0f, 0.0f));
+	shapes.push_back(Cylinder::create(89.0f, 4500.0f));
+	shapes.push_back(RoundedRegTriPrism::create(900.0f, 10.0f, 40.0f));
+	shapes.push_back(Cube::create(200.0f, 200.0f, 20.0f));
+	shapes.push_back(Stiffener::create(30.0f, 150.0f, 20.0f, 50.0f, 20.0f, 0.0f));
 
 	int mainPolei = 0;
 	int paneli = 1;

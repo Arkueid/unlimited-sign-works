@@ -2,6 +2,9 @@
 #include <algorithm>
 #include <base/Cube.hpp>
 #include <base/Cylinder.hpp>
+#include <vector>
+
+static std::vector<RoundedCube *> instances;
 
 RoundedCube::RoundedCube(float a, float b, float c, float r, float precision)
     : a(a), b(b), c(c), radius(std::min(std::min(a, b) / 2, r)), vertices(nullptr)
@@ -205,10 +208,10 @@ RoundedCube::RoundedCube(float a, float b, float c, float r, float precision)
     const float totalLength = perimeter_1_4 * 4 + (innerA) * 2 + (innerB) * 2;
     const float uStep = perimeter_1_4 / totalLength / numOnCorner;
     float u = 0;
-    float uStage[4] = {0, 
-        (perimeter_1_4 + innerA) / totalLength, 
-        (perimeter_1_4 * 2 + innerA + innerB) / totalLength, 
-        (perimeter_1_4 * 3 + innerA + innerB + innerA) / totalLength};
+    float uStage[4] = {0,
+                       (perimeter_1_4 + innerA) / totalLength,
+                       (perimeter_1_4 * 2 + innerA + innerB) / totalLength,
+                       (perimeter_1_4 * 3 + innerA + innerB + innerA) / totalLength};
     for (int i = 0; i < 4; i++)
     {
         u = uStage[i];
@@ -274,10 +277,10 @@ RoundedCube::RoundedCube(float a, float b, float c, float r, float precision)
             angle += angleStep;
         }
     }
-    float uStage2[4] = {perimeter_1_4 / totalLength, 
-        (perimeter_1_4 * 2 + innerA) / totalLength, 
-        (perimeter_1_4 * 3 + innerA + innerB) / totalLength, 
-        (perimeter_1_4 * 4 + innerA + innerB + innerA) / totalLength};
+    float uStage2[4] = {perimeter_1_4 / totalLength,
+                        (perimeter_1_4 * 2 + innerA) / totalLength,
+                        (perimeter_1_4 * 3 + innerA + innerB) / totalLength,
+                        (perimeter_1_4 * 4 + innerA + innerB + innerA) / totalLength};
     // 侧面矩形x4
     // 后侧面
     vertices[vertexIndex++] = {centers[0].x, c, -halfB, 0, 0, -1, uStage2[0], 1};
@@ -315,9 +318,24 @@ RoundedCube::RoundedCube(float a, float b, float c, float r, float precision)
 
 RoundedCube::~RoundedCube()
 {
-     delete[] vertices;
+    instances.erase(std::find(instances.begin(), instances.end(), this));
+    delete[] vertices;
 }
 
+RoundedCube *RoundedCube::create(float a, float b, float c, float radius, float precision)
+{
+    for (int i = 0; i < instances.size(); i++)
+    {
+        if (instances[i]->a == a && instances[i]->b == b && instances[i]->c == c && instances[i]->radius == radius && instances[i]->precision == precision)
+        {
+            return instances[i];
+        }
+    }
+
+    RoundedCube *roundedCube = new RoundedCube(a, b, c, radius, precision);
+    instances.push_back(roundedCube);
+    return roundedCube;
+}
 Vertex *RoundedCube::getVertices()
 {
     return vertices;
