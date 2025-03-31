@@ -162,24 +162,55 @@ void PoleDesigner::bindCube(Part *part)
 				widget->getName()->setText(text);
 			});
 
+	// 形状参数
+	ui->cubeA->disconnect();
+	connect(ui->cubeA, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Cube *oldCube = (Cube *)part->getMesh();
+				Cube *newCube = Cube::create(text.toFloat(), oldCube->getB(), oldCube->getC());
+				part->setMesh(newCube);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->cubeB->disconnect();
+	connect(ui->cubeB, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Cube *oldCube = (Cube *)part->getMesh();
+				Cube *newCube = Cube::create(oldCube->getA(), text.toFloat(), oldCube->getC());
+				part->setMesh(newCube);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				ui->poleScene->update();
+			});
+	ui->cubeC->disconnect();
+	connect(ui->cubeC, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				Cube *oldCube = (Cube *)part->getMesh();
+				Cube *newCube = Cube::create(oldCube->getA(), oldCube->getB(), text.toFloat());
+				part->setMesh(newCube);
+				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+			}
+	);
+
 	// 纹理
-	QComboBox* comboBoxes[6] = {
+	QComboBox *comboBoxes[6] = {
 		ui->cubeTexFront,
 		ui->cubeTexLeft,
 		ui->cubeTexBack,
 		ui->cubeTexRight,
 		ui->cubeTexBottom,
-		ui->cubeTexTop
-	};
+		ui->cubeTexTop};
 	for (int i = 0; i < 6; i++)
 	{
 		comboBoxes[i]->disconnect();
 		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
-			[=](int index)
-			{
-				part->setTextureRef(i, index);
-				ui->poleScene->update();
-			});
+				[=](int index)
+				{
+					part->setTextureRef(i, index);
+					ui->poleScene->update();
+				});
 	}
 
 	// 变换

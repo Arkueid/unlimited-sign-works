@@ -22,6 +22,8 @@ public:
 	PartDrawable(Part* part);
 	~PartDrawable();
 
+	void updatePart();
+
 	void draw(QOpenGLShaderProgram& program, QMatrix4x4& transform);
 
 	bool isVisible() const

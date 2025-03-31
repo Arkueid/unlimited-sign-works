@@ -57,6 +57,14 @@ void PoleScene::addDrawable(Part *part)
     update();
 }
 
+void PoleScene::updatePart(PartDrawable* drawable)
+{
+    makeCurrent();
+    drawable->updatePart();
+    doneCurrent();
+
+    update();
+}
 void PoleScene::releaseDrawables()
 {
     if (!drawables.isEmpty())

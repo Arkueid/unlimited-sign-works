@@ -7,13 +7,7 @@ PartDrawable::PartDrawable(Part* part): part(part), vertexBuffer(nullptr), visib
 {
 	initializeOpenGLFunctions();
 
-	vertexBuffer = VertexBufferManager::registerVertexBuffer(part->getVertices(), part->getVertexCount());
-
-	QStringList* texturePaths = TextureManager::getTexturePaths();
-	for (int i : part->getTextureRefs())
-	{
-		TextureManager::loadTexture((*texturePaths)[i]);
-	}
+	updatePart();
 }
 
 PartDrawable::~PartDrawable()
@@ -21,6 +15,15 @@ PartDrawable::~PartDrawable()
 	VertexBufferManager::unregisterVertexBuffer(part->getVertices());
 }
 
+void PartDrawable::updatePart()
+{
+	if (vertexBuffer != nullptr)
+	{
+		VertexBufferManager::unregisterVertexBuffer(part->getVertices());
+	}
+	
+	vertexBuffer = VertexBufferManager::registerVertexBuffer(part->getVertices(), part->getVertexCount());
+}
 void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 {
 	modelMatrix.setToIdentity();

@@ -55,6 +55,7 @@ public:
     PartDrawable* getDrawable(int index);
     void removeDrawable(PartDrawable* drawable);
     void addDrawable(Part* part);
+    void updatePart(PartDrawable* drawable);
 
     const QVector<PartDrawable*>& getDrawables() const
     {
