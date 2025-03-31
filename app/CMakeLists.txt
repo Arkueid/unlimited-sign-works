@@ -2,14 +2,18 @@ add_executable(usw
     Main.cpp
     win/scene/PoleScene.hpp
     win/scene/PoleScene.cpp
+
+    win/PoleDesigner.ui
     win/PoleDesigner.hpp
     win/PoleDesigner.cpp
-    win/DrawableListItem.hpp
-    win/DrawableListItem.cpp
-    win/PoleDesigner.ui
-    win/DrawableListItem.ui
-    win/CubeParamPanel.hpp
-    win/CubeParamPanel.cpp
+
+    win/list/DrawableListItem.ui
+    win/list/DrawableListItem.hpp
+    win/list/DrawableListItem.cpp
+
+    win/panel/CubePanel.ui
+    win/panel/CubePanel.hpp
+    win/panel/CubePanel.cpp
 
     utils/Camera.hpp
     utils/Camera.cpp
@@ -20,6 +24,8 @@ add_executable(usw
     
     render/PartDrawable.hpp
     render/PartDrawable.cpp
+    render/AxisDrawable.hpp
+    render/AxisDrawable.cpp
 
     logo.rc
 )

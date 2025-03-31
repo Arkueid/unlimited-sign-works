@@ -9,6 +9,7 @@ enum MeshType
     MeshType_RoundedCube,
     MeshType_RoundedRegTriPrism,
     MeshType_Stiffener,
+    MeshType_Axis,
 };
 
 class Mesh

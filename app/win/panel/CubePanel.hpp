@@ -1,25 +1,25 @@
 #pragma once
 
-#include <ui_CubeParamPanel.h>
+#include <ui_CubePanel.h>
 #include <base/Mesh.hpp>
 #include <part/Part.hpp>
 #include <win/scene/PoleScene.hpp>
 
 
-class CubeParamPanel: public QWidget
+class CubePanel: public QWidget
 {
     Q_OBJECT
 
-    Ui::CubeParamPanel* ui;
+    Ui::CubePanel* ui;
 
     PoleScene* scene;
 
     bool isParamValid();
 public:
-    CubeParamPanel(PoleScene* scene,
+    CubePanel(PoleScene* scene,
         QWidget* parent = nullptr);
 
-    ~CubeParamPanel();
+    ~CubePanel();
 public slots:
     void onSubmit();
 };

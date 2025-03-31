@@ -8,6 +8,8 @@
 #include <render/PartDrawable.hpp>
 #include <part/pole/Pole.hpp>
 
+#include <render/AxisDrawable.hpp>
+
 class PoleScene : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
@@ -26,6 +28,8 @@ class PoleScene : public QOpenGLWidget, protected QOpenGLFunctions
     QMatrix4x4 transform;
 
     Pole* pole;
+
+    AxisDrawable* axis;
 
     void releaseDrawables();
 

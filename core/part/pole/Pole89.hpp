@@ -8,10 +8,10 @@
 
 class Pole89: public Pole
 {
-	Cylinder* mainPole;
-	RoundedRegTriPrism* panel;
-	Cube* bottom;
-	Stiffener* bottomStiffener;
+	//Cylinder* mainPole;
+	//RoundedRegTriPrism* panel;
+	//Cube* bottom;
+	//Stiffener* bottomStiffener;
 
 public:
 	Pole89();

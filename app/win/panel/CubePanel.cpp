@@ -1,31 +1,31 @@
-#include <win/CubeParamPanel.hpp>
+#include <win/panel/CubePanel.hpp>
 #include <base/Cube.hpp>
 
 #include <utils/TextureManager.hpp>
 
-CubeParamPanel::CubeParamPanel(PoleScene *scene,
+CubePanel::CubePanel(PoleScene *scene,
                                QWidget *parent) : QWidget(parent),
-                                                  ui(new Ui::CubeParamPanel),
+                                                  ui(new Ui::CubePanel),
                                                   scene(scene)
 
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
 
-    connect(ui->submitBtn, &QPushButton::clicked, this, &CubeParamPanel::onSubmit);
+    connect(ui->submitBtn, &QPushButton::clicked, this, &CubePanel::onSubmit);
 }
 
-bool CubeParamPanel::isParamValid()
+bool CubePanel::isParamValid()
 {
     return true;
 }
 
-CubeParamPanel::~CubeParamPanel()
+CubePanel::~CubePanel()
 {
     delete ui;
 }
 
-void CubeParamPanel::onSubmit()
+void CubePanel::onSubmit()
 {
     if (!isParamValid())
         return;

@@ -1,7 +1,7 @@
 #include <win/PoleDesigner.hpp>
 #include <QListWidgetItem>
-#include <win/DrawableListItem.hpp>
-#include <win/CubeParamPanel.hpp>
+#include <win/list/DrawableListItem.hpp>
+#include <win/panel/CubePanel.hpp>
 #include <QMenu>
 
 PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent), ui(new Ui::PoleDesigner)
@@ -42,20 +42,24 @@ PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent), ui(new Ui::PoleDe
 						});
 			});
 
-	connect(ui->addBtn, &QPushButton::clicked, [=]()
+	connect(ui->addBtn, &QPushButton::clicked,
+			[=]()
 			{
-		CubeParamPanel* panel = new CubeParamPanel(ui->poleScene);
-		panel->show(); });
+				CubePanel *panel = new CubePanel(ui->poleScene);
+				panel->show();
+			});
 
-	connect(ui->removeBtn, &QPushButton::clicked, [=](){
-		if (ui->drawableList->currentRow() >= 0)
-		{
-			qDebug() << "Removing drawable: " << ui->drawableList->currentRow();
-			QListWidgetItem *item = ui->drawableList->takeItem(ui->drawableList->currentRow());
-			ui->poleScene->removeDrawable(item->data(Qt::UserRole).value<PartDrawable*>());
-			delete item;
-		}
-	});
+	connect(ui->removeBtn, &QPushButton::clicked,
+			[=]()
+			{
+				if (ui->drawableList->currentRow() >= 0)
+				{
+					qDebug() << "Removing drawable: " << ui->drawableList->currentRow();
+					QListWidgetItem *item = ui->drawableList->takeItem(ui->drawableList->currentRow());
+					ui->poleScene->removeDrawable(item->data(Qt::UserRole).value<PartDrawable *>());
+					delete item;
+				}
+			});
 }
 
 PoleDesigner::~PoleDesigner()

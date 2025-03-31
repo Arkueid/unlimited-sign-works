@@ -8,12 +8,12 @@
 
 #include <part/pole/Pole168.hpp>
 #include <part/pole/Pole89.hpp>
-#include "PoleScene.hpp"
 
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
                                         deltaTime(0.0f), drawables(0)
 {
     pole = new Pole168();
+    // pole = new Pole89();
     setFocusPolicy(Qt::ClickFocus);
 }
 
@@ -22,6 +22,7 @@ PoleScene::~PoleScene()
     // qDebug() << "PoleScene::~PoleScene";
     makeCurrent();
     releaseDrawables();
+    delete axis;
     VertexBufferManager::releaseVertexBuffers();
     program.removeAllShaders();
     TextureManager::releaseTextures();
@@ -63,6 +64,7 @@ void PoleScene::releaseDrawables()
 void PoleScene::initializeGL()
 {
     initializeOpenGLFunctions();
+    axis = new AxisDrawable();
 
     program.addShaderFromSourceFile(QOpenGLShader::Vertex, "../../assets/shaders/vshader.glsl");
     program.addShaderFromSourceFile(QOpenGLShader::Fragment, "../../assets/shaders/fshader.glsl");
@@ -91,10 +93,13 @@ void PoleScene::paintGL()
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    QMatrix4x4 view = camera.getViewMatrix();
+
+    axis->draw(projection, view);
+
     program.bind();
     program.setUniformValue("projection", projection);
-    program.setUniformValue("view", camera.getViewMatrix());
-
+    program.setUniformValue("view", view);
     for (auto &d : drawables)
     {
         if (d->isVisible())
@@ -102,7 +107,6 @@ void PoleScene::paintGL()
             d->draw(program, transform);
         }
     }
-
     program.release();
 
     // qDebug() << "updated";
