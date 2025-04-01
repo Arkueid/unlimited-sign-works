@@ -1,12 +1,6 @@
 #include <pole/Pole.hpp>
-#include "Pole.hpp"
-
-Pole::Pole()
+Pole::Pole(): parts(0)
 {
-}
-void Pole::createFromJsonFile(const char* fileName)
-{
-    
 }
 
 Pole::~Pole()
@@ -20,6 +14,16 @@ Pole::~Pole()
 std::vector<Part*>& Pole::getParts()
 {
     return parts;
+}
+
+const std::string &Pole::getName() const
+{
+    return name;
+}
+
+void Pole::setName(const std::string &name)
+{
+    this->name = name;
 }
 
 void Pole::addPart(Part *part)

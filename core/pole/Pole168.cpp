@@ -2,6 +2,8 @@
 
 Pole168::Pole168()
 {
+    name = "Pole168";
+    
 	std::vector<Mesh*> shapes;
     shapes.push_back(Cylinder::create(108.0f, 500.0f + 1000.0f + 2500.0f));
     shapes.push_back(Cylinder::create(168.0f, 6700.0f));

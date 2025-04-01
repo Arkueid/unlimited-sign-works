@@ -21,6 +21,8 @@ add_executable(usw
     utils/TextureManager.cpp  
     utils/VertexBufferManager.hpp  
     utils/VertexBufferManager.cpp  
+    utils/PoleJsonSerializer.hpp
+    utils/PoleJsonSerializer.cpp
     
     render/PartDrawable.hpp
     render/PartDrawable.cpp

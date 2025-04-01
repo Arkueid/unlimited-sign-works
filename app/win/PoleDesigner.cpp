@@ -4,6 +4,9 @@
 #include <QMenu>
 #include <utils/TextureManager.hpp>
 #include <win/panel/AddPanel.hpp>
+#include <QFileDialog>
+#include <utils/PoleJsonSerializer.hpp>
+
 
 PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 											  ui(new Ui::PoleDesigner),
@@ -78,6 +81,29 @@ PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 				PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
 				Part *part = drawable->getPart();
 				bindPart(part);
+			});
+
+	ui->poleName->setText(ui->poleScene->getPoleName());
+
+	connect(ui->poleName, &QLineEdit::textEdited,
+			[=]()
+			{
+				ui->poleScene->setPoleName(ui->poleName->text());
+			});
+
+	connect(ui->saveBtn, &QPushButton::clicked,
+			[=]() {
+				QFileDialog dialog(this);
+				dialog.setNameFilter("Pole JSON (*.json)");
+				dialog.setAcceptMode(QFileDialog::AcceptSave);
+				dialog.setFileMode(QFileDialog::AnyFile);
+				dialog.selectFile(ui->poleScene->getPoleName() + ".json");
+				if (dialog.exec())
+				{
+					QString filePath = dialog.selectedFiles().first();
+					// qDebug() << "Saving to: " << filePath;
+					PoleJsonSerializer::toJsonFile(ui->poleScene->getPole(), filePath);
+				}
 			});
 
 	ui->paramPanel->setCurrentWidget(ui->empty);

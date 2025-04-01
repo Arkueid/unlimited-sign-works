@@ -62,6 +62,21 @@ public:
         return drawables;
     }
 
+    QString getPoleName()
+    {
+        return pole->getName().c_str();
+    }
+
+    void setPoleName(const QString& name)
+    {
+        pole->setName(name.toStdString());
+    }
+
+    Pole* getPole()
+    {
+        return pole;
+    }
+
 signals:
     void drawableAdded(PartDrawable* drawable);
 };

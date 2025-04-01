@@ -2,6 +2,8 @@
 
 Pole89::Pole89()
 {
+	name = "Pole89";
+	
 	std::vector<Mesh*> shapes;
 	shapes.push_back(Cylinder::create(89.0f, 4500.0f));
 	shapes.push_back(RoundedRegTriPrism::create(900.0f, 10.0f, 40.0f));

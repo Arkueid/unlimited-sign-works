@@ -4,11 +4,11 @@
 
 enum MeshType
 {
-    MeshType_Cube,
+    MeshType_Cube = 0,
     MeshType_Cylinder,
+    MeshType_Stiffener,
     MeshType_RoundedCube,
     MeshType_RoundedRegTriPrism,
-    MeshType_Stiffener,
 };
 
 #include <iostream>
