@@ -14,7 +14,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionNew, &QAction::triggered,
             [=]()
             {
-                int index = ui->tabs->addTab(new PoleDesigner(this), "New Tab");
+                PoleDesigner *designer = new PoleDesigner(this);
+                designer->getPoleNameLineEdit()->setText("New Pole");
+                const int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
+                connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
+                        [=](const QString &name)
+                        {
+                            ui->tabs->setTabText(index, name);
+                        });
                 ui->tabs->setCurrentIndex(index);
             });
 
@@ -29,7 +36,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                 {
                     return;
                 }
-                int index = ui->tabs->addTab(new PoleDesigner(this, fileName), "New Tab");
+
+                PoleDesigner *designer = new PoleDesigner(this, fileName);
+                int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
+                connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
+                        [=](const QString &name)
+                        {
+                            ui->tabs->setTabText(index, name);
+                        });
                 ui->tabs->setCurrentIndex(index);
             });
 

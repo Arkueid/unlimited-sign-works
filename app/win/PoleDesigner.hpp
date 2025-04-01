@@ -43,5 +43,7 @@ public:
 	explicit PoleDesigner(QWidget* parent = nullptr, const QString& poleJsonPath = "");
 	~PoleDesigner() override;
 
+	QLineEdit* getPoleNameLineEdit();
+
 };
 
