@@ -10,7 +10,7 @@
         },
         {
             "name": "sideBeam2",
-            "shapeRef": 0,
+            "mesh": 0,
             "textureRefs": [0, 0, 0],
             "position": [-250.0, 5800.0, 0.0],
             "rotation": [0.0, 0.0, -90.0]
@@ -128,7 +128,7 @@
             "rotation": [0, 0, 0]
         }
     ],
-    "shapes": [
+    "meshes": [
         {
             "name": "sideBeam",
             "type": "Cylinder",
@@ -183,9 +183,5 @@
             "offsetH": 20.0,
             "offsetV": 0.0
         }
-    ],
-    "textures": [
-        "textures/metal/metal6.bmp",
-        "textures/metal/metal7.bmp"
     ]
 }
