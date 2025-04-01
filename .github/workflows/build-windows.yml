@@ -52,11 +52,11 @@ jobs:
     - name: Zip the folder
       shell: powershell
       run: |
-        Compress-Archive -Path ${{github.workspace}}/x64, ${{github.workspace}}/assets -DestinationPath ${{github.workspace}}/Moeroid-win64.zip
+        Compress-Archive -Path ${{github.workspace}}/x64, ${{github.workspace}}/assets -DestinationPath ${{github.workspace}}/USW-win64.zip
 
     - name: Upload Wheel to Release
       uses: softprops/action-gh-release@v2
       with:
         tag_name: Daily-Build
         files: |
-          ${{github.workspace}}/Moeroid-win64.zip
+          ${{github.workspace}}/USW-win64.zip
