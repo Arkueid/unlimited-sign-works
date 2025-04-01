@@ -8,7 +8,6 @@ class Pole
 {
 protected:
     std::vector<Part*> parts;
-    std::vector<std::string> textures;
     
 public:
     Pole();
@@ -17,5 +16,7 @@ public:
 
     std::vector<Part*>& getParts();
 
-    std::vector<std::string>& getTextures();
+    void addPart(Part* part);
+
+    void removePart(Part* part);
 };

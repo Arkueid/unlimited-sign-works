@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddPanel</class>
+ <widget class="QWidget" name="AddPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>417</width>
+    <height>395</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AddPanel</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QComboBox" name="comboBox">
+     <item>
+      <property name="text">
+       <string>立方体</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>圆柱</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>加劲板</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>圆角立方体</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>圆角三棱柱</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="panels">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="cubePanel">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QFormLayout" name="formLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="Label_2">
+           <property name="text">
+            <string>名称</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="cubeName"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="aLabel">
+           <property name="text">
+            <string>a</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="cubeA"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="bLabel">
+           <property name="text">
+            <string>b</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="cubeB"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="cLabel_2">
+           <property name="text">
+            <string>c</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="cubeC"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="cylinderPanel">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QFormLayout" name="formLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="Label_3">
+           <property name="text">
+            <string>名称</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="cylinderName"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="Label_4">
+           <property name="text">
+            <string>直径</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="cylinderD"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="Label_5">
+           <property name="text">
+            <string>高</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="cylinderH"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="stiffenerPanel">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QFormLayout" name="formLayout_4">
+         <item row="0" column="0">
+          <widget class="QLabel" name="Label_7">
+           <property name="text">
+            <string>名称</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="stiffenerName"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="aLabel_3">
+           <property name="text">
+            <string>a</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="stiffenerA"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="bLabel_3">
+           <property name="text">
+            <string>b</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="stiffenerB"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="cLabel_4">
+           <property name="text">
+            <string>c</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="stiffenerC"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="h1Label">
+           <property name="text">
+            <string>h1</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="stiffenerH1"/>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="h2Label">
+           <property name="text">
+            <string>h2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="stiffenerH2"/>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="Label_8">
+           <property name="text">
+            <string>水平嵌入深度</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QLineEdit" name="stiffenerOffsetH"/>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="Label_9">
+           <property name="text">
+            <string>垂直嵌入深度</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QLineEdit" name="stiffenerOffsetV"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="rCubePanel">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QLabel" name="Label">
+           <property name="text">
+            <string>名称</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="rCubeName"/>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="cLabel">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="aLabel_2">
+           <property name="text">
+            <string>a</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="rCubeA"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="bLabel_2">
+           <property name="text">
+            <string>b</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="rCubeB"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="cLabel_3">
+           <property name="text">
+            <string>c</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="rCubeC"/>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="rCubeRadius"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="Label_6">
+           <property name="text">
+            <string>圆角半径</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="rRegTriPrismPanel">
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QFormLayout" name="formLayout_5">
+         <item row="0" column="0">
+          <widget class="QLabel" name="Label_10">
+           <property name="text">
+            <string>名称</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="rRegTriPrismName"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="aLabel_4">
+           <property name="text">
+            <string>边长</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="rRegTriPrismA"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="Label_11">
+           <property name="text">
+            <string>圆角半径</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="rRegTriPrismRadius"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="Label_12">
+           <property name="text">
+            <string>高</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="rRegTriPrismH"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="addBtn">
+     <property name="text">
+      <string>添加</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>panels</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>208</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,4 +1,5 @@
-#include <base/Stiffener.hpp>
+﻿#include <base/Stiffener.hpp>
+#include <vector>
 
 // 加劲板共用索引
 static unsigned short indices[siffenerIndexCount] = {
@@ -13,6 +14,8 @@ static unsigned short indices[siffenerIndexCount] = {
 
 static int drawableSize[7] = { 9, 9, 6, 6, 6, 6, 6 };
 static int drawableOffset[7] = { 0, 9, 18, 24, 30, 36, 42 };
+
+static std::vector<Stiffener*> instances;
 
 Stiffener::Stiffener(float a, float b, float h1, float h2, float c, float offsetH, float offsetV) : a(a), b(b), c(c), h1(h1), h2(h2), offsetH(offsetH), offsetV(offsetV)
 {
@@ -148,6 +151,22 @@ Stiffener::Stiffener(float a, float b, float h1, float h2, float c, float offset
 
 Stiffener::~Stiffener()
 {
+    instances.erase(std::find(instances.begin(), instances.end(), this));
+}
+
+Stiffener *Stiffener::create(float a, float b, float h1, float h2, float c, float offsetH, float offsetV)
+{
+    for (auto instance : instances)
+    {
+        if (instance->a == a && instance->b == b && instance->h1 == h1 && instance->h2 == h2 && instance->c == c && instance->offsetH == offsetH && instance->offsetV == offsetV)
+        {
+            return instance;
+        }
+    }
+
+    Stiffener *instance = new Stiffener(a, b, h1, h2, c, offsetH, offsetV);
+    instances.push_back(instance);
+    return instance;
 }
 int Stiffener::getDrawableCount()
 {

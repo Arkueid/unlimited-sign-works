@@ -5,24 +5,31 @@
 #include <vector>
 #include <string>
 
-
 // 代理模式
-class Part: public Mesh
+// part
+class Part : public Mesh
 {
     Point origin;
     Rotation rotation;
     Mesh *mesh;
     std::vector<int> textureRefs;
-    const std::vector<std::string>* texturePaths;
 
+    std::string name;
+
+    void releaseMesh();
 public:
     Part(Mesh *mesh,
+         const std::string &name,
          const Point &origin,
          const Rotation &rotation,
-         const std::vector<int>& textureRefs, 
-         const std::vector<std::string>* texturePaths);
+         const std::vector<int> &textureRefs);
 
-    virtual ~Part() = default;
+    virtual ~Part();
+
+    std::string getName()
+    {
+        return name;
+    }
 
     float getOriginX() const
     {
@@ -49,10 +56,8 @@ public:
         return rotation.rz;
     }
 
-    const std::string& getTexturePath(int index) const;
-
     // Mesh
-    Vertex* getVertices() override;
+    Vertex *getVertices() override;
 
     int getVertexCount() override;
 
@@ -61,4 +66,55 @@ public:
     int getDrawableOffset(int index) override;
 
     int getDrawableSize(int index) override;
+
+    int getType() override;
+
+    void setMesh(Mesh *value);
+    
+    Mesh *getMesh() const;
+
+    const std::vector<int> &getTextureRefs() const
+    {
+        return textureRefs;
+    }
+
+    void setTextureRef(int index, int value)
+    {
+        textureRefs[index] = value;
+    }
+
+    void setName(const std::string &value)
+    {
+        this->name = value;
+    }
+
+    void setRotationX(float value)
+    {
+        this->rotation.rx = value;
+    }
+
+    void setRotationY(float value)
+    {
+        this->rotation.ry = value;
+    }
+
+    void setRotationZ(float value)
+    {
+        this->rotation.rz = value;
+    }
+
+    void setOriginX(float value)
+    {
+        this->origin.x = value;
+    }
+
+    void setOriginY(float value)
+    {
+        this->origin.y = value;
+    }
+
+    void setOriginZ(float value)
+    {
+        this->origin.z = value;
+    }
 };

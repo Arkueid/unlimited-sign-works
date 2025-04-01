@@ -1,14 +1,13 @@
 #include <QApplication>
-#include <win/scene/GLScene2.hpp>
+#include <win/scene/PoleScene.hpp>
 #include <utils/TextureManager.hpp>
 
-#include <win/Designer.hpp>
+#include <win/PoleDesigner.hpp>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    Designer w;
+    PoleDesigner w;
     w.show();
-    // TextureManager::releaseTextures();
     return app.exec();
 }

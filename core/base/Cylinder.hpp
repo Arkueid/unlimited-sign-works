@@ -5,28 +5,39 @@
 
 #include <base/Mesh.hpp>
 
-class Cylinder : public Mesh {
+class Cylinder : public Mesh
+{
 
     int indexCount;
     int pointCount;
     Vertex *vertices;
     float h;
     float d;
+    float precision;
     int drawableSize[3];
     int drawableOffset[3];
-public:
+
     /// @brief 圆柱
     /// @param d 直径
     /// @param h 高
-    /// @param precision 每单位长度的顶点数 
+    /// @param precision 每单位长度的顶点数
     Cylinder(float d, float h, float precision = PRECISION_DEFAULT);
+
+public:
     ~Cylinder() override;
+
+    static Cylinder *create(float d, float h, float precision = PRECISION_DEFAULT);
+
+    int getType() override
+    {
+        return MeshType_Cylinder;
+    }
 
     int getVertexCount() override
     {
         return indexCount;
     }
-    Vertex* getVertices() override
+    Vertex *getVertices() override
     {
         return vertices;
     }
@@ -34,4 +45,14 @@ public:
     int getDrawableCount() override;
     int getDrawableOffset(int index) override;
     int getDrawableSize(int index) override;
+
+    float getD() const
+    {
+        return d;
+    }
+
+    float getH() const
+    {
+        return h;
+    }
 };

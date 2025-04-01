@@ -1,8 +1,11 @@
-#include <base/Cylinder.hpp>
+﻿#include <base/Cylinder.hpp>
 #include <core.hpp>
 #include <cmath>
+#include <vector>
 
-Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
+static std::vector<Cylinder *> instances;
+
+Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h), precision(precision)
 {
     const int numOnCircle = static_cast<int>(PI * d * precision);
     indexCount = numOnCircle * 3 * 4;
@@ -110,7 +113,7 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
     {
         vertices[index].x = points[indices[index] * 3 + 0];
         vertices[index].y = points[indices[index] * 3 + 1];
-        vertices[index].z =points[indices[index] * 3 + 2];
+        vertices[index].z = points[indices[index] * 3 + 2];
         vertices[index].nx = vertices[index].x;
         vertices[index].ny = 0;
         vertices[index].nz = vertices[index].z;
@@ -171,12 +174,27 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h)
 
 Cylinder::~Cylinder()
 {
-     delete[] vertices;
+    instances.erase(std::find(instances.begin(), instances.end(), this));
+    delete[] vertices;
 }
 
+Cylinder *Cylinder::create(float d, float h, float precision)
+{
+    for (int i = 0; i < instances.size(); i++)
+    {
+        if (instances[i]->d == d && instances[i]->h == h && instances[i]->precision == precision)
+        {
+            return instances[i];
+        }
+    }
+
+    Cylinder *cylinder = new Cylinder(d, h, precision);
+    instances.push_back(cylinder);
+    return cylinder;
+}
 int Cylinder::getDrawableCount()
 {
-    return 3;  // 上下底面、侧面
+    return 3; // 上下底面、侧面
 }
 
 int Cylinder::getDrawableOffset(int index)

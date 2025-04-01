@@ -1,5 +1,8 @@
-#include <base/RoundedRegTriPrism.hpp>
+﻿#include <base/RoundedRegTriPrism.hpp>
 #include <algorithm>
+#include <vector>
+
+static std::vector<RoundedRegTriPrism *> instances;
 
 RoundedRegTriPrism::RoundedRegTriPrism(float a, float h, float radius, float precision) : a(a), h(h), radius(radius)
 {
@@ -225,9 +228,25 @@ RoundedRegTriPrism::RoundedRegTriPrism(float a, float h, float radius, float pre
 
 RoundedRegTriPrism::~RoundedRegTriPrism()
 {
-	 delete[] vertices;
+    instances.erase(std::find(instances.begin(), instances.end(), this));
+	delete[] vertices;
 }
 
+RoundedRegTriPrism *RoundedRegTriPrism::create(float a, float h, float radius, float precision)
+{
+	for (int i = 0; i < instances.size(); i++)
+	{
+		RoundedRegTriPrism *instance = instances[i];
+		if (instance->a == a && instance->h == h && instance->radius == radius && instance->precision == precision)
+		{
+			return instance;
+		}
+	}
+
+	RoundedRegTriPrism *instance = new RoundedRegTriPrism(a, h, radius, precision);
+	instances.push_back(instance);
+	return instance;
+}
 Vertex *RoundedRegTriPrism::getVertices()
 {
 	return vertices;

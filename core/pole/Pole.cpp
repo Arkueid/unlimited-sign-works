@@ -1,4 +1,4 @@
-#include <part/pole/Pole.hpp>
+#include <pole/Pole.hpp>
 #include "Pole.hpp"
 
 Pole::Pole()
@@ -22,7 +22,13 @@ std::vector<Part*>& Pole::getParts()
     return parts;
 }
 
-std::vector<std::string> &Pole::getTextures()
+void Pole::addPart(Part *part)
 {
-    return textures;
+    parts.push_back(part);
+}
+
+void Pole::removePart(Part *part)
+{
+    parts.erase(std::find(parts.begin(), parts.end(), part));
+    delete part;
 }

@@ -1,5 +1,0 @@
-set(__QT_DEPLOY_TARGET_usw_FILE C:/Users/kasumi/Desktop/unlimited-sign-works/x64/Debug/usw.exe)
-set(__QT_DEPLOY_TARGET_usw_TYPE EXECUTABLE)
-set(__QT_DEPLOY_TARGET_usw_RUNTIME_DLLS D:/Qt/6.8.2/msvc2022_64/bin/Qt6OpenGLWidgetsd.dll;D:/Qt/6.8.2/msvc2022_64/bin/Qt6Widgetsd.dll;D:/Qt/6.8.2/msvc2022_64/bin/Qt6OpenGLd.dll;D:/Qt/6.8.2/msvc2022_64/bin/Qt6Guid.dll;D:/Qt/6.8.2/msvc2022_64/bin/Qt6Cored.dll)
-set(__QT_DEPLOY_TARGET_core_FILE C:/Users/kasumi/Desktop/unlimited-sign-works/Debug/core.lib)
-set(__QT_DEPLOY_TARGET_core_TYPE STATIC_LIBRARY)

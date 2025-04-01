@@ -1,16 +1,34 @@
-#include "Part.hpp"
+#include <part/Part.hpp>
 
-Part::Part(Mesh *mesh, const Point& origin, const Rotation& rotation, const std::vector<int>& textureRefs, const std::vector<std::string>* texturePaths): 
-    mesh(mesh), origin(origin), rotation(rotation), textureRefs(textureRefs), texturePaths(texturePaths)
+Part::Part(Mesh *mesh,
+           const std::string &name,
+           const Point &origin,
+           const Rotation &rotation,
+           const std::vector<int> &textureRefs) : name(name),
+                                                  mesh(mesh),
+                                                  origin(origin),
+                                                  rotation(rotation),
+                                                  textureRefs(textureRefs)
 {
+    mesh->incRef();
 }
 
-const std::string& Part::getTexturePath(int index) const
+Part::~Part()
 {
-    return (*texturePaths)[textureRefs[index]];
+    // printf("Part::~Part()");
+    releaseMesh();
 }
 
-Vertex* Part::getVertices()
+void Part::releaseMesh()
+{
+    mesh->decRef();
+    if (mesh->getRefCount() == 0)
+    {
+        delete mesh;
+    }
+}
+
+Vertex *Part::getVertices()
 {
     return mesh->getVertices();
 }
@@ -33,4 +51,19 @@ int Part::getDrawableOffset(int index)
 int Part::getDrawableSize(int index)
 {
     return mesh->getDrawableSize(index);
+}
+
+int Part::getType()
+{
+    return mesh->getType();
+}
+
+void Part::setMesh(Mesh *value)
+{
+    releaseMesh();
+    mesh = value;
+}
+Mesh *Part::getMesh() const
+{
+    return mesh;
 }

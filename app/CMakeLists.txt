@@ -1,10 +1,19 @@
 add_executable(usw 
     Main.cpp
-    win/scene/GLScene2.hpp
-    win/scene/GLScene2.cpp
-    win/Designer.hpp
-    win/Designer.cpp
-    win/Designer.ui
+    win/scene/PoleScene.hpp
+    win/scene/PoleScene.cpp
+
+    win/PoleDesigner.ui
+    win/PoleDesigner.hpp
+    win/PoleDesigner.cpp
+
+    win/list/DrawableListItem.ui
+    win/list/DrawableListItem.hpp
+    win/list/DrawableListItem.cpp
+
+    win/panel/AddPanel.ui
+    win/panel/AddPanel.hpp
+    win/panel/AddPanel.cpp
 
     utils/Camera.hpp
     utils/Camera.cpp
@@ -12,10 +21,11 @@ add_executable(usw
     utils/TextureManager.cpp  
     utils/VertexBufferManager.hpp  
     utils/VertexBufferManager.cpp  
-
     
-    render/Drawable.hpp
-    render/Drawable.cpp
+    render/PartDrawable.hpp
+    render/PartDrawable.cpp
+    render/AxisDrawable.hpp
+    render/AxisDrawable.cpp
 
     logo.rc
 )
