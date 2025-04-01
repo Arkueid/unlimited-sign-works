@@ -23,7 +23,7 @@ class PoleDesigner: public QWidget
 	RoundedCube* roundedCube;
 	RoundedRegTriPrism* rrTriPrism;
 
-	QDoubleValidator doubleValidator;
+	QDoubleValidator* doubleValidator;
 
 	void bindPart(Part* part);
 

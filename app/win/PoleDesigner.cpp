@@ -12,7 +12,7 @@ PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 											  stiffener(nullptr),
 											  roundedCube(nullptr),
 											  rrTriPrism(nullptr),
-											  doubleValidator(this)
+											  doubleValidator(new QDoubleValidator(this))
 {
 	ui->setupUi(this);
 	ui->leftSplitter->setStretchFactor(0, 1);
@@ -251,7 +251,6 @@ void PoleDesigner::bindCylinder(Part *part)
 					ui->poleScene->update();
 				});
 	}
-#pragma endregion
 
 	bindTransforms(part);
 }
@@ -377,8 +376,6 @@ void PoleDesigner::bindStiffener(Part *part)
 
 	// 变换
 	bindTransforms(part);
-
-#pragma endregion
 }
 
 void PoleDesigner::bindRoundedCube(Part *part)
@@ -532,39 +529,39 @@ void PoleDesigner::hidePanels()
 
 void PoleDesigner::initializeLineEdits()
 {
-	doubleValidator.setRange(-1000000000, 1000000000, 5);
-	doubleValidator.setNotation(QDoubleValidator::StandardNotation);
+	doubleValidator->setRange(-1000000000, 1000000000, 5);
+	doubleValidator->setNotation(QDoubleValidator::StandardNotation);
 
-	ui->originX->setValidator(&doubleValidator);
-	ui->originY->setValidator(&doubleValidator);
-	ui->originZ->setValidator(&doubleValidator);
-	ui->rotationX->setValidator(&doubleValidator);
-	ui->rotationY->setValidator(&doubleValidator);
-	ui->rotationZ->setValidator(&doubleValidator);
+	ui->originX->setValidator(doubleValidator);
+	ui->originY->setValidator(doubleValidator);
+	ui->originZ->setValidator(doubleValidator);
+	ui->rotationX->setValidator(doubleValidator);
+	ui->rotationY->setValidator(doubleValidator);
+	ui->rotationZ->setValidator(doubleValidator);
 
-	ui->cubeA->setValidator(&doubleValidator);
-	ui->cubeB->setValidator(&doubleValidator);
-	ui->cubeC->setValidator(&doubleValidator);
+	ui->cubeA->setValidator(doubleValidator);
+	ui->cubeB->setValidator(doubleValidator);
+	ui->cubeC->setValidator(doubleValidator);
 
-	ui->cylinderD->setValidator(&doubleValidator);
-	ui->cylinderH->setValidator(&doubleValidator);
+	ui->cylinderD->setValidator(doubleValidator);
+	ui->cylinderH->setValidator(doubleValidator);
 
-	ui->rCubeA->setValidator(&doubleValidator);
-	ui->rCubeB->setValidator(&doubleValidator);
-	ui->rCubeC->setValidator(&doubleValidator);
-	ui->rCubeRadius->setValidator(&doubleValidator);
+	ui->rCubeA->setValidator(doubleValidator);
+	ui->rCubeB->setValidator(doubleValidator);
+	ui->rCubeC->setValidator(doubleValidator);
+	ui->rCubeRadius->setValidator(doubleValidator);
 
-	ui->rRegTriPrismA->setValidator(&doubleValidator);
-	ui->rRegTriPrismH->setValidator(&doubleValidator);
-	ui->rRegTriPrismRadius->setValidator(&doubleValidator);
+	ui->rRegTriPrismA->setValidator(doubleValidator);
+	ui->rRegTriPrismH->setValidator(doubleValidator);
+	ui->rRegTriPrismRadius->setValidator(doubleValidator);
 
-	ui->stiffenerA->setValidator(&doubleValidator);
-	ui->stiffenerB->setValidator(&doubleValidator);
-	ui->stiffenerC->setValidator(&doubleValidator);
-	ui->stiffenerH1->setValidator(&doubleValidator);
-	ui->stiffenerH2->setValidator(&doubleValidator);
-	ui->stiffenerHOff->setValidator(&doubleValidator);
-	ui->stiffenerVOff->setValidator(&doubleValidator);
+	ui->stiffenerA->setValidator(doubleValidator);
+	ui->stiffenerB->setValidator(doubleValidator);
+	ui->stiffenerC->setValidator(doubleValidator);
+	ui->stiffenerH1->setValidator(doubleValidator);
+	ui->stiffenerH2->setValidator(doubleValidator);
+	ui->stiffenerHOff->setValidator(doubleValidator);
+	ui->stiffenerVOff->setValidator(doubleValidator);
 }
 
 void PoleDesigner::bindTransforms(Part *part)
