@@ -1,0 +1,186 @@
+{
+    "meshes": [
+        {
+            "d": 89,
+            "h": 4500,
+            "type": 1
+        },
+        {
+            "a": 900,
+            "h": 10,
+            "radius": 40,
+            "type": 4
+        },
+        {
+            "a": 200,
+            "b": 200,
+            "c": 20,
+            "type": 0
+        },
+        {
+            "a": 30,
+            "b": 150,
+            "c": 20,
+            "h1": 20,
+            "h2": 50,
+            "offsetH": 0,
+            "offsetV": 0,
+            "type": 2
+        }
+    ],
+    "name": "Pole89",
+    "parts": [
+        {
+            "meshRef": 0,
+            "name": "mainPole",
+            "position": [
+                0,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "meshRef": 1,
+            "name": "panel",
+            "position": [
+                0,
+                4238.3720703125,
+                44.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureRefs": [
+                0,
+                6,
+                6
+            ]
+        },
+        {
+            "meshRef": 2,
+            "name": "bottom",
+            "position": [
+                0,
+                10,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "meshRef": 3,
+            "name": "bottomStiffener1",
+            "position": [
+                44.5,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "meshRef": 3,
+            "name": "bottomStiffener2",
+            "position": [
+                0,
+                0,
+                -44.5
+            ],
+            "rotation": [
+                0,
+                90,
+                0
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "meshRef": 3,
+            "name": "bottomStiffener3",
+            "position": [
+                -44.5,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "meshRef": 3,
+            "name": "bottomStiffener4",
+            "position": [
+                0,
+                0,
+                44.5
+            ],
+            "rotation": [
+                0,
+                270,
+                0
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        }
+    ]
+}

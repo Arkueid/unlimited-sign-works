@@ -7,14 +7,18 @@
 class Pole
 {
 protected:
+    std::string name;
     std::vector<Part*> parts;
     
 public:
     Pole();
-    void createFromJsonFile(const char* fileName);
     virtual ~Pole();
 
     std::vector<Part*>& getParts();
+
+    const std::string& getName() const;
+
+    void setName(const std::string& name);
 
     void addPart(Part* part);
 
