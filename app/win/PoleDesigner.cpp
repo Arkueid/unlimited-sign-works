@@ -1,9 +1,9 @@
 #include <win/PoleDesigner.hpp>
 #include <QListWidgetItem>
 #include <win/list/DrawableListItem.hpp>
-#include <win/panel/CubePanel.hpp>
 #include <QMenu>
 #include <utils/TextureManager.hpp>
+#include <win/panel/AddPanel.hpp>
 
 PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 											  ui(new Ui::PoleDesigner),
@@ -55,7 +55,7 @@ PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 	connect(ui->addBtn, &QPushButton::clicked,
 			[=]()
 			{
-				CubePanel *panel = new CubePanel(ui->poleScene);
+				AddPanel *panel = new AddPanel(ui->poleScene);
 				panel->show();
 			});
 

@@ -39,7 +39,7 @@ void PoleScene::removeDrawable(PartDrawable *drawable)
 {
     makeCurrent();
     drawables.removeOne(drawable);
-    Part* part = drawable->getPart();
+    Part *part = drawable->getPart();
     delete drawable;
 
     pole->removePart(part);
@@ -57,7 +57,7 @@ void PoleScene::addDrawable(Part *part)
     update();
 }
 
-void PoleScene::updatePart(PartDrawable* drawable)
+void PoleScene::updatePart(PartDrawable *drawable)
 {
     makeCurrent();
     drawable->updatePart();
@@ -88,7 +88,7 @@ void PoleScene::initializeGL()
         qDebug() << "Shader program is not linked\n";
     }
 
-    const std::vector<Part*>& parts = pole->getParts();
+    const std::vector<Part *> &parts = pole->getParts();
     for (auto part : parts)
     {
         PartDrawable *drawable = new PartDrawable(part);

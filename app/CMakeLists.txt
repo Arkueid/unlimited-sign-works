@@ -11,9 +11,9 @@ add_executable(usw
     win/list/DrawableListItem.hpp
     win/list/DrawableListItem.cpp
 
-    win/panel/CubePanel.ui
-    win/panel/CubePanel.hpp
-    win/panel/CubePanel.cpp
+    win/panel/AddPanel.ui
+    win/panel/AddPanel.hpp
+    win/panel/AddPanel.cpp
 
     utils/Camera.hpp
     utils/Camera.cpp
