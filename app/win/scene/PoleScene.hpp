@@ -47,6 +47,8 @@ public:
     explicit PoleScene(QWidget *parent = nullptr);
     ~PoleScene() override;
 
+    void loadPole(const QString& poleJsonPath);
+
     int getDrawableCount() const
     {
         drawables.size();

@@ -7,6 +7,10 @@ add_executable(usw
     win/PoleDesigner.hpp
     win/PoleDesigner.cpp
 
+    win/MainWindow.ui
+    win/MainWindow.hpp
+    win/MainWindow.cpp
+
     win/list/DrawableListItem.ui
     win/list/DrawableListItem.hpp
     win/list/DrawableListItem.cpp

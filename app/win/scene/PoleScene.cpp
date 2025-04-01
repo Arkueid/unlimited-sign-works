@@ -9,14 +9,15 @@
 #include <pole/Pole168.hpp>
 #include <pole/Pole89.hpp>
 
-// hack
 #include <utils/PoleJsonSerializer.hpp>
 
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                                        deltaTime(0.0f), drawables(0)
+                                        deltaTime(0.0f), drawables(0), pole(nullptr)
 {
     // pole = new Pole168();
-    pole = PoleJsonSerializer::fromJsonFile("../../assets/poles/Pole89.json");
+    // pole = new Pole168();
+    // pole = PoleJsonSerializer::fromJsonFile("../../assets/poles/Pole168.json");
+
     setFocusPolicy(Qt::ClickFocus);
 }
 
@@ -31,6 +32,18 @@ PoleScene::~PoleScene()
     TextureManager::releaseTextures();
     delete pole;
     doneCurrent();
+}
+
+void PoleScene::loadPole(const QString &poleJsonPath)
+{
+    if (poleJsonPath.isEmpty()) 
+    {
+        pole = new Pole168();
+    }
+    else
+    {
+        pole = PoleJsonSerializer::fromJsonFile(poleJsonPath);
+    }
 }
 
 PartDrawable *PoleScene::getDrawable(int index)

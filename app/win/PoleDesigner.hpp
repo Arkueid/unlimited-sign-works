@@ -40,8 +40,10 @@ class PoleDesigner: public QWidget
 	void bindTransforms(Part* part);
 
 public:
-	explicit PoleDesigner(QWidget* parent = nullptr);
+	explicit PoleDesigner(QWidget* parent = nullptr, const QString& poleJsonPath = "");
 	~PoleDesigner() override;
+
+	QLineEdit* getPoleNameLineEdit();
 
 };
 

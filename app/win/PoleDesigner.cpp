@@ -8,7 +8,7 @@
 #include <utils/PoleJsonSerializer.hpp>
 
 
-PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
+PoleDesigner::PoleDesigner(QWidget* parent, const QString& poleJsonPath) : QWidget(parent),
 											  ui(new Ui::PoleDesigner),
 											  cube(nullptr),
 											  cylinder(nullptr),
@@ -18,6 +18,9 @@ PoleDesigner::PoleDesigner(QWidget *parent) : QWidget(parent),
 											  doubleValidator(new QDoubleValidator(this))
 {
 	ui->setupUi(this);
+
+	ui->poleScene->loadPole(poleJsonPath);
+
 	ui->leftSplitter->setStretchFactor(0, 1);
 	ui->leftSplitter->setStretchFactor(1, 8);
 	ui->rightSplitter->setStretchFactor(0, 8);
@@ -115,6 +118,10 @@ PoleDesigner::~PoleDesigner()
 	delete ui;
 }
 
+QLineEdit *PoleDesigner::getPoleNameLineEdit()
+{
+    return ui->poleName;
+}
 void PoleDesigner::bindPart(Part *part)
 {
 	switch (part->getType())
