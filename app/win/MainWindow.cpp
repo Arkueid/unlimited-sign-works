@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     auto newFunc = [=]()
     {
-        PoleDesigner *designer = new PoleDesigner(this);
+        PoleDesigner *designer = new PoleDesigner(ui->tabs);
         designer->getPoleNameLineEdit()->setText("New Pole");
         const int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
         connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             return;
         }
 
-        PoleDesigner *designer = new PoleDesigner(this, fileName);
+        PoleDesigner *designer = new PoleDesigner(ui->tabs, fileName);
         int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
         connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
                 [=](const QString &name)
@@ -53,8 +53,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->tabs, &QTabWidget::tabCloseRequested,
             [=](int index)
             {
+                QWidget* widget = ui->tabs->widget(index);
                 // qDebug() << "Closing tab " << index;
                 ui->tabs->removeTab(index);
+                widget->deleteLater();
             });
 }
 

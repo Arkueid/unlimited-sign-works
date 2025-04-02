@@ -6,6 +6,7 @@
 #include <win/panel/AddPanel.hpp>
 #include <QFileDialog>
 #include <utils/PoleJsonSerializer.hpp>
+#include "PoleDesigner.hpp"
 
 
 PoleDesigner::PoleDesigner(QWidget* parent, const QString& poleJsonPath) : QWidget(parent),
@@ -122,6 +123,7 @@ QLineEdit *PoleDesigner::getPoleNameLineEdit()
 {
     return ui->poleName;
 }
+
 void PoleDesigner::bindPart(Part *part)
 {
 	switch (part->getType())

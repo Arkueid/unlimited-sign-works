@@ -27,7 +27,6 @@ PoleScene::~PoleScene()
     makeCurrent();
     releaseDrawables();
     delete axis;
-    VertexBufferManager::releaseVertexBuffers();
     program.removeAllShaders();
     TextureManager::releaseTextures();
     delete pole;

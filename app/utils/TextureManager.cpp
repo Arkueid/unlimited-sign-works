@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <sqlite3/SQLite.hpp>
 
+
+// TODO: 需要引用计数
 static QMap<QString, QOpenGLTexture*> textures;
 static QStringList texturePaths;
 
