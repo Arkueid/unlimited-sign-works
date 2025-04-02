@@ -215,7 +215,7 @@ void PoleDesigner::bindCube(Part *part)
 	{
 		comboBoxes[i]->disconnect();
 		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->addItems(TextureManager::getTextureNames());
 		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
 		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
 				[=](int index)
@@ -275,7 +275,7 @@ void PoleDesigner::bindCylinder(Part *part)
 	{
 		comboBoxes[i]->disconnect();
 		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->addItems(TextureManager::getTextureNames());
 		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
 		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
 				[=](int index)
@@ -397,7 +397,7 @@ void PoleDesigner::bindStiffener(Part *part)
 	{
 		comboBoxes[i]->disconnect();
 		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->addItems(TextureManager::getTextureNames());
 		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
 		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
 				[=](int index)
@@ -432,7 +432,7 @@ void PoleDesigner::bindRoundedCube(Part *part)
 	for (int i = 0; i < 3; i++)
 	{
 		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->addItems(TextureManager::getTextureNames());
 		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
 		connect(comboBoxes[i], QOverload<int>::of(&QComboBox::currentIndexChanged),
 				[=](int index)
@@ -540,7 +540,7 @@ void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 	{
 		comboBoxes[i]->disconnect();
 		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(*TextureManager::getTexturePaths());
+		comboBoxes[i]->addItems(TextureManager::getTextureNames());
 		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
 		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
 				[=](int index)

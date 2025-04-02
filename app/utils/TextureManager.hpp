@@ -8,5 +8,6 @@ public:
     static QOpenGLTexture* loadTexture(const QString& path);
     static QOpenGLTexture* getTexture(int ref);
     static QStringList* getTexturePaths();
+    static QStringList getTextureNames();
     static void releaseTextures();
 };

@@ -54,6 +54,16 @@ QStringList *TextureManager::getTexturePaths()
 {
     return &texturePaths;
 }
+QStringList TextureManager::getTextureNames()
+{
+    QStringList names;
+    for (const QString& path : texturePaths)
+    {
+        QString p = path;
+        names.append(p.replace("../../assets/textures/", ""));
+    }
+    return names;
+}
 void TextureManager::releaseTextures()
 {
     qDeleteAll(textures);
