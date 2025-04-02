@@ -11,6 +11,11 @@ add_executable(usw
     win/MainWindow.hpp
     win/MainWindow.cpp
 
+    sqlite3/sqlite3.h
+    sqlite3/sqlite3.c
+    sqlite3/SQLite.hpp
+    sqlite3/SQLite.cpp
+
     win/list/DrawableListItem.ui
     win/list/DrawableListItem.hpp
     win/list/DrawableListItem.cpp
