@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             [=]()
             {
                 TextureEditor *editor = new TextureEditor(ui->tabs);
-                const int index = ui->tabs->addTab(editor, "纹理编辑");
+                const int index = ui->tabs->addTab(editor, "纹理生成");
                 ui->tabs->setCurrentIndex(index);
             });
 
