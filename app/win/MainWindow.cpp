@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     {
         QString fileName = QFileDialog::getOpenFileName(this,
                                                         "Open Pole Json",
-                                                        QDir::currentPath().append("/../../assets/poles"),
+                                                        QDir::currentPath() + "/../../assets/poles",
                                                         "Pole Json (*.json)");
         if (fileName.isEmpty())
         {

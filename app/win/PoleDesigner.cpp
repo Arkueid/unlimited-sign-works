@@ -101,8 +101,12 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 				dialog.setNameFilter("Pole JSON (*.json)");
 				dialog.setAcceptMode(QFileDialog::AcceptSave);
 				dialog.setFileMode(QFileDialog::AnyFile);
+				QDir dir = QDir::current();
+				dir.cdUp();
+				dir.cdUp();
+				// ../../assets/poles
+				dialog.setDirectory(dir.absoluteFilePath("assets/poles"));
 				dialog.selectFile(ui->poleScene->getPoleName() + ".json");
-				dialog.setDirectory(QDir::currentPath().append("/../../assets/poles"));
 				if (dialog.exec())
 				{
 					QString filePath = dialog.selectedFiles().first();
