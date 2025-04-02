@@ -36,6 +36,11 @@ QOpenGLTexture *TextureManager::loadTexture(const QString &path)
 
 QOpenGLTexture *TextureManager::getTexture(int ref)
 {
+    if (!texturePaths.contains(ref)) 
+    {
+        return loadTexture("../../assets/textures/default/default.png");
+    }
+
     const QString &path = texturePaths[ref];
     return loadTexture(path);
 }

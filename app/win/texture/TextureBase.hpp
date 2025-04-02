@@ -10,4 +10,6 @@ class TextureBase : public QWidget {
 public:
     TextureBase(QWidget* parent = nullptr);
     ~TextureBase() override;
+public slots:
+    void onTextureSelected(QListWidgetItem* item);
 };

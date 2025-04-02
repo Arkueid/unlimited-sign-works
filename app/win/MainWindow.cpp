@@ -55,6 +55,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionTexGen, &QAction::triggered,
             [=]()
             {
+                for (int i = 0; i < ui->tabs->count(); ++i)
+                {
+                    if (ui->tabs->widget(i)->metaObject()->className() == QString("TextureEditor"))
+                    {
+                        ui->tabs->setCurrentIndex(i);
+                        return;
+                    }
+                }
                 TextureEditor *editor = new TextureEditor(ui->tabs);
                 const int index = ui->tabs->addTab(editor, "纹理生成");
                 ui->tabs->setCurrentIndex(index);
@@ -63,6 +71,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionTexBase, &QAction::triggered,
             [=]()
             {
+                for (int i = 0; i < ui->tabs->count(); ++i)
+                {
+                    if (ui->tabs->widget(i)->metaObject()->className() == QString("TextureBase"))
+                    {
+                        ui->tabs->setCurrentIndex(i);
+                        return;
+                    }
+                }
                 TextureBase *base = new TextureBase(ui->tabs);
                 const int index = ui->tabs->addTab(base, "纹理库");
                 ui->tabs->setCurrentIndex(index);
