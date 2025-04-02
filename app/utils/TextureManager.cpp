@@ -2,10 +2,9 @@
 #include <QDebug>
 #include <sqlite3/SQLite.hpp>
 
-
 // TODO: 需要引用计数
-static QMap<QString, QOpenGLTexture*> textures;
-static QStringList texturePaths;
+static QMap<QString, QOpenGLTexture *> textures;
+static QMap<int, QString> texturePaths;
 
 QOpenGLTexture *TextureManager::loadTexture(const QString &path)
 {
@@ -20,7 +19,7 @@ QOpenGLTexture *TextureManager::loadTexture(const QString &path)
 
     if (!image.isNull())
     {
-        QOpenGLTexture* texture = new QOpenGLTexture(image.mirrored().convertToFormat(QImage::Format_RGBA8888));
+        QOpenGLTexture *texture = new QOpenGLTexture(image.mirrored().convertToFormat(QImage::Format_RGBA8888));
         texture->setWrapMode(QOpenGLTexture::ClampToEdge);
         texture->setMinificationFilter(QOpenGLTexture::Linear);
         texture->setMagnificationFilter(QOpenGLTexture::Linear);
@@ -32,29 +31,19 @@ QOpenGLTexture *TextureManager::loadTexture(const QString &path)
     {
         qDebug() << "Failed to load texture: " << path;
     }
-    
+
     return nullptr;
 }
 
 QOpenGLTexture *TextureManager::getTexture(int ref)
 {
-    const QString& path = texturePaths[ref];
+    const QString &path = texturePaths[ref];
     return loadTexture(path);
 }
 
-QStringList *TextureManager::getTexturePaths()
+const QMap<int, QString>& TextureManager::getTexturePaths()
 {
-    return &texturePaths;
-}
-QStringList TextureManager::getTextureNames()
-{
-    QStringList names;
-    for (const QString& path : texturePaths)
-    {
-        QString p = path;
-        names.append(p.replace("../../assets/textures/", ""));
-    }
-    return names;
+    return texturePaths;
 }
 void TextureManager::releaseTextures()
 {
@@ -66,20 +55,21 @@ void TextureManager::loadTexturesPaths()
 {
     texturePaths.clear();
 
-    sqlite3* db = SQLite::getInstance();
+    sqlite3 *db = SQLite::getInstance();
 
-    sqlite3_stmt* stmt;
+    sqlite3_stmt *stmt;
     if (sqlite3_prepare(db, "select id, name from texture order by id asc", -1, &stmt, nullptr) == SQLITE_OK)
     {
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
-            QString path = "../../assets/textures/" + QString::fromUtf8(reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1)));
-            texturePaths.append(path);
+            const int id = sqlite3_column_int(stmt, 0);
+            QString path = "../../assets/textures/" + QString::fromUtf8(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 1)));
+            texturePaths[id] = path;
         }
     }
-    else 
+    else
     {
-        const char* errMsg = sqlite3_errmsg(db);
+        const char *errMsg = sqlite3_errmsg(db);
         qDebug() << "Error while loading texture paths: " << errMsg;
     }
     sqlite3_finalize(stmt);

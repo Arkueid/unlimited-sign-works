@@ -1,6 +1,7 @@
-#include "MainWindow.hpp"
+#include <win/MainWindow.hpp>
 #include <win/PoleDesigner.hpp>
 #include <QFileDialog>
+#include <win/texture/TextureEditor.hpp>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -26,11 +27,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionNew, &QAction::triggered, newFunc);
     connect(ui->clbNew, &QCommandLinkButton::clicked, newFunc);
 
-    auto addFunc = [=]()
+    auto openFunc = [=]()
     {
         QString fileName = QFileDialog::getOpenFileName(this,
                                                         "Open Pole Json",
-                                                        QDir::currentPath(),
+                                                        QDir::currentPath().append("/../../assets/poles"),
                                                         "Pole Json (*.json)");
         if (fileName.isEmpty())
         {
@@ -47,13 +48,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->tabs->setCurrentIndex(index);
     };
 
-    connect(ui->actionOpen, &QAction::triggered, addFunc);
-    connect(ui->clbOpen, &QCommandLinkButton::clicked, addFunc);
+    connect(ui->actionOpen, &QAction::triggered, openFunc);
+    connect(ui->clbOpen, &QCommandLinkButton::clicked, openFunc);
+
+    connect(ui->actionEdit, &QAction::triggered,
+            [=]()
+            {
+                TextureEditor *editor = new TextureEditor(ui->tabs);
+                const int index = ui->tabs->addTab(editor, "纹理编辑");
+                ui->tabs->setCurrentIndex(index);
+            });
 
     connect(ui->tabs, &QTabWidget::tabCloseRequested,
             [=](int index)
             {
-                QWidget* widget = ui->tabs->widget(index);
+                QWidget *widget = ui->tabs->widget(index);
                 // qDebug() << "Closing tab " << index;
                 ui->tabs->removeTab(index);
                 widget->deleteLater();

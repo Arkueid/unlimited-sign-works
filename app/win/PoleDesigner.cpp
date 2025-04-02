@@ -8,15 +8,14 @@
 #include <utils/PoleJsonSerializer.hpp>
 #include "PoleDesigner.hpp"
 
-
-PoleDesigner::PoleDesigner(QWidget* parent, const QString& poleJsonPath) : QWidget(parent),
-											  ui(new Ui::PoleDesigner),
-											  cube(nullptr),
-											  cylinder(nullptr),
-											  stiffener(nullptr),
-											  roundedCube(nullptr),
-											  rrTriPrism(nullptr),
-											  doubleValidator(new QDoubleValidator(this))
+PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidget(parent),
+																		   ui(new Ui::PoleDesigner),
+																		   cube(nullptr),
+																		   cylinder(nullptr),
+																		   stiffener(nullptr),
+																		   roundedCube(nullptr),
+																		   rrTriPrism(nullptr),
+																		   doubleValidator(new QDoubleValidator(this))
 {
 	ui->setupUi(this);
 
@@ -96,12 +95,14 @@ PoleDesigner::PoleDesigner(QWidget* parent, const QString& poleJsonPath) : QWidg
 			});
 
 	connect(ui->saveBtn, &QPushButton::clicked,
-			[=]() {
+			[=]()
+			{
 				QFileDialog dialog(this);
 				dialog.setNameFilter("Pole JSON (*.json)");
 				dialog.setAcceptMode(QFileDialog::AcceptSave);
 				dialog.setFileMode(QFileDialog::AnyFile);
 				dialog.selectFile(ui->poleScene->getPoleName() + ".json");
+				dialog.setDirectory(QDir::currentPath().append("/../../assets/poles"));
 				if (dialog.exec())
 				{
 					QString filePath = dialog.selectedFiles().first();
@@ -121,7 +122,7 @@ PoleDesigner::~PoleDesigner()
 
 QLineEdit *PoleDesigner::getPoleNameLineEdit()
 {
-    return ui->poleName;
+	return ui->poleName;
 }
 
 void PoleDesigner::bindPart(Part *part)
@@ -206,26 +207,12 @@ void PoleDesigner::bindCube(Part *part)
 			});
 
 	// 纹理
-	QComboBox *comboBoxes[6] = {
-		ui->cubeTexFront,
-		ui->cubeTexLeft,
-		ui->cubeTexBack,
-		ui->cubeTexRight,
-		ui->cubeTexBottom,
-		ui->cubeTexTop};
-	for (int i = 0; i < 6; i++)
-	{
-		comboBoxes[i]->disconnect();
-		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(TextureManager::getTextureNames());
-		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
-		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
-				[=](int index)
-				{
-					part->setTextureRef(i, index);
-					ui->poleScene->update();
-				});
-	}
+	bindTextures(part, {ui->cubeTexFront,
+						ui->cubeTexLeft,
+						ui->cubeTexBack,
+						ui->cubeTexRight,
+						ui->cubeTexBottom,
+						ui->cubeTexTop});
 
 	// 变换
 	bindTransforms(part);
@@ -272,20 +259,7 @@ void PoleDesigner::bindCylinder(Part *part)
 				ui->poleScene->update();
 			});
 
-	QComboBox *comboBoxes[3] = {ui->cylinderTexTop, ui->cylinderTexBottom, ui->cylinderTexSide};
-	for (int i = 0; i < 3; i++)
-	{
-		comboBoxes[i]->disconnect();
-		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(TextureManager::getTextureNames());
-		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
-		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
-				[=](int index)
-				{
-					part->setTextureRef(i, index);
-					ui->poleScene->update();
-				});
-	}
+	bindTextures(part, {ui->cylinderTexTop, ui->cylinderTexBottom, ui->cylinderTexSide});
 
 	bindTransforms(part);
 }
@@ -387,28 +361,13 @@ void PoleDesigner::bindStiffener(Part *part)
 			});
 
 	// 纹理
-	QComboBox *comboBoxes[7] = {
-		ui->stiffenerTexFront,
-		ui->stiffenerTexBack,
-		ui->stiffenerTexRight,
-		ui->stiffenerTexBottom,
-		ui->stiffenerTexSlope,
-		ui->stiffenerTexTop,
-		ui->stiffenerTexLeft};
-	for (int i = 0; i < 7; ++i)
-	{
-		comboBoxes[i]->disconnect();
-		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(TextureManager::getTextureNames());
-		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
-		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
-				[=](int index)
-				{
-					part->setTextureRef(i, index);
-					ui->poleScene->update();
-				});
-	}
-
+	bindTextures(part, {ui->stiffenerTexFront,
+						ui->stiffenerTexBack,
+						ui->stiffenerTexRight,
+						ui->stiffenerTexBottom,
+						ui->stiffenerTexSlope,
+						ui->stiffenerTexTop,
+						ui->stiffenerTexLeft});
 	// 变换
 	bindTransforms(part);
 }
@@ -427,22 +386,9 @@ void PoleDesigner::bindRoundedCube(Part *part)
 	ui->rCubeRadius->setText(QString::number(roundedCube->getRadius()));
 
 	// 纹理
-	QComboBox *comboBoxes[3] = {
-		ui->rCubeTexTop,
-		ui->rCubeTexBottom,
-		ui->rCubeTexSide};
-	for (int i = 0; i < 3; i++)
-	{
-		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(TextureManager::getTextureNames());
-		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
-		connect(comboBoxes[i], QOverload<int>::of(&QComboBox::currentIndexChanged),
-				[=](int index)
-				{
-					part->setTextureRef(i, index);
-					ui->poleScene->update();
-				});
-	}
+	bindTextures(part, {ui->rCubeTexTop,
+						ui->rCubeTexBottom,
+						ui->rCubeTexSide});
 
 	// 绑定信号
 	// 基础参数
@@ -537,20 +483,7 @@ void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 			});
 
 	// 纹理
-	QComboBox *comboBoxes[3] = {ui->rRegTriPrismTexTop, ui->rRegTriPrismTexBottom, ui->rRegTriPrismTexSide};
-	for (int i = 0; i < 3; i++)
-	{
-		comboBoxes[i]->disconnect();
-		comboBoxes[i]->clear();
-		comboBoxes[i]->addItems(TextureManager::getTextureNames());
-		comboBoxes[i]->setCurrentIndex(part->getTextureRefs()[i]);
-		connect(comboBoxes[i], &QComboBox::currentIndexChanged,
-				[=](int index)
-				{
-					part->setTextureRef(i, index);
-					ui->poleScene->update();
-				});
-	}
+	bindTextures(part, {ui->rRegTriPrismTexTop, ui->rRegTriPrismTexBottom, ui->rRegTriPrismTexSide});
 
 	// 变换
 	bindTransforms(part);
@@ -651,4 +584,32 @@ void PoleDesigner::bindTransforms(Part *part)
 				part->setRotationZ(text.toFloat());
 				ui->poleScene->update();
 			});
+}
+
+void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBoxes)
+{
+	const int size = comboBoxes.size();
+	const QMap<int, QString> &texturePaths = TextureManager::getTexturePaths();
+	for (int i = 0; i < size; i++)
+	{
+		QComboBox *comboBox = comboBoxes[i];
+		const int cidx = part->getTextureRefs()[i];
+		comboBox->disconnect();
+		comboBox->clear();
+		int idx = 0;
+		for (auto it = texturePaths.begin(); it != texturePaths.end(); ++it)
+		{
+			QString tp = it.value();
+			comboBox->addItem(tp.replace("../../assets/textures/", ""));
+			comboBox->setItemData(idx, it.key());
+			idx++;
+		}
+		comboBox->setCurrentIndex(cidx);
+		connect(comboBox, &QComboBox::currentIndexChanged,
+				[=](int index)
+				{
+					part->setTextureRef(i, comboBox->itemData(index).toInt());
+					ui->poleScene->update();
+				});
+	}
 }

@@ -24,6 +24,10 @@ add_executable(usw
     win/panel/AddPanel.hpp
     win/panel/AddPanel.cpp
 
+    win/texture/TextureEditor.ui
+    win/texture/TextureEditor.hpp
+    win/texture/TextureEditor.cpp
+
     utils/Camera.hpp
     utils/Camera.cpp
     utils/TextureManager.hpp    

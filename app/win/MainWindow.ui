@@ -175,7 +175,14 @@
     <addaction name="separator"/>
     <addaction name="actionOpen"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>纹理</string>
+    </property>
+    <addaction name="actionEdit"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
@@ -192,6 +199,14 @@
    </property>
    <property name="text">
     <string>新建</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::MailMessageNew"/>
+   </property>
+   <property name="text">
+    <string>编辑</string>
    </property>
   </action>
  </widget>

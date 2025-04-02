@@ -9,7 +9,7 @@ namespace
     sqlite3 *db = nullptr;
 }
 
-void SQLite::initialize(const QString &dbPath) 
+void SQLite::initialize(const QString &dbPath)
 {
     sqlite3_open(dbPath.toStdString().c_str(), &db);
 
@@ -24,18 +24,18 @@ void SQLite::initialize(const QString &dbPath)
     printIfError(errMsg);
 
     sqlite3_exec(db,
-                    "insert or ignore into texture (name) values"
-                    "('panel/CN_road_sign.png'),"
-                    "('panel/CN_road_sign2.png'),"
-                    "('metal/metal1.bmp'),"
-                    "('metal/metal2.bmp'),"
-                    "('metal/metal3.bmp'),"
-                    "('metal/metal4.bmp'),"
-                    "('metal/metal5.bmp'),"
-                    "('metal/metal6.bmp'),"
-                    "('metal/metal7.bmp'),"
-                    "('template/D25.bmp');",
-                    nullptr, nullptr, &errMsg);
+                 "insert or ignore into texture (id, name) values"
+                 "(0, 'panel/CN_road_sign.png'),"
+                 "(1, 'panel/CN_road_sign2.png'),"
+                 "(2, 'metal/metal1.bmp'),"
+                 "(3, 'metal/metal2.bmp'),"
+                 "(4, 'metal/metal3.bmp'),"
+                 "(5, 'metal/metal4.bmp'),"
+                 "(6, 'metal/metal5.bmp'),"
+                 "(7, 'metal/metal6.bmp'),"
+                 "(8, 'metal/metal7.bmp'),"
+                 "(9, 'template/D25.bmp');",
+                 nullptr, nullptr, &errMsg);
 
     printIfError(errMsg);
 }
