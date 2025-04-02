@@ -179,7 +179,8 @@
     <property name="title">
      <string>纹理</string>
     </property>
-    <addaction name="actionEdit"/>
+    <addaction name="actionTexGen"/>
+    <addaction name="actionTexBase"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -201,12 +202,20 @@
     <string>新建</string>
    </property>
   </action>
-  <action name="actionEdit">
+  <action name="actionTexGen">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::MailMessageNew"/>
+    <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
    </property>
    <property name="text">
-    <string>编辑</string>
+    <string>模板生成</string>
+   </property>
+  </action>
+  <action name="actionTexBase">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::EditSelectAll"/>
+   </property>
+   <property name="text">
+    <string>纹理库</string>
    </property>
   </action>
  </widget>

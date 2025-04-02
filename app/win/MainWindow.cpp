@@ -2,6 +2,7 @@
 #include <win/PoleDesigner.hpp>
 #include <QFileDialog>
 #include <win/texture/TextureEditor.hpp>
+#include <win/texture/TextureBase.hpp>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -51,11 +52,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionOpen, &QAction::triggered, openFunc);
     connect(ui->clbOpen, &QCommandLinkButton::clicked, openFunc);
 
-    connect(ui->actionEdit, &QAction::triggered,
+    connect(ui->actionTexGen, &QAction::triggered,
             [=]()
             {
                 TextureEditor *editor = new TextureEditor(ui->tabs);
                 const int index = ui->tabs->addTab(editor, "纹理编辑");
+                ui->tabs->setCurrentIndex(index);
+            });
+
+    connect(ui->actionTexBase, &QAction::triggered,
+            [=]()
+            {
+                TextureBase *base = new TextureBase(ui->tabs);
+                const int index = ui->tabs->addTab(base, "纹理库");
                 ui->tabs->setCurrentIndex(index);
             });
 

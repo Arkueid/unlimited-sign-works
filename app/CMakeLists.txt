@@ -28,6 +28,10 @@ add_executable(usw
     win/texture/TextureEditor.hpp
     win/texture/TextureEditor.cpp
 
+    win/texture/TextureBase.ui
+    win/texture/TextureBase.hpp
+    win/texture/TextureBase.cpp
+
     utils/Camera.hpp
     utils/Camera.cpp
     utils/TextureManager.hpp    
