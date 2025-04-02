@@ -13,6 +13,7 @@ static QStringList texturePaths = {
     "../../assets/textures/metal/metal5.bmp",
     "../../assets/textures/metal/metal6.bmp",
     "../../assets/textures/metal/metal7.bmp",
+    "../../assets/textures/template/D25.bmp",
 };
 
 QOpenGLTexture* TextureManager::loadTexture(const QString& path)
