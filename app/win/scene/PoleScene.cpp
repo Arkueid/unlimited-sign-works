@@ -39,6 +39,7 @@ void PoleScene::loadPole(const QString &poleJsonPath)
     if (poleJsonPath.isEmpty()) 
     {
         pole = new Pole168();
+        pole->setName("New Pole");
     }
     else
     {
