@@ -578,12 +578,17 @@ void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBox
 		comboBox->disconnect();
 		comboBox->clear();
 		int idx = 0;
+		int count = 0;
 		for (auto it = texturePaths.begin(); it != texturePaths.end(); ++it)
 		{
 			comboBox->addItem(it.value(), it.key());
-			idx++;
+			if (it.key() == cidx)
+			{
+				idx = count;
+			}
+			count++;
 		}
-		comboBox->setCurrentIndex(cidx);
+		comboBox->setCurrentIndex(idx);
 		connect(comboBox, &QComboBox::currentIndexChanged,
 				[=](int index)
 				{
