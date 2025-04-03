@@ -12,12 +12,13 @@
 #include <utils/PoleJsonSerializer.hpp>
 
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                                        deltaTime(0.0f), drawables(0), pole(nullptr)
+                                        deltaTime(0.0f), drawables(0), pole(nullptr), axis(nullptr), wrapBox(nullptr), partSelected(false)
 {
     // pole = new Pole168();
     // pole = new Pole168();
     // pole = PoleJsonSerializer::fromJsonFile("../../assets/poles/Pole168.json");
 
+    transform.setToIdentity();
     setFocusPolicy(Qt::ClickFocus);
 }
 
@@ -101,6 +102,7 @@ void PoleScene::initializeGL()
 {
     initializeOpenGLFunctions();
     axis = new AxisDrawable();
+    wrapBox = new BoxDrawable();
 
     program.addShaderFromSourceFile(QOpenGLShader::Vertex, "../../assets/shaders/vshader.glsl");
     program.addShaderFromSourceFile(QOpenGLShader::Fragment, "../../assets/shaders/fshader.glsl");
@@ -145,6 +147,10 @@ void PoleScene::paintGL()
     }
     program.release();
 
+    if (partSelected)
+    {
+        wrapBox->draw(projection, view);
+    }
     // qDebug() << "updated";
 }
 
@@ -225,4 +231,17 @@ void PoleScene::focusOutEvent(QFocusEvent *event)
 {
     // qDebug() << "focusOutEvent";
     releaseKeyboard();
+}
+
+void PoleScene::selectPart(PartDrawable *drawable)
+{
+    wrapBox->wrap(drawable->getPart(), drawable->getModelMatrix());
+    partSelected = true;
+    update();
+}
+
+void PoleScene::unselectPart()
+{
+    partSelected = false;
+    update();
 }

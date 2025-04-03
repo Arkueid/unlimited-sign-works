@@ -43,8 +43,12 @@ add_executable(usw
     
     render/PartDrawable.hpp
     render/PartDrawable.cpp
+
     render/AxisDrawable.hpp
     render/AxisDrawable.cpp
+
+    render/BoxDrawable.hpp
+    render/BoxDrawable.cpp
 
     logo.rc
 )

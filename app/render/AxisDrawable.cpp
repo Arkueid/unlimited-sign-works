@@ -2,6 +2,7 @@
 #include <utils/VertexBufferManager.hpp>
 #include <stddef.h>
 
+
 static Vertex vertices[] = {
     // position, color
     // x轴

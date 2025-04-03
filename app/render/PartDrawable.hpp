@@ -25,6 +25,8 @@ public:
 	void unbindPart();
 	void updatePart();
 
+	QMatrix4x4 getModelMatrix();
+
 	void draw(QOpenGLShaderProgram& program, QMatrix4x4& transform);
 
 	bool isVisible() const

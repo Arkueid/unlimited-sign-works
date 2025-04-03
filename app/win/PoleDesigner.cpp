@@ -75,6 +75,7 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 					ui->poleScene->removeDrawable(item->data(Qt::UserRole).value<PartDrawable *>());
 					delete item;
 					hidePanels();
+					ui->poleScene->unselectPart();
 				}
 			});
 
@@ -84,6 +85,7 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 				PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
 				Part *part = drawable->getPart();
 				bindPart(part);
+				ui->poleScene->selectPart(drawable);
 			});
 
 	ui->poleName->setText(ui->poleScene->getPoleName());

@@ -9,6 +9,7 @@
 #include <pole/Pole.hpp>
 
 #include <render/AxisDrawable.hpp>
+#include <render/BoxDrawable.hpp>
 
 class PoleScene : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -30,6 +31,9 @@ class PoleScene : public QOpenGLWidget, protected QOpenGLFunctions
     Pole* pole;
 
     AxisDrawable* axis;
+    BoxDrawable* wrapBox;
+
+    bool partSelected;
 
     void releaseDrawables();
 
@@ -48,6 +52,10 @@ public:
     ~PoleScene() override;
 
     void loadPole(const QString& poleJsonPath);
+
+    void selectPart(PartDrawable* drawable);
+
+    void unselectPart();
 
     int getDrawableCount() const
     {
