@@ -53,14 +53,22 @@ void TextureBase::onAddBtnClicked()
         return;
     }
 
-    bool ok;
     QString defaultValue = QFileInfo(externalPath).fileName();
-    QString textureName = QInputDialog::getText(nullptr, "添加纹理", "已选择纹理：" + externalPath + "\n设置纹理id:", QLineEdit::EchoMode::Normal, defaultValue, &ok);
+    QInputDialog dialog(this);
+    dialog.setInputMode(QInputDialog::TextInput);
+    dialog.setLabelText("已选择纹理：" + externalPath + "\n请输入纹理名称");
+    dialog.setTextValue(defaultValue);
+    dialog.setWindowTitle("添加纹理");
+    dialog.setWindowFlags(Qt::Dialog | Qt::WindowTitleHint);
+    dialog.setCancelButtonText("取消");
+    dialog.setOkButtonText("确定");
+    dialog.adjustSize();
 
-    if (!ok) 
+    if (dialog.exec() != QDialog::Accepted) 
     {
         return;
     }
+    QString textureName = dialog.textValue();
     QString internalPath = "../../assets/textures/" + textureName;
     QFileInfo textureInfo(internalPath);
     if (textureInfo.exists())
