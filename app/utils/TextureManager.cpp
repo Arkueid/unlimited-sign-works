@@ -137,6 +137,8 @@ int TextureManager::registerTexture(const QString &externalPath, const QString &
     }
 
     texturePaths[id] = textureName;
+
+    emit texturesSignals->texturesUpdated();
     return id;
 }
 bool TextureManager::unregisterTexture(const QString &textureName)

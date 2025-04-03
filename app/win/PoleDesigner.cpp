@@ -579,7 +579,7 @@ void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBox
 		const int cidx = part->getTextureRefs()[i];
 		comboBox->disconnect();
 		comboBox->clear();
-		int idx = 0;
+		int idx = -1;
 		int count = 0;
 		for (auto it = texturePaths.begin(); it != texturePaths.end(); ++it)
 		{

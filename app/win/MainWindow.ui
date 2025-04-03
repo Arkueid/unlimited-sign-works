@@ -66,6 +66,10 @@
        <bool>false</bool>
       </property>
       <widget class="QWidget" name="tab">
+       <attribute name="icon">
+        <iconset>
+         <normaloff>../../assets/16x16.ico</normaloff>../../assets/16x16.ico</iconset>
+       </attribute>
        <attribute name="title">
         <string>开始</string>
        </attribute>
