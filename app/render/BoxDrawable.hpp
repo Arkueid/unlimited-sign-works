@@ -6,6 +6,7 @@
 #include <part/Part.hpp>
 
 
+// 选中包围盒
 class BoxDrawable : protected QOpenGLFunctions {
 
     QOpenGLBuffer* vertexBuffer;
