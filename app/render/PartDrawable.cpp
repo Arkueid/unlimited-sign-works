@@ -15,13 +15,17 @@ PartDrawable::~PartDrawable()
 	VertexBufferManager::unregisterVertexBuffer(part->getVertices());
 }
 
-void PartDrawable::updatePart()
+void PartDrawable::unbindPart()
 {
 	if (vertexBuffer != nullptr)
 	{
 		VertexBufferManager::unregisterVertexBuffer(part->getVertices());
 	}
-	
+	vertexBuffer = nullptr;
+}
+
+void PartDrawable::updatePart()
+{
 	vertexBuffer = VertexBufferManager::registerVertexBuffer(part->getVertices(), part->getVertexCount());
 }
 void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)

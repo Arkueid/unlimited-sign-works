@@ -12,4 +12,6 @@ public:
     ~TextureBase() override;
 public slots:
     void onTextureSelected(QListWidgetItem* item);
+    void onAddBtnClicked();
+    void onRemoveBtnClicked();
 };

@@ -71,7 +71,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout" stretch="3,1,1,5">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="3,0,1,1,5">
           <property name="topMargin">
            <number>50</number>
           </property>
@@ -85,6 +85,22 @@
             </property>
             <property name="text">
              <string>Unlimited Sign Works</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>标识牌建模</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>

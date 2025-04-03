@@ -58,6 +58,7 @@ public:
     void removeDrawable(PartDrawable* drawable);
     void addDrawable(Part* part);
     void updatePart(PartDrawable* drawable);
+    void unbindPart(PartDrawable* drawable);
 
     const QVector<PartDrawable*>& getDrawables() const
     {

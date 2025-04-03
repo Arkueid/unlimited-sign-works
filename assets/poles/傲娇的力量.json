@@ -1,0 +1,78 @@
+{
+    "meshes": [
+        {
+            "d": 168,
+            "h": 4000,
+            "type": 1
+        },
+        {
+            "a": 2500,
+            "b": 2000,
+            "c": 10,
+            "type": 0
+        }
+    ],
+    "name": "傲娇的力量",
+    "parts": [
+        {
+            "meshRef": 0,
+            "name": "右立柱",
+            "position": [
+                800,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "meshRef": 0,
+            "name": "左立柱",
+            "position": [
+                -800,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "meshRef": 1,
+            "name": "面板",
+            "position": [
+                0,
+                4000,
+                89
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                15
+            ]
+        }
+    ]
+}

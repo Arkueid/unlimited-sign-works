@@ -41,6 +41,8 @@ class PoleDesigner: public QWidget
 
 	void bindTextures(Part* part, const QVector<QComboBox*>& comboBoxes);
 
+	void refreshMesh(Part* part, Mesh* mesh);
+
 public:
 	explicit PoleDesigner(QWidget* parent = nullptr, const QString& poleJsonPath = "");
 	~PoleDesigner() override;

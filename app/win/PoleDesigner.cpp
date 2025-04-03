@@ -115,6 +115,19 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 				}
 			});
 
+	connect(TextureManager::getTexturesSignals(), &TextureSignals::texturesUpdated,
+			[=]()
+			{
+				QListWidgetItem *item = ui->drawableList->currentItem();
+				if (item != nullptr)
+				{
+					PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
+					Part *part = drawable->getPart();
+					bindPart(part);
+				}
+				ui->poleScene->update();
+			});
+
 	ui->paramPanel->setCurrentWidget(ui->empty);
 	ui->transformPanel->setVisible(false);
 }
@@ -186,9 +199,7 @@ void PoleDesigner::bindCube(Part *part)
 			{
 				Cube *oldCube = (Cube *)part->getMesh();
 				Cube *newCube = Cube::create(text.toFloat(), oldCube->getB(), oldCube->getC());
-				part->setMesh(newCube);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newCube);
 			});
 	ui->cubeB->disconnect();
 	connect(ui->cubeB, &QLineEdit::textEdited,
@@ -196,9 +207,7 @@ void PoleDesigner::bindCube(Part *part)
 			{
 				Cube *oldCube = (Cube *)part->getMesh();
 				Cube *newCube = Cube::create(oldCube->getA(), text.toFloat(), oldCube->getC());
-				part->setMesh(newCube);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newCube);
 			});
 	ui->cubeC->disconnect();
 	connect(ui->cubeC, &QLineEdit::textEdited,
@@ -206,8 +215,8 @@ void PoleDesigner::bindCube(Part *part)
 			{
 				Cube *oldCube = (Cube *)part->getMesh();
 				Cube *newCube = Cube::create(oldCube->getA(), oldCube->getB(), text.toFloat());
-				part->setMesh(newCube);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
+				refreshMesh(part, newCube);
+
 			});
 
 	// 纹理
@@ -248,9 +257,7 @@ void PoleDesigner::bindCylinder(Part *part)
 			{
 				Cylinder *oldCylinder = (Cylinder *)part->getMesh();
 				Cylinder *newCylinder = Cylinder::create(text.toFloat(), oldCylinder->getH());
-				part->setMesh(newCylinder);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newCylinder);
 			});
 	ui->cylinderH->disconnect();
 	connect(ui->cylinderH, &QLineEdit::textEdited,
@@ -258,9 +265,7 @@ void PoleDesigner::bindCylinder(Part *part)
 			{
 				Cylinder *oldCylinder = (Cylinder *)part->getMesh();
 				Cylinder *newCylinder = Cylinder::create(oldCylinder->getD(), text.toFloat());
-				part->setMesh(newCylinder);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newCylinder);
 			});
 
 	bindTextures(part, {ui->cylinderTexTop, ui->cylinderTexBottom, ui->cylinderTexSide});
@@ -299,9 +304,7 @@ void PoleDesigner::bindStiffener(Part *part)
 			{
 				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
 				Stiffener *newStiffener = Stiffener::create(text.toFloat(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
-				part->setMesh(newStiffener);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newStiffener);
 			});
 	ui->stiffenerB->disconnect();
 	connect(ui->stiffenerB, &QLineEdit::textEdited,
@@ -309,9 +312,7 @@ void PoleDesigner::bindStiffener(Part *part)
 			{
 				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
 				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), text.toFloat(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
-				part->setMesh(newStiffener);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newStiffener);
 			});
 	ui->stiffenerH1->disconnect();
 	connect(ui->stiffenerH1, &QLineEdit::textEdited,
@@ -319,9 +320,7 @@ void PoleDesigner::bindStiffener(Part *part)
 			{
 				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
 				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), text.toFloat(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
-				part->setMesh(newStiffener);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newStiffener);
 			});
 	ui->stiffenerH2->disconnect();
 	connect(ui->stiffenerH2, &QLineEdit::textEdited,
@@ -329,9 +328,7 @@ void PoleDesigner::bindStiffener(Part *part)
 			{
 				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
 				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), text.toFloat(), oldStiffener->getC(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
-				part->setMesh(newStiffener);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newStiffener);
 			});
 	ui->stiffenerC->disconnect();
 	connect(ui->stiffenerC, &QLineEdit::textEdited,
@@ -339,9 +336,7 @@ void PoleDesigner::bindStiffener(Part *part)
 			{
 				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
 				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), text.toFloat(), oldStiffener->getOffsetH(), oldStiffener->getOffsetV());
-				part->setMesh(newStiffener);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newStiffener);
 			});
 	ui->stiffenerHOff->disconnect();
 	connect(ui->stiffenerHOff, &QLineEdit::textEdited,
@@ -349,9 +344,7 @@ void PoleDesigner::bindStiffener(Part *part)
 			{
 				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
 				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), text.toFloat(), oldStiffener->getOffsetV());
-				part->setMesh(newStiffener);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newStiffener);
 			});
 	ui->stiffenerVOff->disconnect();
 	connect(ui->stiffenerVOff, &QLineEdit::textEdited,
@@ -359,9 +352,7 @@ void PoleDesigner::bindStiffener(Part *part)
 			{
 				Stiffener *oldStiffener = (Stiffener *)part->getMesh();
 				Stiffener *newStiffener = Stiffener::create(oldStiffener->getA(), oldStiffener->getB(), oldStiffener->getH1(), oldStiffener->getH2(), oldStiffener->getC(), oldStiffener->getOffsetH(), text.toFloat());
-				part->setMesh(newStiffener);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newStiffener);
 			});
 
 	// 纹理
@@ -402,9 +393,7 @@ void PoleDesigner::bindRoundedCube(Part *part)
 			{
 				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
 				RoundedCube *newRCube = RoundedCube::create(text.toFloat(), oldRCube->getB(), oldRCube->getC(), oldRCube->getRadius());
-				part->setMesh(newRCube);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newRCube);
 			});
 	ui->rCubeB->disconnect();
 	connect(ui->rCubeB, &QLineEdit::textEdited,
@@ -412,9 +401,7 @@ void PoleDesigner::bindRoundedCube(Part *part)
 			{
 				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
 				RoundedCube *newRCube = RoundedCube::create(oldRCube->getA(), text.toFloat(), oldRCube->getC(), oldRCube->getRadius());
-				part->setMesh(newRCube);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newRCube);
 			});
 	ui->rCubeC->disconnect();
 	connect(ui->rCubeC, &QLineEdit::textEdited,
@@ -422,9 +409,7 @@ void PoleDesigner::bindRoundedCube(Part *part)
 			{
 				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
 				RoundedCube *newRCube = RoundedCube::create(oldRCube->getA(), oldRCube->getB(), text.toFloat(), oldRCube->getRadius());
-				part->setMesh(newRCube);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newRCube);
 			});
 	ui->rCubeRadius->disconnect();
 	connect(ui->rCubeRadius, &QLineEdit::textEdited,
@@ -432,9 +417,7 @@ void PoleDesigner::bindRoundedCube(Part *part)
 			{
 				RoundedCube *oldRCube = (RoundedCube *)part->getMesh();
 				RoundedCube *newRCube = RoundedCube::create(oldRCube->getA(), oldRCube->getB(), oldRCube->getC(), text.toFloat());
-				part->setMesh(newRCube);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newRCube);
 			});
 
 	// 变换
@@ -461,9 +444,7 @@ void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 			{
 				RoundedRegTriPrism *oldRrtp = (RoundedRegTriPrism *)part->getMesh();
 				RoundedRegTriPrism *newRrtp = RoundedRegTriPrism::create(text.toFloat(), oldRrtp->getH(), oldRrtp->getRadius());
-				part->setMesh(newRrtp);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newRrtp);
 			});
 	ui->rRegTriPrismH->disconnect();
 	connect(ui->rRegTriPrismH, &QLineEdit::textEdited,
@@ -471,9 +452,7 @@ void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 			{
 				RoundedRegTriPrism *oldRrtp = (RoundedRegTriPrism *)part->getMesh();
 				RoundedRegTriPrism *newRrtp = RoundedRegTriPrism::create(oldRrtp->getA(), text.toFloat(), oldRrtp->getRadius());
-				part->setMesh(newRrtp);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newRrtp);
 			});
 	ui->rRegTriPrismRadius->disconnect();
 	connect(ui->rRegTriPrismRadius, &QLineEdit::textEdited,
@@ -481,9 +460,7 @@ void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 			{
 				RoundedRegTriPrism *oldRrtp = (RoundedRegTriPrism *)part->getMesh();
 				RoundedRegTriPrism *newRrtp = RoundedRegTriPrism::create(oldRrtp->getA(), oldRrtp->getH(), text.toFloat());
-				part->setMesh(newRrtp);
-				ui->poleScene->updatePart(ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>());
-				ui->poleScene->update();
+				refreshMesh(part, newRrtp);
 			});
 
 	// 纹理
@@ -603,9 +580,7 @@ void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBox
 		int idx = 0;
 		for (auto it = texturePaths.begin(); it != texturePaths.end(); ++it)
 		{
-			QString tp = it.value();
-			comboBox->addItem(tp.replace("../../assets/textures/", ""));
-			comboBox->setItemData(idx, it.key());
+			comboBox->addItem(it.value(), it.key());
 			idx++;
 		}
 		comboBox->setCurrentIndex(cidx);
@@ -616,4 +591,13 @@ void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBox
 					ui->poleScene->update();
 				});
 	}
+}
+
+void PoleDesigner::refreshMesh(Part *part, Mesh *mesh)
+{
+	PartDrawable *drawable = ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>();
+	ui->poleScene->unbindPart(drawable);
+	part->setMesh(mesh);
+	ui->poleScene->updatePart(drawable);
+	ui->poleScene->update();
 }

@@ -15,12 +15,18 @@ int main(int argc, char *argv[])
 
     SQLite::initialize(cd + "/../../settings.db");
 
+    TextureManager::initSignals();
     TextureManager::loadTexturesPaths();
 
     MainWindow w;
     w.show();
 
-    SQLite::dispose();
+    QApplication::connect(&app, &QApplication::aboutToQuit,
+                          []()
+                          {
+                              SQLite::dispose();
+                              TextureManager::destroySignals();
+                          });
 
     return app.exec();
 }

@@ -60,6 +60,7 @@ int Part::getType()
 
 void Part::setMesh(Mesh *value)
 {
+    value->incRef();
     releaseMesh();
     mesh = value;
 }
