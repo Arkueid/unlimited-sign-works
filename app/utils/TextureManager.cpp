@@ -24,7 +24,7 @@ QOpenGLTexture *TextureManager::loadTexture(const QString &path)
     if (!image.isNull())
     {
         QOpenGLTexture *texture = new QOpenGLTexture(image.mirrored().convertToFormat(QImage::Format_RGBA8888));
-        texture->setWrapMode(QOpenGLTexture::ClampToEdge);
+        texture->setWrapMode(QOpenGLTexture::Repeat);
         texture->setMinificationFilter(QOpenGLTexture::Linear);
         texture->setMagnificationFilter(QOpenGLTexture::Linear);
         textures[path] = texture;
