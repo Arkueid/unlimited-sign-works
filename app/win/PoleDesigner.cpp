@@ -117,7 +117,8 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 				}
 			});
 
-	connect(TextureManager::getTexturesSignals(), &TextureSignals::texturesUpdated,
+	// 需要手动解除
+	connection = connect(TextureManager::getTexturesSignals(), &TextureSignals::texturesUpdated,
 			[=]()
 			{
 				QListWidgetItem *item = ui->drawableList->currentItem();
@@ -136,6 +137,7 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 
 PoleDesigner::~PoleDesigner()
 {
+	disconnect(connection);
 	delete ui;
 }
 

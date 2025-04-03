@@ -10,6 +10,7 @@
 #include <base/RoundedRegTriPrism.hpp>
 
 #include <QDoubleValidator>
+#include <QMetaObject>
 
 class PoleDesigner: public QWidget
 {
@@ -22,6 +23,8 @@ class PoleDesigner: public QWidget
 	Stiffener* stiffener;
 	RoundedCube* roundedCube;
 	RoundedRegTriPrism* rrTriPrism;
+
+	QMetaObject::Connection connection;
 
 	QDoubleValidator* doubleValidator;
 
