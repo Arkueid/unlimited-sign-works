@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     resize(1280, 720);
 
-    ui->statusbar->showMessage("I am the bone of my sword. "
-                               "So as I pray, unlimited blade works. ");
+    ui->statusbar->showMessage("I am the bone of highway traffic sign. "
+                               "So as I pray, unlimited sign works. ");
 
     auto newFunc = [=]()
     {
