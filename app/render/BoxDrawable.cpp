@@ -4,9 +4,10 @@
 
 namespace
 {
-    constexpr float R = 1.0f;
-    constexpr float G = 0.01f;
-    constexpr float B = 0.01f;
+    // 242, 241, 12
+    constexpr float R = 242.0f / 255.0f;
+    constexpr float G = 241.0f / 255.0f;
+    constexpr float B = 12.0f / 255.0f;
 }
 
 // 上底面 | 下底面
