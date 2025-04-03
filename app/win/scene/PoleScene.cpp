@@ -78,6 +78,7 @@ void PoleScene::updatePart(PartDrawable *drawable)
 {
     makeCurrent();
     drawable->updatePart();
+    wrapBox->wrap(drawable->getPart(), drawable->getModelMatrix());
     doneCurrent();
 
     update();

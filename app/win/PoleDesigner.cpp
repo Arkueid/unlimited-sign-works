@@ -519,6 +519,7 @@ void PoleDesigner::initializeLineEdits()
 
 void PoleDesigner::bindTransforms(Part *part)
 {
+	PartDrawable *drawable = ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable*>();
 	ui->originX->setText(QString::number(part->getOriginX()));
 	ui->originY->setText(QString::number(part->getOriginY()));
 	ui->originZ->setText(QString::number(part->getOriginZ()));
@@ -532,6 +533,7 @@ void PoleDesigner::bindTransforms(Part *part)
 			[=](const QString &text)
 			{
 				part->setOriginX(text.toFloat());
+				ui->poleScene->selectPart(drawable);
 				ui->poleScene->update();
 			});
 	ui->originY->disconnect();
@@ -539,6 +541,7 @@ void PoleDesigner::bindTransforms(Part *part)
 			[=](const QString &text)
 			{
 				part->setOriginY(text.toFloat());
+				ui->poleScene->selectPart(drawable);
 				ui->poleScene->update();
 			});
 	ui->originZ->disconnect();
@@ -546,6 +549,7 @@ void PoleDesigner::bindTransforms(Part *part)
 			[=](const QString &text)
 			{
 				part->setOriginZ(text.toFloat());
+				ui->poleScene->selectPart(drawable);
 				ui->poleScene->update();
 			});
 	ui->rotationX->disconnect();
@@ -553,6 +557,7 @@ void PoleDesigner::bindTransforms(Part *part)
 			[=](const QString &text)
 			{
 				part->setRotationX(text.toFloat());
+				ui->poleScene->selectPart(drawable);
 				ui->poleScene->update();
 			});
 	ui->rotationY->disconnect();
@@ -560,6 +565,7 @@ void PoleDesigner::bindTransforms(Part *part)
 			[=](const QString &text)
 			{
 				part->setRotationY(text.toFloat());
+				ui->poleScene->selectPart(drawable);
 				ui->poleScene->update();
 			});
 	ui->rotationZ->disconnect();
@@ -567,6 +573,7 @@ void PoleDesigner::bindTransforms(Part *part)
 			[=](const QString &text)
 			{
 				part->setRotationZ(text.toFloat());
+				ui->poleScene->selectPart(drawable);
 				ui->poleScene->update();
 			});
 }
