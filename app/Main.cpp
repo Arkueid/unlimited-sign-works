@@ -8,6 +8,8 @@
 
 #include <utils/TextureManager.hpp>
 
+#include <QSurfaceFormat>
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -17,6 +19,11 @@ int main(int argc, char *argv[])
 
     TextureManager::initSignals();
     TextureManager::loadTexturesPaths();
+
+
+    QSurfaceFormat fmt;
+    fmt.setSamples(4);
+    QSurfaceFormat::setDefaultFormat(fmt);
 
     MainWindow w;
     w.show();

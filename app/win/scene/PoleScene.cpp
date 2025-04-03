@@ -103,6 +103,9 @@ void PoleScene::releaseDrawables()
 void PoleScene::initializeGL()
 {
     initializeOpenGLFunctions();
+
+    glEnable(GL_MULTISAMPLE);
+
     axis = new AxisDrawable();
     wrapBox = new BoxDrawable();
 

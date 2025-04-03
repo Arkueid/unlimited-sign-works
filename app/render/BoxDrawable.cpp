@@ -91,6 +91,13 @@ void BoxDrawable::wrap(Part *part, const QMatrix4x4& model)
         }
     }
 
+    minX -= 0.2f;
+    minZ -= 0.2f;
+    minY -= 0.2f;
+    maxX += 0.2f;
+    maxZ += 0.2f;
+    maxY += 0.2f;
+
     vertices[0].x = minX;
     vertices[0].y = maxY;
     vertices[0].z = minZ;
