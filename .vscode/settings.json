@@ -78,6 +78,11 @@
         "ostream": "cpp",
         "qdoublevalidator": "cpp",
         "filesystem": "cpp",
-        "qsettings": "cpp"
+        "qsettings": "cpp",
+        "resumable": "cpp",
+        "qframe": "cpp",
+        "qwidget": "cpp",
+        "qregularexpressionvalidator": "cpp",
+        "qpainter": "cpp"
     }
 }

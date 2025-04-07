@@ -14,12 +14,11 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     QString cd = QCoreApplication::applicationDirPath();
-
+    
     SQLite::initialize(cd + "/../../settings.db");
 
     TextureManager::initSignals();
     TextureManager::loadTexturesPaths();
-
 
     QSurfaceFormat fmt;
     fmt.setSamples(4);

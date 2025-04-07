@@ -3,6 +3,9 @@ add_executable(usw
     win/scene/PoleScene.hpp
     win/scene/PoleScene.cpp
 
+    win/scene/BoardScene.cpp
+    win/scene/BoardScene.cpp
+
     win/PoleDesigner.ui
     win/PoleDesigner.hpp
     win/PoleDesigner.cpp
@@ -24,9 +27,9 @@ add_executable(usw
     win/panel/AddPanel.hpp
     win/panel/AddPanel.cpp
 
-    win/texture/TextureEditor.ui
-    win/texture/TextureEditor.hpp
-    win/texture/TextureEditor.cpp
+    win/texture/BoardDesigner.ui
+    win/texture/BoardDesigner.hpp
+    win/texture/BoardDesigner.cpp
 
     win/texture/TextureBase.ui
     win/texture/TextureBase.hpp
@@ -40,6 +43,9 @@ add_executable(usw
     utils/VertexBufferManager.cpp  
     utils/PoleJsonSerializer.hpp
     utils/PoleJsonSerializer.cpp
+
+    template/TemplateCfg.hpp
+    template/TemplateCfg.cpp
     
     render/PartDrawable.hpp
     render/PartDrawable.cpp

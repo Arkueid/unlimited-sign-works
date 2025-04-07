@@ -1,7 +1,7 @@
 #include <win/MainWindow.hpp>
 #include <win/PoleDesigner.hpp>
 #include <QFileDialog>
-#include <win/texture/TextureEditor.hpp>
+#include <win/texture/BoardDesigner.hpp>
 #include <win/texture/TextureBase.hpp>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -57,14 +57,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
             {
                 for (int i = 0; i < ui->tabs->count(); ++i)
                 {
-                    if (ui->tabs->widget(i)->metaObject()->className() == QString("TextureEditor"))
+                    if (ui->tabs->widget(i)->metaObject()->className() == QString("BoardDesigner"))
                     {
                         ui->tabs->setCurrentIndex(i);
                         return;
                     }
                 }
-                TextureEditor *editor = new TextureEditor(ui->tabs);
-                const int index = ui->tabs->addTab(editor, "纹理生成");
+                BoardDesigner *designer = new BoardDesigner(ui->tabs);
+                const int index = ui->tabs->addTab(designer, "纹理生成");
                 ui->tabs->setCurrentIndex(index);
             });
 
