@@ -90,4 +90,6 @@ public:
 
 signals:
     void drawableAdded(PartDrawable* drawable);
+
+    void initialized();
 };

@@ -18,7 +18,8 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 																		   stiffener(nullptr),
 																		   roundedCube(nullptr),
 																		   rrTriPrism(nullptr),
-																		   doubleValidator(new QDoubleValidator(this))
+																		   doubleValidator(new QDoubleValidator(this)),
+																		   sceneInitialized(false)
 {
 	ui->setupUi(this);
 
@@ -48,6 +49,8 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 	connect(ui->poleName, &QLineEdit::textEdited, this, &PoleDesigner::onPoleNameEdited);
 
 	connect(ui->saveBtn, &QPushButton::clicked, this, &PoleDesigner::onSaveBtnClicked);
+
+	connect(ui->poleScene, &PoleScene::initialized, this, &PoleDesigner::onSceneInitialized);
 
 	// 需要手动解除
 	connection = connect(TextureManager::getTexturesSignals(), &TextureSignals::texturesUpdated,
@@ -565,9 +568,13 @@ void PoleDesigner::onDrawableAdded(PartDrawable *d)
 				ui->poleScene->update();
 			});
 
-	ui->drawableList->setCurrentItem(item);
-	bindPart(d->getPart());
-	ui->poleScene->selectPart(d);
+	if (sceneInitialized) // 初始化时不需要绑定，提高加载速度
+	{
+		// qDebug() << "Binding part: " << d->getPart()->getName();
+		ui->drawableList->setCurrentItem(item);
+		bindPart(d->getPart());
+		ui->poleScene->selectPart(d);
+	}
 }
 
 void PoleDesigner::onAddBtnClicked()
@@ -671,4 +678,9 @@ void PoleDesigner::onCopyBtnClicked()
 		part->getTextureRefs());
 	
 	ui->poleScene->addDrawable(newPart);
+}
+
+void PoleDesigner::onSceneInitialized()
+{
+	sceneInitialized = true;
 }

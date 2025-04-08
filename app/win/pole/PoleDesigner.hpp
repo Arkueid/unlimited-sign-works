@@ -28,6 +28,8 @@ class PoleDesigner: public QWidget
 
 	QDoubleValidator* doubleValidator;
 
+	bool sceneInitialized;
+
 	void bindPart(Part* part);
 
 	void bindCube(Part* part);
@@ -62,6 +64,8 @@ private slots:
 	void onSaveBtnClicked();
 
 	void onTextureBaseUpdated();
+
+	void onSceneInitialized();
 
 public:
 	explicit PoleDesigner(QWidget* parent = nullptr, const QString& poleJsonPath = "");

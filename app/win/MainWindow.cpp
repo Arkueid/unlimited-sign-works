@@ -16,14 +16,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                                "So as I pray, unlimited sign works. ");
 
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::onNewProjectRequested);
-    connect(ui->clbNew, &QCommandLinkButton::clicked, this, &MainWindow::onNewProjectRequested);
+    connect(ui->clbNewProject, &QCommandLinkButton::clicked, this, &MainWindow::onNewProjectRequested);
 
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::onOpenProjectRequested);
-    connect(ui->clbOpen, &QCommandLinkButton::clicked, this, &MainWindow::onOpenProjectRequested);
+    connect(ui->clbOpenProject, &QCommandLinkButton::clicked, this, &MainWindow::onOpenProjectRequested);
 
     connect(ui->actionTexGen, &QAction::triggered, this, &MainWindow::onTexGenRequested);
+    connect(ui->clbTexGen, &QCommandLinkButton::clicked, this, &MainWindow::onTexGenRequested);
 
     connect(ui->actionTexBase, &QAction::triggered, this, &MainWindow::onTexBaseRequested);
+    connect(ui->clbTexBase, &QCommandLinkButton::clicked, this, &MainWindow::onTexBaseRequested);
 
     connect(ui->tabs, &QTabWidget::tabCloseRequested, this, &MainWindow::onTabClosed);
 }

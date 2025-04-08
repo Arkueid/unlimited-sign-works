@@ -127,6 +127,8 @@ void PoleScene::initializeGL()
     }
 
     deltaTime = 1.0f / 60.0f;
+
+    emit initialized();
 }
 
 void PoleScene::paintGL()
