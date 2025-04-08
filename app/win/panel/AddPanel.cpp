@@ -85,7 +85,7 @@ bool AddPanel::isParamsValid(const QVector<QLineEdit*>& numbers, const QVector<Q
 {
     for (auto it : numbers)
     {
-        if (it->text().toFloat() <= 0)
+        if (it->text().toFloat() < 0)
         {
             QMessageBox::warning(this, "添加部件", "参数不能为空或负数", QMessageBox::Ok);
             return false;
@@ -115,7 +115,7 @@ void AddPanel::addCube()
     QString name = ui->cubeName->text();
     
     Cube* cube = Cube::create(a, b, c);
-    Part* part = new Part(cube, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 });
+    Part* part = new Part(cube, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { -1, -1, -1, -1, -1, -1 });
     scene->addDrawable(part);
 
     close();
@@ -132,7 +132,7 @@ void AddPanel::addCylinder()
     const float h = ui->cylinderH->text().toFloat();
     QString name = ui->cylinderName->text();
     Cylinder* cylinder = Cylinder::create(d, h);
-    Part* part = new Part(cylinder, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 });
+    Part* part = new Part(cylinder, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { -1, -1, -1 });
     scene->addDrawable(part);
 
     close();
@@ -155,7 +155,7 @@ void AddPanel::addStiffener()
     QString name = ui->stiffenerName->text();
 
     Stiffener* stiffener = Stiffener::create(a, b, h1, h2, c, offsetH, offsetV);
-    Part* part = new Part(stiffener, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0 });
+    Part* part = new Part(stiffener, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { -1, -1, -1, -1, -1, -1, -1 });
     scene->addDrawable(part);
 
     close();
@@ -175,7 +175,7 @@ void AddPanel::addRoundedCube()
     QString name = ui->rCubeName->text();
 
     RoundedCube* cube = RoundedCube::create(a, b, c, radius);
-    Part* part = new Part(cube, name.toStdString(), { 0,0,0 }, { 0,0,0 }, { 0, 0, 0 });
+    Part* part = new Part(cube, name.toStdString(), { 0,0,0 }, { 0,0,0 }, { -1, -1, -1 });
     scene->addDrawable(part);
 
     close();
@@ -194,7 +194,7 @@ void AddPanel::addRoundedRegTriPrism()
     QString name = ui->rRegTriPrismName->text();
 
     RoundedRegTriPrism* rrtp = RoundedRegTriPrism::create(a, h, r);
-    Part* part = new Part(rrtp, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 });
+    Part* part = new Part(rrtp, name.toStdString(), { 0, 0, 0 }, { 0, 0, 0 }, { -1, -1, -1 });
     scene->addDrawable(part);
 
     close();

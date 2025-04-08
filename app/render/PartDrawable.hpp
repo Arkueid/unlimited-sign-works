@@ -22,7 +22,10 @@ public:
 	PartDrawable(Part* part);
 	~PartDrawable();
 
+	void unbindPart();
 	void updatePart();
+
+	QMatrix4x4 getModelMatrix();
 
 	void draw(QOpenGLShaderProgram& program, QMatrix4x4& transform);
 

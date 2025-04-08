@@ -8,14 +8,16 @@ uniform sampler2D tex;
 // 平行光参数
 uniform vec3 lightPos = vec3(1000, 1000, 3000);
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);  // 光颜色
-uniform vec3 objectColor = vec3(0.5, 0.5, 0.5); // 物体基础颜色
+uniform vec3 objectColor = vec3(0.8, 0.8, 0.8); // 物体基础颜色
 
 // 材质参数
 uniform vec3 ambientColor = vec3(0.2);  // 环境光强度
 
 void main()
 {
-    vec3 texColor = texture(tex, TexCoord).rgb;
+    vec4 col = texture(tex, TexCoord);
+
+    vec3 texColor = col.rgb * col.a;
     
     // 环境光计算
     vec3 ambient = ambientColor * texColor;
@@ -28,5 +30,5 @@ void main()
 
     // 最终颜色合成
     vec3 result = ambient + diffuse;
-    gl_FragColor = vec4(result, 1.0);
+    gl_FragColor = vec4(result, col.a);
 }

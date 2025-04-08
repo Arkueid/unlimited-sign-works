@@ -3,13 +3,21 @@ add_executable(usw
     win/scene/PoleScene.hpp
     win/scene/PoleScene.cpp
 
-    win/PoleDesigner.ui
-    win/PoleDesigner.hpp
-    win/PoleDesigner.cpp
+    win/scene/BoardScene.cpp
+    win/scene/BoardScene.cpp
+
+    win/pole/PoleDesigner.ui
+    win/pole/PoleDesigner.hpp
+    win/pole/PoleDesigner.cpp
 
     win/MainWindow.ui
     win/MainWindow.hpp
     win/MainWindow.cpp
+
+    sqlite3/sqlite3.h
+    sqlite3/sqlite3.c
+    sqlite3/SQLite.hpp
+    sqlite3/SQLite.cpp
 
     win/list/DrawableListItem.ui
     win/list/DrawableListItem.hpp
@@ -19,6 +27,14 @@ add_executable(usw
     win/panel/AddPanel.hpp
     win/panel/AddPanel.cpp
 
+    win/texture/BoardDesigner.ui
+    win/texture/BoardDesigner.hpp
+    win/texture/BoardDesigner.cpp
+
+    win/texture/TextureBase.ui
+    win/texture/TextureBase.hpp
+    win/texture/TextureBase.cpp
+
     utils/Camera.hpp
     utils/Camera.cpp
     utils/TextureManager.hpp    
@@ -27,11 +43,18 @@ add_executable(usw
     utils/VertexBufferManager.cpp  
     utils/PoleJsonSerializer.hpp
     utils/PoleJsonSerializer.cpp
+
+    template/TemplateCfg.hpp
+    template/TemplateCfg.cpp
     
     render/PartDrawable.hpp
     render/PartDrawable.cpp
+
     render/AxisDrawable.hpp
     render/AxisDrawable.cpp
+
+    render/BoxDrawable.hpp
+    render/BoxDrawable.cpp
 
     logo.rc
 )

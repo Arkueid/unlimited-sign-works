@@ -15,28 +15,24 @@ PartDrawable::~PartDrawable()
 	VertexBufferManager::unregisterVertexBuffer(part->getVertices());
 }
 
-void PartDrawable::updatePart()
+void PartDrawable::unbindPart()
 {
 	if (vertexBuffer != nullptr)
 	{
 		VertexBufferManager::unregisterVertexBuffer(part->getVertices());
 	}
-	
+	vertexBuffer = nullptr;
+}
+
+void PartDrawable::updatePart()
+{
 	vertexBuffer = VertexBufferManager::registerVertexBuffer(part->getVertices(), part->getVertexCount());
 }
 void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 {
-	modelMatrix.setToIdentity();
-	modelMatrix.translate(part->getOriginX(), part->getOriginY(), part->getOriginZ());
-	modelMatrix.rotate(part->getRotationX(), 1, 0, 0);
-	modelMatrix.rotate(part->getRotationY(), 0, 1, 0);
-	modelMatrix.rotate(part->getRotationZ(), 0, 0, 1);
-	QMatrix4x4 scale;
-	scale.setToIdentity();
-	scale.scale(0.0001f);
-	scale = transform * scale * modelMatrix;
-	program.setUniformValue("model", scale);
-	program.setUniformValue("normalMatrix", scale.normalMatrix());
+	QMatrix4x4 model = transform * getModelMatrix();
+	program.setUniformValue("model", model);
+	program.setUniformValue("normalMatrix", model.normalMatrix());
 	vertexBuffer->bind();
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), (void*)0);
@@ -57,3 +53,16 @@ void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 	vertexBuffer->release();
 }
 
+QMatrix4x4 PartDrawable::getModelMatrix()
+{
+	modelMatrix.setToIdentity();
+	modelMatrix.translate(part->getOriginX(), part->getOriginY(), part->getOriginZ());
+	modelMatrix.rotate(part->getRotationX(), 1, 0, 0);
+	modelMatrix.rotate(part->getRotationY(), 0, 1, 0);
+	modelMatrix.rotate(part->getRotationZ(), 0, 0, 1);
+	QMatrix4x4 scale;
+	scale.setToIdentity();
+	scale.scale(0.0001f);
+	scale = scale * modelMatrix;
+	return scale;
+}

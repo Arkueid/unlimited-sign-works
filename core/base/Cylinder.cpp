@@ -83,8 +83,8 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h), precision(pr
             vertices[index].nx = 0;
             vertices[index].ny = 1;
             vertices[index].nz = 0;
-            vertices[index].u = 0.5f + vertices[index].x / r;
-            vertices[index].v = 0.5f + vertices[index].z / r;
+            vertices[index].u = 0.5f + vertices[index].x / r * 0.5f;
+            vertices[index].v = 0.5f - vertices[index].z / r * 0.5f;
             index++;
         }
     }
@@ -101,8 +101,8 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h), precision(pr
             vertices[index].nx = 0;
             vertices[index].ny = -1;
             vertices[index].nz = 0;
-            vertices[index].u = 0.5f + vertices[index].x / r;
-            vertices[index].v = 0.5f + vertices[index].z / r;
+            vertices[index].u = 0.5f + vertices[index].x / r * 0.5f;
+            vertices[index].v = 0.5f - vertices[index].z / r * 0.5f;
             index++;
         }
     }
