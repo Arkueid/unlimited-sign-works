@@ -6,9 +6,9 @@ namespace
 {
     // 242, 241, 12
     // 黄色
-    constexpr float R = 242.0f / 255.0f;
-    constexpr float G = 241.0f / 255.0f;
-    constexpr float B = 12.0f / 255.0f;
+    constexpr float R = 1.0f;
+    constexpr float G = 0.0f;
+    constexpr float B = 0.0f;
 }
 
 // 上底面 | 下底面

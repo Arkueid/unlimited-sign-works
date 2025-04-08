@@ -1,8 +1,10 @@
 #include <win/MainWindow.hpp>
-#include <win/PoleDesigner.hpp>
+
 #include <QFileDialog>
+
 #include <win/texture/BoardDesigner.hpp>
 #include <win/texture/TextureBase.hpp>
+#include <win/pole/PoleDesigner.hpp>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -13,88 +15,92 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->statusbar->showMessage("I am the bone of highway traffic sign. "
                                "So as I pray, unlimited sign works. ");
 
-    auto newFunc = [=]()
-    {
-        PoleDesigner *designer = new PoleDesigner(ui->tabs);
-        designer->getPoleNameLineEdit()->setText("New Pole");
-        const int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
-        connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
-                [=](const QString &name)
-                {
-                    ui->tabs->setTabText(index, name);
-                });
-        ui->tabs->setCurrentIndex(index);
-    };
-    connect(ui->actionNew, &QAction::triggered, newFunc);
-    connect(ui->clbNew, &QCommandLinkButton::clicked, newFunc);
+    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::onNewProjectRequested);
+    connect(ui->clbNew, &QCommandLinkButton::clicked, this, &MainWindow::onNewProjectRequested);
 
-    auto openFunc = [=]()
-    {
-        QString fileName = QFileDialog::getOpenFileName(this,
-                                                        "Open Pole Json",
-                                                        QDir::currentPath() + "/../../assets/poles",
-                                                        "Pole Json (*.json)");
-        if (fileName.isEmpty())
-        {
-            return;
-        }
+    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::onOpenProjectRequested);
+    connect(ui->clbOpen, &QCommandLinkButton::clicked, this, &MainWindow::onOpenProjectRequested);
 
-        PoleDesigner *designer = new PoleDesigner(ui->tabs, fileName);
-        int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
-        connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
-                [=](const QString &name)
-                {
-                    ui->tabs->setTabText(index, name);
-                });
-        ui->tabs->setCurrentIndex(index);
-    };
+    connect(ui->actionTexGen, &QAction::triggered, this, &MainWindow::onTexGenRequested);
 
-    connect(ui->actionOpen, &QAction::triggered, openFunc);
-    connect(ui->clbOpen, &QCommandLinkButton::clicked, openFunc);
+    connect(ui->actionTexBase, &QAction::triggered, this, &MainWindow::onTexBaseRequested);
 
-    connect(ui->actionTexGen, &QAction::triggered,
-            [=]()
-            {
-                for (int i = 0; i < ui->tabs->count(); ++i)
-                {
-                    if (ui->tabs->widget(i)->metaObject()->className() == QString("BoardDesigner"))
-                    {
-                        ui->tabs->setCurrentIndex(i);
-                        return;
-                    }
-                }
-                BoardDesigner *designer = new BoardDesigner(ui->tabs);
-                const int index = ui->tabs->addTab(designer, "纹理生成");
-                ui->tabs->setCurrentIndex(index);
-            });
-
-    connect(ui->actionTexBase, &QAction::triggered,
-            [=]()
-            {
-                for (int i = 0; i < ui->tabs->count(); ++i)
-                {
-                    if (ui->tabs->widget(i)->metaObject()->className() == QString("TextureBase"))
-                    {
-                        ui->tabs->setCurrentIndex(i);
-                        return;
-                    }
-                }
-                TextureBase *base = new TextureBase(ui->tabs);
-                const int index = ui->tabs->addTab(base, "纹理库");
-                ui->tabs->setCurrentIndex(index);
-            });
-
-    connect(ui->tabs, &QTabWidget::tabCloseRequested,
-            [=](int index)
-            {
-                QWidget *widget = ui->tabs->widget(index);
-                // qDebug() << "Closing tab " << index;
-                ui->tabs->removeTab(index);
-                widget->deleteLater();
-            });
+    connect(ui->tabs, &QTabWidget::tabCloseRequested, this, &MainWindow::onTabClosed);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onNewProjectRequested()
+{
+    PoleDesigner *designer = new PoleDesigner(ui->tabs);
+    designer->getPoleNameLineEdit()->setText("New Pole");
+    const int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
+    connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
+            [=](const QString &name)
+            {
+                ui->tabs->setTabText(index, name);
+            });
+    ui->tabs->setCurrentIndex(index);
+}
+
+void MainWindow::onOpenProjectRequested()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    "Open Pole Json",
+                                                    QDir::currentPath() + "/../../assets/poles",
+                                                    "Pole Json (*.json)");
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    PoleDesigner *designer = new PoleDesigner(ui->tabs, fileName);
+    int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
+    connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
+            [=](const QString &name)
+            {
+                ui->tabs->setTabText(index, name);
+            });
+    ui->tabs->setCurrentIndex(index);
+}
+
+void MainWindow::onTexGenRequested()
+{
+    for (int i = 0; i < ui->tabs->count(); ++i)
+    {
+        if (ui->tabs->widget(i)->metaObject()->className() == QString("BoardDesigner"))
+        {
+            ui->tabs->setCurrentIndex(i);
+            return;
+        }
+    }
+    BoardDesigner *designer = new BoardDesigner(ui->tabs);
+    const int index = ui->tabs->addTab(designer, "纹理生成");
+    ui->tabs->setCurrentIndex(index);
+}
+
+void MainWindow::onTexBaseRequested()
+{
+    for (int i = 0; i < ui->tabs->count(); ++i)
+    {
+        if (ui->tabs->widget(i)->metaObject()->className() == QString("TextureBase"))
+        {
+            ui->tabs->setCurrentIndex(i);
+            return;
+        }
+    }
+    TextureBase *base = new TextureBase(ui->tabs);
+    const int index = ui->tabs->addTab(base, "纹理库");
+    ui->tabs->setCurrentIndex(index);
+}
+
+void MainWindow::onTabClosed(int index)
+{
+    QWidget *widget = ui->tabs->widget(index);
+    // qDebug() << "Closing tab " << index;
+    ui->tabs->removeTab(index);
+    widget->deleteLater();
 }

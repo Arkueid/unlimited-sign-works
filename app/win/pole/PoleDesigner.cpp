@@ -1,12 +1,15 @@
-#include <win/PoleDesigner.hpp>
-#include <QListWidgetItem>
+#include <win/pole/PoleDesigner.hpp>
 #include <win/list/DrawableListItem.hpp>
-#include <QMenu>
 #include <utils/TextureManager.hpp>
 #include <win/panel/AddPanel.hpp>
-#include <QFileDialog>
 #include <utils/PoleJsonSerializer.hpp>
-#include "PoleDesigner.hpp"
+
+#include <QFileDialog>
+#include <QMenu>
+#include <QListWidgetItem>
+#include <QInputDialog>
+#include <QMessageBox>
+
 
 PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidget(parent),
 																		   ui(new Ui::PoleDesigner),
@@ -30,106 +33,25 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 
 	initializeLineEdits();
 
-	connect(ui->poleScene, &PoleScene::drawableAdded,
-			[=](PartDrawable *d)
-			{
-				QListWidgetItem *item = new QListWidgetItem(ui->drawableList);
-				DrawableListItem *widget = new DrawableListItem(ui->drawableList);
-				widget->getName()->setText(d->getName());
-				item->setSizeHint(widget->size());
-				item->setData(Qt::UserRole, QVariant::fromValue(d));
-				ui->drawableList->addItem(item);
-				ui->drawableList->setItemWidget(item, widget);
+	connect(ui->poleScene, &PoleScene::drawableAdded, this, &PoleDesigner::onDrawableAdded);
 
-				QCheckBox *chkbx = widget->getCheckBox();
-				chkbx->setChecked(true);
-				connect(chkbx, &QCheckBox::checkStateChanged,
-						[=](Qt::CheckState state)
-						{
-							if (state == Qt::Checked)
-							{
-								d->setVisible(true);
-							}
-							else
-							{
-								d->setVisible(false);
-							}
-							ui->poleScene->update();
-						});
-			});
+	connect(ui->addBtn, &QPushButton::clicked, this, &PoleDesigner::onAddBtnClicked);
 
-	connect(ui->addBtn, &QPushButton::clicked,
-			[=]()
-			{
-				AddPanel *panel = new AddPanel(ui->poleScene);
-				panel->show();
-			});
+	connect(ui->removeBtn, &QPushButton::clicked, this, &PoleDesigner::onRemoveBtnClicked);
 
-	connect(ui->removeBtn, &QPushButton::clicked,
-			[=]()
-			{
-				if (ui->drawableList->currentRow() >= 0)
-				{
-					// qDebug() << "Removing drawable: " << ui->drawableList->currentRow();
-					QListWidgetItem *item = ui->drawableList->takeItem(ui->drawableList->currentRow());
-					ui->poleScene->removeDrawable(item->data(Qt::UserRole).value<PartDrawable *>());
-					delete item;
-					hidePanels();
-					ui->poleScene->unselectPart();
-				}
-			});
+	connect(ui->copyBtn, &QPushButton::clicked, this, &PoleDesigner::onCopyBtnClicked);
 
-	connect(ui->drawableList, &QListWidget::itemClicked,
-			[=](QListWidgetItem *item)
-			{
-				PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
-				Part *part = drawable->getPart();
-				bindPart(part);
-				ui->poleScene->selectPart(drawable);
-			});
+	connect(ui->drawableList, &QListWidget::itemClicked, this, &PoleDesigner::onDrawableItemSelected);
 
 	ui->poleName->setText(ui->poleScene->getPoleName());
 
-	connect(ui->poleName, &QLineEdit::textEdited,
-			[=]()
-			{
-				ui->poleScene->setPoleName(ui->poleName->text());
-			});
+	connect(ui->poleName, &QLineEdit::textEdited, this, &PoleDesigner::onPoleNameEdited);
 
-	connect(ui->saveBtn, &QPushButton::clicked,
-			[=]()
-			{
-				QFileDialog dialog(this);
-				dialog.setNameFilter("Pole JSON (*.json)");
-				dialog.setAcceptMode(QFileDialog::AcceptSave);
-				dialog.setFileMode(QFileDialog::AnyFile);
-				QDir dir = QDir::current();
-				dir.cdUp();
-				dir.cdUp();
-				// ../../assets/poles
-				dialog.setDirectory(dir.absoluteFilePath("assets/poles"));
-				dialog.selectFile(ui->poleScene->getPoleName() + ".json");
-				if (dialog.exec())
-				{
-					QString filePath = dialog.selectedFiles().first();
-					// qDebug() << "Saving to: " << filePath;
-					PoleJsonSerializer::toJsonFile(ui->poleScene->getPole(), filePath);
-				}
-			});
+	connect(ui->saveBtn, &QPushButton::clicked, this, &PoleDesigner::onSaveBtnClicked);
 
 	// 需要手动解除
 	connection = connect(TextureManager::getTexturesSignals(), &TextureSignals::texturesUpdated,
-			[=]()
-			{
-				QListWidgetItem *item = ui->drawableList->currentItem();
-				if (item != nullptr)
-				{
-					PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
-					Part *part = drawable->getPart();
-					bindPart(part);
-				}
-				ui->poleScene->update();
-			});
+						 this, &PoleDesigner::onTextureBaseUpdated);
 
 	ui->paramPanel->setCurrentWidget(ui->empty);
 	ui->transformPanel->setVisible(false);
@@ -220,7 +142,6 @@ void PoleDesigner::bindCube(Part *part)
 				Cube *oldCube = (Cube *)part->getMesh();
 				Cube *newCube = Cube::create(oldCube->getA(), oldCube->getB(), text.toFloat());
 				refreshMesh(part, newCube);
-
 			});
 
 	// 纹理
@@ -519,7 +440,7 @@ void PoleDesigner::initializeLineEdits()
 
 void PoleDesigner::bindTransforms(Part *part)
 {
-	PartDrawable *drawable = ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable*>();
+	PartDrawable *drawable = ui->drawableList->currentItem()->data(Qt::UserRole).value<PartDrawable *>();
 	ui->originX->setText(QString::number(part->getOriginX()));
 	ui->originY->setText(QString::number(part->getOriginY()));
 	ui->originZ->setText(QString::number(part->getOriginZ()));
@@ -616,4 +537,138 @@ void PoleDesigner::refreshMesh(Part *part, Mesh *mesh)
 	part->setMesh(mesh);
 	ui->poleScene->updatePart(drawable);
 	ui->poleScene->update();
+}
+
+void PoleDesigner::onDrawableAdded(PartDrawable *d)
+{
+	QListWidgetItem *item = new QListWidgetItem(ui->drawableList);
+	DrawableListItem *widget = new DrawableListItem(ui->drawableList);
+	widget->getName()->setText(d->getName());
+	item->setSizeHint(widget->size());
+	item->setData(Qt::UserRole, QVariant::fromValue(d));
+	ui->drawableList->addItem(item);
+	ui->drawableList->setItemWidget(item, widget);
+
+	QCheckBox *chkbx = widget->getCheckBox();
+	chkbx->setChecked(true);
+	connect(chkbx, &QCheckBox::checkStateChanged,
+			[=](Qt::CheckState state)
+			{
+				if (state == Qt::Checked)
+				{
+					d->setVisible(true);
+				}
+				else
+				{
+					d->setVisible(false);
+				}
+				ui->poleScene->update();
+			});
+
+	ui->drawableList->setCurrentItem(item);
+	bindPart(d->getPart());
+	ui->poleScene->selectPart(d);
+}
+
+void PoleDesigner::onAddBtnClicked()
+{
+	AddPanel *panel = new AddPanel(ui->poleScene);
+	panel->show();
+}
+
+void PoleDesigner::onRemoveBtnClicked()
+{
+	if (ui->drawableList->currentRow() >= 0)
+	{
+		// qDebug() << "Removing drawable: " << ui->drawableList->currentRow();
+		QListWidgetItem *item = ui->drawableList->takeItem(ui->drawableList->currentRow());
+		ui->poleScene->removeDrawable(item->data(Qt::UserRole).value<PartDrawable *>());
+		delete item;
+		hidePanels();
+		ui->poleScene->unselectPart();
+	}
+}
+
+void PoleDesigner::onDrawableItemSelected(QListWidgetItem *item)
+{
+	PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
+	Part *part = drawable->getPart();
+	bindPart(part);
+	ui->poleScene->selectPart(drawable);
+}
+
+void PoleDesigner::onPoleNameEdited()
+{
+	ui->poleScene->setPoleName(ui->poleName->text());
+}
+
+void PoleDesigner::onSaveBtnClicked()
+{
+	QFileDialog dialog(this);
+	dialog.setNameFilter("Pole JSON (*.json)");
+	dialog.setAcceptMode(QFileDialog::AcceptSave);
+	dialog.setFileMode(QFileDialog::AnyFile);
+	QDir dir = QDir::current();
+	dir.cdUp();
+	dir.cdUp();
+	// ../../assets/poles
+	dialog.setDirectory(dir.absoluteFilePath("assets/poles"));
+	dialog.selectFile(ui->poleScene->getPoleName() + ".json");
+	if (dialog.exec())
+	{
+		QString filePath = dialog.selectedFiles().first();
+		// qDebug() << "Saving to: " << filePath;
+		PoleJsonSerializer::toJsonFile(ui->poleScene->getPole(), filePath);
+	}
+}
+
+void PoleDesigner::onTextureBaseUpdated()
+{
+	QListWidgetItem *item = ui->drawableList->currentItem();
+	if (item != nullptr)
+	{
+		PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
+		Part *part = drawable->getPart();
+		bindPart(part);
+	}
+	ui->poleScene->update();
+}
+
+void PoleDesigner::onCopyBtnClicked()
+{
+	QListWidgetItem *item = ui->drawableList->currentItem();
+	if (item == nullptr)
+	{
+		return;
+	}
+
+	PartDrawable *drawable = item->data(Qt::UserRole).value<PartDrawable *>();
+
+	QInputDialog dialog(this);
+	dialog.setWindowTitle("复制部件");
+	dialog.setLabelText("选中部件：" + drawable->getName() + "\n新部件名称:");
+	dialog.setTextValue(drawable->getName() + " - 副本");
+	dialog.setOkButtonText("确定");
+	dialog.setCancelButtonText("取消");
+	dialog.adjustSize();
+	if (dialog.exec() != QDialog::Accepted)
+	{
+		return;
+	}
+
+	QString name = dialog.textValue();
+	if (name.isEmpty())
+	{
+		QMessageBox::warning(this, "警告", "部件名称不能为空");
+		return;
+	}
+
+	Part* part = drawable->getPart();
+	Mesh *mesh = part->getMesh();
+	Part *newPart = new Part(mesh, name.toStdString(), 
+		{part->getOriginX() + 100, part->getOriginY() + 100, part->getOriginZ() + 100}, 
+		{part->getRotationX(), part->getRotationY(), part->getRotationZ()}, 
+		part->getTextureRefs());
+	
+	ui->poleScene->addDrawable(newPart);
 }

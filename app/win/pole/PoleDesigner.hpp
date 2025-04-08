@@ -46,6 +46,23 @@ class PoleDesigner: public QWidget
 
 	void refreshMesh(Part* part, Mesh* mesh);
 
+private slots:
+	void onDrawableAdded(PartDrawable* d);
+
+	void onAddBtnClicked();
+
+	void onRemoveBtnClicked();
+
+	void onCopyBtnClicked();
+
+	void onDrawableItemSelected(QListWidgetItem* item);
+
+	void onPoleNameEdited();
+
+	void onSaveBtnClicked();
+
+	void onTextureBaseUpdated();
+
 public:
 	explicit PoleDesigner(QWidget* parent = nullptr, const QString& poleJsonPath = "");
 	~PoleDesigner() override;

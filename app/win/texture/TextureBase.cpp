@@ -12,25 +12,35 @@ TextureBase::TextureBase(QWidget *parent): QWidget(parent), ui(new Ui::TextureBa
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 20);
 
-    const QMap<int, QString> &texturesPaths = TextureManager::getTexturePaths();
-    for (auto it = texturesPaths.begin(); it != texturesPaths.end(); ++it)
-    {
-        QListWidgetItem* textureItem = new QListWidgetItem(ui->textureList);
-        textureItem->setText(it.value());
-        textureItem->setData(Qt::UserRole, QVariant("../../assets/textures/" + it.value()));
-        ui->textureList->addItem(textureItem);
-    }
+    loadTextureList();
 
     connect(ui->textureList, &QListWidget::itemClicked, this, &TextureBase::onTextureSelected);
 
     connect(ui->addBtn, &QPushButton::clicked, this, &TextureBase::onAddBtnClicked);
 
     connect(ui->removeBtn, &QPushButton::clicked, this, &TextureBase::onRemoveBtnClicked);
+
+    connect(ui->searchInput, &QLineEdit::textEdited, this, &TextureBase::onSearchInputTextEdited);
 }
 
 TextureBase::~TextureBase()
 {
     delete ui;
+}
+
+void TextureBase::loadTextureList()
+{
+    ui->textureList->clear();
+
+    const QMap<int, QString> &texturesPaths = TextureManager::getTexturePaths();
+    for (auto it = texturesPaths.begin(); it != texturesPaths.end(); ++it)
+    {
+        QListWidgetItem* textureItem = new QListWidgetItem(ui->textureList);
+        textureItem->setText(it.value());
+        textureItem->setData(Qt::UserRole, QVariant("../../assets/textures/" + it.value()));
+        // 指定了父组件，无需再显式添加
+        // ui->textureList->addItem(textureItem);
+    }
 }
 
 void TextureBase::onTextureSelected(QListWidgetItem* item)
@@ -103,5 +113,27 @@ void TextureBase::onRemoveBtnClicked()
         ui->textureList->takeItem(ui->textureList->row(item));
         delete item;
         ui->textureLabel->clear();
+    }
+}
+
+void TextureBase::onSearchInputTextEdited(const QString& text)
+{
+    ui->textureList->clear();
+
+    if (text.isEmpty())
+    {
+        loadTextureList();
+        return;
+    }
+
+    const QMap<int, QString> &texturesPaths = TextureManager::getTexturePaths();
+    for (auto it = texturesPaths.begin(); it != texturesPaths.end(); ++it)
+    {
+        if (it.value().contains(text, Qt::CaseInsensitive))
+        {
+            QListWidgetItem* textureItem = new QListWidgetItem(ui->textureList);
+            textureItem->setText(it.value());
+            textureItem->setData(Qt::UserRole, QVariant("../../assets/textures/" + it.value()));
+        }
     }
 }

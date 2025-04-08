@@ -85,7 +85,7 @@ bool AddPanel::isParamsValid(const QVector<QLineEdit*>& numbers, const QVector<Q
 {
     for (auto it : numbers)
     {
-        if (it->text().toFloat() <= 0)
+        if (it->text().toFloat() < 0)
         {
             QMessageBox::warning(this, "添加部件", "参数不能为空或负数", QMessageBox::Ok);
             return false;

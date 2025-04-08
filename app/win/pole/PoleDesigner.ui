@@ -64,7 +64,7 @@
              </sizepolicy>
             </property>
             <property name="toolTip">
-             <string>保存标识牌模型</string>
+             <string>保存建模工程</string>
             </property>
             <property name="text">
              <string/>
@@ -80,7 +80,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0">
           <item>
            <widget class="QPushButton" name="addBtn">
             <property name="sizePolicy">
@@ -119,6 +119,22 @@
             </property>
             <property name="icon">
              <iconset theme="QIcon::ThemeIcon::ListRemove"/>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="copyBtn">
+            <property name="toolTip">
+             <string>复制部件</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::EditCopy"/>
             </property>
             <property name="flat">
              <bool>false</bool>

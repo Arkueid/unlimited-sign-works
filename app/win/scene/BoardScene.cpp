@@ -44,7 +44,7 @@ void BoardScene::paintEvent(QPaintEvent *event)
         const QString &text = texts[i];
         if (!text.isEmpty())
         {
-            QRect fontRect(startX + rect->x * scaleX - 3, startY + rect->y * scaleY - 3, rect->w * scaleX + 6, rect->h * scaleY + 6);
+            QRect fontRect(startX + rect->x * scaleX - 4, startY + rect->y * scaleY - 4, rect->w * scaleX + 8, rect->h * scaleY + 8);
             painter.fillRect(fontRect, getColor(rect->background));
 
             painter.setPen(getColor(rect->foreground));
@@ -168,7 +168,7 @@ void BoardScene::exportImage(const QString &path)
         return;
     }
 
-    QImage image(originImage.width() * 1.5, originImage.height() * 1.5, QImage::Format_ARGB32);
+    QImage image(originImage.width() * 1.1, originImage.height() * 1.1, QImage::Format_ARGB32);
 
     QPainter painter(&image);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing, true);

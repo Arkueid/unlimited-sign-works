@@ -6,9 +6,9 @@ add_executable(usw
     win/scene/BoardScene.cpp
     win/scene/BoardScene.cpp
 
-    win/PoleDesigner.ui
-    win/PoleDesigner.hpp
-    win/PoleDesigner.cpp
+    win/pole/PoleDesigner.ui
+    win/pole/PoleDesigner.hpp
+    win/pole/PoleDesigner.cpp
 
     win/MainWindow.ui
     win/MainWindow.hpp
