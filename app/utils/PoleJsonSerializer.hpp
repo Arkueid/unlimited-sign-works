@@ -31,4 +31,7 @@ public:
 
     static void toJsonFile(Pole *pole, const QString &filePath);
     static Pole *fromJsonFile(const QString &filePath);
+
+    static void toJson(Pole *pole, QJsonObject &json);
+    static Pole *fromJson(QJsonObject &json);
 };

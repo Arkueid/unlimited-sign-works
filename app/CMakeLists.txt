@@ -10,6 +10,10 @@ add_executable(usw
     win/pole/PoleDesigner.hpp
     win/pole/PoleDesigner.cpp
 
+    win/pole/AddPanel.ui
+    win/pole/AddPanel.hpp
+    win/pole/AddPanel.cpp
+
     win/MainWindow.ui
     win/MainWindow.hpp
     win/MainWindow.cpp
@@ -22,10 +26,6 @@ add_executable(usw
     win/list/DrawableListItem.ui
     win/list/DrawableListItem.hpp
     win/list/DrawableListItem.cpp
-
-    win/panel/AddPanel.ui
-    win/panel/AddPanel.hpp
-    win/panel/AddPanel.cpp
 
     win/texture/BoardDesigner.ui
     win/texture/BoardDesigner.hpp
@@ -55,6 +55,18 @@ add_executable(usw
 
     render/BoxDrawable.hpp
     render/BoxDrawable.cpp
+
+    win/road/RoadDesigner.ui
+    win/road/RoadDesigner.hpp
+    win/road/RoadDesigner.cpp
+
+    win/road/PoleAddPanel.ui
+    win/road/PoleAddPanel.hpp
+    win/road/PoleAddPanel.cpp
+
+    win/road/TextureSetPanel.ui
+    win/road/TextureSetPanel.hpp
+    win/road/TextureSetPanel.cpp
 
     logo.rc
 )

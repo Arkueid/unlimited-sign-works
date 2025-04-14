@@ -36,7 +36,7 @@ PoleScene::~PoleScene()
 
 void PoleScene::loadPole(const QString &poleJsonPath)
 {
-    if (poleJsonPath.isEmpty()) 
+    if (poleJsonPath.isEmpty())
     {
         pole = new Pole168();
         pole->setName("New Pole");
@@ -252,5 +252,23 @@ void PoleScene::selectPart(PartDrawable *drawable)
 void PoleScene::unselectPart()
 {
     partSelected = false;
+    update();
+}
+
+void PoleScene::changePole(Pole *pole)
+{
+    makeCurrent();
+    releaseDrawables();
+    this->pole = pole;
+
+    const std::vector<Part *> &parts = pole->getParts();
+    for (auto part : parts)
+    {
+        PartDrawable *drawable = new PartDrawable(part);
+        drawables.append(drawable);
+        emit drawableAdded(drawable);
+    }
+
+    doneCurrent();
     update();
 }

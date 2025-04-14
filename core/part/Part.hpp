@@ -13,16 +13,19 @@ class Part : public Mesh
     Rotation rotation;
     Mesh *mesh;
     std::vector<int> textureRefs;
+    std::vector<bool> textureEdits;
 
     std::string name;
 
     void releaseMesh();
+
 public:
     Part(Mesh *mesh,
          const std::string &name,
          const Point &origin,
          const Rotation &rotation,
-         const std::vector<int> &textureRefs);
+         const std::vector<int> &textureRefs,
+         const std::vector<bool> &textureEdits = std::vector<bool>(0));
 
     virtual ~Part();
 
@@ -70,7 +73,7 @@ public:
     int getType() override;
 
     void setMesh(Mesh *value);
-    
+
     Mesh *getMesh() const;
 
     const std::vector<int> &getTextureRefs() const
@@ -81,6 +84,16 @@ public:
     void setTextureRef(int index, int value)
     {
         textureRefs[index] = value;
+    }
+
+    const std::vector<bool> &getTextureEdits() const
+    {
+        return textureEdits;
+    }
+
+    void setTextureEdit(int index, bool value)
+    {
+        textureEdits[index] = value;
     }
 
     void setName(const std::string &value)

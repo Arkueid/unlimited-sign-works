@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1004</width>
+    <width>748</width>
     <height>713</height>
    </rect>
   </property>
@@ -80,7 +80,74 @@
          </layout>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_16">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>类型</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="poleType">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>单柱式</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>双柱式</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>门架式</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>单悬臂式</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>双悬臂式</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>部件</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QPushButton" name="addBtn">
             <property name="sizePolicy">
@@ -142,18 +209,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label">
-            <property name="font">
-             <font>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>部件</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Orientation::Horizontal</enum>
@@ -204,7 +259,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>481</width>
+         <width>355</width>
          <height>693</height>
         </rect>
        </property>
@@ -224,7 +279,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>5</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="cylinderPanel">
            <property name="sizePolicy">
@@ -275,6 +330,16 @@
               <property name="bottomMargin">
                <number>6</number>
               </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="Label_16">
+                <property name="text">
+                 <string>名称</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="cylinderName"/>
+              </item>
               <item row="1" column="0">
                <widget class="QLabel" name="Label_2">
                 <property name="text">
@@ -317,23 +382,67 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QComboBox" name="cylinderTexTop"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                 <widget class="QComboBox" name="cylinderTexTop">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cylinderTexTopEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="4" column="1">
-               <widget class="QComboBox" name="cylinderTexBottom"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="QComboBox" name="cylinderTexBottom">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cylinderTexBottomEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="5" column="1">
-               <widget class="QComboBox" name="cylinderTexSide"/>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="Label_16">
-                <property name="text">
-                 <string>名称</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="cylinderName"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <widget class="QComboBox" name="cylinderTexSide">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cylinderTexSideEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
@@ -439,18 +548,12 @@
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QComboBox" name="cubeTexFront"/>
-              </item>
               <item row="5" column="0">
                <widget class="QLabel" name="label_6">
                 <property name="text">
                  <string>纹理（右）</string>
                 </property>
                </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QComboBox" name="cubeTexRight"/>
               </item>
               <item row="6" column="0">
                <widget class="QLabel" name="label_7">
@@ -459,18 +562,12 @@
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
-               <widget class="QComboBox" name="cubeTexBack"/>
-              </item>
               <item row="7" column="0">
                <widget class="QLabel" name="label_8">
                 <property name="text">
                  <string>纹理（左）</string>
                 </property>
                </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QComboBox" name="cubeTexLeft"/>
               </item>
               <item row="8" column="0">
                <widget class="QLabel" name="label_9">
@@ -479,9 +576,6 @@
                 </property>
                </widget>
               </item>
-              <item row="8" column="1">
-               <widget class="QComboBox" name="cubeTexBottom"/>
-              </item>
               <item row="9" column="0">
                <widget class="QLabel" name="label_10">
                 <property name="text">
@@ -489,8 +583,131 @@
                 </property>
                </widget>
               </item>
+              <item row="4" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item>
+                 <widget class="QComboBox" name="cubeTexFront">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cubeTexFrontEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="5" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QComboBox" name="cubeTexRight">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cubeTexRightEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="6" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <item>
+                 <widget class="QComboBox" name="cubeTexBack">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cubeTexBackEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="7" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <item>
+                 <widget class="QComboBox" name="cubeTexLeft">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cubeTexLeftEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="8" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <widget class="QComboBox" name="cubeTexBottom">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cubeTexBottomEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
               <item row="9" column="1">
-               <widget class="QComboBox" name="cubeTexTop"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_14">
+                <item>
+                 <widget class="QComboBox" name="cubeTexTop">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="cubeTexTopEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
@@ -622,18 +839,12 @@
                 </property>
                </widget>
               </item>
-              <item row="8" column="1">
-               <widget class="QComboBox" name="stiffenerTexFront"/>
-              </item>
               <item row="9" column="0">
                <widget class="QLabel" name="Label_10">
                 <property name="text">
                  <string>纹理（后）</string>
                 </property>
                </widget>
-              </item>
-              <item row="9" column="1">
-               <widget class="QComboBox" name="stiffenerTexBack"/>
               </item>
               <item row="10" column="0">
                <widget class="QLabel" name="Label_11">
@@ -642,18 +853,12 @@
                 </property>
                </widget>
               </item>
-              <item row="10" column="1">
-               <widget class="QComboBox" name="stiffenerTexRight"/>
-              </item>
               <item row="11" column="0">
                <widget class="QLabel" name="Label_12">
                 <property name="text">
                  <string>纹理（下）</string>
                 </property>
                </widget>
-              </item>
-              <item row="11" column="1">
-               <widget class="QComboBox" name="stiffenerTexBottom"/>
               </item>
               <item row="12" column="0">
                <widget class="QLabel" name="Label_13">
@@ -676,9 +881,6 @@
                 </property>
                </widget>
               </item>
-              <item row="14" column="1">
-               <widget class="QComboBox" name="stiffenerTexLeft"/>
-              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="Label_17">
                 <property name="text">
@@ -689,11 +891,173 @@
               <item row="0" column="1">
                <widget class="QLineEdit" name="stiffenerName"/>
               </item>
+              <item row="8" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="stiffenerTexFront">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="stiffenerTexFrontEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="9" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_16">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="stiffenerTexBack">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="stiffenerTexBackEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="10" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_17">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="stiffenerTexRight">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="stiffenerTexRightEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="11" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="stiffenerTexBottom">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="stiffenerTexBottomEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
               <item row="12" column="1">
-               <widget class="QComboBox" name="stiffenerTexSlope"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_19">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="stiffenerTexSlope">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="stiffenerTexSlopeEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="13" column="1">
-               <widget class="QComboBox" name="stiffenerTexTop"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_20">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="stiffenerTexTop">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="stiffenerTexTopEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="14" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_21">
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="stiffenerTexLeft">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="stiffenerTexLeftEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
@@ -802,13 +1166,67 @@
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QComboBox" name="rCubeTexTop"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_22">
+                <item>
+                 <widget class="QComboBox" name="rCubeTexTop">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="rCubeTexTopEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="6" column="1">
-               <widget class="QComboBox" name="rCubeTexBottom"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_23">
+                <item>
+                 <widget class="QComboBox" name="rCubeTexBottom">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="rCubeTexBottomEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item row="7" column="1">
-               <widget class="QComboBox" name="rCubeTexSide"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_24">
+                <item>
+                 <widget class="QComboBox" name="rCubeTexSide">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="rCubeTexSideEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>
@@ -892,18 +1310,12 @@
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="QComboBox" name="rRegTriPrismTexTop"/>
-              </item>
               <item row="5" column="0">
                <widget class="QLabel" name="Label_27">
                 <property name="text">
                  <string>纹理（下）</string>
                 </property>
                </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QComboBox" name="rRegTriPrismTexBottom"/>
               </item>
               <item row="6" column="0">
                <widget class="QLabel" name="Label_28">
@@ -912,8 +1324,68 @@
                 </property>
                </widget>
               </item>
+              <item row="4" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_25">
+                <item>
+                 <widget class="QComboBox" name="rRegTriPrismTexTop">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="rRegTriPrismTexTopEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="5" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_26">
+                <item>
+                 <widget class="QComboBox" name="rRegTriPrismTexBottom">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="rRegTriPrismTexBottomEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
               <item row="6" column="1">
-               <widget class="QComboBox" name="rRegTriPrismTexSide"/>
+               <layout class="QHBoxLayout" name="horizontalLayout_27">
+                <item>
+                 <widget class="QComboBox" name="rRegTriPrismTexSide">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="rRegTriPrismTexSideEditable">
+                  <property name="text">
+                   <string>面板</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </item>

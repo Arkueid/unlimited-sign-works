@@ -5,6 +5,7 @@
 #include <win/texture/BoardDesigner.hpp>
 #include <win/texture/TextureBase.hpp>
 #include <win/pole/PoleDesigner.hpp>
+#include <win/road/RoadDesigner.hpp>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -15,19 +16,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->statusbar->showMessage("I am the bone of highway traffic sign. "
                                "So as I pray, unlimited sign works. ");
 
-    connect(ui->actionNew, &QAction::triggered, this, &MainWindow::onNewProjectRequested);
-    connect(ui->clbNewProject, &QCommandLinkButton::clicked, this, &MainWindow::onNewProjectRequested);
+    connect(ui->actionNewPole, &QAction::triggered, this, &MainWindow::onNewPoleRequested);
 
-    connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::onOpenProjectRequested);
-    connect(ui->clbOpenProject, &QCommandLinkButton::clicked, this, &MainWindow::onOpenProjectRequested);
+    connect(ui->actionOpenPole, &QAction::triggered, this, &MainWindow::onOpenPoleRequested);
 
     connect(ui->actionTexGen, &QAction::triggered, this, &MainWindow::onTexGenRequested);
-    connect(ui->clbTexGen, &QCommandLinkButton::clicked, this, &MainWindow::onTexGenRequested);
 
     connect(ui->actionTexBase, &QAction::triggered, this, &MainWindow::onTexBaseRequested);
-    connect(ui->clbTexBase, &QCommandLinkButton::clicked, this, &MainWindow::onTexBaseRequested);
 
     connect(ui->tabs, &QTabWidget::tabCloseRequested, this, &MainWindow::onTabClosed);
+
+    connect(ui->actionNewRoad, &QAction::triggered, this, &MainWindow::onNewRoadRequested);
+    connect(ui->clbNewRoad, &QCommandLinkButton::clicked, this, &MainWindow::onNewRoadRequested);
+
+    connect(ui->actionOpenRoad, &QAction::triggered, this, &MainWindow::onOpenRoadRequested);
+    connect(ui->clbOpenRoad, &QCommandLinkButton::clicked, this, &MainWindow::onOpenRoadRequested);
 }
 
 MainWindow::~MainWindow()
@@ -35,7 +38,25 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::onNewProjectRequested()
+void MainWindow::onNewRoadRequested()
+{
+    RoadDesigner *designer = new RoadDesigner(ui->tabs);
+    designer->getRoadNameLineEdit()->setText("New Road");
+    const int index = ui->tabs->addTab(designer, designer->getRoadNameLineEdit()->text());
+    connect(designer->getRoadNameLineEdit(), &QLineEdit::textChanged,
+            [=](const QString &name)
+            {
+                ui->tabs->setTabText(index, name);
+            });
+    ui->tabs->setCurrentIndex(index);
+}
+
+void MainWindow::onOpenRoadRequested()
+{
+    // TODO
+}
+
+void MainWindow::onNewPoleRequested()
 {
     PoleDesigner *designer = new PoleDesigner(ui->tabs);
     designer->getPoleNameLineEdit()->setText("New Pole");
@@ -48,7 +69,7 @@ void MainWindow::onNewProjectRequested()
     ui->tabs->setCurrentIndex(index);
 }
 
-void MainWindow::onOpenProjectRequested()
+void MainWindow::onOpenPoleRequested()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
                                                     "Open Pole Json",

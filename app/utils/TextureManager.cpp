@@ -5,8 +5,12 @@
 #include <QDir>
 #include <QMessageBox>
 
+// 缓存
 static QMap<QString, QOpenGLTexture *> textures;
-static QMap<int, QString> texturePaths;
+// id, name
+static QMap<int, TextureItem> texturePaths;
+
+static QMap<int, QString> publicTexturePaths;
 
 TextureSignals *TextureManager::texturesSignals = nullptr;
 
@@ -19,7 +23,7 @@ QOpenGLTexture *TextureManager::loadTexture(const QString &path)
         return textures[path];
     }
 
-    QImage image("../../assets/textures/" + path);
+    QImage image(path);
 
     if (!image.isNull())
     {
@@ -43,16 +47,26 @@ QOpenGLTexture *TextureManager::getTexture(int ref)
 {
     if (!texturePaths.contains(ref)) 
     {
-        return loadTexture("default/default.png");
+        return loadTexture("../../assets/textures/default/default.bmp");
     }
 
-    const QString &path = texturePaths[ref];
+    const char* prefix = texturePaths[ref].unique ? "../../assets/textures/generated/"  : "../../assets/textures/";
+    const QString &path = prefix + texturePaths[ref].path;
     return loadTexture(path);
 }
 
 const QMap<int, QString>& TextureManager::getTexturePaths()
 {
-    return texturePaths;
+    publicTexturePaths.clear();
+    for (auto it = texturePaths.begin(); it != texturePaths.end(); ++it) 
+    {
+        if (it.value().unique)
+        {
+            continue;
+        }
+        publicTexturePaths.insert(it.key(), it.value().path);
+    }
+    return publicTexturePaths;
 }
 void TextureManager::releaseTextures()
 {
@@ -72,7 +86,8 @@ void TextureManager::loadTexturesPaths()
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             const int id = sqlite3_column_int(stmt, 0);
-            texturePaths[id] = QString::fromUtf8(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 1)));
+            bool unique = sqlite3_column_int(stmt, 1) == 1;
+            texturePaths[id] = {QString::fromUtf8(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 1))), unique};
         }
     }
     else
@@ -83,7 +98,7 @@ void TextureManager::loadTexturesPaths()
     sqlite3_finalize(stmt);
 }
 
-int TextureManager::registerTexture(const QString &externalPath, const QString &textureName)
+int TextureManager::registerTexture(const QString &externalPath, const QString &textureName, bool unique)
 {
     QDir dir = QFileInfo("../../assets/textures/" + textureName).dir();
 
@@ -92,15 +107,19 @@ int TextureManager::registerTexture(const QString &externalPath, const QString &
         dir.mkpath(".");
     }
 
-    QFile::copy(externalPath, "../../assets/textures/" + textureName);
+    if (!unique)
+    {
+        QFile::copy(externalPath, "../../assets/textures/" + textureName);
+    }
 
     sqlite3 *db = SQLite::getInstance();
 
     std::string textureNameStr = textureName.toUtf8().toStdString();
     sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, "insert into texture (name) values (?);", -1, &stmt, nullptr) == SQLITE_OK)
+    if (sqlite3_prepare_v2(db, "insert into texture (name, is_private) values (?, ?);", -1, &stmt, nullptr) == SQLITE_OK)
     {
         sqlite3_bind_text(stmt, 1, textureNameStr.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_int(stmt, 2, unique ? 1 : 0);
         int ret = sqlite3_step(stmt);
         if (ret != SQLITE_DONE)
         {
@@ -136,17 +155,25 @@ int TextureManager::registerTexture(const QString &externalPath, const QString &
         qDebug() << "Error while getting texture id: " << errMsg;
     }
 
-    texturePaths[id] = textureName;
+    texturePaths[id] = {textureName, unique};
 
     emit texturesSignals->texturesUpdated();
     return id;
 }
 bool TextureManager::unregisterTexture(const QString &textureName)
 {
-    int key = texturePaths.key(textureName);
+    int key;
+    for (auto k : texturePaths.keys())
+    {
+        if (texturePaths[k].path == textureName)
+        {
+            key = k;
+            break;
+        }
+    }
     if (key <= 9)
     {
-        QMessageBox::warning(nullptr, "错误", "不能删除默认纹理");
+        QMessageBox::warning(nullptr, "警告", "不能删除默认纹理");
         return false;
     }
 

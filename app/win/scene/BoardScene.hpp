@@ -23,6 +23,8 @@ public:
 
     void setCfg(TemplateCfg *cfg);
 
+    void setTexutre(const QString& texturePath);
+
     int currentSelectedRect() const;
 
     void setText(int index, const QString &text);

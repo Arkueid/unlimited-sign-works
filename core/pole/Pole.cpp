@@ -1,5 +1,7 @@
 #include <pole/Pole.hpp>
-Pole::Pole(): parts(0)
+#include "Pole.hpp"
+
+Pole::Pole(): parts(0), type(PoleType_Single)
 {
 }
 
@@ -10,6 +12,15 @@ Pole::~Pole()
         delete part;
     }
     parts.clear();
+}
+int Pole::getType() const
+{
+    return type;
+}
+
+void Pole::setType(int type)
+{
+    this->type = type;
 }
 std::vector<Part*>& Pole::getParts()
 {

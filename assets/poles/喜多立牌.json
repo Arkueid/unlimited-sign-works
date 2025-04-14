@@ -22,6 +22,14 @@
                 0,
                 0
             ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                true
+            ],
             "textureRefs": [
                 4,
                 4,
@@ -31,5 +39,6 @@
                 11
             ]
         }
-    ]
+    ],
+    "type": 0
 }

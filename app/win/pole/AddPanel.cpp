@@ -1,4 +1,4 @@
-#include <win/panel/AddPanel.hpp>
+#include <win/pole/AddPanel.hpp>
 #include <base/Cube.hpp>
 #include <base/Cylinder.hpp>
 #include <base/Stiffener.hpp>

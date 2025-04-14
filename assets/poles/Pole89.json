@@ -43,6 +43,11 @@
                 0,
                 0
             ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
             "textureRefs": [
                 4,
                 4,
@@ -62,6 +67,11 @@
                 0,
                 0
             ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
             "textureRefs": [
                 0,
                 6,
@@ -80,6 +90,14 @@
                 0,
                 0,
                 0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
             ],
             "textureRefs": [
                 8,
@@ -102,6 +120,15 @@
                 0,
                 0,
                 0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
             ],
             "textureRefs": [
                 8,
@@ -126,6 +153,15 @@
                 90,
                 0
             ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
             "textureRefs": [
                 8,
                 8,
@@ -148,6 +184,15 @@
                 0,
                 180,
                 0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
             ],
             "textureRefs": [
                 8,
@@ -172,6 +217,15 @@
                 270,
                 0
             ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
             "textureRefs": [
                 8,
                 8,
@@ -182,5 +236,6 @@
                 8
             ]
         }
-    ]
+    ],
+    "type": 0
 }

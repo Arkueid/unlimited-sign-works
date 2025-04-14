@@ -1,7 +1,7 @@
 #include <win/pole/PoleDesigner.hpp>
 #include <win/list/DrawableListItem.hpp>
 #include <utils/TextureManager.hpp>
-#include <win/panel/AddPanel.hpp>
+#include <win/pole/AddPanel.hpp>
 #include <utils/PoleJsonSerializer.hpp>
 
 #include <QFileDialog>
@@ -9,7 +9,6 @@
 #include <QListWidgetItem>
 #include <QInputDialog>
 #include <QMessageBox>
-
 
 PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidget(parent),
 																		   ui(new Ui::PoleDesigner),
@@ -45,8 +44,10 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 	connect(ui->drawableList, &QListWidget::itemClicked, this, &PoleDesigner::onDrawableItemSelected);
 
 	ui->poleName->setText(ui->poleScene->getPoleName());
-
 	connect(ui->poleName, &QLineEdit::textEdited, this, &PoleDesigner::onPoleNameEdited);
+
+	ui->poleType->setCurrentIndex(ui->poleScene->getPole()->getType());
+	connect(ui->poleType, &QComboBox::currentIndexChanged, this, &PoleDesigner::onPoleTypeChanged);
 
 	connect(ui->saveBtn, &QPushButton::clicked, this, &PoleDesigner::onSaveBtnClicked);
 
@@ -148,12 +149,9 @@ void PoleDesigner::bindCube(Part *part)
 			});
 
 	// 纹理
-	bindTextures(part, {ui->cubeTexFront,
-						ui->cubeTexLeft,
-						ui->cubeTexBack,
-						ui->cubeTexRight,
-						ui->cubeTexBottom,
-						ui->cubeTexTop});
+	bindTextures(part,
+				 {ui->cubeTexFront, ui->cubeTexLeft, ui->cubeTexBack, ui->cubeTexRight, ui->cubeTexBottom, ui->cubeTexTop},
+				 {ui->cubeTexFrontEditable, ui->cubeTexLeftEditable, ui->cubeTexBackEditable, ui->cubeTexRightEditable, ui->cubeTexBottomEditable, ui->cubeTexTopEditable});
 
 	// 变换
 	bindTransforms(part);
@@ -196,7 +194,9 @@ void PoleDesigner::bindCylinder(Part *part)
 				refreshMesh(part, newCylinder);
 			});
 
-	bindTextures(part, {ui->cylinderTexTop, ui->cylinderTexBottom, ui->cylinderTexSide});
+	bindTextures(part,
+				 {ui->cylinderTexTop, ui->cylinderTexBottom, ui->cylinderTexSide},
+				 {ui->cylinderTexTopEditable, ui->cylinderTexBottomEditable, ui->cylinderTexSideEditable});
 
 	bindTransforms(part);
 }
@@ -284,13 +284,21 @@ void PoleDesigner::bindStiffener(Part *part)
 			});
 
 	// 纹理
-	bindTextures(part, {ui->stiffenerTexFront,
-						ui->stiffenerTexBack,
-						ui->stiffenerTexRight,
-						ui->stiffenerTexBottom,
-						ui->stiffenerTexSlope,
-						ui->stiffenerTexTop,
-						ui->stiffenerTexLeft});
+	bindTextures(part,
+				 {ui->stiffenerTexFront,
+				  ui->stiffenerTexBack,
+				  ui->stiffenerTexRight,
+				  ui->stiffenerTexBottom,
+				  ui->stiffenerTexSlope,
+				  ui->stiffenerTexTop,
+				  ui->stiffenerTexLeft},
+				 {ui->stiffenerTexFrontEditable,
+				  ui->stiffenerTexBackEditable,
+				  ui->stiffenerTexRightEditable,
+				  ui->stiffenerTexBottomEditable,
+				  ui->stiffenerTexSlopeEditable,
+				  ui->stiffenerTexTopEditable,
+				  ui->stiffenerTexLeftEditable});
 	// 变换
 	bindTransforms(part);
 }
@@ -309,9 +317,13 @@ void PoleDesigner::bindRoundedCube(Part *part)
 	ui->rCubeRadius->setText(QString::number(roundedCube->getRadius()));
 
 	// 纹理
-	bindTextures(part, {ui->rCubeTexTop,
-						ui->rCubeTexBottom,
-						ui->rCubeTexSide});
+	bindTextures(part,
+				 {ui->rCubeTexTop,
+				  ui->rCubeTexBottom,
+				  ui->rCubeTexSide},
+				 {ui->rCubeTexTopEditable,
+				  ui->rCubeTexBottomEditable,
+				  ui->rCubeTexSideEditable});
 
 	// 绑定信号
 	// 基础参数
@@ -392,7 +404,13 @@ void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 			});
 
 	// 纹理
-	bindTextures(part, {ui->rRegTriPrismTexTop, ui->rRegTriPrismTexBottom, ui->rRegTriPrismTexSide});
+	bindTextures(part,
+				 {ui->rRegTriPrismTexTop,
+				  ui->rRegTriPrismTexBottom,
+				  ui->rRegTriPrismTexSide},
+				 {ui->rRegTriPrismTexTopEditable,
+				  ui->rRegTriPrismTexBottomEditable,
+				  ui->rRegTriPrismTexSideEditable});
 
 	// 变换
 	bindTransforms(part);
@@ -502,7 +520,7 @@ void PoleDesigner::bindTransforms(Part *part)
 			});
 }
 
-void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBoxes)
+void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBoxes, const QVector<QCheckBox *> &checkBoxes)
 {
 	const int size = comboBoxes.size();
 	const QMap<int, QString> &texturePaths = TextureManager::getTexturePaths();
@@ -528,6 +546,17 @@ void PoleDesigner::bindTextures(Part *part, const QVector<QComboBox *> &comboBox
 				[=](int index)
 				{
 					part->setTextureRef(i, comboBox->itemData(index).toInt());
+					ui->poleScene->update();
+				});
+
+		QCheckBox *checkBox = checkBoxes[i];
+		const bool e = part->getTextureEdits()[i];
+		checkBox->disconnect();
+		checkBox->setChecked(e);
+		connect(checkBox, &QCheckBox::checkStateChanged,
+				[=](Qt::CheckState state)
+				{
+					part->setTextureEdit(i, state == Qt::Checked);
 					ui->poleScene->update();
 				});
 	}
@@ -609,6 +638,11 @@ void PoleDesigner::onPoleNameEdited()
 	ui->poleScene->setPoleName(ui->poleName->text());
 }
 
+void PoleDesigner::onPoleTypeChanged(int index)
+{
+	ui->poleScene->getPole()->setType(index);
+}
+
 void PoleDesigner::onSaveBtnClicked()
 {
 	QFileDialog dialog(this);
@@ -670,13 +704,13 @@ void PoleDesigner::onCopyBtnClicked()
 		return;
 	}
 
-	Part* part = drawable->getPart();
+	Part *part = drawable->getPart();
 	Mesh *mesh = part->getMesh();
-	Part *newPart = new Part(mesh, name.toStdString(), 
-		{part->getOriginX() + 100, part->getOriginY() + 100, part->getOriginZ() + 100}, 
-		{part->getRotationX(), part->getRotationY(), part->getRotationZ()}, 
-		part->getTextureRefs());
-	
+	Part *newPart = new Part(mesh, name.toStdString(),
+							 {part->getOriginX() + 100, part->getOriginY() + 100, part->getOriginZ() + 100},
+							 {part->getRotationX(), part->getRotationY(), part->getRotationZ()},
+							 part->getTextureRefs(), part->getTextureEdits());
+
 	ui->poleScene->addDrawable(newPart);
 }
 

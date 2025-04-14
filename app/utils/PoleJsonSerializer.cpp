@@ -3,10 +3,11 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 
-void PoleJsonSerializer::toJsonFile(Pole *pole, const QString &filePath)
+void PoleJsonSerializer::toJson(Pole *pole, QJsonObject& root)
 {
-    QJsonObject root;
+    root = QJsonObject();
     root["name"] = pole->getName().c_str();
+    root["type"] = pole->getType();
 
     QJsonArray parts;
     QJsonArray meshes;
@@ -54,31 +55,14 @@ void PoleJsonSerializer::toJsonFile(Pole *pole, const QString &filePath)
 
     root["parts"] = parts;
     root["meshes"] = meshes;
-    QFile file(filePath);
-    if (file.open(QIODevice::WriteOnly))
-    {
-        QJsonDocument doc(root);
-        file.write(doc.toJson());
-        file.close();
-    }
 }
-Pole *PoleJsonSerializer::fromJsonFile(const QString &filePath)
+Pole *PoleJsonSerializer::fromJson(QJsonObject& root)
 {
-    QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "Failed to open file: " << filePath;
-        return nullptr;
-    }
-
-    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
-    file.close();
-
-    QJsonObject root = doc.object();
     QJsonArray parts = root["parts"].toArray();
     QJsonArray meshes = root["meshes"].toArray();
 
     Pole *pole = new Pole();
+    pole->setType(root["type"].toInt());
     pole->setName(root["name"].toString().toStdString());
 
     QMap<int, Mesh *> ref2Mesh;
@@ -100,6 +84,33 @@ Pole *PoleJsonSerializer::fromJsonFile(const QString &filePath)
     return pole;
 }
 
+void PoleJsonSerializer::toJsonFile(Pole *pole, const QString &filePath)
+{
+    QJsonObject root;
+    toJson(pole, root);
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        QJsonDocument doc(root);
+        file.write(doc.toJson());
+        file.close();
+    }
+}
+Pole *PoleJsonSerializer::fromJsonFile(const QString &filePath)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Failed to open file: " << filePath;
+        return nullptr;
+    }
+
+    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    file.close();
+
+    QJsonObject root = doc.object();
+    return fromJson(root);
+}
 void PoleJsonSerializer::initCubeJson(Cube *cube, QJsonObject &mesh)
 {
     mesh["a"] = cube->getA();
@@ -151,6 +162,7 @@ void PoleJsonSerializer::initPartJson(int meshRef, Part *part, QJsonObject &part
     QJsonArray position;
     QJsonArray rotation;
     QJsonArray textureRefs;
+    QJsonArray textureEdits;
 
     position.append(part->getOriginX());
     position.append(part->getOriginY());
@@ -160,14 +172,19 @@ void PoleJsonSerializer::initPartJson(int meshRef, Part *part, QJsonObject &part
     rotation.append(part->getRotationY());
     rotation.append(part->getRotationZ());
 
-    for (int texRef : part->getTextureRefs())
+    const int size = part->getTextureRefs().size();
+    const std::vector<int> &textureRefsVec = part->getTextureRefs();
+    const std::vector<bool> &textureEditsVec = part->getTextureEdits();
+    for (int i = 0; i < size; i++)
     {
-        textureRefs.append(texRef);
+        textureRefs.append(textureRefsVec[i]);
+        textureEdits.append(textureEditsVec[i]);
     }
 
     partJson["position"] = position;
     partJson["rotation"] = rotation;
     partJson["textureRefs"] = textureRefs;
+    partJson["textureEdits"] = textureEdits;
 }
 
 Mesh *PoleJsonSerializer::createMesh(QJsonObject &meshJson)
@@ -250,15 +267,24 @@ Part *PoleJsonSerializer::createPart(Mesh *mesh, QJsonObject &partJson)
     QJsonArray position = partJson["position"].toArray();
     QJsonArray rotation = partJson["rotation"].toArray();
     QJsonArray textureRefs = partJson["textureRefs"].toArray();
+    QJsonArray textureEdits = partJson["textureEdits"].toArray();
     std::vector<int> textureRefsVec;
-    for (auto it : textureRefs)
+    std::vector<bool> textureEditsVec;
+    const int size = textureRefs.size();
+    const int size2 = textureEdits.size();
+    for (int i = 0; i < size; i++)
     {
-        textureRefsVec.push_back(it.toInt());
+        textureRefsVec.push_back(textureRefs[i].toInt());
+        if (i < size2)
+        {
+            textureEditsVec.push_back(textureEdits[i].toBool());
+        }
     }
 
     Part *part = new Part(mesh, name.toStdString(),
                           {static_cast<float>(position[0].toDouble()), static_cast<float>(position[1].toDouble()), static_cast<float>(position[2].toDouble())},
                           {static_cast<float>(rotation[0].toDouble()), static_cast<float>(rotation[1].toDouble()), static_cast<float>(rotation[2].toDouble())},
-                          textureRefsVec);
+                          textureRefsVec,
+                          textureEditsVec);
     return part;
 }

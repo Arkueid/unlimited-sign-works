@@ -3,6 +3,7 @@
 Pole168::Pole168()
 {
     name = "Pole168";
+    type = PoleType_SingleArm;
     
 	std::vector<Mesh*> shapes;
     shapes.push_back(Cylinder::create(108.0f, 500.0f + 1000.0f + 2500.0f));
@@ -33,7 +34,7 @@ Pole168::Pole168()
 
     parts.push_back(new Part{shapes[sideBeami], "sideBeam2", {-250.0f, 6700.0f - 300.0f - 600.0f, 0.0f}, {0.0f, 0.0f, -90.0f}, {4, 4, 7}});
 
-    parts.push_back(new Part{shapes[paneli], "panel1", {4000.0f - 250.0f - 1250.0f, 6700.0f - 300.0f - 300.0f, 10.0f + 54.0f}, {90.0f, 0.0f, 0.0f}, {1, 6, 6, 6, 6, 6}});
+    parts.push_back(new Part{shapes[paneli], "panel1", {4000.0f - 250.0f - 1250.0f, 6700.0f - 300.0f - 300.0f, 10.0f + 54.0f}, {90.0f, 0.0f, 0.0f}, {1, 6, 6, 6, 6, 6}, {true, false, false, false, false, false}});
 
     parts.push_back(new Part{shapes[bottomi], "bottom", {0.0f, 10.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {8, 8, 8, 8, 8, 8}});
 

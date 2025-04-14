@@ -17,11 +17,11 @@ BoardScene::~BoardScene()
 
 void BoardScene::paintEvent(QPaintEvent *event)
 {
-    if (cfg == nullptr)
+    if (originImage.isNull())
     {
         return;
     }
-
+    
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing, true);
 
@@ -33,43 +33,46 @@ void BoardScene::paintEvent(QPaintEvent *event)
     startY = (height() - boardImage.height()) / 2;
     painter.drawPixmap(startX, startY, boardImage);
 
-    scaleX = boardImage.width() / cfg->getWidth();
-    scaleY = boardImage.height() / cfg->getHeight();
-
-    const QVector<TemplateCfg::Rect *> &rects = cfg->getRects();
-    for (int i = 0; i < rects.size(); i++)
+    if (cfg != nullptr)
     {
-        TemplateCfg::Rect *rect = rects[i];
+        scaleX = boardImage.width() / cfg->getWidth();
+        scaleY = boardImage.height() / cfg->getHeight();
 
-        const QString &text = texts[i];
-        if (!text.isEmpty())
+        const QVector<TemplateCfg::Rect *> &rects = cfg->getRects();
+        for (int i = 0; i < rects.size(); i++)
         {
-            QRect fontRect(startX + rect->x * scaleX - 4, startY + rect->y * scaleY - 4, rect->w * scaleX + 8, rect->h * scaleY + 8);
-            painter.fillRect(fontRect, getColor(rect->background));
+            TemplateCfg::Rect *rect = rects[i];
 
-            painter.setPen(getColor(rect->foreground));
-            QFont font = painter.font();
-            font.setPointSize(rect->h * scaleY * 0.5);
-            painter.setFont(font);
-            painter.drawText(fontRect, Qt::AlignCenter, text);
-        }
-    }
+            const QString &text = texts[i];
+            if (!text.isEmpty())
+            {
+                QRect fontRect(startX + rect->x * scaleX - 4, startY + rect->y * scaleY - 4, rect->w * scaleX + 8, rect->h * scaleY + 8);
+                painter.fillRect(fontRect, getColor(rect->background));
 
-    if (selectedRectIndex != -1)
-    {
-        TemplateCfg::Rect *rect = rects[selectedRectIndex];
-        QPen pen;
-        if (rect->background == TemplateCfg::ColorType_R)
-        {
-            pen.setColor(Qt::yellow);
+                painter.setPen(getColor(rect->foreground));
+                QFont font = painter.font();
+                font.setPointSize(rect->h * scaleY * 0.5);
+                painter.setFont(font);
+                painter.drawText(fontRect, Qt::AlignCenter, text);
+            }
         }
-        else
+
+        if (selectedRectIndex != -1)
         {
-            pen.setColor(Qt::red);
+            TemplateCfg::Rect *rect = rects[selectedRectIndex];
+            QPen pen;
+            if (rect->background == TemplateCfg::ColorType_R)
+            {
+                pen.setColor(Qt::yellow);
+            }
+            else
+            {
+                pen.setColor(Qt::red);
+            }
+            pen.setWidth(3);
+            painter.setPen(pen);
+            painter.drawRect(QRect(startX + rect->x * scaleX, startY + rect->y * scaleY, rect->w * scaleX, rect->h * scaleY));
         }
-        pen.setWidth(3);
-        painter.setPen(pen);
-        painter.drawRect(QRect(startX + rect->x * scaleX, startY + rect->y * scaleY, rect->w * scaleX, rect->h * scaleY));
     }
 }
 
@@ -146,6 +149,26 @@ void BoardScene::setCfg(TemplateCfg *cfg)
         update();
     }
 }
+
+void BoardScene::setTexutre(const QString &texturePath)
+{
+    if (this->cfg != nullptr)
+    {
+        delete this->cfg;
+        this->cfg = nullptr;
+    }
+
+    texts.clear();
+
+    originImage = QPixmap(texturePath);
+
+    selectedRectIndex = -1;
+    if (isVisible())
+    {
+        update();
+    }
+}
+
 int BoardScene::currentSelectedRect() const
 {
     return selectedRectIndex;
@@ -163,10 +186,6 @@ const QString &BoardScene::getText(int index) const
 
 void BoardScene::exportImage(const QString &path)
 {
-    if (cfg == nullptr)
-    {
-        return;
-    }
 
     QImage image(originImage.width() * 1.1, originImage.height() * 1.1, QImage::Format_ARGB32);
 
@@ -176,26 +195,29 @@ void BoardScene::exportImage(const QString &path)
     QPixmap scaledSrc = originImage.scaled(image.width(), image.height(), Qt::KeepAspectRatio);
     painter.drawPixmap(0, 0, scaledSrc);
 
-    float scaleX = image.width() / cfg->getWidth();
-    float scaleY = image.height() / cfg->getHeight();
-
-    const QVector<TemplateCfg::Rect *> &rects = cfg->getRects();
-
-    for (int i = 0; i < texts.size(); i++)
+    if (cfg != nullptr)
     {
-        TemplateCfg::Rect *rect = rects[i];
+        float scaleX = image.width() / cfg->getWidth();
+        float scaleY = image.height() / cfg->getHeight();
 
-        const QString &text = texts[i];
-        if (!text.isEmpty())
+        const QVector<TemplateCfg::Rect *> &rects = cfg->getRects();
+
+        for (int i = 0; i < texts.size(); i++)
         {
-            QRect fontRect(rect->x * scaleX - 2, rect->y * scaleY - 2, rect->w * scaleX + 4, rect->h * scaleY + 4);
-            painter.fillRect(fontRect, getColor(rect->background));
+            TemplateCfg::Rect *rect = rects[i];
 
-            painter.setPen(getColor(rect->foreground));
-            QFont font = painter.font();
-            font.setPointSize(rect->h * scaleY * 0.5);
-            painter.setFont(font);
-            painter.drawText(fontRect, Qt::AlignCenter, text);
+            const QString &text = texts[i];
+            if (!text.isEmpty())
+            {
+                QRect fontRect(rect->x * scaleX - 2, rect->y * scaleY - 2, rect->w * scaleX + 4, rect->h * scaleY + 4);
+                painter.fillRect(fontRect, getColor(rect->background));
+
+                painter.setPen(getColor(rect->foreground));
+                QFont font = painter.font();
+                font.setPointSize(rect->h * scaleY * 0.5);
+                painter.setFont(font);
+                painter.drawText(fontRect, Qt::AlignCenter, text);
+            }
         }
     }
 

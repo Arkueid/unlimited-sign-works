@@ -1,5 +1,4 @@
 #include <utils/Camera.hpp>
-#include "Camera.hpp"
 
 Camera::Camera(const QVector3D &position, const QVector3D &up, float yaw, float pitch)
     : front(QVector3D(0.0f, 0.0f, -1.0f)), movementSpeed(2.5f), mouseSensitivity(0.1f),

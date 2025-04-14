@@ -4,13 +4,19 @@ Part::Part(Mesh *mesh,
            const std::string &name,
            const Point &origin,
            const Rotation &rotation,
-           const std::vector<int> &textureRefs) : name(name),
-                                                  mesh(mesh),
-                                                  origin(origin),
-                                                  rotation(rotation),
-                                                  textureRefs(textureRefs)
+           const std::vector<int> &textureRefs,
+           const std::vector<bool> &textureEdits) : name(name),
+                                                    mesh(mesh),
+                                                    origin(origin),
+                                                    rotation(rotation),
+                                                    textureRefs(textureRefs),
+                                                    textureEdits(textureEdits)
 {
     mesh->incRef();
+    if (textureRefs.size() != textureEdits.size())
+    {
+        this->textureEdits = std::vector<bool>(textureRefs.size(), false);
+    }
 }
 
 Part::~Part()

@@ -3,6 +3,8 @@
 Pole89::Pole89()
 {
 	name = "Pole89";
+
+	type = PoleType_Single;
 	
 	std::vector<Mesh*> shapes;
 	shapes.push_back(Cylinder::create(89.0f, 4500.0f));
@@ -21,7 +23,7 @@ Pole89::Pole89()
 	// textures.push_back("../../assets/textures/metal/metal7.bmp");
 
 	parts.push_back(new Part{ shapes[mainPolei] , "mainPole", {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {4, 4, 7}});
-	parts.push_back(new Part{ shapes[paneli] , "panel", {0.0f, 4500.0f - 900.0f / 2.0f / 1.72, 44.5f}, {90.0f, 0.0f, 0.0f}, {0, 6, 6}});
+	parts.push_back(new Part{ shapes[paneli] , "panel", {0.0f, 4500.0f - 900.0f / 2.0f / 1.72, 44.5f}, {90.0f, 0.0f, 0.0f}, {0, 6, 6}, {true, false, false}});
 
 	parts.push_back(new Part{ shapes[bottomi] , "bottom", {0.0f, 10.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {8, 8, 8, 8, 8, 8}});
 

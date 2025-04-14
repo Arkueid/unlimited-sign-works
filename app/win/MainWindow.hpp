@@ -11,8 +11,11 @@ class MainWindow : public QMainWindow
     Ui::MainWindow *ui;
 
 public slots:
-    void onNewProjectRequested();
-    void onOpenProjectRequested();
+    void onNewRoadRequested();
+    void onOpenRoadRequested();
+
+    void onNewPoleRequested();
+    void onOpenPoleRequested();
 
     void onTexGenRequested();
     void onTexBaseRequested();

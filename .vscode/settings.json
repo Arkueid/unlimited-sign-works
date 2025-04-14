@@ -83,6 +83,7 @@
         "qframe": "cpp",
         "qwidget": "cpp",
         "qregularexpressionvalidator": "cpp",
-        "qpainter": "cpp"
+        "qpainter": "cpp",
+        "coroutine": "cpp"
     }
 }

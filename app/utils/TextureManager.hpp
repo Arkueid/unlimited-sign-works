@@ -4,6 +4,12 @@
 #include <QMap>
 #include <QOpenGLTexture>
 
+struct TextureItem
+{
+    QString path;
+    bool unique;
+};
+
 class TextureSignals : public QObject
 {
     Q_OBJECT
@@ -32,7 +38,7 @@ public:
     /// @brief 在纹理库中注册纹理
     /// @param externalPath 外部纹理路径，会复制到 ../../assets/textures/ 下
     /// @return
-    static int registerTexture(const QString &externalPath, const QString &textureName);
+    static int registerTexture(const QString &externalPath, const QString &textureName, bool unique = false);
 
     /// @brief 注销纹理
     /// @param textureName

@@ -44,7 +44,7 @@ class PoleDesigner: public QWidget
 
 	void bindTransforms(Part* part);
 
-	void bindTextures(Part* part, const QVector<QComboBox*>& comboBoxes);
+	void bindTextures(Part* part, const QVector<QComboBox*>& comboBoxes, const QVector<QCheckBox *> &checkBoxes);
 
 	void refreshMesh(Part* part, Mesh* mesh);
 
@@ -60,6 +60,8 @@ private slots:
 	void onDrawableItemSelected(QListWidgetItem* item);
 
 	void onPoleNameEdited();
+
+	void onPoleTypeChanged(int index);
 
 	void onSaveBtnClicked();
 
