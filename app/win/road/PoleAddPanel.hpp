@@ -52,4 +52,6 @@ private:
     QDoubleValidator* doubleValidator;
 
     QMetaObject::Connection stateChangedConnection;
+    QMetaObject::Connection texClickedConnection;
+    QMetaObject::Connection texDoubleClickedConnection;
 };

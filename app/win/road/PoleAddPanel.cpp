@@ -534,6 +534,10 @@ void PoleAddPanel::refreshMesh(Part *part, Mesh *mesh)
 
 void PoleAddPanel::initTexturePanel()
 {
+	ui->textureTable->disconnect(texClickedConnection);
+	ui->textureTable->disconnect(texDoubleClickedConnection);
+	ui->textureTable->clearContents();
+
 	const std::vector<Part *> parts = ui->poleScene->getPole()->getParts();
 
 	int partIndex = 0;
@@ -559,7 +563,7 @@ void PoleAddPanel::initTexturePanel()
 		}
 		partIndex++;
 	}
-	connect(ui->textureTable, &QTableWidget::itemClicked,
+	texClickedConnection = connect(ui->textureTable, &QTableWidget::itemClicked,
 		[=](QTableWidgetItem *item)
 		{
 			PartDrawable *partDrawable = ui->poleScene->getDrawable(item->data(Qt::UserRole + 2).toInt());
@@ -567,7 +571,7 @@ void PoleAddPanel::initTexturePanel()
 		}
 	);
 
-	connect(ui->textureTable, &QTableWidget::itemDoubleClicked,
+	texDoubleClickedConnection = connect(ui->textureTable, &QTableWidget::itemDoubleClicked,
 			[this](QTableWidgetItem *item)
 			{
 				if (item->column() == 0)
