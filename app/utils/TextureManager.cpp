@@ -45,6 +45,11 @@ QOpenGLTexture *TextureManager::loadTexture(const QString &path)
 
 QOpenGLTexture *TextureManager::getTexture(int ref)
 {
+    if (ref == -2)
+    {
+        return loadTexture("../../assets/textures/default/面板.bmp");
+    }
+
     if (!texturePaths.contains(ref)) 
     {
         return loadTexture("../../assets/textures/default/default.bmp");

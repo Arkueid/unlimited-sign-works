@@ -536,6 +536,7 @@ void PoleAddPanel::initTexturePanel()
 {
 	const std::vector<Part *> parts = ui->poleScene->getPole()->getParts();
 
+	int partIndex = 0;
 	for (auto &part : parts)
 	{
 		const int drawableCount = part->getDrawableCount();
@@ -544,7 +545,7 @@ void PoleAddPanel::initTexturePanel()
 		{
 			if (textureEdits[i])
 			{
-				part->setTextureRef(i, -1);
+				part->setTextureRef(i, -2);
 
 				const int row = ui->textureTable->rowCount();
 				ui->textureTable->insertRow(row);
@@ -553,9 +554,18 @@ void PoleAddPanel::initTexturePanel()
 				ui->textureTable->setItem(row, 0, item);
 				item->setData(Qt::UserRole, QVariant::fromValue(part));
 				item->setData(Qt::UserRole + 1, QVariant::fromValue(i));
+				item->setData(Qt::UserRole + 2, QVariant::fromValue(partIndex));
 			}
 		}
+		partIndex++;
 	}
+	connect(ui->textureTable, &QTableWidget::itemClicked,
+		[=](QTableWidgetItem *item)
+		{
+			PartDrawable *partDrawable = ui->poleScene->getDrawable(item->data(Qt::UserRole + 2).toInt());
+			ui->poleScene->selectPart(partDrawable);
+		}
+	);
 
 	connect(ui->textureTable, &QTableWidget::itemDoubleClicked,
 			[this](QTableWidgetItem *item)
