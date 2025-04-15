@@ -2,7 +2,7 @@
 
 #define PI 3.1415926f
 // 每单位长度的顶点个数
-#define PRECISION_DEFAULT 1.0f / 35.0f
+#define PRECISION_DEFAULT 1.0f / 40.0f
 
 struct Vertex
 {

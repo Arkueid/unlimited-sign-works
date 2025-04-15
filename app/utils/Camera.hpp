@@ -14,6 +14,11 @@ public:
     void processKeyboardForVerticalMovement(int direction, float deltaTime);
     QMatrix4x4 getViewMatrix(); // 获取视图矩阵
 
+    QVector3D& getPosition()
+    {
+        return position;
+    }
+
 private:
     QVector3D position;
     QVector3D front;

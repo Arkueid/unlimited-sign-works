@@ -12,7 +12,7 @@
 #include <utils/PoleJsonSerializer.hpp>
 
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                                        deltaTime(1.0f / 60.0f), drawables(0), pole(nullptr), axis(nullptr), wrapBox(nullptr), partSelected(false)
+                                        deltaTime(1.0f / 120.0f), drawables(0), pole(nullptr), axis(nullptr), wrapBox(nullptr), partSelected(false)
 {
     // pole = new Pole168();
     // pole = new Pole168();
@@ -149,6 +149,7 @@ void PoleScene::paintGL()
     program.bind();
     program.setUniformValue("projection", projection);
     program.setUniformValue("view", view);
+    program.setUniformValue("cameraPos", camera.getPosition());
     for (auto d : drawables)
     {
         if (d->isVisible())
@@ -169,7 +170,7 @@ void PoleScene::resizeGL(int w, int h)
 {
     glViewport(0, 0, w, h);
     float fov = 45.0f;                       // 视野角度
-    float aspectRatio = (float)w / (float)h; // 假设窗口大小为800x600
+    float aspectRatio = (float)w / (float)h; // 窗口比例
     float nearPlane = 0.1f;                  // 近裁剪面
     float farPlane = 100.0f;                 // 远裁剪面
 
