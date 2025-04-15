@@ -113,7 +113,7 @@ void TextureSetPanel::onConfirmBtnClicked()
             QMessageBox::warning(this, "警告", "请选择模板");
             return;
         }
-        const QString& outputFile = QUuid::createUuid().toString() + ".png";
+        const QString& outputFile = QUuid::createUuid().toString(QUuid::WithoutBraces) + ".png";
         textureName = outputFile;
         const QString& externalPath = "../../assets/textures/generated/" + outputFile;
         ui->scene->exportImage(externalPath);

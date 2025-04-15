@@ -653,7 +653,27 @@ void PoleDesigner::onSaveBtnClicked()
 	dir.cdUp();
 	dir.cdUp();
 	// ../../assets/poles
-	dialog.setDirectory(dir.absoluteFilePath("assets/poles"));
+	int type = ui->poleType->currentIndex();
+	QString dirPath = dir.absoluteFilePath("assets/poles");
+	switch (type)
+	{
+	case PoleType_Single:
+		dirPath += "/single";
+		break;
+	case PoleType_Double:
+		dirPath += "/double";
+		break;
+	case PoleType_Gate:
+		dirPath += "/gate";
+		break;
+	case PoleType_SingleArm:
+		dirPath += "/single-arm";
+		break;
+	case PoleType_DoubleArm:
+		dirPath += "/double-arm";
+		break;
+	}
+	dialog.setDirectory(dirPath);
 	dialog.selectFile(ui->poleScene->getPoleName() + ".json");
 	if (dialog.exec())
 	{
@@ -707,7 +727,7 @@ void PoleDesigner::onCopyBtnClicked()
 	Part *part = drawable->getPart();
 	Mesh *mesh = part->getMesh();
 	Part *newPart = new Part(mesh, name.toStdString(),
-							 {part->getOriginX() + 100, part->getOriginY() + 100, part->getOriginZ() + 100},
+							 {part->getOriginX(), part->getOriginY(), part->getOriginZ()},
 							 {part->getRotationX(), part->getRotationY(), part->getRotationZ()},
 							 part->getTextureRefs(), part->getTextureEdits());
 

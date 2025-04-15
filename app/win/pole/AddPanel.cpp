@@ -16,6 +16,7 @@ AddPanel::AddPanel(PoleScene *scene, QWidget *parent) : scene(scene),
     initializeLineEdits();
 
     setAttribute(Qt::WA_DeleteOnClose);
+    setWindowModality(Qt::ApplicationModal);
 
     ui->panels->setCurrentIndex(0);
 

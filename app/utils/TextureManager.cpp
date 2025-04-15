@@ -86,12 +86,12 @@ void TextureManager::loadTexturesPaths()
     sqlite3 *db = SQLite::getInstance();
 
     sqlite3_stmt *stmt;
-    if (sqlite3_prepare(db, "select id, name from texture order by id asc", -1, &stmt, nullptr) == SQLITE_OK)
+    if (sqlite3_prepare(db, "select id, name, is_private from texture order by id asc", -1, &stmt, nullptr) == SQLITE_OK)
     {
         while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             const int id = sqlite3_column_int(stmt, 0);
-            bool unique = sqlite3_column_int(stmt, 1) == 1;
+            bool unique = sqlite3_column_int(stmt, 2) == 1;
             texturePaths[id] = {QString::fromUtf8(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 1))), unique};
         }
     }

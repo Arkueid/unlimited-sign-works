@@ -8,6 +8,9 @@
 
 #include <utils/TextureManager.hpp>
 #include <win/road/TextureSetPanel.hpp>
+#include <utils/PoleJsonSerializer.hpp>
+
+#include <QDir>
 
 PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator)
 {
@@ -33,6 +36,10 @@ PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAd
 	connect(ui->poleSlot, &QLineEdit::textEdited, this, &PoleAddPanel::onPoleSlotEdited);
 
 	connect(ui->nodeTree, &QTreeWidget::itemClicked, this, &PoleAddPanel::onNodeClicked);
+
+	connect(ui->poleTypeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onPoleTypeChanged);
+
+	onPoleTypeChanged(0);
 
 	hidePanels();
 }
@@ -120,6 +127,60 @@ void PoleAddPanel::onPoleInitialized()
 {
 	initNodeTree();
 	initTexturePanel();
+}
+
+void PoleAddPanel::onPoleTypeChanged(int index)
+{
+	QDir dir = QDir::current();
+	dir.cdUp();
+	dir.cdUp();
+	dirPath = dir.absoluteFilePath("assets/poles");
+	switch (index)
+	{
+	case PoleType_Single:
+		dirPath += "/single";
+		break;
+	case PoleType_Double:
+		dirPath += "/double";
+		break;
+	case PoleType_Gate:
+		dirPath += "/gate";
+		break;
+	case PoleType_SingleArm:
+		dirPath += "/single-arm";
+		break;
+	case PoleType_DoubleArm:
+		dirPath += "/double-arm";
+		break;
+	}
+	ui->poleSelector->disconnect();
+	ui->poleSelector->clear();
+	dir = QDir(dirPath);
+	for (auto& f: dir.entryList(QDir::Files))
+	{
+		if (f.endsWith(".json"))
+		{
+			ui->poleSelector->addItem(f.replace(".json", ""));
+		}
+	}
+
+	ui->poleSelector->setCurrentIndex(-1);
+	connect(ui->poleSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onPoleSelected);
+
+	ui->poleScene->changePole(nullptr);
+	ui->textureTable->setRowCount(0);
+	ui->nodeTree->clear();
+}
+
+void PoleAddPanel::onPoleSelected(int index)
+{
+	QDir dir(dirPath);
+
+	Pole* pole = PoleJsonSerializer::fromJsonFile(dir.absoluteFilePath(ui->poleSelector->currentText() + ".json"));
+
+	ui->poleSlot->setText(pole->getName().c_str());
+
+	ui->poleScene->changePole(pole);
 }
 
 void PoleAddPanel::bindPart(Part *part)
@@ -536,7 +597,7 @@ void PoleAddPanel::initTexturePanel()
 {
 	ui->textureTable->disconnect(texClickedConnection);
 	ui->textureTable->disconnect(texDoubleClickedConnection);
-	ui->textureTable->clearContents();
+	ui->textureTable->setRowCount(0);
 
 	const std::vector<Part *> parts = ui->poleScene->getPole()->getParts();
 

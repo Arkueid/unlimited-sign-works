@@ -42,6 +42,9 @@ private slots:
 
     void onPoleInitialized();
 
+    void onPoleTypeChanged(int index);
+
+    void onPoleSelected(int index);
 
 public:
     PoleAddPanel(QWidget* parent = nullptr);
@@ -54,4 +57,6 @@ private:
     QMetaObject::Connection stateChangedConnection;
     QMetaObject::Connection texClickedConnection;
     QMetaObject::Connection texDoubleClickedConnection;
+
+    QString dirPath;
 };

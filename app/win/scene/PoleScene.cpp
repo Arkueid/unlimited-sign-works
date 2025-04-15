@@ -12,7 +12,7 @@
 #include <utils/PoleJsonSerializer.hpp>
 
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                                        deltaTime(0.0f), drawables(0), pole(nullptr), axis(nullptr), wrapBox(nullptr), partSelected(false)
+                                        deltaTime(1.0f / 60.0f), drawables(0), pole(nullptr), axis(nullptr), wrapBox(nullptr), partSelected(false)
 {
     // pole = new Pole168();
     // pole = new Pole168();
@@ -38,7 +38,7 @@ void PoleScene::loadPole(const QString &poleJsonPath)
 {
     if (poleJsonPath.isEmpty())
     {
-        pole = new Pole168();
+        pole = new Pole();
         pole->setName("New Pole");
     }
     else
@@ -118,6 +118,10 @@ void PoleScene::initializeGL()
         qDebug() << "Shader program is not linked\n";
     }
 
+    if (pole == nullptr)
+    {
+        return;
+    }
     const std::vector<Part *> &parts = pole->getParts();
     for (auto part : parts)
     {
@@ -125,8 +129,6 @@ void PoleScene::initializeGL()
         drawables.append(drawable);
         emit drawableAdded(drawable);
     }
-
-    deltaTime = 1.0f / 60.0f;
 
     emit initialized();
 }
@@ -259,6 +261,20 @@ void PoleScene::changePole(Pole *pole)
 {
     makeCurrent();
     releaseDrawables();
+    if (this->pole != nullptr)
+    {
+        delete this->pole;
+        this->pole = nullptr;
+    }
+
+    partSelected = false;
+
+    if (pole == nullptr)
+    {
+        update();
+        return;
+    }
+
     this->pole = pole;
 
     const std::vector<Part *> &parts = pole->getParts();
@@ -266,9 +282,11 @@ void PoleScene::changePole(Pole *pole)
     {
         PartDrawable *drawable = new PartDrawable(part);
         drawables.append(drawable);
-        emit drawableAdded(drawable);
+        // emit drawableAdded(drawable);
     }
 
     doneCurrent();
+
+    emit initialized();
     update();
 }
