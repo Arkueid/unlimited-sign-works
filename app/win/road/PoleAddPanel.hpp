@@ -73,7 +73,7 @@ public:
     ~PoleAddPanel() override;
 
 signals:
-    void poleAdded(Pole* pole);
+    void poleSubmitted(Pole* pole);
 
 private:
     Ui::PoleAddPanel* ui;

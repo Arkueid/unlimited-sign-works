@@ -73,24 +73,36 @@
         </layout>
        </item>
        <item>
-        <widget class="QTreeWidget" name="treeWidget">
+        <widget class="QTreeWidget" name="nodeTree">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <attribute name="headerVisible">
-          <bool>false</bool>
+          <bool>true</bool>
          </attribute>
          <column>
           <property name="text">
-           <string notr="true">1</string>
+           <string notr="true">节点</string>
           </property>
          </column>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QOpenGLWidget" name="roadScene"/>
+     <widget class="RoadScene" name="roadScene"/>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RoadScene</class>
+   <extends>QOpenGLWidget</extends>
+   <header location="global">win/scene/RoadScene.hpp</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

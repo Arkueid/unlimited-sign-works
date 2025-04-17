@@ -12,6 +12,12 @@ class RoadDesigner : public QWidget
 private slots:
     void onAddPoleRequested();
 
+    void onPoleSubmitted(Pole* pole);
+
+    void onNodeStateChanged(QTreeWidgetItem* item, int column);
+
+    void onRemovePoleRequested();
+
 public:
     RoadDesigner(QWidget *parent = nullptr);
     ~RoadDesigner() override;

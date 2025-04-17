@@ -6,7 +6,9 @@
 
 RoadScene::RoadScene(QWidget *parent) : QOpenGLWidget(parent),
                                         camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                                        firstMouse(true)
+                                        firstMouse(true),
+                                        deltaTime(1.0f / 120.0f),
+                                        drawables(0)
 {
     setFocusPolicy(Qt::ClickFocus);
 }
@@ -14,14 +16,52 @@ RoadScene::RoadScene(QWidget *parent) : QOpenGLWidget(parent),
 RoadScene::~RoadScene()
 {
     makeCurrent();
+    releaseDrawables();
     program.removeAllShaders();
     TextureManager::releaseTextures();
+    
     doneCurrent();
+}
+
+PoleDrawable* RoadScene::addPole(Pole *pole)
+{
+    makeCurrent();
+    PoleDrawable* d = new PoleDrawable(pole);
+    drawables.append(d);
+    doneCurrent();
+
+    update();
+    return d;
+}
+
+void RoadScene::removePole(PoleDrawable *drawable)
+{
+    makeCurrent();
+    drawables.removeOne(drawable);
+    delete drawable;
+
+    doneCurrent();
+
+    update();
+}
+
+PoleDrawable *RoadScene::getPoleDrawable(int index)
+{
+    return drawables[index];
 }
 
 void RoadScene::initializeGL()
 {
     initializeOpenGLFunctions();
+
+    program.addShaderFromSourceFile(QOpenGLShader::Vertex, "../../assets/shaders/vshader.glsl");
+    program.addShaderFromSourceFile(QOpenGLShader::Fragment, "../../assets/shaders/fshader.glsl");
+    program.link();
+
+    if (!program.isLinked())
+    {
+        qDebug() << "Shader program is not linked\n";
+    }
 }
 
 void RoadScene::paintGL()
@@ -32,6 +72,21 @@ void RoadScene::paintGL()
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    QMatrix4x4 view = camera.getViewMatrix();
+    axis.draw(projection, view);
+
+    program.bind();
+    program.setUniformValue("projection", projection);
+    program.setUniformValue("view", view);
+    for (int i = 0; i < drawables.size(); i++)
+    {
+        if (drawables[i]->isVisible())
+        {
+            drawables[i]->draw(program);
+        }
+    }
+    program.release();
 }
 
 void RoadScene::resizeGL(int w, int h)
@@ -109,4 +164,10 @@ void RoadScene::focusInEvent(QFocusEvent *event)
 void RoadScene::focusOutEvent(QFocusEvent *event)
 {
     releaseKeyboard();
+}
+
+void RoadScene::releaseDrawables()
+{
+    qDeleteAll(drawables);
+    drawables.clear();
 }

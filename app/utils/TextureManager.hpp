@@ -39,7 +39,7 @@ public:
 
     static void releaseTextures();
 
-    static void releaseTexture(int ref);
+    // static void releaseTexture(int ref);
 
     static TextureSignals *getTexturesSignals()
     {

@@ -250,6 +250,9 @@ void PoleAddPanel::onConfirmBtnClicked()
 		QMessageBox::warning(this, "提示", "请设置基底！");
 		return;
 	}
+
+	emit poleSubmitted(ui->poleScene->getPole());
+	close();
 }
 
 void PoleAddPanel::onBaseTypeChanged(int index)
