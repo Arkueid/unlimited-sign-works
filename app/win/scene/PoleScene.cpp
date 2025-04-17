@@ -11,8 +11,14 @@
 
 #include <utils/PoleJsonSerializer.hpp>
 
-PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent), camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
-                                        deltaTime(1.0f / 120.0f), drawables(0), pole(nullptr), axis(nullptr), wrapBox(nullptr), partSelected(false)
+PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent),
+                                        camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
+                                        deltaTime(1.0f / 120.0f),
+                                        drawables(0),
+                                        pole(nullptr),
+                                        axis(nullptr), wrapBox(nullptr),
+                                        partSelected(false),
+                                        isPoleOutSide(false)
 {
     // pole = new Pole168();
     // pole = new Pole168();
@@ -30,7 +36,10 @@ PoleScene::~PoleScene()
     delete axis;
     program.removeAllShaders();
     TextureManager::releaseTextures();
-    delete pole;
+    if (!isPoleOutSide)
+    {
+        delete pole;
+    }
     doneCurrent();
 }
 
@@ -260,6 +269,8 @@ void PoleScene::unselectPart()
 
 void PoleScene::changePole(Pole *pole)
 {
+    setPoleOutSide(true);
+
     makeCurrent();
     releaseDrawables();
     if (this->pole != nullptr)

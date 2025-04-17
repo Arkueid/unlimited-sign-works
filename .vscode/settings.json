@@ -84,6 +84,8 @@
         "qwidget": "cpp",
         "qregularexpressionvalidator": "cpp",
         "qpainter": "cpp",
-        "coroutine": "cpp"
+        "coroutine": "cpp",
+        "qmessagebox": "cpp",
+        "qfile": "cpp"
     }
 }

@@ -4,19 +4,13 @@
 #include <QMap>
 #include <QOpenGLTexture>
 
-struct TextureItem
-{
-    QString path;
-    bool unique;
-};
-
 class TextureSignals : public QObject
 {
     Q_OBJECT
 
     friend class TextureManager;
 
-    TextureSignals() = default;;
+    TextureSignals() = default;
 
 signals:
     void texturesUpdated();
@@ -28,10 +22,9 @@ class TextureManager
 
 public:
     static void loadTexturesPaths();
-    static QOpenGLTexture *loadTexture(const QString &path);
     static QOpenGLTexture *getTexture(int ref);
     static const QMap<int, QString> &getTexturePaths();
-    static void releaseTextures();
+    static void checkTextureLeak();
 
     // 数据库操作
 
@@ -44,6 +37,10 @@ public:
     /// @param textureName
     static bool unregisterTexture(const QString &textureName);
 
+    static void releaseTextures();
+
+    static void releaseTexture(int ref);
+
     static TextureSignals *getTexturesSignals()
     {
         return texturesSignals;
@@ -52,4 +49,7 @@ public:
     static void initSignals();
 
     static void destroySignals();
+
+private:
+    static QOpenGLTexture *loadTexture(const QString &path);
 };

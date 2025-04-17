@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
                           {
                               SQLite::dispose();
                               TextureManager::destroySignals();
+                              TextureManager::checkTextureLeak();
                           });
 
     return app.exec();

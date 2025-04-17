@@ -19,7 +19,7 @@ class PoleScene : public QOpenGLWidget, protected QOpenGLFunctions
 
     Camera camera;
     float deltaTime;
-    bool firstMouse = true;
+    bool firstMouse;
     float lastX;
     float lastY;
 
@@ -35,7 +35,7 @@ class PoleScene : public QOpenGLWidget, protected QOpenGLFunctions
 
     bool partSelected;
 
-    void releaseDrawables();
+    bool isPoleOutSide;
 
 protected:
     void initializeGL() override;
@@ -94,4 +94,13 @@ signals:
     void drawableAdded(PartDrawable* drawable);
 
     void initialized();
+
+private:
+    
+    void setPoleOutSide(bool isOutSide)
+    {
+        isPoleOutSide = isOutSide;
+    }
+
+    void releaseDrawables();
 };

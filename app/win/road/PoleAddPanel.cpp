@@ -11,6 +11,8 @@
 #include <utils/PoleJsonSerializer.hpp>
 
 #include <QDir>
+#include <QMessageBox>
+
 
 PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator)
 {
@@ -38,6 +40,8 @@ PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAd
 	connect(ui->nodeTree, &QTreeWidget::itemClicked, this, &PoleAddPanel::onNodeClicked);
 
 	connect(ui->poleTypeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onPoleTypeChanged);
+
+	connect(ui->confirmBtn, &QPushButton::clicked, this, &PoleAddPanel::onConfirmBtnClicked);
 
 	onPoleTypeChanged(0);
 
@@ -156,7 +160,7 @@ void PoleAddPanel::onPoleTypeChanged(int index)
 	ui->poleSelector->disconnect();
 	ui->poleSelector->clear();
 	dir = QDir(dirPath);
-	for (auto& f: dir.entryList(QDir::Files))
+	for (auto &f : dir.entryList(QDir::Files))
 	{
 		if (f.endsWith(".json"))
 		{
@@ -176,11 +180,26 @@ void PoleAddPanel::onPoleSelected(int index)
 {
 	QDir dir(dirPath);
 
-	Pole* pole = PoleJsonSerializer::fromJsonFile(dir.absoluteFilePath(ui->poleSelector->currentText() + ".json"));
+	Pole *pole = PoleJsonSerializer::fromJsonFile(dir.absoluteFilePath(ui->poleSelector->currentText() + ".json"));
 
 	ui->poleSlot->setText(pole->getName().c_str());
 
 	ui->poleScene->changePole(pole);
+}
+
+void PoleAddPanel::onConfirmBtnClicked()
+{
+	if (!isPoleSet())
+	{
+		QMessageBox::warning(this, "提示", "请选择标识牌!");
+		return;
+	}
+
+	if (!isAllTexSet())
+	{
+		QMessageBox::warning(this, "提示", "请设置所有面板！");
+		return;
+	}
 }
 
 void PoleAddPanel::bindPart(Part *part)
@@ -593,6 +612,31 @@ void PoleAddPanel::refreshMesh(Part *part, Mesh *mesh)
 	ui->poleScene->update();
 }
 
+bool PoleAddPanel::isPoleSet()
+{
+	if (ui->poleScene->getPole() == nullptr)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool PoleAddPanel::isAllTexSet()
+{
+	for (auto &part : ui->poleScene->getPole()->getParts())
+	{
+		for (auto &texRef : part->getTextureRefs())
+		{
+			if (texRef < 0)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 void PoleAddPanel::initTexturePanel()
 {
 	ui->textureTable->disconnect(texClickedConnection);
@@ -625,27 +669,25 @@ void PoleAddPanel::initTexturePanel()
 		partIndex++;
 	}
 	texClickedConnection = connect(ui->textureTable, &QTableWidget::itemClicked,
-		[=](QTableWidgetItem *item)
-		{
-			PartDrawable *partDrawable = ui->poleScene->getDrawable(item->data(Qt::UserRole + 2).toInt());
-			ui->poleScene->selectPart(partDrawable);
-		}
-	);
+								   [=](QTableWidgetItem *item)
+								   {
+									   PartDrawable *partDrawable = ui->poleScene->getDrawable(item->data(Qt::UserRole + 2).toInt());
+									   ui->poleScene->selectPart(partDrawable);
+								   });
 
 	texDoubleClickedConnection = connect(ui->textureTable, &QTableWidget::itemDoubleClicked,
-			[this](QTableWidgetItem *item)
-			{
-				if (item->column() == 0)
-				{
-					Part *part = item->data(Qt::UserRole).value<Part *>();
-					int index = item->data(Qt::UserRole + 1).value<int>();
-					TextureSetPanel *textureSetPanel = new TextureSetPanel(part, index);
-					connect(textureSetPanel, &TextureSetPanel::success, [this, item](const QString &textureName)
-							{ 
+										 [this](QTableWidgetItem *item)
+										 {
+											 if (item->column() == 0)
+											 {
+												 Part *part = item->data(Qt::UserRole).value<Part *>();
+												 int index = item->data(Qt::UserRole + 1).value<int>();
+												 TextureSetPanel *textureSetPanel = new TextureSetPanel(part, index);
+												 connect(textureSetPanel, &TextureSetPanel::success, [this, item](const QString &textureName)
+														 { 
 								item->setText(textureName);
-								ui->poleScene->update(); 
-							});
-					textureSetPanel->show();
-				}
-			});
+								ui->poleScene->update(); });
+												 textureSetPanel->show();
+											 }
+										 });
 }

@@ -5,16 +5,21 @@
 #include <QDir>
 #include <QMessageBox>
 
+struct TextureItem
+{
+    QString path;
+    bool unique;
+};
+
 // 缓存
-static QMap<QString, QOpenGLTexture *> textures;
+static QMap<QString, QOpenGLTexture*> textures;
 // id, name
 static QMap<int, TextureItem> texturePaths;
 
 static QMap<int, QString> publicTexturePaths;
 
 TextureSignals *TextureManager::texturesSignals = nullptr;
-
-QOpenGLTexture *TextureManager::loadTexture(const QString &path)
+QOpenGLTexture* TextureManager::loadTexture(const QString &path)
 {
     // qDebug() << "Loading texture: " << path;
 
@@ -43,7 +48,7 @@ QOpenGLTexture *TextureManager::loadTexture(const QString &path)
     return nullptr;
 }
 
-QOpenGLTexture *TextureManager::getTexture(int ref)
+QOpenGLTexture* TextureManager::getTexture(int ref)
 {
     if (ref == -2)
     {
@@ -73,7 +78,15 @@ const QMap<int, QString>& TextureManager::getTexturePaths()
     }
     return publicTexturePaths;
 }
-void TextureManager::releaseTextures()
+void TextureManager::checkTextureLeak()
+{
+    if (!textures.isEmpty()) 
+    {
+        qDebug() << "Texture leak detected: " << textures.size();
+    }
+}
+
+void TextureManager::releaseTextures() 
 {
     qDeleteAll(textures);
     textures.clear();

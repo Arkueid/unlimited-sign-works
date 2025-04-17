@@ -33,6 +33,10 @@ class PoleAddPanel : public QDialog {
 
     void refreshMesh(Part* part, Mesh* mesh);
 
+    bool isPoleSet();
+
+    bool isAllTexSet();
+
 private slots:
     void onNodeClicked(QTreeWidgetItem* item, int column);
 
@@ -46,9 +50,14 @@ private slots:
 
     void onPoleSelected(int index);
 
+    void onConfirmBtnClicked();
+
 public:
     PoleAddPanel(QWidget* parent = nullptr);
     ~PoleAddPanel() override;
+
+signals:
+    void poleAdded(Pole* pole);
 
 private:
     Ui::PoleAddPanel* ui;

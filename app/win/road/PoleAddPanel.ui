@@ -151,7 +151,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>290</width>
+            <width>394</width>
             <height>462</height>
            </rect>
           </property>
@@ -835,7 +835,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="confirmBtn">
          <property name="text">
           <string>添加</string>
          </property>
