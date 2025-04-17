@@ -83,7 +83,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="poleSelector"/>
+           <widget class="QComboBox" name="poleSelector">
+            <property name="placeholderText">
+             <string>未选择</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -129,12 +133,12 @@
             </property>
             <item>
              <property name="text">
-              <string>柱形</string>
+              <string>方形</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>方形</string>
+              <string>柱形</string>
              </property>
             </item>
            </widget>
@@ -153,7 +157,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="baseSizeSelector"/>
+           <widget class="QComboBox" name="baseSizeSelector">
+            <property name="placeholderText">
+             <string>未选择</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -233,7 +241,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>427</width>
+            <width>393</width>
             <height>462</height>
            </rect>
           </property>

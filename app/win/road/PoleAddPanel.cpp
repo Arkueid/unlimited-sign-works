@@ -13,8 +13,7 @@
 #include <QDir>
 #include <QMessageBox>
 
-
-PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator)
+PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0)
 {
 	ui->setupUi(this);
 
@@ -33,6 +32,8 @@ PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAd
 
 	initializeLineEdits();
 
+	initSizes();
+
 	connect(ui->poleScene, &PoleScene::initialized, this, &PoleAddPanel::onPoleInitialized);
 
 	connect(ui->poleSlot, &QLineEdit::textEdited, this, &PoleAddPanel::onPoleSlotEdited);
@@ -40,10 +41,12 @@ PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAd
 	connect(ui->nodeTree, &QTreeWidget::itemClicked, this, &PoleAddPanel::onNodeClicked);
 
 	connect(ui->poleTypeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onPoleTypeChanged);
+	onPoleTypeChanged(0);
 
 	connect(ui->confirmBtn, &QPushButton::clicked, this, &PoleAddPanel::onConfirmBtnClicked);
 
-	onPoleTypeChanged(0);
+	connect(ui->baseTypeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onBaseTypeChanged);
+	onBaseTypeChanged(0);
 
 	hidePanels();
 }
@@ -72,11 +75,11 @@ void PoleAddPanel::initNodeTree()
 	root->setText(0, pole->getName().c_str());
 	root->setCheckState(0, Qt::CheckState::Checked);
 
-	QTreeWidgetItem* body = new QTreeWidgetItem(root);
+	QTreeWidgetItem *body = new QTreeWidgetItem(root);
 	body->setText(0, "主体");
 	body->setCheckState(0, Qt::CheckState::Checked);
 
-	QTreeWidgetItem* base = new QTreeWidgetItem(root);
+	QTreeWidgetItem *base = new QTreeWidgetItem(root);
 	base->setText(0, "基底");
 	base->setCheckState(0, Qt::CheckState::Checked);
 
@@ -161,7 +164,7 @@ void PoleAddPanel::onPoleInitialized()
 void PoleAddPanel::onPoleTypeChanged(int index)
 {
 	hidePanels();
-	
+
 	QDir dir = QDir::current();
 	dir.cdUp();
 	dir.cdUp();
@@ -205,6 +208,8 @@ void PoleAddPanel::onPoleTypeChanged(int index)
 
 void PoleAddPanel::onPoleSelected(int index)
 {
+	bases.clear();
+
 	QDir dir(dirPath);
 
 	Pole *pole = PoleJsonSerializer::fromJsonFile(dir.absoluteFilePath(ui->poleSelector->currentText() + ".json"));
@@ -212,6 +217,18 @@ void PoleAddPanel::onPoleSelected(int index)
 	ui->poleSlot->setText(pole->getName().c_str());
 
 	ui->poleScene->changePole(pole);
+
+	onBaseTypeChanged(0);
+
+	int didx = 0;
+	for (auto &part : pole->getParts())
+	{
+		if (part->isPoleBase())
+		{
+			bases.push_back({part, didx});
+		}
+		didx++;
+	}
 }
 
 void PoleAddPanel::onConfirmBtnClicked()
@@ -226,6 +243,93 @@ void PoleAddPanel::onConfirmBtnClicked()
 	{
 		QMessageBox::warning(this, "提示", "请设置所有面板！");
 		return;
+	}
+
+	if (!isBaseSet())
+	{
+		QMessageBox::warning(this, "提示", "请设置基底！");
+		return;
+	}
+}
+
+void PoleAddPanel::onBaseTypeChanged(int index)
+{
+	ui->baseSizeSelector->disconnect();
+	ui->baseSizeSelector->clear();
+	if (index == 0)
+	{
+		ui->baseSizeSelector->addItems(cubeSizes);
+		ui->baseSizeSelector->setCurrentIndex(-1);
+	}
+	else if (index == 1)
+	{
+		ui->baseSizeSelector->addItems(cylinderSizes);
+		ui->baseSizeSelector->setCurrentIndex(-1);
+	}
+
+	connect(ui->baseSizeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onBaseSizeChanged);
+}
+
+void PoleAddPanel::onBaseSizeChanged(int index)
+{
+	int type = ui->baseTypeSelector->currentIndex();
+	if (type == 0) // cube
+	{
+		for (auto &base : bases)
+		{
+			Cube *newCube;
+			switch (index)
+			{
+			case 0:
+				newCube = Cube::create(500, 500, 600);
+				break;
+			case 1:
+				newCube = Cube::create(800, 800, 800);
+				break;
+			case 2:
+				newCube = Cube::create(1000, 1000, 1000);
+				break;
+			case 3:
+				newCube = Cube::create(1200, 1200, 1200);
+				break;
+			case 4:
+				newCube = Cube::create(1500, 1500, 1500);
+				break;
+			default:
+				break;
+			}
+			base.part->setOriginY(-newCube->getC() / 2);
+			refreshMesh(base, newCube);
+		}
+	}
+	else if (type == 1) // cylinder
+	{
+		for (auto &base : bases)
+		{
+			Cylinder *newCylinder;
+			switch (index)
+			{
+			case 0:
+				newCylinder = Cylinder::create(600, 800);
+				break;
+			case 1:
+				newCylinder = Cylinder::create(800, 1000);
+				break;
+			case 2:
+				newCylinder = Cylinder::create(1000, 1200);
+				break;
+			case 3:
+				newCylinder = Cylinder::create(1200, 1500);
+				break;
+			case 4:
+				newCylinder = Cylinder::create(1500, 2000);
+				break;
+			default:
+				break;
+			}
+			base.part->setOriginY(-newCylinder->getH());
+			refreshMesh(base, newCylinder);
+		}
 	}
 }
 
@@ -639,6 +743,15 @@ void PoleAddPanel::refreshMesh(Part *part, Mesh *mesh)
 	ui->poleScene->update();
 }
 
+void PoleAddPanel::refreshMesh(BaseInfo &base, Mesh *mesh)
+{
+	PartDrawable *drawable = ui->poleScene->getDrawable(base.drawableIndex);
+	ui->poleScene->unbindPart(drawable);
+	base.part->setMesh(mesh);
+	ui->poleScene->updatePart(drawable);
+	ui->poleScene->update();
+}
+
 bool PoleAddPanel::isPoleSet()
 {
 	if (ui->poleScene->getPole() == nullptr)
@@ -662,6 +775,11 @@ bool PoleAddPanel::isAllTexSet()
 		}
 	}
 	return true;
+}
+
+bool PoleAddPanel::isBaseSet()
+{
+	return ui->baseSizeSelector->currentIndex() != -1; 
 }
 
 void PoleAddPanel::initTexturePanel()
@@ -723,4 +841,22 @@ void PoleAddPanel::initTexturePanel()
 												 textureSetPanel->show();
 											 }
 										 });
+}
+
+void PoleAddPanel::initSizes()
+{
+	cubeSizes = {
+		"500 x 500 x 600",
+		"800 x 800 x 800",
+		"1000 x 1000 x 1000",
+		"1200 x 1200 x 1200",
+		"1500 x 1500 x 1500",
+	};
+	cylinderSizes = {
+		"600 x 800",
+		"800 x 1000",
+		"1000 x 1200",
+		"1200 x 1500",
+		"1500 x 2000",
+	};
 }

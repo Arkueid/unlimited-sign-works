@@ -47,11 +47,18 @@
             "offsetH": 20,
             "offsetV": 0,
             "type": 2
+        },
+        {
+            "a": 800,
+            "b": 800,
+            "c": 800,
+            "type": 0
         }
     ],
     "name": "Pole168",
     "parts": [
         {
+            "isPoleBase": false,
             "meshRef": 0,
             "name": "mainPole",
             "position": [
@@ -76,6 +83,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 1,
             "name": "sideBeam1",
             "position": [
@@ -100,6 +108,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 1,
             "name": "sideBeam2",
             "position": [
@@ -124,6 +133,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 2,
             "name": "panel1",
             "position": [
@@ -154,6 +164,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 3,
             "name": "bottom",
             "position": [
@@ -184,6 +195,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 4,
             "name": "flange1",
             "position": [
@@ -208,6 +220,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 4,
             "name": "flange2",
             "position": [
@@ -232,6 +245,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener1",
             "position": [
@@ -264,6 +278,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener2",
             "position": [
@@ -296,6 +311,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener3",
             "position": [
@@ -328,6 +344,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener4",
             "position": [
@@ -360,6 +377,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener5",
             "position": [
@@ -392,6 +410,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener6",
             "position": [
@@ -424,6 +443,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener7",
             "position": [
@@ -456,6 +476,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 5,
             "name": "sideStiffener8",
             "position": [
@@ -488,6 +509,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 6,
             "name": "bottomStiffener1",
             "position": [
@@ -520,6 +542,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 6,
             "name": "bottomStiffener2",
             "position": [
@@ -552,6 +575,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 6,
             "name": "bottomStiffener3",
             "position": [
@@ -584,6 +608,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 6,
             "name": "bottomStiffener4",
             "position": [
@@ -613,6 +638,37 @@
                 8,
                 8,
                 8
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 7,
+            "name": "基",
+            "position": [
+                0,
+                -400,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
             ]
         }
     ],

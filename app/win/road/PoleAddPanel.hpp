@@ -9,6 +9,12 @@
 #include <QMetaObject>
 #include <QDialog>
 
+struct BaseInfo
+{
+    Part* part;
+    int drawableIndex;
+};
+
 class PoleAddPanel : public QDialog {
 
     Q_OBJECT
@@ -16,6 +22,8 @@ class PoleAddPanel : public QDialog {
     void initNodeTree();
 
     void initTexturePanel();
+
+    void initSizes();
 
     void bindPart(Part* part);
 
@@ -33,9 +41,13 @@ class PoleAddPanel : public QDialog {
 
     void refreshMesh(Part* part, Mesh* mesh);
 
+    void refreshMesh(BaseInfo& base, Mesh* mesh);
+
     bool isPoleSet();
 
     bool isAllTexSet();
+
+    bool isBaseSet();
 
 private slots:
     void onNodeClicked(QTreeWidgetItem* item, int column);
@@ -51,6 +63,10 @@ private slots:
     void onPoleSelected(int index);
 
     void onConfirmBtnClicked();
+
+    void onBaseTypeChanged(int index);
+
+    void onBaseSizeChanged(int index);
 
 public:
     PoleAddPanel(QWidget* parent = nullptr);
@@ -68,4 +84,9 @@ private:
     QMetaObject::Connection texDoubleClickedConnection;
 
     QString dirPath;
+
+    QStringList cubeSizes;
+    QStringList cylinderSizes;
+
+    QVector<BaseInfo> bases;
 };

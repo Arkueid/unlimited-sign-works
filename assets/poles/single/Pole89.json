@@ -26,11 +26,18 @@
             "offsetH": 0,
             "offsetV": 0,
             "type": 2
+        },
+        {
+            "a": 500,
+            "b": 500,
+            "c": 800,
+            "type": 0
         }
     ],
     "name": "Pole89",
     "parts": [
         {
+            "isPoleBase": false,
             "meshRef": 0,
             "name": "mainPole",
             "position": [
@@ -55,6 +62,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 1,
             "name": "panel",
             "position": [
@@ -79,6 +87,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 2,
             "name": "bottom",
             "position": [
@@ -109,6 +118,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 3,
             "name": "bottomStiffener1",
             "position": [
@@ -141,6 +151,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 3,
             "name": "bottomStiffener2",
             "position": [
@@ -173,6 +184,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 3,
             "name": "bottomStiffener3",
             "position": [
@@ -205,6 +217,7 @@
             ]
         },
         {
+            "isPoleBase": false,
             "meshRef": 3,
             "name": "bottomStiffener4",
             "position": [
@@ -234,6 +247,37 @@
                 8,
                 8,
                 8
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 4,
+            "name": "基",
+            "position": [
+                0,
+                -400,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
             ]
         }
     ],

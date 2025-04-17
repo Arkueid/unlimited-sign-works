@@ -746,6 +746,8 @@ void PoleDesigner::onCopyBtnClicked()
 							 {part->getOriginX(), part->getOriginY(), part->getOriginZ()},
 							 {part->getRotationX(), part->getRotationY(), part->getRotationZ()},
 							 part->getTextureRefs(), part->getTextureEdits());
+							 
+	newPart->setPoleBase(part->isPoleBase());
 
 	ui->poleScene->addDrawable(newPart);
 }
