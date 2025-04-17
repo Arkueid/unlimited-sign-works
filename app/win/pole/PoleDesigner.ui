@@ -259,7 +259,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>355</width>
+         <width>358</width>
          <height>693</height>
         </rect>
        </property>
@@ -279,7 +279,7 @@
            </size>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="cylinderPanel">
            <property name="sizePolicy">
@@ -288,7 +288,7 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,1">
+           <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,1">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -313,6 +313,13 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cylinderIsPoleBase">
+              <property name="text">
+               <string>柱基础</string>
               </property>
              </widget>
             </item>
@@ -455,7 +462,7 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
+           <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -480,6 +487,13 @@
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cubeIsPoleBase">
+              <property name="text">
+               <string>柱基础</string>
               </property>
              </widget>
             </item>
@@ -1064,7 +1078,7 @@
            </layout>
           </widget>
           <widget class="QWidget" name="rCubePanel">
-           <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,1">
+           <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -1079,6 +1093,12 @@
             </property>
             <item>
              <widget class="QLabel" name="label_13">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <bold>true</bold>
@@ -1151,20 +1171,6 @@
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="Label_21">
-                <property name="text">
-                 <string>纹理（下）</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="Label_22">
-                <property name="text">
-                 <string>纹理（侧面）</string>
-                </property>
-               </widget>
-              </item>
               <item row="5" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_22">
                 <item>
@@ -1186,6 +1192,13 @@
                 </item>
                </layout>
               </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="Label_21">
+                <property name="text">
+                 <string>纹理（下）</string>
+                </property>
+               </widget>
+              </item>
               <item row="6" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_23">
                 <item>
@@ -1206,6 +1219,13 @@
                  </widget>
                 </item>
                </layout>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="Label_22">
+                <property name="text">
+                 <string>纹理（侧面）</string>
+                </property>
+               </widget>
               </item>
               <item row="7" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_24">

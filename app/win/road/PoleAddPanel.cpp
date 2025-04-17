@@ -70,15 +70,31 @@ void PoleAddPanel::initNodeTree()
 	}
 
 	root->setText(0, pole->getName().c_str());
-
 	root->setCheckState(0, Qt::CheckState::Checked);
+
+	QTreeWidgetItem* body = new QTreeWidgetItem(root);
+	body->setText(0, "主体");
+	body->setCheckState(0, Qt::CheckState::Checked);
+
+	QTreeWidgetItem* base = new QTreeWidgetItem(root);
+	base->setText(0, "基底");
+	base->setCheckState(0, Qt::CheckState::Checked);
 
 	const std::vector<Part *> &parts = pole->getParts();
 
 	int index = 0;
 	for (auto &part : parts)
 	{
-		QTreeWidgetItem *item = new QTreeWidgetItem(root);
+		QTreeWidgetItem *item;
+
+		if (part->isPoleBase())
+		{
+			item = new QTreeWidgetItem(base);
+		}
+		else
+		{
+			item = new QTreeWidgetItem(body);
+		}
 		item->setCheckState(0, Qt::CheckState::Checked);
 		item->setText(0, part->getName().c_str());
 		item->setData(0, Qt::UserRole, QVariant::fromValue(ui->poleScene->getDrawable(index++)));
@@ -92,7 +108,7 @@ void PoleAddPanel::initNodeTree()
 void PoleAddPanel::onNodeClicked(QTreeWidgetItem *item, int column)
 {
 	// qDebug() << "Node clicked";
-	if (item->parent() == nullptr)
+	if (item->parent() == nullptr || item->parent()->parent() == nullptr)
 	{
 		return;
 	}
@@ -111,16 +127,12 @@ void PoleAddPanel::onNodeClicked(QTreeWidgetItem *item, int column)
 void PoleAddPanel::onNodeStateChanged(QTreeWidgetItem *item, int column)
 {
 	// qDebug() << "onNodeStateChanged";
-	if (item->parent() == nullptr)
+	if (item->parent() == nullptr || item->parent()->parent() == nullptr)
 	{
-		for (int i = 0; i < ui->nodeTree->topLevelItemCount(); ++i)
+		for (int i = 0; i < item->childCount(); ++i)
 		{
-			QTreeWidgetItem *item = ui->nodeTree->topLevelItem(i);
-			for (int j = 0; j < item->childCount(); ++j)
-			{
-				QTreeWidgetItem *child = item->child(j);
-				child->setCheckState(0, item->checkState(0));
-			}
+			QTreeWidgetItem *child = item->child(i);
+			child->setCheckState(0, item->checkState(0));
 		}
 		return;
 	}

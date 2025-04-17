@@ -159,6 +159,8 @@ void PoleJsonSerializer::initPartJson(int meshRef, Part *part, QJsonObject &part
 {
     partJson["name"] = part->getName().c_str();
     partJson["meshRef"] = meshRef;
+    partJson["isPoleBase"] = part->isPoleBase();
+    
     QJsonArray position;
     QJsonArray rotation;
     QJsonArray textureRefs;
@@ -286,5 +288,7 @@ Part *PoleJsonSerializer::createPart(Mesh *mesh, QJsonObject &partJson)
                           {static_cast<float>(rotation[0].toDouble()), static_cast<float>(rotation[1].toDouble()), static_cast<float>(rotation[2].toDouble())},
                           textureRefsVec,
                           textureEditsVec);
+                          
+    part->setPoleBase(partJson["isPoleBase"].toBool());
     return part;
 }

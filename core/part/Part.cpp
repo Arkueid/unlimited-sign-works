@@ -10,7 +10,8 @@ Part::Part(Mesh *mesh,
                                                     origin(origin),
                                                     rotation(rotation),
                                                     textureRefs(textureRefs),
-                                                    textureEdits(textureEdits)
+                                                    textureEdits(textureEdits),
+                                                    valueIsPoleBase(false)
 {
     mesh->incRef();
     if (textureRefs.size() != textureEdits.size())

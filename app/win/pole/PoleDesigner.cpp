@@ -102,6 +102,14 @@ void PoleDesigner::bindCube(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->cubePanel);
 
+	ui->cubeIsPoleBase->disconnect();
+	ui->cubeIsPoleBase->setChecked(part->isPoleBase());
+	connect(ui->cubeIsPoleBase, &QCheckBox::checkStateChanged,
+			[=](int state)
+			{
+				part->setPoleBase(state == Qt::Checked);
+			});
+
 	// 绑定基本数据
 	ui->cubeName->setText(part->getName().c_str());
 	cube = (Cube *)part->getMesh();
@@ -160,6 +168,14 @@ void PoleDesigner::bindCube(Part *part)
 void PoleDesigner::bindCylinder(Part *part)
 {
 	ui->paramPanel->setCurrentWidget(ui->cylinderPanel);
+
+	ui->cylinderIsPoleBase->disconnect();
+	ui->cylinderIsPoleBase->setChecked(part->isPoleBase());
+	connect(ui->cylinderIsPoleBase, &QCheckBox::checkStateChanged,
+			[=](int state)
+			{
+				part->setPoleBase(state == Qt::Checked);
+			});
 
 	ui->cylinderName->setText(part->getName().c_str());
 	cylinder = (Cylinder *)part->getMesh();

@@ -1,5 +1,4 @@
 #include <pole/Pole.hpp>
-#include "Pole.hpp"
 
 Pole::Pole(): parts(0), type(PoleType_Single)
 {

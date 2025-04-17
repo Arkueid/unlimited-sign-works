@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <base/Mesh.hpp>
 
@@ -17,6 +17,8 @@ class Part : public Mesh
 
     std::string name;
 
+    bool valueIsPoleBase;
+
     void releaseMesh();
 
 public:
@@ -29,6 +31,16 @@ public:
 
     virtual ~Part();
 
+    void setPoleBase(bool value)
+    {
+        valueIsPoleBase = value;
+    }
+
+    bool isPoleBase()
+    {
+        return valueIsPoleBase;
+    }
+    
     std::string getName()
     {
         return name;
