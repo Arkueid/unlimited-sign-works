@@ -1,12 +1,15 @@
 #pragma once
 
 #include <QOpenGLFunctions>
+#include <QVector>
 
+#include <render/PartDrawable.hpp>
 
-class ObjectDrawable: protected QOpenGLFunctions
+class ObjectDrawable : protected QOpenGLFunctions
 {
-    Q_OBJECT
+    QVector<PartDrawable *> partDrawables;
 
 public:
-    
+    ObjectDrawable();
+    ~ObjectDrawable();
 };

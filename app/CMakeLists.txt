@@ -59,6 +59,9 @@ add_executable(usw
     render/BoxDrawable.hpp
     render/BoxDrawable.cpp
 
+    render/ObjectDrawable.hpp
+    render/ObjectDrawable.cpp
+
     win/road/RoadDesigner.ui
     win/road/RoadDesigner.hpp
     win/road/RoadDesigner.cpp
