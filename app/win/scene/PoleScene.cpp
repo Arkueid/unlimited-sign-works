@@ -281,22 +281,18 @@ void PoleScene::changePole(Pole *pole)
 
     partSelected = false;
 
-    if (pole == nullptr)
+    if (pole != nullptr)
     {
-        update();
-        return;
+        this->pole = pole;
+
+        const std::vector<Part *> &parts = pole->getParts();
+        for (auto part : parts)
+        {
+            PartDrawable *drawable = new PartDrawable(part);
+            drawables.append(drawable);
+            // emit drawableAdded(drawable);
+        }    
     }
-
-    this->pole = pole;
-
-    const std::vector<Part *> &parts = pole->getParts();
-    for (auto part : parts)
-    {
-        PartDrawable *drawable = new PartDrawable(part);
-        drawables.append(drawable);
-        // emit drawableAdded(drawable);
-    }
-
     doneCurrent();
 
     emit initialized();

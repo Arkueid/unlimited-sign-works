@@ -60,7 +60,15 @@ void PoleAddPanel::initNodeTree()
 
 	ui->nodeTree->clear();
 	QTreeWidgetItem *root = new QTreeWidgetItem(ui->nodeTree);
+	root->setText(0, "未选择");
+
 	Pole *pole = ui->poleScene->getPole();
+
+	if (pole == nullptr)
+	{
+		return;
+	}
+
 	root->setText(0, pole->getName().c_str());
 
 	root->setCheckState(0, Qt::CheckState::Checked);
@@ -85,6 +93,11 @@ void PoleAddPanel::onNodeClicked(QTreeWidgetItem *item, int column)
 {
 	// qDebug() << "Node clicked";
 	if (item->parent() == nullptr)
+	{
+		return;
+	}
+
+	if (ui->nodeTree->currentItem() != item)
 	{
 		return;
 	}
@@ -135,6 +148,8 @@ void PoleAddPanel::onPoleInitialized()
 
 void PoleAddPanel::onPoleTypeChanged(int index)
 {
+	hidePanels();
+	
 	QDir dir = QDir::current();
 	dir.cdUp();
 	dir.cdUp();
@@ -643,7 +658,13 @@ void PoleAddPanel::initTexturePanel()
 	ui->textureTable->disconnect(texDoubleClickedConnection);
 	ui->textureTable->setRowCount(0);
 
-	const std::vector<Part *> parts = ui->poleScene->getPole()->getParts();
+	Pole *pole = ui->poleScene->getPole();
+	if (pole == nullptr)
+	{
+		return;
+	}
+
+	const std::vector<Part *> parts = pole->getParts();
 
 	int partIndex = 0;
 	for (auto &part : parts)
