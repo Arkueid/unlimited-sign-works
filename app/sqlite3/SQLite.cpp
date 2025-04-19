@@ -54,7 +54,6 @@ void SQLite::printIfError(char *errMsg)
 {
     if (errMsg != nullptr)
     {
-        qDebug() << "Failed to insert into table";
         qDebug() << errMsg;
         sqlite3_free(errMsg);
     }
