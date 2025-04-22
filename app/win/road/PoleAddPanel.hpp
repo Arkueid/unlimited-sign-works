@@ -89,4 +89,8 @@ private:
     QStringList cylinderSizes;
 
     QVector<BaseInfo> bases;
+
+    bool textureSelcted;
+
+    bool poleLoaded;
 };

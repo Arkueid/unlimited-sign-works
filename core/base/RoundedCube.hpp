@@ -20,12 +20,12 @@ class RoundedCube : public Mesh
     /// @param c y方向长度
     /// @param radius xz面圆角大小
     /// @param precision 圆角离散精度
-    RoundedCube(float a, float b, float c, float radius, float precision = PRECISION_DEFAULT);
+    RoundedCube(float a, float b, float c, float radius, float precision = PRECISION_DEFAULT * 2);
 
 public:
     ~RoundedCube() override;
 
-    static RoundedCube *create(float a, float b, float c, float radius, float precision = PRECISION_DEFAULT);
+    static RoundedCube *create(float a, float b, float c, float radius, float precision = PRECISION_DEFAULT * 2);
 
     int getType() override
     {

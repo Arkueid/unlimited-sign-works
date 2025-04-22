@@ -13,7 +13,8 @@
 #include <QDir>
 #include <QMessageBox>
 
-PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0)
+PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0), 
+	textureSelcted(false), poleLoaded(false)
 {
 	ui->setupUi(this);
 
@@ -123,7 +124,10 @@ void PoleAddPanel::onNodeClicked(QTreeWidgetItem *item, int column)
 
 	PartDrawable *drawable = item->data(0, Qt::UserRole).value<PartDrawable *>();
 	Part *part = drawable->getPart();
-	bindPart(part);
+	if (!part->isPoleBase() || ui->baseSizeSelector->currentIndex() != -1)
+	{
+		bindPart(part);
+	}
 	ui->poleScene->selectPart(drawable);
 }
 
@@ -142,7 +146,10 @@ void PoleAddPanel::onNodeStateChanged(QTreeWidgetItem *item, int column)
 	else
 	{
 		PartDrawable *drawable = item->data(0, Qt::UserRole).value<PartDrawable *>();
-		drawable->setVisible(item->checkState(0) == Qt::Checked);
+		if (!drawable->getPart()->isPoleBase() || ui->baseSizeSelector->currentIndex() != -1)
+		{
+			drawable->setVisible(item->checkState(0) == Qt::Checked);
+		}
 	}
 
 	ui->poleScene->update();
@@ -157,8 +164,16 @@ void PoleAddPanel::onPoleSlotEdited(const QString &text)
 
 void PoleAddPanel::onPoleInitialized()
 {
+	for (auto &base : bases)
+	{
+		ui->poleScene->getDrawable(base.drawableIndex)->setVisible(false);
+	}
+
 	initNodeTree();
+	
 	initTexturePanel();
+
+	poleLoaded = true;
 }
 
 void PoleAddPanel::onPoleTypeChanged(int index)
@@ -201,6 +216,8 @@ void PoleAddPanel::onPoleTypeChanged(int index)
 	ui->poleSelector->setCurrentIndex(-1);
 	connect(ui->poleSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onPoleSelected);
 
+	bases.clear();
+	poleLoaded = false;
 	ui->poleScene->changePole(nullptr);
 	ui->textureTable->setRowCount(0);
 	ui->nodeTree->clear();
@@ -214,12 +231,6 @@ void PoleAddPanel::onPoleSelected(int index)
 
 	Pole *pole = PoleJsonSerializer::fromJsonFile(dir.absoluteFilePath(ui->poleSelector->currentText() + ".json"));
 
-	ui->poleSlot->setText(pole->getName().c_str());
-
-	ui->poleScene->changePole(pole);
-
-	onBaseTypeChanged(0);
-
 	int didx = 0;
 	for (auto &part : pole->getParts())
 	{
@@ -229,6 +240,13 @@ void PoleAddPanel::onPoleSelected(int index)
 		}
 		didx++;
 	}
+
+	ui->poleSlot->setText(pole->getName().c_str());
+
+	poleLoaded = false;
+	ui->poleScene->changePole(pole);
+
+	onBaseTypeChanged(0);
 }
 
 void PoleAddPanel::onConfirmBtnClicked()
@@ -270,6 +288,16 @@ void PoleAddPanel::onBaseTypeChanged(int index)
 		ui->baseSizeSelector->setCurrentIndex(-1);
 	}
 
+	if (poleLoaded)
+	{
+		for (auto &base : bases)
+		{
+			ui->poleScene->getDrawable(base.drawableIndex)->setVisible(false);
+		}
+	
+		ui->poleScene->update();
+	}
+
 	connect(ui->baseSizeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onBaseSizeChanged);
 }
 
@@ -302,6 +330,7 @@ void PoleAddPanel::onBaseSizeChanged(int index)
 				break;
 			}
 			base.part->setOriginY(-newCube->getC() / 2);
+			ui->poleScene->getDrawable(base.drawableIndex)->setVisible(true);
 			refreshMesh(base, newCube);
 		}
 	}
@@ -331,6 +360,7 @@ void PoleAddPanel::onBaseSizeChanged(int index)
 				break;
 			}
 			base.part->setOriginY(-newCylinder->getH());
+			ui->poleScene->getDrawable(base.drawableIndex)->setVisible(true);
 			refreshMesh(base, newCylinder);
 		}
 	}
@@ -678,7 +708,19 @@ void PoleAddPanel::initializeLineEdits()
 
 void PoleAddPanel::bindTransforms(Part *part)
 {
-	PartDrawable *drawable = ui->nodeTree->currentItem()->data(0, Qt::UserRole).value<PartDrawable *>();
+	PartDrawable *drawable = nullptr;
+	if (textureSelcted)
+	{
+		drawable = ui->textureTable->currentItem()->data(Qt::UserRole).value<PartDrawable *>();
+		;
+	}
+	else
+	{
+		drawable = ui->nodeTree->currentItem()->data(0, Qt::UserRole).value<PartDrawable *>();
+	}
+
+	textureSelcted = false;
+
 	ui->originX->setText(QString::number(part->getOriginX()));
 	ui->originY->setText(QString::number(part->getOriginY()));
 	ui->originZ->setText(QString::number(part->getOriginZ()));
@@ -782,7 +824,7 @@ bool PoleAddPanel::isAllTexSet()
 
 bool PoleAddPanel::isBaseSet()
 {
-	return ui->baseSizeSelector->currentIndex() != -1; 
+	return ui->baseSizeSelector->currentIndex() != -1;
 }
 
 void PoleAddPanel::initTexturePanel()
@@ -826,6 +868,8 @@ void PoleAddPanel::initTexturePanel()
 								   [=](QTableWidgetItem *item)
 								   {
 									   PartDrawable *partDrawable = ui->poleScene->getDrawable(item->data(Qt::UserRole + 2).toInt());
+									   textureSelcted = true;
+									   bindPart(partDrawable->getPart());
 									   ui->poleScene->selectPart(partDrawable);
 								   });
 
@@ -837,10 +881,12 @@ void PoleAddPanel::initTexturePanel()
 												 Part *part = item->data(Qt::UserRole).value<Part *>();
 												 int index = item->data(Qt::UserRole + 1).value<int>();
 												 TextureSetPanel *textureSetPanel = new TextureSetPanel(part, index);
-												 connect(textureSetPanel, &TextureSetPanel::success, [this, item](const QString &textureName)
-														 { 
-								item->setText(textureName);
-								ui->poleScene->update(); });
+												 connect(textureSetPanel, &TextureSetPanel::success,
+														 [this, item](const QString &textureName)
+														 {
+															 item->setText(textureName);
+															 ui->poleScene->update();
+														 });
 												 textureSetPanel->show();
 											 }
 										 });

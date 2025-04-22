@@ -1,0 +1,505 @@
+{
+    "meshes": [
+        {
+            "d": 68,
+            "h": 2500,
+            "type": 1
+        },
+        {
+            "a": 30,
+            "b": 150,
+            "c": 10,
+            "h1": 20,
+            "h2": 50,
+            "offsetH": 20,
+            "offsetV": 1,
+            "type": 2
+        },
+        {
+            "a": 200,
+            "b": 200,
+            "c": 20,
+            "type": 0
+        },
+        {
+            "a": 500,
+            "b": 500,
+            "c": 500,
+            "type": 0
+        },
+        {
+            "a": 1800,
+            "b": 600,
+            "c": 10,
+            "radius": 20,
+            "type": 3
+        }
+    ],
+    "name": "68-矩形",
+    "parts": [
+        {
+            "isPoleBase": false,
+            "meshRef": 0,
+            "name": "右立柱",
+            "position": [
+                500,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 0,
+            "name": "左立柱",
+            "position": [
+                -500,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板左1",
+            "position": [
+                -466,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板左2",
+            "position": [
+                -500,
+                0,
+                -34
+            ],
+            "rotation": [
+                0,
+                90,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板左3",
+            "position": [
+                -534,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板左4",
+            "position": [
+                -500,
+                0,
+                34
+            ],
+            "rotation": [
+                0,
+                270,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "底板左",
+            "position": [
+                -500,
+                10,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "底板右",
+            "position": [
+                500,
+                10,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板右1",
+            "position": [
+                534,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板右2",
+            "position": [
+                500,
+                0,
+                -34
+            ],
+            "rotation": [
+                0,
+                90,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板右3",
+            "position": [
+                466,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "加劲板右4",
+            "position": [
+                500,
+                0,
+                34
+            ],
+            "rotation": [
+                0,
+                270,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 3,
+            "name": "基（左）",
+            "position": [
+                -500,
+                -250,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 3,
+            "name": "基（右）",
+            "position": [
+                500,
+                -250,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "面板",
+            "position": [
+                0,
+                2220,
+                34
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                1,
+                8,
+                8
+            ]
+        }
+    ],
+    "type": 1
+}

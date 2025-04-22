@@ -1,19 +1,13 @@
 {
     "meshes": [
         {
-            "d": 89,
+            "d": 114,
             "h": 4500,
             "type": 1
         },
         {
-            "a": 900,
-            "h": 10,
-            "radius": 40,
-            "type": 4
-        },
-        {
-            "a": 200,
-            "b": 200,
+            "a": 250,
+            "b": 250,
             "c": 20,
             "type": 0
         },
@@ -21,8 +15,8 @@
             "a": 30,
             "b": 150,
             "c": 20,
-            "h1": 20,
-            "h2": 50,
+            "h1": 30,
+            "h2": 60,
             "offsetH": 0,
             "offsetV": 0,
             "type": 2
@@ -32,9 +26,14 @@
             "b": 500,
             "c": 800,
             "type": 0
+        },
+        {
+            "d": 1000,
+            "h": 10,
+            "type": 1
         }
     ],
-    "name": "Pole89",
+    "name": "114-双圆",
     "parts": [
         {
             "isPoleBase": false,
@@ -64,31 +63,6 @@
         {
             "isPoleBase": false,
             "meshRef": 1,
-            "name": "panel",
-            "position": [
-                0,
-                4238.3720703125,
-                44.5
-            ],
-            "rotation": [
-                90,
-                0,
-                0
-            ],
-            "textureEdits": [
-                true,
-                false,
-                false
-            ],
-            "textureRefs": [
-                0,
-                6,
-                6
-            ]
-        },
-        {
-            "isPoleBase": false,
-            "meshRef": 2,
             "name": "bottom",
             "position": [
                 0,
@@ -119,10 +93,10 @@
         },
         {
             "isPoleBase": false,
-            "meshRef": 3,
+            "meshRef": 2,
             "name": "bottomStiffener1",
             "position": [
-                44.5,
+                57,
                 0,
                 0
             ],
@@ -152,12 +126,12 @@
         },
         {
             "isPoleBase": false,
-            "meshRef": 3,
+            "meshRef": 2,
             "name": "bottomStiffener2",
             "position": [
                 0,
                 0,
-                -44.5
+                -57
             ],
             "rotation": [
                 0,
@@ -185,10 +159,10 @@
         },
         {
             "isPoleBase": false,
-            "meshRef": 3,
+            "meshRef": 2,
             "name": "bottomStiffener3",
             "position": [
-                -44.5,
+                -57,
                 0,
                 0
             ],
@@ -218,12 +192,12 @@
         },
         {
             "isPoleBase": false,
-            "meshRef": 3,
+            "meshRef": 2,
             "name": "bottomStiffener4",
             "position": [
                 0,
                 0,
-                44.5
+                57
             ],
             "rotation": [
                 0,
@@ -251,7 +225,7 @@
         },
         {
             "isPoleBase": true,
-            "meshRef": 4,
+            "meshRef": 3,
             "name": "基",
             "position": [
                 0,
@@ -278,6 +252,56 @@
                 4,
                 4,
                 4
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "面板-上",
+            "position": [
+                0,
+                4000,
+                57
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "面板-下",
+            "position": [
+                0,
+                2900,
+                57
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                8,
+                8
             ]
         }
     ],

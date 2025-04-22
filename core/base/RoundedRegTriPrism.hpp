@@ -17,12 +17,12 @@ class RoundedRegTriPrism : public Mesh
 	/// @param h 高/厚度
 	/// @param radius 圆角半径
 	/// @param precision 圆角上圆周每单位长度的顶点个数
-	RoundedRegTriPrism(float a, float h, float radius, float precision = PRECISION_DEFAULT);
+	RoundedRegTriPrism(float a, float h, float radius, float precision = PRECISION_DEFAULT * 2);
 
 public:
 	~RoundedRegTriPrism() override;
 
-	static RoundedRegTriPrism *create(float a, float h, float radius, float precision = PRECISION_DEFAULT);
+	static RoundedRegTriPrism *create(float a, float h, float radius, float precision = PRECISION_DEFAULT * 2);
 
 	int getType() override
 	{
