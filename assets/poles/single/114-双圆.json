@@ -41,7 +41,7 @@
             "name": "mainPole",
             "position": [
                 0,
-                0,
+                20,
                 0
             ],
             "rotation": [
@@ -97,7 +97,7 @@
             "name": "bottomStiffener1",
             "position": [
                 57,
-                0,
+                20,
                 0
             ],
             "rotation": [
@@ -130,7 +130,7 @@
             "name": "bottomStiffener2",
             "position": [
                 0,
-                0,
+                20,
                 -57
             ],
             "rotation": [
@@ -163,7 +163,7 @@
             "name": "bottomStiffener3",
             "position": [
                 -57,
-                0,
+                20,
                 0
             ],
             "rotation": [
@@ -196,7 +196,7 @@
             "name": "bottomStiffener4",
             "position": [
                 0,
-                0,
+                20,
                 57
             ],
             "rotation": [
@@ -260,7 +260,7 @@
             "name": "面板-上",
             "position": [
                 0,
-                4000,
+                4020,
                 57
             ],
             "rotation": [
@@ -285,7 +285,7 @@
             "name": "面板-下",
             "position": [
                 0,
-                2900,
+                2920,
                 57
             ],
             "rotation": [

@@ -42,16 +42,17 @@
             "type": 1
         },
         {
-            "a": 4000,
-            "b": 3000,
-            "c": 20,
-            "type": 0
-        },
-        {
             "a": 1500,
             "b": 1500,
             "c": 1500,
             "type": 0
+        },
+        {
+            "a": 4000,
+            "b": 3000,
+            "c": 20,
+            "radius": 50,
+            "type": 3
         }
     ],
     "name": "Pole377-3T",
@@ -1469,70 +1470,8 @@
             ]
         },
         {
-            "isPoleBase": false,
-            "meshRef": 6,
-            "name": "面板（左）",
-            "position": [
-                2758.5,
-                6985,
-                66.5
-            ],
-            "rotation": [
-                90,
-                0,
-                0
-            ],
-            "textureEdits": [
-                false,
-                false,
-                false,
-                false,
-                false,
-                true
-            ],
-            "textureRefs": [
-                8,
-                8,
-                8,
-                8,
-                8,
-                3
-            ]
-        },
-        {
-            "isPoleBase": false,
-            "meshRef": 6,
-            "name": "面板（右）",
-            "position": [
-                -2758.5,
-                6985,
-                66.5
-            ],
-            "rotation": [
-                90,
-                0,
-                0
-            ],
-            "textureEdits": [
-                false,
-                false,
-                false,
-                false,
-                false,
-                true
-            ],
-            "textureRefs": [
-                8,
-                8,
-                8,
-                8,
-                8,
-                3
-            ]
-        },
-        {
             "isPoleBase": true,
-            "meshRef": 7,
+            "meshRef": 6,
             "name": "基",
             "position": [
                 0,
@@ -1559,6 +1498,56 @@
                 4,
                 4,
                 4
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "面板（左）",
+            "position": [
+                2758.5,
+                6985,
+                66.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "面板（右）",
+            "position": [
+                -2758.5,
+                6985,
+                66.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                8,
+                8
             ]
         }
     ],

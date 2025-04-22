@@ -49,7 +49,7 @@ PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAd
 	connect(ui->baseTypeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onBaseTypeChanged);
 	onBaseTypeChanged(0);
 
-	hidePanels();
+	// hidePanels();
 }
 
 PoleAddPanel::~PoleAddPanel()
@@ -127,6 +127,10 @@ void PoleAddPanel::onNodeClicked(QTreeWidgetItem *item, int column)
 	if (!part->isPoleBase() || ui->baseSizeSelector->currentIndex() != -1)
 	{
 		bindPart(part);
+	}
+	else
+	{
+		hidePanels();
 	}
 	ui->poleScene->selectPart(drawable);
 }
@@ -299,6 +303,8 @@ void PoleAddPanel::onBaseTypeChanged(int index)
 	}
 
 	connect(ui->baseSizeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onBaseSizeChanged);
+
+	hidePanels();
 }
 
 void PoleAddPanel::onBaseSizeChanged(int index)

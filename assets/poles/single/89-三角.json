@@ -42,7 +42,7 @@
             "name": "mainPole",
             "position": [
                 0,
-                0,
+                20,
                 0
             ],
             "rotation": [
@@ -123,7 +123,7 @@
             "name": "bottomStiffener1",
             "position": [
                 44.5,
-                0,
+                20,
                 0
             ],
             "rotation": [
@@ -156,7 +156,7 @@
             "name": "bottomStiffener2",
             "position": [
                 0,
-                0,
+                20,
                 -44.5
             ],
             "rotation": [
@@ -189,7 +189,7 @@
             "name": "bottomStiffener3",
             "position": [
                 -44.5,
-                0,
+                20,
                 0
             ],
             "rotation": [
@@ -222,7 +222,7 @@
             "name": "bottomStiffener4",
             "position": [
                 0,
-                0,
+                20,
                 44.5
             ],
             "rotation": [
