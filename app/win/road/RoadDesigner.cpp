@@ -60,6 +60,11 @@ void RoadDesigner::onRemovePoleRequested()
 {
     QTreeWidgetItem *item = ui->nodeTree->currentItem();
 
+    if (item == nullptr)
+    {
+        return;
+    }
+
     if (item->parent() == nullptr)
     {
         if (QMessageBox::question(this, "删除节点", "是否确定删除节点：" + item->text(0)) == QMessageBox::Yes)
