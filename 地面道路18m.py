@@ -77,7 +77,11 @@ meshes = [
     stiffener(20, 103, 12, 50, 200, 0, 0), # 横梁-加劲板1
     cube(200, 12, 41), # 横梁-加劲板2
     cylinder(300, 20), # 法兰盘
-
+    cube(14, 176, 176), # 加劲板
+    cylinder(60, 1505), # 直腹杆
+    cylinder(60, 405), # 4a
+    cylinder(60, 300), # 4b
+    rounded_cube(3810, 3810, 10, 50), # 面板
 ]
 parts = [
     part(True, 0, "基-左", [-9000, -750, 0], [0, 0, 0], [False for i in range(6)], [4 for i in range(6)]),
@@ -248,6 +252,168 @@ parts.append(
 parts.append(
     part(False, 7, "中心法兰盘-后-下", [10, 6920, -250], [0, 0, 90], [False for i in range(3)], [8 for i in range(3)]),
 )
+
+# 柱加劲板
+parts.append(
+    part(False, 8, "柱加劲板1-左-前-上", [-9000 + 70, 8520, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-左-前-上", [-9000 - 70, 8520, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板1-左-前-下", [-9000 + 70, 6920, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-左-前-下", [-9000 - 70, 6920, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+
+parts.append(
+    part(False, 8, "柱加劲板1-右-前-上", [9000 - 70, 8520, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-右-前-上", [9000 + 70, 8520, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板1-右-前-下", [9000 - 70, 6920, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-右-前-下", [9000 + 70, 6920, 250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+
+parts.append(
+    part(False, 8, "柱加劲板1-左-后-上", [-9000 + 70, 8520, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-左-后-上", [-9000 - 70, 8520, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板1-左-后-下", [-9000 + 70, 6920, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-左-后-下", [-9000 - 70, 6920, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+
+parts.append(
+    part(False, 8, "柱加劲板1-右-后-上", [9000 - 70, 8520, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-右-后-上", [9000 + 70, 8520, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板1-右-后-下", [9000 - 70, 6920, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+parts.append(
+    part(False, 8, "柱加劲板2-右-后-下", [9000 + 70, 6920, -250], [0, 0, 0], [False for i in range(7)], [8 for i in range(7)])
+)
+
+# 直腹杆
+parts.append(
+    part(False, 9, "直腹杆-左-前-端", [-9000 + 600, 6920 + r, 250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 9, "直腹杆-左-后-端", [-9000 + 600, 6920 + r, -250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 9, "直腹杆-右-前-端", [9000 - 600, 6920 + r, 250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 9, "直腹杆-右-后-端", [9000 - 600, 6920 + r, -250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+
+parts.append(
+    part(False, 9, "直腹杆-左-前-中", [-9000 + 600 + 560 + 7000 + 560, 6920 + r, 250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 9, "直腹杆-右-前-中", [-9000 + 600 + 560 + 7000 + 560 + 560, 6920 + r, 250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 9, "直腹杆-左-后-中", [-9000 + 600 + 560 + 7000 + 560, 6920 + r, -250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 9, "直腹杆-右-后-中", [-9000 + 600 + 560 + 7000 + 560 + 560, 6920 + r, -250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+for i in range(8):
+    parts.append(
+        part(False, 9, "直腹杆-前-" + str(i + 1), [-9000 + 600 + 560 + i * 1000, 6920 + r, 250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+
+    parts.append(
+        part(False, 9, "直腹杆-前-" + str(i + 1 + 9), [-9000 + 600 + 560 + 560 * 3 + 7000 + i * 1000, 6920 + r, 250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+
+    parts.append(
+        part(False, 9, "直腹杆-后-" + str(i + 1), [-9000 + 600 + 560 + i * 1000, 6920 + r, -250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+
+    parts.append(
+        part(False, 9, "直腹杆-后-" + str(i + 1 + 9), [-9000 + 600 + 560 + 560 * 3 + 7000 + i * 1000, 6920 + r, -250], [0, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+
+    # 顶层直腹杆
+    parts.append(
+        part(False, 10, "直腹杆-顶层" + str(i + 1), [-9000 + 600 + 560 + i * 1000, 8520, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+    parts.append(
+        part(False, 10, "直腹杆-顶层" + str(i + 1), [-9000 + 600 + 560 + 560 * 3 + 7000 + i * 1000, 8520, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+    parts.append(
+        part(False, 10, "直腹杆-底层" + str(i + 1), [-9000 + 600 + 560 + i * 1000, 6920, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+    parts.append(
+        part(False, 10, "直腹杆-底层" + str(i + 1), [-9000 + 600 + 560 + 560 * 3 + 7000 + i * 1000, 6920, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+
+parts.append(
+    part(False, 10, "直腹杆-顶层-左端", [-9000 + 600, 8520, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 10, "直腹杆-顶层-右端", [9000 - 560, 8520, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 10, "直腹杆-顶层-左中", [-9000 + 600 + 560 + 7000 + 560, 8520, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 10, "直腹杆-顶层-右中", [-9000 + 600 + 560 + 7000 + 560 + 560, 8520, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+
+parts.append(
+    part(False, 10, "直腹杆-顶层-左端", [-9000 + 600, 6920, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 10, "直腹杆-顶层-右端", [9000 - 560, 6920, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 10, "直腹杆-顶层-左中", [-9000 + 600 + 560 + 7000 + 560, 6920, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+parts.append(
+    part(False, 10, "直腹杆-顶层-右中", [-9000 + 600 + 560 + 7000 + 560 + 560, 6920, 250 - r], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+)
+
+# 柱直腹杆
+for i in range(11):
+    parts.append(
+        part(False, 11, "柱直腹杆-左-" + str(i + 1), [-9000, 520 + i * 800, 250 - 100], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+
+    parts.append(
+        part(False, 11, "柱直腹杆-右-" + str(i + 1), [9000, 520 + i * 800, 250 - 100], [-90, 0, 0], [False for i in range(3)], [7 for i in range(3)])
+    )
+
+# 面板
+a = 3810
+parts.append(
+    part(False, 12, "面板-1", [-9000 + 600 + a / 2, 9000 - 500 - 800, 250 + r], [90, 0, 0], [False if i != 0 else True for i in range(6)], [7 for i in range(6)])
+)
+parts.append(
+    part(False, 12, "面板-2", [-9000 + 600 + a / 2 + 500 + a, 9000 - 500 - 800, 250 + r], [90, 0, 0], [False if i != 0 else True for i in range(6)], [7 for i in range(6)])
+)
+parts.append(
+    part(False, 12, "面板-3", [-9000 + 7000 + 560 + 560 * 2 + 600 + a / 2, 9000 - 500 - 800, 250 + r], [90, 0, 0], [False if i != 0 else True for i in range(6)], [7 for i in range(6)])
+)
+parts.append(
+    part(False, 12, "面板-4", [-9000 + 7000 + 560 + 560 * 2 + 600 + a / 2 + 500 + a, 9000 - 500 - 800, 250 + r], [90, 0, 0], [False if i != 0 else True for i in range(6)], [7 for i in range(6)])
+)
+
 
 pole_name = "地面道路18m"
 pole_type = POLE_TYPE_GATE
