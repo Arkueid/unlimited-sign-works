@@ -1,0 +1,924 @@
+{
+    "meshes": [
+        {
+            "d": 299,
+            "h": 9300,
+            "type": 1
+        },
+        {
+            "d": 114,
+            "h": 5500,
+            "type": 1
+        },
+        {
+            "a": 4500,
+            "b": 3500,
+            "c": 10,
+            "radius": 100,
+            "type": 3
+        },
+        {
+            "a": 800,
+            "b": 800,
+            "c": 20,
+            "type": 0
+        },
+        {
+            "d": 300,
+            "h": 20,
+            "type": 1
+        },
+        {
+            "a": 30,
+            "b": 104,
+            "c": 8,
+            "h1": 550,
+            "h2": 750,
+            "offsetH": 0,
+            "offsetV": 20,
+            "type": 2
+        },
+        {
+            "a": 80,
+            "b": 300,
+            "c": 8,
+            "h1": 30,
+            "h2": 140,
+            "offsetH": 20,
+            "offsetV": 0,
+            "type": 2
+        },
+        {
+            "a": 1500,
+            "b": 1500,
+            "c": 1500,
+            "type": 0
+        }
+    ],
+    "name": "299-3F",
+    "parts": [
+        {
+            "isPoleBase": false,
+            "meshRef": 0,
+            "name": "mainPole",
+            "position": [
+                0,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "sideBeam1",
+            "position": [
+                -250,
+                7500,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "sideBeam2",
+            "position": [
+                -250,
+                6000,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "panel1",
+            "position": [
+                3250,
+                7450,
+                64
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                7,
+                6,
+                6,
+                6,
+                6,
+                6
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 3,
+            "name": "bottom",
+            "position": [
+                0,
+                10,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "flange1",
+            "position": [
+                250,
+                7500,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "flange2",
+            "position": [
+                250,
+                6000,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener1",
+            "position": [
+                -250,
+                7557,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener2",
+            "position": [
+                -250,
+                7500,
+                57
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener3",
+            "position": [
+                -250,
+                7443,
+                0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener4",
+            "position": [
+                -250,
+                7500,
+                -57
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener5",
+            "position": [
+                -250,
+                6057,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener6",
+            "position": [
+                -250,
+                6000,
+                57
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener7",
+            "position": [
+                -250,
+                5943,
+                0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener8",
+            "position": [
+                -250,
+                6000,
+                -57
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "bottomStiffener1",
+            "position": [
+                72.75,
+                20,
+                -126
+            ],
+            "rotation": [
+                0,
+                60,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "bottomStiffener2",
+            "position": [
+                -72.75,
+                20,
+                -126
+            ],
+            "rotation": [
+                0,
+                120,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "bottomStiffener3",
+            "position": [
+                -72.75,
+                20,
+                126
+            ],
+            "rotation": [
+                0,
+                240,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "bottomStiffener4",
+            "position": [
+                72.75,
+                20,
+                126
+            ],
+            "rotation": [
+                0,
+                300,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 7,
+            "name": "基",
+            "position": [
+                0,
+                -750,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "sideBeam3",
+            "position": [
+                -250,
+                9000,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener9",
+            "position": [
+                -250,
+                9057,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener10",
+            "position": [
+                -250,
+                9000,
+                57
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener11",
+            "position": [
+                -250,
+                8943,
+                0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener12",
+            "position": [
+                -250,
+                9000,
+                -57
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "flange3",
+            "position": [
+                250,
+                9000,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "bottomStiffener5",
+            "position": [
+                145.5,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "bottomStiffener6",
+            "position": [
+                -145.5,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        }
+    ],
+    "type": 3
+}

@@ -1,25 +1,25 @@
 {
     "meshes": [
         {
-            "d": 168,
-            "h": 6700,
+            "d": 273,
+            "h": 7700,
             "type": 1
         },
         {
-            "d": 108,
-            "h": 4000,
+            "d": 114,
+            "h": 5000,
             "type": 1
         },
         {
-            "a": 2500,
-            "b": 2000,
+            "a": 4000,
+            "b": 2800,
             "c": 10,
-            "radius": 220,
+            "radius": 280,
             "type": 3
         },
         {
-            "a": 400,
-            "b": 400,
+            "a": 600,
+            "b": 600,
             "c": 20,
             "type": 0
         },
@@ -39,23 +39,23 @@
             "type": 2
         },
         {
-            "a": 50,
-            "b": 200,
+            "a": 80,
+            "b": 300,
             "c": 8,
             "h1": 30,
-            "h2": 110,
+            "h2": 140,
             "offsetH": 20,
             "offsetV": 0,
             "type": 2
         },
         {
-            "a": 800,
-            "b": 800,
-            "c": 800,
+            "a": 1500,
+            "b": 1500,
+            "c": 1500,
             "type": 0
         }
     ],
-    "name": "Pole168",
+    "name": "273-3F",
     "parts": [
         {
             "isPoleBase": false,
@@ -88,7 +88,7 @@
             "name": "sideBeam1",
             "position": [
                 -250,
-                6400,
+                6300,
                 0
             ],
             "rotation": [
@@ -113,7 +113,7 @@
             "name": "sideBeam2",
             "position": [
                 -250,
-                5800,
+                5200,
                 0
             ],
             "rotation": [
@@ -137,8 +137,8 @@
             "meshRef": 2,
             "name": "panel1",
             "position": [
-                2500,
-                6100,
+                2750,
+                6300,
                 64
             ],
             "rotation": [
@@ -200,7 +200,7 @@
             "name": "flange1",
             "position": [
                 250,
-                6400,
+                6300,
                 0
             ],
             "rotation": [
@@ -225,7 +225,7 @@
             "name": "flange2",
             "position": [
                 250,
-                5800,
+                5200,
                 0
             ],
             "rotation": [
@@ -250,7 +250,7 @@
             "name": "sideStiffener1",
             "position": [
                 -250,
-                6454,
+                6357,
                 0
             ],
             "rotation": [
@@ -283,8 +283,8 @@
             "name": "sideStiffener2",
             "position": [
                 -250,
-                6400,
-                54
+                6300,
+                57
             ],
             "rotation": [
                 90,
@@ -316,7 +316,7 @@
             "name": "sideStiffener3",
             "position": [
                 -250,
-                6346,
+                6243,
                 0
             ],
             "rotation": [
@@ -349,8 +349,8 @@
             "name": "sideStiffener4",
             "position": [
                 -250,
-                6400,
-                -54
+                6300,
+                -57
             ],
             "rotation": [
                 270,
@@ -382,7 +382,7 @@
             "name": "sideStiffener5",
             "position": [
                 -250,
-                5854,
+                5257,
                 0
             ],
             "rotation": [
@@ -415,8 +415,8 @@
             "name": "sideStiffener6",
             "position": [
                 -250,
-                5800,
-                54
+                5200,
+                57
             ],
             "rotation": [
                 90,
@@ -448,7 +448,7 @@
             "name": "sideStiffener7",
             "position": [
                 -250,
-                5746,
+                5143,
                 0
             ],
             "rotation": [
@@ -481,8 +481,8 @@
             "name": "sideStiffener8",
             "position": [
                 -250,
-                5800,
-                -54
+                5200,
+                -57
             ],
             "rotation": [
                 270,
@@ -513,13 +513,13 @@
             "meshRef": 6,
             "name": "bottomStiffener1",
             "position": [
-                84,
-                0,
-                0
+                96.5199966430664,
+                20,
+                -96.5199966430664
             ],
             "rotation": [
                 0,
-                0,
+                45,
                 0
             ],
             "textureEdits": [
@@ -546,13 +546,13 @@
             "meshRef": 6,
             "name": "bottomStiffener2",
             "position": [
-                0,
-                0,
-                -84
+                -96.5199966430664,
+                20,
+                -96.5199966430664
             ],
             "rotation": [
                 0,
-                90,
+                135,
                 0
             ],
             "textureEdits": [
@@ -579,13 +579,13 @@
             "meshRef": 6,
             "name": "bottomStiffener3",
             "position": [
-                -84,
-                0,
-                0
+                -96.5199966430664,
+                20,
+                96.5199966430664
             ],
             "rotation": [
                 0,
-                180,
+                225,
                 0
             ],
             "textureEdits": [
@@ -612,13 +612,13 @@
             "meshRef": 6,
             "name": "bottomStiffener4",
             "position": [
-                0,
-                0,
-                84
+                96.5199966430664,
+                20,
+                96.5199966430664
             ],
             "rotation": [
                 0,
-                270,
+                315,
                 0
             ],
             "textureEdits": [
@@ -646,7 +646,7 @@
             "name": "基",
             "position": [
                 0,
-                -400,
+                -750,
                 0
             ],
             "rotation": [
@@ -669,6 +669,188 @@
                 4,
                 4,
                 4
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "sideBeam3",
+            "position": [
+                -250,
+                7400,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener9",
+            "position": [
+                -250,
+                7457,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener10",
+            "position": [
+                -250,
+                7400,
+                57
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener11",
+            "position": [
+                -250,
+                7343,
+                0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "sideStiffener12",
+            "position": [
+                -250,
+                7400,
+                -57
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "flange3",
+            "position": [
+                250,
+                7400,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                -90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
             ]
         }
     ],

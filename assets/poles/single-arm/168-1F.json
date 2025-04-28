@@ -1,0 +1,450 @@
+{
+    "meshes": [
+        {
+            "a": 400,
+            "b": 400,
+            "c": 20,
+            "type": 0
+        },
+        {
+            "d": 168,
+            "h": 6400,
+            "type": 1
+        },
+        {
+            "a": 50,
+            "b": 200,
+            "c": 12,
+            "h1": 30,
+            "h2": 110,
+            "offsetH": 20,
+            "offsetV": 1,
+            "type": 2
+        },
+        {
+            "d": 108,
+            "h": 1600,
+            "type": 1
+        },
+        {
+            "a": 90,
+            "b": 220,
+            "c": 8,
+            "h1": 30,
+            "h2": 95,
+            "offsetH": 10,
+            "offsetV": 100,
+            "type": 2
+        },
+        {
+            "d": 300,
+            "h": 20,
+            "type": 1
+        },
+        {
+            "d": 108,
+            "h": 2500,
+            "type": 1
+        },
+        {
+            "d": 1500,
+            "h": 10,
+            "type": 1
+        },
+        {
+            "a": 800,
+            "b": 800,
+            "c": 800,
+            "type": 0
+        }
+    ],
+    "name": "168-1F",
+    "parts": [
+        {
+            "isPoleBase": false,
+            "meshRef": 0,
+            "name": "底板",
+            "position": [
+                0,
+                10,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "立柱",
+            "position": [
+                0,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "加劲板-1",
+            "position": [
+                84,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "加劲板-2",
+            "position": [
+                0,
+                0,
+                -84
+            ],
+            "rotation": [
+                0,
+                90,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "加劲板-3",
+            "position": [
+                -84,
+                0,
+                0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "加劲板-4",
+            "position": [
+                0,
+                0,
+                84
+            ],
+            "rotation": [
+                0,
+                270,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 3,
+            "name": "悬臂-1",
+            "position": [
+                0,
+                6000,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                72
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "悬梁加劲板-1",
+            "position": [
+                -84,
+                6084.06982421875,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                72
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "悬梁加劲板-2",
+            "position": [
+                -123.5,
+                5985.5,
+                0
+            ],
+            "rotation": [
+                0,
+                180,
+                -72
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "法兰",
+            "position": [
+                -142.64999389648438,
+                6046.35009765625,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                72
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "悬臂-2",
+            "position": [
+                -1504.68994140625,
+                6491.419921875,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "面板",
+            "position": [
+                -3254.68994140625,
+                6491.419921875,
+                54
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 8,
+            "name": "基",
+            "position": [
+                0,
+                -400,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            ]
+        }
+    ],
+    "type": 3
+}
