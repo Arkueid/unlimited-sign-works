@@ -6,7 +6,7 @@
             "type": 1
         },
         {
-            "d": 114,
+            "d": 140,
             "h": 5000,
             "type": 1
         },
@@ -24,7 +24,7 @@
             "type": 0
         },
         {
-            "d": 300,
+            "d": 326,
             "h": 20,
             "type": 1
         },
@@ -250,7 +250,7 @@
             "name": "sideStiffener1",
             "position": [
                 -250,
-                6357,
+                6370,
                 0
             ],
             "rotation": [
@@ -284,7 +284,7 @@
             "position": [
                 -250,
                 6300,
-                57
+                70
             ],
             "rotation": [
                 90,
@@ -316,7 +316,7 @@
             "name": "sideStiffener3",
             "position": [
                 -250,
-                6243,
+                6230,
                 0
             ],
             "rotation": [
@@ -350,7 +350,7 @@
             "position": [
                 -250,
                 6300,
-                -57
+                -70
             ],
             "rotation": [
                 270,
@@ -382,7 +382,7 @@
             "name": "sideStiffener5",
             "position": [
                 -250,
-                5257,
+                5270,
                 0
             ],
             "rotation": [
@@ -416,7 +416,7 @@
             "position": [
                 -250,
                 5200,
-                57
+                70
             ],
             "rotation": [
                 90,
@@ -448,7 +448,7 @@
             "name": "sideStiffener7",
             "position": [
                 -250,
-                5143,
+                5130,
                 0
             ],
             "rotation": [
@@ -482,7 +482,7 @@
             "position": [
                 -250,
                 5200,
-                -57
+                -70
             ],
             "rotation": [
                 270,
@@ -702,7 +702,7 @@
             "name": "sideStiffener9",
             "position": [
                 -250,
-                7457,
+                7470,
                 0
             ],
             "rotation": [
@@ -736,7 +736,7 @@
             "position": [
                 -250,
                 7400,
-                57
+                70
             ],
             "rotation": [
                 90,
@@ -768,7 +768,7 @@
             "name": "sideStiffener11",
             "position": [
                 -250,
-                7343,
+                7330,
                 0
             ],
             "rotation": [
@@ -802,7 +802,7 @@
             "position": [
                 -250,
                 7400,
-                -57
+                -70
             ],
             "rotation": [
                 270,

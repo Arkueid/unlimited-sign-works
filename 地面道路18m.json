@@ -1,0 +1,4184 @@
+{
+    "meshes": [
+        {
+            "type": 0,
+            "a": 1500,
+            "b": 1500,
+            "c": 1500
+        },
+        {
+            "type": 0,
+            "a": 500,
+            "b": 400,
+            "c": 20
+        },
+        {
+            "type": 0,
+            "a": 200,
+            "b": 8,
+            "c": 9000
+        },
+        {
+            "type": 0,
+            "a": 8,
+            "b": 200,
+            "c": 9000
+        },
+        {
+            "type": 1,
+            "d": 95,
+            "h": 18200
+        },
+        {
+            "type": 2,
+            "a": 20,
+            "b": 103,
+            "c": 12,
+            "h1": 50,
+            "h2": 200,
+            "offsetH": 0,
+            "offsetV": 0
+        },
+        {
+            "type": 0,
+            "a": 200,
+            "b": 12,
+            "c": 41
+        },
+        {
+            "type": 1,
+            "d": 300,
+            "h": 20
+        }
+    ],
+    "parts": [
+        {
+            "isPoleBase": true,
+            "meshRef": 0,
+            "name": "基-左",
+            "position": [
+                -9000,
+                -750,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 0,
+            "name": "基-右",
+            "position": [
+                9000,
+                -750,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "底板-左-前",
+            "position": [
+                -9000,
+                10,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "底板-左-后",
+            "position": [
+                -9000,
+                10,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "底板-右-前",
+            "position": [
+                9000,
+                10,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "底板-右-后",
+            "position": [
+                9000,
+                10,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-左-前-前",
+            "position": [
+                -9000,
+                4520,
+                350
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 3,
+            "name": "立柱-左-前-中",
+            "position": [
+                -9000,
+                4520,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-左-前-前",
+            "position": [
+                -9000,
+                4520,
+                150
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-左-后-前",
+            "position": [
+                -9000,
+                4520,
+                -150
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 3,
+            "name": "立柱-左-后-中",
+            "position": [
+                -9000,
+                4520,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-左-后-前",
+            "position": [
+                -9000,
+                4520,
+                -350
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-右-前-前",
+            "position": [
+                9000,
+                4520,
+                350
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 3,
+            "name": "立柱-右-前-中",
+            "position": [
+                9000,
+                4520,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-右-前-前",
+            "position": [
+                9000,
+                4520,
+                150
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-右-后-前",
+            "position": [
+                9000,
+                4520,
+                -150
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 3,
+            "name": "立柱-右-后-中",
+            "position": [
+                9000,
+                4520,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "立柱-右-后-前",
+            "position": [
+                9000,
+                4520,
+                -350
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                32,
+                32,
+                32,
+                32,
+                32,
+                32
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "横梁-前-上",
+            "position": [
+                9100,
+                8520,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "横梁-前-下",
+            "position": [
+                9100,
+                6920,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "横梁-后-上",
+            "position": [
+                9100,
+                8520,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "横梁-后-下",
+            "position": [
+                9100,
+                6920,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                7,
+                7,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-上-0",
+            "position": [
+                -8730,
+                8567.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-下-0",
+            "position": [
+                -8730,
+                6967.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-上-0",
+            "position": [
+                -8730,
+                8567.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-下-0",
+            "position": [
+                -8730,
+                6967.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-上-0",
+            "position": [
+                -8830,
+                8588.0,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-下-0",
+            "position": [
+                -8830,
+                6988.0,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-上-0",
+            "position": [
+                -8830,
+                8588.0,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-下-0",
+            "position": [
+                -8830,
+                6988.0,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-上-0",
+            "position": [
+                8730,
+                8567.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-下-0",
+            "position": [
+                8730,
+                6967.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-上-0",
+            "position": [
+                8730,
+                8567.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-下-0",
+            "position": [
+                8730,
+                6967.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-上-0",
+            "position": [
+                8830,
+                8588.0,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-下-0",
+            "position": [
+                8830,
+                6988.0,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-上-0",
+            "position": [
+                8830,
+                8588.0,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-下-0",
+            "position": [
+                8830,
+                6988.0,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-上-0",
+            "position": [
+                -10,
+                8567.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-上-0",
+            "position": [
+                10,
+                8567.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-下-0",
+            "position": [
+                -10,
+                6967.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-下-0",
+            "position": [
+                10,
+                6967.5,
+                250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-上-0",
+            "position": [
+                -10,
+                8567.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-上-0",
+            "position": [
+                10,
+                8567.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-下-0",
+            "position": [
+                -10,
+                6967.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-下-0",
+            "position": [
+                10,
+                6967.5,
+                -250.0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-上-1",
+            "position": [
+                -8730,
+                8520.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-下-1",
+            "position": [
+                -8730,
+                6920.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-上-1",
+            "position": [
+                -8730,
+                8520.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-下-1",
+            "position": [
+                -8730,
+                6920.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-上-1",
+            "position": [
+                -8830,
+                8520.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-下-1",
+            "position": [
+                -8830,
+                6920.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-上-1",
+            "position": [
+                -8830,
+                8520.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-下-1",
+            "position": [
+                -8830,
+                6920.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-上-1",
+            "position": [
+                8730,
+                8520.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-下-1",
+            "position": [
+                8730,
+                6920.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-上-1",
+            "position": [
+                8730,
+                8520.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-下-1",
+            "position": [
+                8730,
+                6920.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-上-1",
+            "position": [
+                8830,
+                8520.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-下-1",
+            "position": [
+                8830,
+                6920.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-上-1",
+            "position": [
+                8830,
+                8520.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-下-1",
+            "position": [
+                8830,
+                6920.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-上-1",
+            "position": [
+                -10,
+                8520.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-上-1",
+            "position": [
+                10,
+                8520.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-下-1",
+            "position": [
+                -10,
+                6920.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-下-1",
+            "position": [
+                10,
+                6920.0,
+                297.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-上-1",
+            "position": [
+                -10,
+                8520.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-上-1",
+            "position": [
+                10,
+                8520.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-下-1",
+            "position": [
+                -10,
+                6920.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-下-1",
+            "position": [
+                10,
+                6920.0,
+                -202.5
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-上-2",
+            "position": [
+                -8730,
+                8472.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-下-2",
+            "position": [
+                -8730,
+                6872.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-上-2",
+            "position": [
+                -8730,
+                8472.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-下-2",
+            "position": [
+                -8730,
+                6872.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-上-2",
+            "position": [
+                -8830,
+                8452.0,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-下-2",
+            "position": [
+                -8830,
+                6852.0,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-上-2",
+            "position": [
+                -8830,
+                8452.0,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-下-2",
+            "position": [
+                -8830,
+                6852.0,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-上-2",
+            "position": [
+                8730,
+                8472.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-下-2",
+            "position": [
+                8730,
+                6872.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-上-2",
+            "position": [
+                8730,
+                8472.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-下-2",
+            "position": [
+                8730,
+                6872.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-上-2",
+            "position": [
+                8830,
+                8452.0,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-下-2",
+            "position": [
+                8830,
+                6852.0,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-上-2",
+            "position": [
+                8830,
+                8452.0,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-下-2",
+            "position": [
+                8830,
+                6852.0,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-上-2",
+            "position": [
+                -10,
+                8472.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-上-2",
+            "position": [
+                10,
+                8472.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-下-2",
+            "position": [
+                -10,
+                6872.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-下-2",
+            "position": [
+                10,
+                6872.5,
+                250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-上-2",
+            "position": [
+                -10,
+                8472.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-上-2",
+            "position": [
+                10,
+                8472.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-下-2",
+            "position": [
+                -10,
+                6872.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-下-2",
+            "position": [
+                10,
+                6872.5,
+                -250.0
+            ],
+            "rotation": [
+                180,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-上-3",
+            "position": [
+                -8730,
+                8520.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-前-下-3",
+            "position": [
+                -8730,
+                6920.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-上-3",
+            "position": [
+                -8730,
+                8520.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板1-左-后-下-3",
+            "position": [
+                -8730,
+                6920.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-上-3",
+            "position": [
+                -8830,
+                8520.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-前-下-3",
+            "position": [
+                -8830,
+                6920.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-上-3",
+            "position": [
+                -8830,
+                8520.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-左-后-下-3",
+            "position": [
+                -8830,
+                6920.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-上-3",
+            "position": [
+                8730,
+                8520.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-前-下-3",
+            "position": [
+                8730,
+                6920.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-上-3",
+            "position": [
+                8730,
+                8520.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-加劲板-右-后-下-3",
+            "position": [
+                8730,
+                6920.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-上-3",
+            "position": [
+                8830,
+                8520.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-前-下-3",
+            "position": [
+                8830,
+                6920.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-上-3",
+            "position": [
+                8830,
+                8520.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 6,
+            "name": "横梁-加劲板2-右-后-下-3",
+            "position": [
+                8830,
+                6920.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-上-3",
+            "position": [
+                -10,
+                8520.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-上-3",
+            "position": [
+                10,
+                8520.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-前-下-3",
+            "position": [
+                -10,
+                6920.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-前-下-3",
+            "position": [
+                10,
+                6920.0,
+                202.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-上-3",
+            "position": [
+                -10,
+                8520.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-上-3",
+            "position": [
+                10,
+                8520.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-左-后-下-3",
+            "position": [
+                -10,
+                6920.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "横梁-中心加劲板-右-后-下-3",
+            "position": [
+                10,
+                6920.0,
+                -297.5
+            ],
+            "rotation": [
+                270,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-左-前-上",
+            "position": [
+                -8730,
+                8520,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-左-前-下",
+            "position": [
+                -8730,
+                6920,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-左-后-上",
+            "position": [
+                -8730,
+                8520,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-左-后-下",
+            "position": [
+                -8730,
+                6920,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-右-前-上",
+            "position": [
+                8730,
+                8520,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-右-前-下",
+            "position": [
+                8730,
+                6920,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-右-后-上",
+            "position": [
+                8730,
+                8520,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "法兰盘-右-后-下",
+            "position": [
+                8730,
+                6920,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "中心法兰盘-前-上",
+            "position": [
+                10,
+                8520,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "中心法兰盘-前-下",
+            "position": [
+                10,
+                6920,
+                250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "中心法兰盘-后-上",
+            "position": [
+                10,
+                8520,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 7,
+            "name": "中心法兰盘-后-下",
+            "position": [
+                10,
+                6920,
+                -250
+            ],
+            "rotation": [
+                0,
+                0,
+                90
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8
+            ]
+        }
+    ],
+    "name": "地面道路18m",
+    "type": 2
+}
