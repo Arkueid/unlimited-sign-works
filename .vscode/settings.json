@@ -86,6 +86,7 @@
         "qpainter": "cpp",
         "coroutine": "cpp",
         "qmessagebox": "cpp",
-        "qfile": "cpp"
+        "qfile": "cpp",
+        "qopenglfunctions": "cpp"
     }
 }

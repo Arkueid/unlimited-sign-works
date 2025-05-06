@@ -1,4 +1,18 @@
+aux_source_directory(road/common ROAD_COMMON_SOURCES)
+aux_source_directory(road/scene ROAD_SCENE_SOURCES)
+aux_source_directory(road/road ROAD_ROAD_SOURCES)
+aux_source_directory(road/geoSolid ROAD_GEO_SOLID_SOURCES)
+aux_source_directory(road/terrain ROAD_TERRAIN_SOURCES)
+aux_source_directory(road/bridge ROAD_BRIDGE_SOURCES)
+
 add_executable(usw 
+    ${ROAD_COMMON_SOURCES}
+    ${ROAD_SCENE_SOURCES}
+    ${ROAD_ROAD_SOURCES}
+    ${ROAD_GEO_SOLID_SOURCES}
+    ${ROAD_TERRAIN_SOURCES}
+    ${ROAD_BRIDGE_SOURCES}
+
     Main.cpp
     win/scene/PoleScene.hpp
     win/scene/PoleScene.cpp
@@ -77,9 +91,10 @@ add_executable(usw
     logo.rc
 )
 
+
 target_compile_definitions(usw PRIVATE UNICODE _UNICODE)
 
-target_include_directories(usw PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(usw PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} road)
 
 target_compile_options(usw PRIVATE "/Zc:__cplusplus" "/permissive-" "/utf-8")
 
@@ -94,6 +109,7 @@ target_link_libraries(usw
     Qt6::OpenGLWidgets 
     Qt6::Gui
     core
+    opengl32.lib
 )
 
 set_target_properties(usw PROPERTIES

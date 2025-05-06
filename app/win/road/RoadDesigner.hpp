@@ -12,7 +12,7 @@ class RoadDesigner : public QWidget
 private slots:
     void onAddPoleRequested();
 
-    void onPoleSubmitted(Pole* pole);
+    void onPoleSubmitted(Pole* pole, float peg, const QString& slot, bool isLeft);
 
     void onNodeStateChanged(QTreeWidgetItem* item, int column);
 

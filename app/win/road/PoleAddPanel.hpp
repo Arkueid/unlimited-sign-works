@@ -9,6 +9,8 @@
 #include <QMetaObject>
 #include <QDialog>
 
+#include <QRegularExpressionValidator>
+
 struct BaseInfo
 {
     Part* part;
@@ -49,6 +51,8 @@ class PoleAddPanel : public QDialog {
 
     bool isBaseSet();
 
+    bool checkPoleSlotValid(float& peg);
+
 private slots:
     void onNodeClicked(QTreeWidgetItem* item, int column);
 
@@ -73,11 +77,16 @@ public:
     ~PoleAddPanel() override;
 
 signals:
-    void poleSubmitted(Pole* pole);
+    void poleSubmitted(Pole* pole, 
+        float peg, 
+        const QString& slot,
+        bool isLeft);
 
 private:
     Ui::PoleAddPanel* ui;
     QDoubleValidator* doubleValidator;
+
+    QRegularExpressionValidator* slotValidator;
 
     QMetaObject::Connection stateChangedConnection;
     QMetaObject::Connection texClickedConnection;

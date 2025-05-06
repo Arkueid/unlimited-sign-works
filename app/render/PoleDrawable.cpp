@@ -12,6 +12,9 @@ PoleDrawable::PoleDrawable(Pole* pole): pole(pole)
     }
 
     modelMatrix.setToIdentity();
+
+    innerScale.setToIdentity();
+    innerScale.scale(10 * 1.2); // 单位m
 }
 
 PoleDrawable::~PoleDrawable()
@@ -23,7 +26,6 @@ PoleDrawable::~PoleDrawable()
 
 void PoleDrawable::draw(QOpenGLShaderProgram &program)
 {
-
     for (auto d : drawables)
     {
         if (d->isVisible())
@@ -35,5 +37,5 @@ void PoleDrawable::draw(QOpenGLShaderProgram &program)
 
 void PoleDrawable::setModelMatrix(QMatrix4x4 &modelMatrix)
 {
-    this->modelMatrix = modelMatrix;
+    this->modelMatrix = modelMatrix * innerScale;
 }

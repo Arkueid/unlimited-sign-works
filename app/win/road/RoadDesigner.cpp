@@ -35,13 +35,13 @@ void RoadDesigner::onAddPoleRequested()
     connect(panel, &PoleAddPanel::poleSubmitted, this, &RoadDesigner::onPoleSubmitted);
 }
 
-void RoadDesigner::onPoleSubmitted(Pole *pole)
+void RoadDesigner::onPoleSubmitted(Pole *pole, float peg, const QString& slot, bool isLeft)
 {
-    PoleDrawable *d = ui->roadScene->addPole(pole);
+    PoleDrawable *d = ui->roadScene->addPole(pole, peg, isLeft);
 
     QTreeWidgetItem *item = new QTreeWidgetItem(ui->nodeTree);
     item->setCheckState(0, Qt::Checked);
-    item->setText(0, pole->getName().c_str());
+    item->setText(0, slot + (isLeft ? "左" : "右"));
 
     item->setData(0, Qt::UserRole, QVariant::fromValue(d));
 }

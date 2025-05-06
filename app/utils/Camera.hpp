@@ -19,20 +19,21 @@ public:
         return position;
     }
 
-private:
     QVector3D position;
+    float pitch;
+    float yaw;
+    void updateCameraVectors(); // 更新摄像机向量
+    float movementSpeed;
+
+private:
     QVector3D front;
     QVector3D up;
     QVector3D right;
     QVector3D worldUp;
 
-    float yaw;
-    float pitch;
 
-    float movementSpeed;
     float mouseSensitivity;
 
-    void updateCameraVectors(); // 更新摄像机向量
 };
 
 #endif // CAMERA_H

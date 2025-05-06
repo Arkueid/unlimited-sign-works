@@ -87,13 +87,13 @@
             "meshRef": 1,
             "name": "sideBeam1",
             "position": [
-                -250,
+                250,
                 7500,
                 0
             ],
             "rotation": [
                 0,
-                0,
+                180,
                 -90
             ],
             "textureEdits": [
@@ -112,13 +112,13 @@
             "meshRef": 1,
             "name": "sideBeam2",
             "position": [
-                -250,
+                250,
                 6000,
                 0
             ],
             "rotation": [
                 0,
-                0,
+                180,
                 -90
             ],
             "textureEdits": [
@@ -137,7 +137,7 @@
             "meshRef": 2,
             "name": "panel1",
             "position": [
-                3250,
+                -3250,
                 7450,
                 64
             ],
@@ -199,7 +199,7 @@
             "meshRef": 4,
             "name": "flange1",
             "position": [
-                250,
+                -250,
                 7500,
                 0
             ],
@@ -224,7 +224,7 @@
             "meshRef": 4,
             "name": "flange2",
             "position": [
-                250,
+                -250,
                 6000,
                 0
             ],
@@ -249,13 +249,13 @@
             "meshRef": 5,
             "name": "sideStiffener1",
             "position": [
-                -250,
+                250,
                 7570,
                 0
             ],
             "rotation": [
                 0,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -282,13 +282,13 @@
             "meshRef": 5,
             "name": "sideStiffener2",
             "position": [
-                -250,
+                250,
                 7500,
                 70
             ],
             "rotation": [
                 90,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -315,13 +315,13 @@
             "meshRef": 5,
             "name": "sideStiffener3",
             "position": [
-                -250,
+                250,
                 7430,
                 0
             ],
             "rotation": [
                 180,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -348,13 +348,13 @@
             "meshRef": 5,
             "name": "sideStiffener4",
             "position": [
-                -250,
+                250,
                 7500,
                 -70
             ],
             "rotation": [
                 270,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -381,13 +381,13 @@
             "meshRef": 5,
             "name": "sideStiffener5",
             "position": [
-                -250,
+                250,
                 6070,
                 0
             ],
             "rotation": [
                 0,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -414,13 +414,13 @@
             "meshRef": 5,
             "name": "sideStiffener6",
             "position": [
-                -250,
+                250,
                 6000,
                 70
             ],
             "rotation": [
                 90,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -447,13 +447,13 @@
             "meshRef": 5,
             "name": "sideStiffener7",
             "position": [
-                -250,
+                250,
                 5930,
                 0
             ],
             "rotation": [
                 180,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -480,13 +480,13 @@
             "meshRef": 5,
             "name": "sideStiffener8",
             "position": [
-                -250,
+                250,
                 6000,
                 -70
             ],
             "rotation": [
                 270,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -676,13 +676,13 @@
             "meshRef": 1,
             "name": "sideBeam3",
             "position": [
-                -250,
+                250,
                 9000,
                 0
             ],
             "rotation": [
                 0,
-                0,
+                180,
                 -90
             ],
             "textureEdits": [
@@ -701,13 +701,13 @@
             "meshRef": 5,
             "name": "sideStiffener9",
             "position": [
-                -250,
+                250,
                 9070,
                 0
             ],
             "rotation": [
                 0,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -734,13 +734,13 @@
             "meshRef": 5,
             "name": "sideStiffener10",
             "position": [
-                -250,
+                250,
                 9000,
                 70
             ],
             "rotation": [
                 90,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -767,13 +767,13 @@
             "meshRef": 5,
             "name": "sideStiffener11",
             "position": [
-                -250,
+                250,
                 8930,
                 0
             ],
             "rotation": [
                 180,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -800,13 +800,13 @@
             "meshRef": 5,
             "name": "sideStiffener12",
             "position": [
-                -250,
+                250,
                 9000,
                 -70
             ],
             "rotation": [
                 270,
-                0,
+                180,
                 0
             ],
             "textureEdits": [
@@ -833,7 +833,7 @@
             "meshRef": 4,
             "name": "flange3",
             "position": [
-                250,
+                -250,
                 9000,
                 0
             ],

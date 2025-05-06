@@ -92,7 +92,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1,0,1">
           <property name="topMargin">
            <number>0</number>
           </property>
@@ -105,6 +105,27 @@
           </item>
           <item>
            <widget class="QLineEdit" name="poleSlot"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>位置</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="poleSlotPosSelector">
+            <item>
+             <property name="text">
+              <string>左</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>右</string>
+             </property>
+            </item>
+           </widget>
           </item>
          </layout>
         </item>
@@ -209,6 +230,9 @@
        </layout>
       </widget>
       <widget class="QTableWidget" name="textureTable">
+       <property name="cursor" stdset="0">
+        <cursorShape>ArrowCursor</cursorShape>
+       </property>
        <property name="editTriggers">
         <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
        </property>

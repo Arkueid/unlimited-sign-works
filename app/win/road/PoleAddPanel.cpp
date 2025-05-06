@@ -13,8 +13,8 @@
 #include <QDir>
 #include <QMessageBox>
 
-PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0), 
-	textureSelcted(false), poleLoaded(false)
+PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0),
+											  textureSelcted(false), poleLoaded(false), slotValidator(new QRegularExpressionValidator)
 {
 	ui->setupUi(this);
 
@@ -22,7 +22,11 @@ PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAd
 
 	ui->poleScene->loadPole("");
 
-	ui->poleSlot->setText(ui->poleScene->getPoleName());
+	slotValidator->setRegularExpression(QRegularExpression("-?K\\d+(\\.\\d+)?\\+\\d+(\\.\\d+)?"));
+
+	ui->poleSlot->setValidator(slotValidator);
+
+	ui->poleSlot->setText("K0+000");
 
 	ui->splitter->setStretchFactor(0, 1);
 	ui->splitter->setStretchFactor(1, 5);
@@ -162,6 +166,10 @@ void PoleAddPanel::onNodeStateChanged(QTreeWidgetItem *item, int column)
 void PoleAddPanel::onPoleSlotEdited(const QString &text)
 {
 	QTreeWidgetItem *item = ui->nodeTree->topLevelItem(0);
+	if (item == nullptr)
+	{
+		return;
+	}
 	item->setText(0, text);
 	ui->poleScene->setPoleName(text);
 }
@@ -174,7 +182,7 @@ void PoleAddPanel::onPoleInitialized()
 	}
 
 	initNodeTree();
-	
+
 	initTexturePanel();
 
 	poleLoaded = true;
@@ -245,8 +253,6 @@ void PoleAddPanel::onPoleSelected(int index)
 		didx++;
 	}
 
-	ui->poleSlot->setText(pole->getName().c_str());
-
 	poleLoaded = false;
 	ui->poleScene->changePole(pole);
 
@@ -255,6 +261,12 @@ void PoleAddPanel::onPoleSelected(int index)
 
 void PoleAddPanel::onConfirmBtnClicked()
 {
+	float peg = 0;
+	if (!checkPoleSlotValid(peg))
+	{
+		return;
+	}
+
 	if (!isPoleSet())
 	{
 		QMessageBox::warning(this, "提示", "请选择标识牌!");
@@ -273,7 +285,11 @@ void PoleAddPanel::onConfirmBtnClicked()
 		return;
 	}
 
-	emit poleSubmitted(ui->poleScene->getPole());
+	emit poleSubmitted(
+		ui->poleScene->getPole(),
+		peg,
+		ui->poleSlot->text(),
+		ui->poleSlotPosSelector->currentIndex() == 0);
 	close();
 }
 
@@ -298,7 +314,7 @@ void PoleAddPanel::onBaseTypeChanged(int index)
 		{
 			ui->poleScene->getDrawable(base.drawableIndex)->setVisible(false);
 		}
-	
+
 		ui->poleScene->update();
 	}
 
@@ -831,6 +847,53 @@ bool PoleAddPanel::isAllTexSet()
 bool PoleAddPanel::isBaseSet()
 {
 	return ui->baseSizeSelector->currentIndex() != -1;
+}
+
+bool PoleAddPanel::checkPoleSlotValid(float& peg)
+{
+	QString poleSlot = ui->poleSlot->text();
+	if (poleSlot.isEmpty())
+	{
+		QMessageBox::warning(this, "提示", "桩号不能为空");
+		return false;
+	}
+
+	const bool isFirstK = poleSlot.startsWith("K");
+	const bool isFirstMinus = poleSlot.startsWith("-");
+
+	if (!isFirstK && !isFirstMinus)
+	{
+		QMessageBox::warning(this, "提示", "桩号必须以-或K开头");
+		return false;
+	}
+
+	const bool isContainsPlus = poleSlot.contains("+");
+	if (!isContainsPlus || !poleSlot.contains("K"))
+	{
+		QMessageBox::warning(this, "提示", "桩号格式不正确");
+		return false;
+	}
+
+	peg = 0;
+	int kIndex = poleSlot.indexOf("K");
+	int plusIndex = poleSlot.indexOf("+");
+
+	float km = poleSlot.mid(kIndex + 1, plusIndex - kIndex - 1).toFloat() * 1000;
+	float m = poleSlot.mid(plusIndex + 1, poleSlot.length() - plusIndex).toFloat();
+	peg = km + m;
+
+	if (isFirstMinus)
+	{
+		peg = -peg;
+	}
+
+	if (peg < -920.0f || peg > 7900.0f)
+	{
+		QMessageBox::warning(this, "提示", "桩号超出范围");
+		return false;
+	}
+
+	return true;
 }
 
 void PoleAddPanel::initTexturePanel()

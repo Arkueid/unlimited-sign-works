@@ -9,6 +9,9 @@
 #include <render/BoxDrawable.hpp>
 #include <render/PoleDrawable.hpp>
 
+#include <road/scene/rdScene.h>
+
+
 class RoadScene : public QOpenGLWidget, protected QOpenGLFunctions
 {
 
@@ -25,14 +28,19 @@ class RoadScene : public QOpenGLWidget, protected QOpenGLFunctions
     float lastY;
 
     QMatrix4x4 projection;
+    QMatrix4x4 projectionSky;
 
     QVector<PoleDrawable*> drawables;
+
+    rdScene* roadScene;
+
+    Point origin;
 
 public:
     RoadScene(QWidget *parent = nullptr);
     ~RoadScene() override;
 
-    PoleDrawable* addPole(Pole* pole);
+    PoleDrawable* addPole(Pole* pole, float peg, bool isLeft);
 
     void removePole(PoleDrawable *drawable);
 
@@ -50,4 +58,11 @@ protected:
 
 private:
     void releaseDrawables();
+
+    void initRoad();
+
+    PoleDrawable* placePole(Pole* pole, 
+        float peg,
+        bool isLeft
+    );
 };

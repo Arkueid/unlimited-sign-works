@@ -17,6 +17,8 @@ class PoleDrawable : protected QOpenGLFunctions
 
     bool visible;
 
+    QMatrix4x4 innerScale;
+
 public:
     PoleDrawable(Pole* pole);
     ~PoleDrawable();

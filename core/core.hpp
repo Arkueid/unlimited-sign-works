@@ -1,6 +1,9 @@
 #pragma once
 
+#ifndef PI
 #define PI 3.1415926f
+#endif
+
 // 每单位长度的顶点个数
 #define PRECISION_DEFAULT 1.0f / 20.0f
 
