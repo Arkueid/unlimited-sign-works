@@ -78,6 +78,8 @@ void RoadScene::initializeGL()
     camera.position = {origin.x, origin.y, origin.z};
     camera.yaw = roadScene->m_originYaw;
     camera.updateCameraVectors();
+
+    emit initialized();
 }
 
 void RoadScene::paintGL()

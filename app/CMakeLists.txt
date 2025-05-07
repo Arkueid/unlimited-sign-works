@@ -92,6 +92,10 @@ add_executable(usw
     win/road/DateSetPanel.hpp
     win/road/DateSetPanel.cpp
 
+    win/road/DateTimeDialog.ui
+    win/road/DateTimeDialog.hpp
+    win/road/DateTimeDialog.cpp
+
     win/road/Common.hpp
 
     logo.rc

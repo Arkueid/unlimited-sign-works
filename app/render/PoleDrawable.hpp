@@ -36,4 +36,9 @@ public:
     {
         return visible;
     }
+
+    Pole* getPole() 
+    {
+        return pole;
+    }
 };

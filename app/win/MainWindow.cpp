@@ -53,7 +53,23 @@ void MainWindow::onNewRoadRequested()
 
 void MainWindow::onOpenRoadRequested()
 {
-    // TODO
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    "Open Road Json",
+                                                    QDir::currentPath() + "/../../assets/roads",
+                                                    "Road Json (*.json)");
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    RoadDesigner *designer = new RoadDesigner(ui->tabs, fileName);
+    const int index = ui->tabs->addTab(designer, "Open Road");
+    connect(designer->getRoadNameLineEdit(), &QLineEdit::textChanged,
+            [=](const QString &name)
+            {
+                ui->tabs->setTabText(index, name);
+            });
+    ui->tabs->setCurrentIndex(index);
 }
 
 void MainWindow::onNewPoleRequested()

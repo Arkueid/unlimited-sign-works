@@ -16,6 +16,8 @@ class RoadDesigner : public QWidget
     long long minDateTime;
     long long maxDateTime;
 
+    const QString& roadFileName;
+
 private slots:
     void onAddPoleRequested();
 
@@ -29,12 +31,22 @@ private slots:
 
     void onSetTimeRequested();
 
+    void onTimeSliderValueChanged(int value);
+
+    void onSceneInitialized();
+
 public:
-    RoadDesigner(QWidget *parent = nullptr);
+    RoadDesigner(QWidget *parent = nullptr, const QString& fileName = "");
     ~RoadDesigner() override;
 
     QLineEdit* getRoadNameLineEdit();
+
+    void fromJsonFile(const QString& fileName);
 private:
-    const QJsonObject toJson();
+    void toJson(QJsonObject& root);
     void toJsonFile(const QString& fileName);
+
+    void fromJson(const QJsonObject& root);
+
+    void addPole(Pole* pole, float peg, bool isLeft, const QString& slot, long long cdt);
 };

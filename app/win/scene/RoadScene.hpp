@@ -35,6 +35,9 @@ class RoadScene : public QOpenGLWidget, protected QOpenGLFunctions
 
     Point origin;
 
+signals:
+    void initialized();
+
 public:
     RoadScene(QWidget *parent = nullptr);
     ~RoadScene() override;

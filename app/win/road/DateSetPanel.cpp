@@ -1,5 +1,7 @@
 #include "DateSetPanel.hpp"
 
+#include "DateTimeDialog.hpp"
+
 #include <QDateTime>
 
 DateSetPanel::DateSetPanel(QVector<PoleRoadData> *poleRoadData, QWidget *parent) : QWidget(parent), ui(new Ui::DateSetPanel), poleRoadData(poleRoadData)
@@ -45,11 +47,17 @@ void DateSetPanel::onCommitRequested()
         return;
     }
 
-    const long long ct = QDateTime::currentSecsSinceEpoch();
+    DateTimeDialog dialog(this);
+    if (dialog.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    const long long ct = dialog.getDateTime().toSecsSinceEpoch();
     const int index = item->data(Qt::UserRole).toInt();
     PoleRoadData& data = (*poleRoadData)[index];
     data.completeDateTime = ct;
-    ui->uList->takeItem(index);
+    ui->uList->takeItem(ui->uList->currentRow());
 
     addToFList(data, index);
     emit committed(ct);
@@ -66,7 +74,7 @@ void DateSetPanel::onRevertRequested()
     const int index = item->data(Qt::UserRole).toInt();
     PoleRoadData& data = (*poleRoadData)[index];
     data.completeDateTime = NOT_COMPLETE;
-    ui->fList->takeItem(index);
+    ui->fList->takeItem(ui->fList->currentRow());
     
     addToUList(data, index);
     emit reverted();
