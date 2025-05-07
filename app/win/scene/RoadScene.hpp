@@ -11,7 +11,6 @@
 
 #include <road/scene/rdScene.h>
 
-
 class RoadScene : public QOpenGLWidget, protected QOpenGLFunctions
 {
 
@@ -30,9 +29,9 @@ class RoadScene : public QOpenGLWidget, protected QOpenGLFunctions
     QMatrix4x4 projection;
     QMatrix4x4 projectionSky;
 
-    QVector<PoleDrawable*> drawables;
+    QVector<PoleDrawable *> drawables;
 
-    rdScene* roadScene;
+    rdScene *roadScene;
 
     Point origin;
 
@@ -40,11 +39,13 @@ public:
     RoadScene(QWidget *parent = nullptr);
     ~RoadScene() override;
 
-    PoleDrawable* addPole(Pole* pole, float peg, bool isLeft);
+    PoleDrawable *addPole(Pole *pole, float peg, bool isLeft);
 
     void removePole(PoleDrawable *drawable);
 
-    PoleDrawable* getPoleDrawable(int index);
+    PoleDrawable *getPoleDrawable(int index);
+
+    const QVector<PoleDrawable *> getDrawables() const;
 
 protected:
     void initializeGL() override;
@@ -61,8 +62,5 @@ private:
 
     void initRoad();
 
-    PoleDrawable* placePole(Pole* pole, 
-        float peg,
-        bool isLeft
-    );
+    PoleDrawable *placePole(Pole *pole, float peg, bool isLeft);
 };

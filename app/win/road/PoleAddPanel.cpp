@@ -165,13 +165,13 @@ void PoleAddPanel::onNodeStateChanged(QTreeWidgetItem *item, int column)
 
 void PoleAddPanel::onPoleSlotEdited(const QString &text)
 {
-	QTreeWidgetItem *item = ui->nodeTree->topLevelItem(0);
-	if (item == nullptr)
-	{
-		return;
-	}
-	item->setText(0, text);
-	ui->poleScene->setPoleName(text);
+	// QTreeWidgetItem *item = ui->nodeTree->topLevelItem(0);
+	// if (item == nullptr)
+	// {
+	// 	return;
+	// }
+	// item->setText(0, text);
+	// ui->poleScene->setPoleName(text);
 }
 
 void PoleAddPanel::onPoleInitialized()
@@ -604,6 +604,14 @@ void PoleAddPanel::bindRoundedCube(Part *part)
 	ui->rCubeRadius->setText(QString::number(roundedCube->getRadius()));
 
 	// 绑定信号
+	ui->rCubeName->disconnect();
+	connect(ui->rCubeName, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setName(text.toStdString());
+				QTreeWidgetItem *item = ui->nodeTree->currentItem();
+				item->setText(0, text);
+			});
 	// 基础参数
 	ui->rCubeA->disconnect();
 	connect(ui->rCubeA, &QLineEdit::textEdited,
@@ -655,6 +663,14 @@ void PoleAddPanel::bindRoundedRegTriPrism(Part *part)
 	ui->rRegTriPrismRadius->setText(QString::number(roundedRegTriPrism->getRadius()));
 
 	// 绑定信号
+	ui->rRegTriPrismName->disconnect();
+	connect(ui->rRegTriPrismName, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setName(text.toStdString());
+				QTreeWidgetItem *item = ui->nodeTree->currentItem();
+				item->setText(0, text);
+			});
 	// 基础参数
 	ui->rRegTriPrismA->disconnect();
 	connect(ui->rRegTriPrismA, &QLineEdit::textEdited,

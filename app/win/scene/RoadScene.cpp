@@ -4,6 +4,8 @@
 
 #include <utils/TextureManager.hpp>
 
+#include <base/Cube.hpp>
+#include <base/Cylinder.hpp>
 
 RoadScene::RoadScene(QWidget *parent) : QOpenGLWidget(parent),
                                         camera(QVector3D(0.0f, 0.0f, 10.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
@@ -24,15 +26,15 @@ RoadScene::~RoadScene()
     TextureManager::releaseTextures();
 
     delete roadScene;
-    
+
     doneCurrent();
 }
 
-PoleDrawable* RoadScene::addPole(Pole *pole, float peg, bool isLeft)
+PoleDrawable *RoadScene::addPole(Pole *pole, float peg, bool isLeft)
 {
     makeCurrent();
 
-    PoleDrawable* d = placePole(pole, peg, isLeft);
+    PoleDrawable *d = placePole(pole, peg, isLeft);
 
     doneCurrent();
 
@@ -71,7 +73,7 @@ void RoadScene::initializeGL()
 
     initRoad();
 
-    Point& point = roadScene->m_originPoint;
+    Point &point = roadScene->m_originPoint;
     origin = {point.y, camera.position.z(), point.x};
     camera.position = {origin.x, origin.y, origin.z};
     camera.yaw = roadScene->m_originYaw;
@@ -88,7 +90,7 @@ void RoadScene::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     QMatrix4x4 view = camera.getViewMatrix();
-    
+
     roadScene->render(projection, view);
 
     axis.draw(projection, view);
@@ -113,7 +115,7 @@ void RoadScene::resizeGL(int w, int h)
     float fov = 60.0f;                       // 视野角度
     float aspectRatio = (float)w / (float)h; // 窗口比例
     float nearPlane = 0.1f;                  // 近裁剪面
-    float farPlane = 30000.0f;                 // 远裁剪面
+    float farPlane = 30000.0f;               // 远裁剪面
 
     projection.setToIdentity();
     projection.perspective(fov, aspectRatio, nearPlane, farPlane);
@@ -205,15 +207,20 @@ void RoadScene::initRoad()
     roadScene->initGeometry();
 }
 
-PoleDrawable* RoadScene::placePole(Pole *pole, float peg, bool isLeft)
+PoleDrawable *RoadScene::placePole(Pole *pole, float peg, bool isLeft)
 {
-    PoleDrawable* d = new PoleDrawable(pole);
- 
+    PoleDrawable *d = new PoleDrawable(pole);
+
     _PosAng p = roadScene->m_rl.findPos(peg);
-    qDebug() << peg;
-    qDebug() << p.y << p.z << p.x << p.angle << p.section;
+    // qDebug() << peg;
+    // qDebug() << p.y << p.z << p.x << p.angle << p.section;
 
     _RoadCrossSection sec = roadScene->m_rl.getRCS(p.section, 1);
+    _RoadCrossSection secNext = roadScene->m_rl.getRCS(p.section + 1, 1);
+
+    const float t = (peg - sec.pileNo) / (secNext.pileNo - sec.pileNo);
+
+    // qDebug() << t;
 
     QMatrix4x4 model;
     model.setToIdentity();
@@ -222,30 +229,107 @@ PoleDrawable* RoadScene::placePole(Pole *pole, float peg, bool isLeft)
     const float faceAngle = isLeft ? 90 : -90;
     const float angle = 360 - p.angle + faceAngle;
 
-    if (pole->getType() == PoleType_DoubleArm) // 摆在路中央：双悬臂
+    const float radius = angle / 180.0f * PI;
+
+    // qDebug() << angle;
+
+    const float sideOffset = 0.5f;
+
+    const QVector3D &center1 = sec.center;
+    const QVector3D &center2 = secNext.center;
+    const QVector3D &center = (center2 - center1) * t + center1;
+
+    if (pole->getType() == PoleType_DoubleArm) // 摆在路中央：双悬臂、门架
     {
-        model.translate(p.y, p.z - 1.0f, p.x);
+        model.translate(center.y(), center.z() - 0.01, center.x());
     }
-    // 摆在路侧：单柱、单悬臂
-    else if (isLeft)
+    else if (pole->getType() == PoleType_Gate) // 门架并非完全摆在路中间
     {
-        // TODO: 计算路侧偏移量
-        model.translate(sec.left.y() + cos(angle - 180) * 10.0f, sec.left.z(), sec.left.x() + sin(angle - 180) * 10.0f);
+        const float leftSize1 = sec.lW1 + sec.lW2 + sec.lW3 + sec.W0 / 2;
+        const float rightSize1 = sec.rW1 + sec.rW2 + sec.rW3 + sec.W0 / 2;
+        const float leftSize2 = secNext.lW1 + secNext.lW2 + secNext.lW3 + secNext.W0 / 2;
+        const float rightSize2 = secNext.rW1 + secNext.rW2 + secNext.rW3 + secNext.W0 / 2;
+        const float leftSize = (leftSize2 - leftSize1) * t + leftSize1;
+        const float rightSize = (rightSize2 - rightSize1) * t + rightSize1;
+
+        const float leftRadius = (360 - p.angle + 90) / 180.0f * PI;
+        const float rightRadius = (360 - p.angle - 90) / 180.0f * PI;
+        const float leftX = leftSize * cos(leftRadius) + center.y();
+        const float leftZ = -leftSize * sin(leftRadius) + center.x();
+
+        const float rightX = rightSize * cos(rightRadius) + center.y();
+        const float rightZ = -rightSize * sin(rightRadius) + center.x();
+
+        const float x = (leftX + rightX) / 2.0f;
+        const float z = (leftZ + rightZ) / 2.0f;
+        qDebug() << x << z;
+        qDebug() << center.y() << center.x();
+        model.translate(x, center.z() - 0.01, z);
+
+        // 适应路面宽度
+        QVector<QVector2D> points(2);
+        int index = 0;
+        // 获取底座水平面坐标，用于计算两个立柱水平距离
+        for (auto &part : pole->getParts())
+        {
+            if (part->isPoleBase())
+            {
+                points[index++] = {part->getOriginX(), part->getOriginZ()};
+                if (index >= 2)
+                {
+                    break;
+                }
+            }
+        }
+        // 基底最大为1500mm
+        const float scale = (leftSize + rightSize + 1.5f) * 1000 / (points[0] - points[1]).length();
+        // qDebug() << scale;
+        model.scale(scale);
     }
+    // 摆在路侧：单柱、双柱、单悬臂
+    // 路左：左为相机初始时朝向时，右车道行驶的方向
     else
     {
-        model.translate(sec.right.y() - cos(angle) * 10.0f, sec.right.z(), sec.right.x() - sin(angle) * 10.0f);
+        const float size1 = isLeft ? (sec.lW1 + sec.lW2 + sec.lW3 + sec.W0 / 2) : (sec.rW1 + sec.rW2 + sec.rW3 + sec.W0 / 2);
+        const float size2 = isLeft ? (secNext.lW1 + secNext.lW2 + secNext.lW3 + secNext.W0 / 2) : (secNext.rW1 + secNext.rW2 + secNext.rW3 + secNext.W0 / 2);
+        const float size = (size2 - size1) * t + size1;
+
+        float r = sideOffset + size;
+
+        // 双柱需要考虑其宽度
+        if (pole->getType() == PoleType_Double)
+        {
+            QVector<QVector2D> points(2);
+            int index = 0;
+            for (auto &part : pole->getParts())
+            {
+                if (part->isPoleBase())
+                {
+                    points[index++] = {part->getOriginX(), part->getOriginZ()};
+                    if (index >= 2)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            // 两立柱水平距离一半
+            const float halfPoleDistance = (points[0] - points[1]).length() / 2.0f / 1000;
+            r += halfPoleDistance;
+        }
+
+        model.translate(center.y() + cos(radius) * r, center.z() - 0.01, center.x() - sin(radius) * r);
     }
 
     model.rotate(angle, {0.0f, 1.0f, 0.0f});
-
-    if (pole->getType() == PoleType_Gate)
-    {
-        // TODO: 适配路面宽度
-    }
 
     d->setModelMatrix(model);
 
     drawables.append(d);
     return d;
+}
+
+const QVector<PoleDrawable *> RoadScene::getDrawables() const
+{
+    return drawables;
 }

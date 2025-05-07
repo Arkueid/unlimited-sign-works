@@ -88,6 +88,12 @@ add_executable(usw
     win/road/TextureSetPanel.hpp
     win/road/TextureSetPanel.cpp
 
+    win/road/DateSetPanel.ui
+    win/road/DateSetPanel.hpp
+    win/road/DateSetPanel.cpp
+
+    win/road/Common.hpp
+
     logo.rc
 )
 

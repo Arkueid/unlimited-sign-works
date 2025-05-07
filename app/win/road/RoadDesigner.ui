@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>RoadDesigner</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_3">
+  <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
@@ -32,6 +32,19 @@
          </item>
          <item>
           <widget class="QLineEdit" name="roadName"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="saveBtn">
+           <property name="toolTip">
+            <string>保存</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -54,6 +67,16 @@
            </property>
            <property name="icon">
             <iconset theme="QIcon::ThemeIcon::ListRemove"/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="timeBtn">
+           <property name="text">
+            <string>部署时间</string>
+           </property>
+           <property name="icon">
+            <iconset theme="QIcon::ThemeIcon::DocumentOpenRecent"/>
            </property>
           </widget>
          </item>
@@ -91,7 +114,40 @@
        </item>
       </layout>
      </widget>
-     <widget class="RoadScene" name="roadScene"/>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
+         <item>
+          <widget class="QDateTimeEdit" name="dateTimeEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="buttonSymbols">
+            <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="timeSlider">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="RoadScene" name="roadScene"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

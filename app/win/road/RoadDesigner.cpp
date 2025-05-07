@@ -1,9 +1,16 @@
 #include "RoadDesigner.hpp"
 
 #include <win/road/PoleAddPanel.hpp>
-#include <QMessageBox>
+#include <win/road/DateSetPanel.hpp>
 
-RoadDesigner::RoadDesigner(QWidget *parent) : QWidget(parent), ui(new Ui::RoadDesigner)
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QJsonDocument>
+#include <QDateTime>
+
+#include <climits>
+
+RoadDesigner::RoadDesigner(QWidget *parent) : QWidget(parent), ui(new Ui::RoadDesigner), minDateTime(LLONG_MAX), maxDateTime(LLONG_MIN)
 {
     ui->setupUi(this);
 
@@ -15,6 +22,10 @@ RoadDesigner::RoadDesigner(QWidget *parent) : QWidget(parent), ui(new Ui::RoadDe
     connect(ui->removeBtn, &QPushButton::clicked, this, &RoadDesigner::onRemovePoleRequested);
 
     connect(ui->nodeTree, &QTreeWidget::itemChanged, this, &RoadDesigner::onNodeStateChanged);
+
+    connect(ui->saveBtn, &QPushButton::clicked, this, &RoadDesigner::onSaveBtnClicked);
+
+    connect(ui->timeBtn, &QPushButton::clicked, this, &RoadDesigner::onSetTimeRequested);
 }
 
 RoadDesigner::~RoadDesigner()
@@ -39,9 +50,11 @@ void RoadDesigner::onPoleSubmitted(Pole *pole, float peg, const QString& slot, b
 {
     PoleDrawable *d = ui->roadScene->addPole(pole, peg, isLeft);
 
+    poleRoadData.append({NOT_COMPLETE, slot + (isLeft ? "（左）-" : "（右）-") + pole->getName().c_str(), peg, isLeft});
+
     QTreeWidgetItem *item = new QTreeWidgetItem(ui->nodeTree);
     item->setCheckState(0, Qt::Checked);
-    item->setText(0, slot + (isLeft ? "左" : "右"));
+    item->setText(0, poleRoadData.back().slot);
 
     item->setData(0, Qt::UserRole, QVariant::fromValue(d));
 }
@@ -76,4 +89,54 @@ void RoadDesigner::onRemovePoleRequested()
             delete item;
         }
     }
+}
+
+void RoadDesigner::onSaveBtnClicked()
+{
+    QFileDialog dialog(this);
+	dialog.setNameFilter("Road JSON (*.json)");
+	dialog.setAcceptMode(QFileDialog::AcceptSave);
+	dialog.setFileMode(QFileDialog::AnyFile);
+	QDir dir = QDir::current();
+	dir.cdUp();
+	dir.cdUp();
+	// ../../assets/roads
+	QString dirPath = dir.absoluteFilePath("assets/roads");
+
+    dialog.setDirectory(dirPath);
+	dialog.selectFile(ui->roadName->text() + ".json");
+	if (dialog.exec())
+	{
+		QString filePath = dialog.selectedFiles().first();
+		// qDebug() << "Saving to: " << filePath;
+		toJsonFile(filePath);
+	}
+}
+
+const QJsonObject RoadDesigner::toJson()
+{
+    QJsonObject root;
+    const QVector<PoleDrawable*> drawables = ui->roadScene->getDrawables();
+    // TODO
+    return root;
+}
+
+void RoadDesigner::toJsonFile(const QString& fileName)
+{
+    const QJsonObject json = toJson();
+
+    QFile file(fileName);
+    if (file.open(QFile::WriteOnly))
+    {
+        QJsonDocument doc;
+        doc.setObject(json);
+        file.write(doc.toJson());
+        file.close();
+    }
+}
+
+void RoadDesigner::onSetTimeRequested()
+{
+    DateSetPanel* panel = new DateSetPanel(&poleRoadData);
+    panel->show();
 }

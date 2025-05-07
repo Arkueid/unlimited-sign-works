@@ -6,7 +6,7 @@ in vec2 TexCoord;
 
 uniform sampler2D tex;
 // 平行光参数
-uniform vec3 lightPos = vec3(1000, 1000, 3000);
+uniform vec3 lightPos = vec3(1000, 1000, 1000);
 uniform vec3 lightColor = vec3(1.0, 1.0, 1.0);  // 光颜色
 uniform vec3 objectColor = vec3(0.8, 0.8, 0.8); // 物体基础颜色
 uniform vec3 cameraPos = vec3(0.0, 0.0, 0.0); // 相机位置

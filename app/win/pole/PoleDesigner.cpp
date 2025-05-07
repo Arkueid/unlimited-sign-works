@@ -342,6 +342,15 @@ void PoleDesigner::bindRoundedCube(Part *part)
 				  ui->rCubeTexSideEditable});
 
 	// 绑定信号
+	ui->rCubeName->disconnect();
+	connect(ui->rCubeName, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setName(text.toStdString());
+				QListWidgetItem *item = ui->drawableList->currentItem();
+				DrawableListItem *widget = reinterpret_cast<DrawableListItem *>(ui->drawableList->itemWidget(item));
+				widget->getName()->setText(text);
+			});
 	// 基础参数
 	ui->rCubeA->disconnect();
 	connect(ui->rCubeA, &QLineEdit::textEdited,
@@ -393,6 +402,15 @@ void PoleDesigner::bindRoundedRegTriPrism(Part *part)
 	ui->rRegTriPrismRadius->setText(QString::number(roundedRegTriPrism->getRadius()));
 
 	// 绑定信号
+	ui->rRegTriPrismName->disconnect();
+	connect(ui->rRegTriPrismName, &QLineEdit::textEdited,
+			[=](const QString &text)
+			{
+				part->setName(text.toStdString());
+				QListWidgetItem *item = ui->drawableList->currentItem();
+				DrawableListItem *widget = reinterpret_cast<DrawableListItem *>(ui->drawableList->itemWidget(item));
+				widget->getName()->setText(text);
+			});
 	// 基础参数
 	ui->rRegTriPrismA->disconnect();
 	connect(ui->rRegTriPrismA, &QLineEdit::textEdited,
