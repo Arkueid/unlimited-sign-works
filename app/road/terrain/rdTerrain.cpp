@@ -23,7 +23,7 @@ rdTerrain::~rdTerrain()
 
 bool rdTerrain::readSegPile()
 {
-	QString filename = QCoreApplication::applicationDirPath() + "/../../assets/terrain/TerrainSegPile.txt";
+	QString filename = QCoreApplication::applicationDirPath() + "/../../assets/data/terrain/TerrainSegPile.txt";
 	QFile file(filename);
 	if (!file.exists()) return false;
 
@@ -59,7 +59,7 @@ bool rdTerrain::readSegPile()
 
 bool rdTerrain::readOrthophotoInfor()
 {
-	QString filename = QCoreApplication::applicationDirPath() + "/../../assets/terrain/orthophoto/seg.txt";
+	QString filename = QCoreApplication::applicationDirPath() + "/../../assets/data/terrain/orthophoto/seg.txt";
 	QFile file(filename);
 	if (!file.exists()) return false;
 
@@ -97,7 +97,7 @@ bool rdTerrain::readOrthophotoData()
 {
 	m_pTextBlock = new _TextBlock[54];
 
-	QString filepath = QCoreApplication::applicationDirPath() + "/../../assets/terrain/orthophoto/";
+	QString filepath = QCoreApplication::applicationDirPath() + "/../../assets/data/terrain/orthophoto/";
 
 	QString indexstr;
 	for (int i = 1; i <= 54; i++)
@@ -158,7 +158,7 @@ bool rdTerrain::readOrthophotoData()
 bool rdTerrain::readTriData()
 {
 	//return true;
-	QString filename = QCoreApplication::applicationDirPath() + "/../../assets/terrain/newterrain.dat";
+	QString filename = QCoreApplication::applicationDirPath() + "/../../assets/data/terrain/newterrain.dat";
 
 	QString strHead = QString("-terr");
 	QFile file(filename);

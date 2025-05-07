@@ -52,7 +52,7 @@ bool rdTerrainTextureManager::addTexture(QString fname)
     _terraintexture* ptt = searchTexture(fname);
     if (ptt) return true;
 
-    QString filepath = QCoreApplication::applicationDirPath() + "/../../assets/terrain/orthophoto/";
+    QString filepath = QCoreApplication::applicationDirPath() + "/../../assets/data/terrain/orthophoto/";
     QString filename = filepath + fname;
     QImage image;
     if (!image.load(filename)) return false;

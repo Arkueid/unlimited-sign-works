@@ -203,7 +203,7 @@ void RoadScene::initRoad()
 
     roadScene->loadTextures(); // 耗时
     roadScene->loadShaders();
-    roadScene->loadData(); // 耗时
+    roadScene->loadData();
     roadScene->computing();
 
     roadScene->initGeometry();

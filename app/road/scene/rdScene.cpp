@@ -82,7 +82,7 @@ void rdScene::computing()
 
 void rdScene::loadTextures()
 {
-    m_terrain.loadTerrainTexture();
+    m_terrain.loadTerrainTexture(); // 耗时
     m_roadbed.loadTextures();
     m_textures.LoadTextures();
 }
