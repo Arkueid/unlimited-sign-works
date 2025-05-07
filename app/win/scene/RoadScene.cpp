@@ -285,7 +285,7 @@ PoleDrawable *RoadScene::placePole(Pole *pole, float peg, bool isLeft)
             }
         }
         // 基底最大为1500mm
-        const float scale = (leftSize + rightSize + 1.5f) * 1000 / (points[0] - points[1]).length();
+        const float scale = (leftSize + rightSize) * 1000 / (points[0] - points[1]).length();
         // qDebug() << scale;
         model.scale(scale);
     }
