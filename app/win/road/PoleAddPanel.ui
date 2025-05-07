@@ -109,7 +109,7 @@
           <item>
            <widget class="QLabel" name="label_9">
             <property name="text">
-             <string>位置</string>
+             <string>朝向</string>
             </property>
            </widget>
           </item>
@@ -117,12 +117,12 @@
            <widget class="QComboBox" name="poleSlotPosSelector">
             <item>
              <property name="text">
-              <string>左</string>
+              <string>左车道</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>右</string>
+              <string>右车道</string>
              </property>
             </item>
            </widget>

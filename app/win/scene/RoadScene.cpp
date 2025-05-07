@@ -201,9 +201,9 @@ void RoadScene::initRoad()
 {
     roadScene = new rdScene;
 
-    roadScene->loadTextures();
+    roadScene->loadTextures(); // 耗时
     roadScene->loadShaders();
-    roadScene->loadData();
+    roadScene->loadData(); // 耗时
     roadScene->computing();
 
     roadScene->initGeometry();
@@ -218,8 +218,9 @@ PoleDrawable *RoadScene::placePole(Pole *pole, float peg, bool isLeft)
     // qDebug() << p.y << p.z << p.x << p.angle << p.section;
 
     _RoadCrossSection sec = roadScene->m_rl.getRCS(p.section, 1);
-    _RoadCrossSection secNext = roadScene->m_rl.getRCS(p.section + 1, 1);
+    _RoadCrossSection secNext = roadScene->m_rl.getRCS(p.section + 1 /* 对于当前数据来说，section 不可能为最后一个  */, 1);
 
+    // 插值参数
     const float t = (peg - sec.pileNo) / (secNext.pileNo - sec.pileNo);
 
     // qDebug() << t;
@@ -264,8 +265,8 @@ PoleDrawable *RoadScene::placePole(Pole *pole, float peg, bool isLeft)
 
         const float x = (leftX + rightX) / 2.0f;
         const float z = (leftZ + rightZ) / 2.0f;
-        qDebug() << x << z;
-        qDebug() << center.y() << center.x();
+        // qDebug() << x << z;
+        // qDebug() << center.y() << center.x();
         model.translate(x, center.z() - 0.01, z);
 
         // 适应路面宽度
