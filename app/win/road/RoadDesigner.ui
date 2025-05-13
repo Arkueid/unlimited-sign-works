@@ -71,6 +71,16 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="editBtn">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="QIcon::ThemeIcon::MailMessageNew"/>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="timeBtn">
            <property name="text">
             <string>部署时间</string>

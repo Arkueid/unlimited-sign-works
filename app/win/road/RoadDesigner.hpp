@@ -35,6 +35,10 @@ private slots:
 
     void onSceneInitialized();
 
+    void onEditBtnClicked();
+
+    void onPoleModified(Pole* pole, float peg, const QString& slot, bool isLeft);
+
 public:
     RoadDesigner(QWidget *parent = nullptr, const QString& fileName = "");
     ~RoadDesigner() override;

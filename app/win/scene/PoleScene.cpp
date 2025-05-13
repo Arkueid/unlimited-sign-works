@@ -267,17 +267,17 @@ void PoleScene::unselectPart()
     update();
 }
 
-void PoleScene::changePole(Pole *pole)
+void PoleScene::changePole(Pole *pole, bool release)
 {
     setPoleOutSide(true);
 
     makeCurrent();
     releaseDrawables();
-    if (this->pole != nullptr)
+    if (this->pole != nullptr && release)
     {
         delete this->pole;
-        this->pole = nullptr;
     }
+    this->pole = nullptr;
 
     partSelected = false;
 
@@ -297,4 +297,10 @@ void PoleScene::changePole(Pole *pole)
 
     emit initialized();
     update();
+}
+
+void PoleScene::setPole(Pole* pole)
+{
+    setPoleOutSide(true);
+    this->pole = pole;
 }

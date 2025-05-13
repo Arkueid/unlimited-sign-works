@@ -88,7 +88,9 @@ public:
         return pole;
     }
 
-    void changePole(Pole* pole);
+    void setPole(Pole* pole);
+
+    void changePole(Pole* pole, bool release = true);
 
 signals:
     void drawableAdded(PartDrawable* drawable);

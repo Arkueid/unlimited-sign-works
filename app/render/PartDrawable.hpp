@@ -18,6 +18,8 @@ class PartDrawable: protected QOpenGLFunctions
 
 	bool visible;
 
+	Vertex* oldVertices;
+
 public:
 	PartDrawable(Part* part);
 	~PartDrawable();
@@ -48,4 +50,6 @@ public:
 	{
 		return part;
 	}
+
+	void releaseOldBuffer();
 };

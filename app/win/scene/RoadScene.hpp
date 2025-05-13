@@ -50,6 +50,10 @@ public:
 
     const QVector<PoleDrawable *> getDrawables() const;
 
+    QMatrix4x4 placePole(Pole *pole, float peg, bool isLeft);
+
+    void changePole(PoleDrawable* d, Pole* p);
+
 protected:
     void initializeGL() override;
     void paintGL() override;
@@ -59,11 +63,10 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void focusInEvent(QFocusEvent *event) override;
     void focusOutEvent(QFocusEvent *event) override;
+    
 
 private:
     void releaseDrawables();
 
     void initRoad();
-
-    PoleDrawable *placePole(Pole *pole, float peg, bool isLeft);
 };

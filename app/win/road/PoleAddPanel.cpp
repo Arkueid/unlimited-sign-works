@@ -13,8 +13,9 @@
 #include <QDir>
 #include <QMessageBox>
 
-PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0),
-											  textureSelcted(false), poleLoaded(false), slotValidator(new QRegularExpressionValidator)
+PoleAddPanel::PoleAddPanel(QWidget *parent, bool modify) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0),
+														   textureSelcted(false), poleLoaded(false), slotValidator(new QRegularExpressionValidator),
+														   modify(modify), poleTypeChanged(false), baseTypeChanged(false), poleChanged(true)
 {
 	ui->setupUi(this);
 
@@ -52,7 +53,6 @@ PoleAddPanel::PoleAddPanel(QWidget *parent) : QDialog(parent), ui(new Ui::PoleAd
 
 	connect(ui->baseTypeSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onBaseTypeChanged);
 	onBaseTypeChanged(0);
-
 	// hidePanels();
 }
 
@@ -60,6 +60,40 @@ PoleAddPanel::~PoleAddPanel()
 {
 	delete ui;
 	delete doubleValidator;
+}
+
+void PoleAddPanel::setPole(Pole *pole, const QString &slot, bool isLeft)
+{
+	ui->confirmBtn->setText("提交");
+
+	ui->poleTypeSelector->setCurrentIndex(pole->getType());
+	ui->poleSelector->setCurrentIndex(-1);
+
+	ui->poleScene->setPole(pole);
+
+	int didx = 0;
+	for (auto &part : pole->getParts())
+	{
+		if (part->isPoleBase())
+		{
+			bases.push_back({part, didx});
+		}
+		didx++;
+	}
+
+	ui->poleSlotPosSelector->setCurrentIndex(isLeft ? 0 : 1);
+
+	ui->poleSlot->setText(slot);
+
+	ui->poleSelector->setPlaceholderText("已设置");
+
+	ui->baseTypeSelector->setPlaceholderText("已设置");
+
+	ui->baseSizeSelector->setPlaceholderText("已设置");
+
+	baseTypeChanged = false;
+	poleTypeChanged = false;
+	poleChanged = false;
 }
 
 void PoleAddPanel::initNodeTree()
@@ -176,9 +210,12 @@ void PoleAddPanel::onPoleSlotEdited(const QString &text)
 
 void PoleAddPanel::onPoleInitialized()
 {
-	for (auto &base : bases)
+	if (!modify || poleTypeChanged)
 	{
-		ui->poleScene->getDrawable(base.drawableIndex)->setVisible(false);
+		for (auto &base : bases)
+		{
+			ui->poleScene->getDrawable(base.drawableIndex)->setVisible(false);
+		}
 	}
 
 	initNodeTree();
@@ -190,6 +227,8 @@ void PoleAddPanel::onPoleInitialized()
 
 void PoleAddPanel::onPoleTypeChanged(int index)
 {
+	poleTypeChanged = true;
+
 	hidePanels();
 
 	QDir dir = QDir::current();
@@ -225,12 +264,14 @@ void PoleAddPanel::onPoleTypeChanged(int index)
 		}
 	}
 
+	ui->poleSelector->setPlaceholderText("未选择");
 	ui->poleSelector->setCurrentIndex(-1);
 	connect(ui->poleSelector, &QComboBox::currentIndexChanged, this, &PoleAddPanel::onPoleSelected);
 
 	bases.clear();
 	poleLoaded = false;
-	ui->poleScene->changePole(nullptr);
+	ui->poleScene->changePole(nullptr, poleChanged);
+	poleChanged = true;
 	ui->textureTable->setRowCount(0);
 	ui->nodeTree->clear();
 }
@@ -254,7 +295,9 @@ void PoleAddPanel::onPoleSelected(int index)
 	}
 
 	poleLoaded = false;
-	ui->poleScene->changePole(pole);
+	
+	ui->poleScene->changePole(pole, poleChanged);
+	poleChanged = true;
 
 	onBaseTypeChanged(0);
 }
@@ -267,7 +310,7 @@ void PoleAddPanel::onConfirmBtnClicked()
 		return;
 	}
 
-	if (!isPoleSet())
+	if ((!modify || poleTypeChanged) && !isPoleSet())
 	{
 		QMessageBox::warning(this, "提示", "请选择标识牌!");
 		return;
@@ -279,7 +322,7 @@ void PoleAddPanel::onConfirmBtnClicked()
 		return;
 	}
 
-	if (!isBaseSet())
+	if ((!modify || baseTypeChanged) && !isBaseSet())
 	{
 		QMessageBox::warning(this, "提示", "请设置基底！");
 		return;
@@ -295,8 +338,11 @@ void PoleAddPanel::onConfirmBtnClicked()
 
 void PoleAddPanel::onBaseTypeChanged(int index)
 {
+	baseTypeChanged = true;
+
 	ui->baseSizeSelector->disconnect();
 	ui->baseSizeSelector->clear();
+	ui->baseSizeSelector->setPlaceholderText("未选择");
 	if (index == 0)
 	{
 		ui->baseSizeSelector->addItems(cubeSizes);
@@ -865,7 +911,7 @@ bool PoleAddPanel::isBaseSet()
 	return ui->baseSizeSelector->currentIndex() != -1;
 }
 
-bool PoleAddPanel::checkPoleSlotValid(float& peg)
+bool PoleAddPanel::checkPoleSlotValid(float &peg)
 {
 	QString poleSlot = ui->poleSlot->text();
 	if (poleSlot.isEmpty())
@@ -935,16 +981,30 @@ void PoleAddPanel::initTexturePanel()
 		{
 			if (textureEdits[i])
 			{
-				part->setTextureRef(i, -2);
+				if (modify && !poleChanged)
+				{
+					const int row = ui->textureTable->rowCount();
+					ui->textureTable->insertRow(row);
 
-				const int row = ui->textureTable->rowCount();
-				ui->textureTable->insertRow(row);
+					QTableWidgetItem *item = new QTableWidgetItem(TextureManager::getTextureName(part->getTextureRefs()[i]));
+					ui->textureTable->setItem(row, 0, item);
+					item->setData(Qt::UserRole, QVariant::fromValue(part));
+					item->setData(Qt::UserRole + 1, QVariant::fromValue(i));
+					item->setData(Qt::UserRole + 2, QVariant::fromValue(partIndex));
+				}
+				else
+				{
+					part->setTextureRef(i, -2);
 
-				QTableWidgetItem *item = new QTableWidgetItem("未设置");
-				ui->textureTable->setItem(row, 0, item);
-				item->setData(Qt::UserRole, QVariant::fromValue(part));
-				item->setData(Qt::UserRole + 1, QVariant::fromValue(i));
-				item->setData(Qt::UserRole + 2, QVariant::fromValue(partIndex));
+					const int row = ui->textureTable->rowCount();
+					ui->textureTable->insertRow(row);
+
+					QTableWidgetItem *item = new QTableWidgetItem("未设置");
+					ui->textureTable->setItem(row, 0, item);
+					item->setData(Qt::UserRole, QVariant::fromValue(part));
+					item->setData(Qt::UserRole + 1, QVariant::fromValue(i));
+					item->setData(Qt::UserRole + 2, QVariant::fromValue(partIndex));
+				}
 			}
 		}
 		partIndex++;

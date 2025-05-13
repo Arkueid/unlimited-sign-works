@@ -34,7 +34,11 @@ PoleDrawable *RoadScene::addPole(Pole *pole, float peg, bool isLeft)
 {
     makeCurrent();
 
-    PoleDrawable *d = placePole(pole, peg, isLeft);
+    PoleDrawable *d = new PoleDrawable(pole);
+    QMatrix4x4 model = placePole(pole, peg, isLeft);
+
+    d->setModelMatrix(model);
+    drawables.append(d);
 
     doneCurrent();
 
@@ -209,10 +213,8 @@ void RoadScene::initRoad()
     roadScene->initGeometry();
 }
 
-PoleDrawable *RoadScene::placePole(Pole *pole, float peg, bool isLeft)
+QMatrix4x4 RoadScene::placePole(Pole *pole, float peg, bool isLeft)
 {
-    PoleDrawable *d = new PoleDrawable(pole);
-
     _PosAng p = roadScene->m_rl.findPos(peg);
     // qDebug() << peg;
     // qDebug() << p.y << p.z << p.x << p.angle << p.section;
@@ -325,11 +327,16 @@ PoleDrawable *RoadScene::placePole(Pole *pole, float peg, bool isLeft)
     }
 
     model.rotate(angle, {0.0f, 1.0f, 0.0f});
+    return model;
+}
 
-    d->setModelMatrix(model);
+void RoadScene::changePole(PoleDrawable *d, Pole *p)
+{
+    makeCurrent();
 
-    drawables.append(d);
-    return d;
+    d->setPole(p);
+
+    doneCurrent();
 }
 
 const QVector<PoleDrawable *> RoadScene::getDrawables() const

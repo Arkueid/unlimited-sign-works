@@ -41,4 +41,6 @@ public:
     {
         return pole;
     }
+
+    void setPole(Pole* pole);
 };

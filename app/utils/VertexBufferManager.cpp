@@ -1,25 +1,26 @@
 #include <utils/VertexBufferManager.hpp>
 #include <QDebug>
-#include "VertexBufferManager.hpp"
 
 struct BufferRef
 {
-    QOpenGLBuffer* buffer;
+    QOpenGLBuffer *buffer;
     int refCount;
 
     ~BufferRef()
     {
+        // qDebug() << "destroyed";
         buffer->destroy();
         delete buffer;
     }
 };
 
-static QMap<Vertex*, BufferRef*> vertexBuffers;
+static QMap<Vertex *, BufferRef *> vertexBuffers;
 
 QOpenGLBuffer *VertexBufferManager::registerVertexBuffer(Vertex *vertices, int vertexCount)
 {
-    if (vertexBuffers.contains(vertices)) {
-        BufferRef* bufRef = vertexBuffers.value(vertices);
+    if (vertexBuffers.contains(vertices))
+    {
+        BufferRef *bufRef = vertexBuffers.value(vertices);
         bufRef->refCount++;
         return bufRef->buffer;
     }
@@ -46,12 +47,9 @@ void VertexBufferManager::unregisterVertexBuffer(Vertex *vertices)
 {
     if (vertexBuffers.contains(vertices))
     {
-        BufferRef* bufRef = vertexBuffers.value(vertices);
-        if (bufRef->refCount > 1)
-        {
-            bufRef->refCount--;
-        }
-        else
+        BufferRef *bufRef = vertexBuffers.value(vertices);
+        bufRef->refCount--;
+        if (bufRef->refCount == 0)
         {
             vertexBuffers.remove(vertices);
             delete bufRef;

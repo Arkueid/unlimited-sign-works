@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QDir>
 #include <QMessageBox>
+#include "TextureManager.hpp"
 
 struct TextureItem
 {
@@ -236,4 +237,9 @@ void TextureManager::initSignals()
 void TextureManager::destroySignals()
 {
     delete texturesSignals;
+}
+
+const QString & TextureManager::getTextureName(int id)
+{
+    return texturePaths[id].path;
 }

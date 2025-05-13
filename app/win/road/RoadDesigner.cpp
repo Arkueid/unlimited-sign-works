@@ -36,6 +36,8 @@ RoadDesigner::RoadDesigner(QWidget *parent, const QString &fileName) : QWidget(p
     connect(ui->timeBtn, &QPushButton::clicked, this, &RoadDesigner::onSetTimeRequested);
 
     connect(ui->roadScene, &RoadScene::initialized, this, &RoadDesigner::onSceneInitialized);
+
+    connect(ui->editBtn, &QPushButton::clicked, this, &RoadDesigner::onEditBtnClicked);
 }
 
 RoadDesigner::~RoadDesigner()
@@ -258,4 +260,42 @@ void RoadDesigner::onSceneInitialized()
     }
 
     fromJsonFile(roadFileName);
+}
+
+void RoadDesigner::onEditBtnClicked()
+{
+    PoleAddPanel* panel = new PoleAddPanel(this, true);
+    QTreeWidgetItem* item = ui->nodeTree->currentItem();
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    const int index = ui->nodeTree->indexOfTopLevelItem(item);
+    panel->setPole(ui->roadScene->getPoleDrawable(index)->getPole(),
+        poleRoadData[index].slot.split("（").first(), poleRoadData[index].isLeft);
+
+    panel->show();
+
+    connect(panel, &PoleAddPanel::poleSubmitted, this, &RoadDesigner::onPoleModified);
+}
+
+void RoadDesigner::onPoleModified(Pole *pole, float peg, const QString &slot, bool isLeft)
+{
+    QTreeWidgetItem *item = ui->nodeTree->currentItem();
+    PoleDrawable *poleDrawable = item->data(0, Qt::UserRole).value<PoleDrawable *>();
+    QMatrix4x4 model = ui->roadScene->placePole(pole, peg, isLeft);
+    poleDrawable->setModelMatrix(model);
+    Pole* currentPole = poleDrawable->getPole();
+
+    ui->roadScene->changePole(poleDrawable, pole);
+    
+    const int index = ui->nodeTree->indexOfTopLevelItem(item);
+    poleRoadData[index].peg = peg;
+    poleRoadData[index].slot = slot + (isLeft ? "（左）-" : "（右）-") + pole->getName().c_str();
+    poleRoadData[index].isLeft = isLeft;
+
+    item->setText(0, poleRoadData[index].slot);
+
+    ui->roadScene->update();
 }

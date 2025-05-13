@@ -50,6 +50,8 @@ public:
 
     static void destroySignals();
 
+    static const QString& getTextureName(int id);
+
 private:
     static QOpenGLTexture *loadTexture(const QString &path);
 };

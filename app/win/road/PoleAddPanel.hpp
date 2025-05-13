@@ -73,8 +73,10 @@ private slots:
     void onBaseSizeChanged(int index);
 
 public:
-    PoleAddPanel(QWidget* parent = nullptr);
+    PoleAddPanel(QWidget* parent = nullptr, bool modify = false);
     ~PoleAddPanel() override;
+
+    void setPole(Pole* pole, const QString& slot, bool isLeft);
 
 signals:
     void poleSubmitted(Pole* pole, 
@@ -102,4 +104,9 @@ private:
     bool textureSelcted;
 
     bool poleLoaded;
+    bool modify;
+
+    bool poleTypeChanged;
+    bool baseTypeChanged;
+    bool poleChanged;
 };
