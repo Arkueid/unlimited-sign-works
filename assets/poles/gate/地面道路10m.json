@@ -64,7 +64,7 @@
             "type": 0
         }
     ],
-    "name": "地面道路10m门架",
+    "name": "地面道路10m",
     "parts": [
         {
             "isPoleBase": false,
@@ -2780,11 +2780,11 @@
             "position": [
                 -2365,
                 7600,
-                72
+                -72
             ],
             "rotation": [
                 0,
-                0,
+                180,
                 0
             ],
             "textureEdits": [

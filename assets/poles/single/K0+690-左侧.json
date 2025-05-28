@@ -1,0 +1,318 @@
+{
+    "meshes": [
+        {
+            "d": 98,
+            "h": 6000,
+            "type": 1
+        },
+        {
+            "a": 300,
+            "b": 300,
+            "c": 20,
+            "type": 0
+        },
+        {
+            "a": 50,
+            "b": 200,
+            "c": 8,
+            "h1": 30,
+            "h2": 90,
+            "offsetH": 20,
+            "offsetV": 0,
+            "type": 2
+        },
+        {
+            "a": 500,
+            "b": 500,
+            "c": 800,
+            "type": 0
+        },
+        {
+            "a": 2400,
+            "b": 3000,
+            "c": 10,
+            "radius": 1,
+            "type": 3
+        },
+        {
+            "a": 2000,
+            "b": 900,
+            "c": 10,
+            "radius": 1,
+            "type": 3
+        }
+    ],
+    "name": "K0+690-左侧",
+    "parts": [
+        {
+            "isPoleBase": false,
+            "meshRef": 0,
+            "name": "mainPole",
+            "position": [
+                0,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                7
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 1,
+            "name": "bottom",
+            "position": [
+                0,
+                10,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "bottomStiffener1",
+            "position": [
+                49,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "bottomStiffener2",
+            "position": [
+                0,
+                20,
+                -49
+            ],
+            "rotation": [
+                0,
+                90,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "bottomStiffener3",
+            "position": [
+                -49,
+                20,
+                0
+            ],
+            "rotation": [
+                0,
+                180,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 2,
+            "name": "bottomStiffener4",
+            "position": [
+                0,
+                20,
+                49
+            ],
+            "rotation": [
+                0,
+                270,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                8,
+                8,
+                8,
+                8,
+                8,
+                8,
+                8
+            ]
+        },
+        {
+            "isPoleBase": true,
+            "meshRef": 3,
+            "name": "基",
+            "position": [
+                0,
+                -400,
+                0
+            ],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
+            "textureEdits": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+            ],
+            "textureRefs": [
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 4,
+            "name": "面板下",
+            "position": [
+                0,
+                3640,
+                49
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                6,
+                6,
+                6
+            ]
+        },
+        {
+            "isPoleBase": false,
+            "meshRef": 5,
+            "name": "面板上",
+            "position": [
+                200,
+                5610,
+                49
+            ],
+            "rotation": [
+                90,
+                0,
+                0
+            ],
+            "textureEdits": [
+                true,
+                false,
+                false
+            ],
+            "textureRefs": [
+                6,
+                6,
+                6
+            ]
+        }
+    ],
+    "type": 0
+}

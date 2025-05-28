@@ -16,6 +16,7 @@ public:
         ColorType_Y, // 黄色
         ColorType_R, // 红色
         ColorType_Z, // 棕色
+        ColorType_O, // 橙色
     };
 
     struct Rect

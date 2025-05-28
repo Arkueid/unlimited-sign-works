@@ -122,6 +122,8 @@ QColor BoardScene::getColor(TemplateCfg::ColorType type)
         return QColor(255, 255, 0);
     case TemplateCfg::ColorType_Z:
         return QColor(128, 64, 0);
+    case TemplateCfg::ColorType_O:
+        return QColor(254, 153, 1);
     default:
         qDebug() << "unknown color type";
         return QColor(0, 0, 0);

@@ -40,6 +40,9 @@ add_executable(usw
     sqlite3/SQLite.hpp
     sqlite3/SQLite.cpp
 
+    mysql/MySQLManager.hpp
+    mysql/MySQLManager.cpp
+
     win/list/DrawableListItem.ui
     win/list/DrawableListItem.hpp
     win/list/DrawableListItem.cpp
@@ -112,12 +115,15 @@ set_target_properties(usw PROPERTIES
     LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup"
 )
 
+find_package(Qt6 REQUIRED Sql)
+
 target_link_libraries(usw
     PRIVATE
     Qt6::Core
     Qt6::Widgets
     Qt6::OpenGLWidgets 
     Qt6::Gui
+    Qt::Sql
     core
     opengl32.lib
 )

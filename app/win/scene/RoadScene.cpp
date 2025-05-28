@@ -15,7 +15,7 @@ RoadScene::RoadScene(QWidget *parent) : QOpenGLWidget(parent),
 {
     setFocusPolicy(Qt::ClickFocus);
 
-    camera.movementSpeed = 1000.0f;
+    camera.movementSpeed = 100.0f;
 }
 
 RoadScene::~RoadScene()
@@ -99,11 +99,13 @@ void RoadScene::paintGL()
 
     roadScene->render(projection, view);
 
-    axis.draw(projection, view);
+    // axis.draw(projection, view);
 
     program.bind();
     program.setUniformValue("projection", projection);
     program.setUniformValue("view", view);
+    program.setUniformValue("cameraPos", camera.getPosition());
+    program.setUniformValue("lightPos", camera.getPosition());
 
     for (int i = 0; i < drawables.size(); i++)
     {
@@ -244,11 +246,7 @@ QMatrix4x4 RoadScene::placePole(Pole *pole, float peg, bool isLeft)
     const QVector3D &center2 = secNext.center;
     const QVector3D &center = (center2 - center1) * t + center1;
 
-    if (pole->getType() == PoleType_DoubleArm) // 摆在路中央：双悬臂、门架
-    {
-        model.translate(center.y(), center.z() - 0.01, center.x());
-    }
-    else if (pole->getType() == PoleType_Gate) // 门架并非完全摆在路中间
+    if (pole->getType() == PoleType_Gate) // 门架并非完全摆在路中间
     {
         const float leftSize1 = sec.lW1 + sec.lW2 + sec.lW3 + sec.W0 / 2;
         const float rightSize1 = sec.rW1 + sec.rW2 + sec.rW3 + sec.W0 / 2;
@@ -291,7 +289,7 @@ QMatrix4x4 RoadScene::placePole(Pole *pole, float peg, bool isLeft)
         // qDebug() << scale;
         model.scale(scale);
     }
-    // 摆在路侧：单柱、双柱、单悬臂
+    // 摆在路侧：单柱、双柱、单悬臂、双悬臂
     // 路左：左为相机初始时朝向时，右车道行驶的方向
     else
     {

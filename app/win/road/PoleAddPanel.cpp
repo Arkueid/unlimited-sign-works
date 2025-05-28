@@ -295,7 +295,7 @@ void PoleAddPanel::onPoleSelected(int index)
 	}
 
 	poleLoaded = false;
-	
+
 	ui->poleScene->changePole(pole, poleChanged);
 	poleChanged = true;
 
@@ -796,7 +796,6 @@ void PoleAddPanel::bindTransforms(Part *part)
 	if (textureSelcted)
 	{
 		drawable = ui->textureTable->currentItem()->data(Qt::UserRole).value<PartDrawable *>();
-		;
 	}
 	else
 	{
@@ -865,7 +864,18 @@ void PoleAddPanel::bindTransforms(Part *part)
 
 void PoleAddPanel::refreshMesh(Part *part, Mesh *mesh)
 {
-	PartDrawable *drawable = ui->nodeTree->currentItem()->data(0, Qt::UserRole).value<PartDrawable *>();
+	QTreeWidgetItem *item = ui->nodeTree->currentItem();
+
+	PartDrawable *drawable;
+	if (item)
+	{
+		drawable = item->data(0, Qt::UserRole).value<PartDrawable *>();
+	}
+	else
+	{
+		const int index = ui->textureTable->currentItem()->data(Qt::UserRole + 2).toInt();
+		drawable = ui->poleScene->getDrawable(index);
+	}
 	ui->poleScene->unbindPart(drawable);
 	part->setMesh(mesh);
 	ui->poleScene->updatePart(drawable);

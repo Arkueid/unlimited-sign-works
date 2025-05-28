@@ -120,7 +120,7 @@ void BoardDesigner::onTemplateSelected(const QString &templateName)
 
 void BoardDesigner::initValidators()
 {
-    characterValidator.setRegularExpression(QRegularExpression("."));
+    characterValidator.setRegularExpression(QRegularExpression(".*"));
 
     letterValidator.setRegularExpression(QRegularExpression("[a-zA-Z ]*"));
 

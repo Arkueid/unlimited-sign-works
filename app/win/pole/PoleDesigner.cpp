@@ -1,4 +1,4 @@
-#include <win/pole/PoleDesigner.hpp>
+﻿#include <win/pole/PoleDesigner.hpp>
 #include <win/list/DrawableListItem.hpp>
 #include <utils/TextureManager.hpp>
 #include <win/pole/AddPanel.hpp>
@@ -9,6 +9,7 @@
 #include <QListWidgetItem>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <mysql/MySQLManager.hpp>
 
 PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidget(parent),
 																		   ui(new Ui::PoleDesigner),
@@ -677,6 +678,7 @@ void PoleDesigner::onPoleTypeChanged(int index)
 	ui->poleScene->getPole()->setType(index);
 }
 
+
 void PoleDesigner::onSaveBtnClicked()
 {
 	QFileDialog dialog(this);
@@ -714,6 +716,8 @@ void PoleDesigner::onSaveBtnClicked()
 		QString filePath = dialog.selectedFiles().first();
 		// qDebug() << "Saving to: " << filePath;
 		PoleJsonSerializer::toJsonFile(ui->poleScene->getPole(), filePath);
+
+		// MySQLManager::savePole(ui->poleScene->getPole());
 	}
 }
 

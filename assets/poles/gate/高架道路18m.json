@@ -7242,12 +7242,12 @@
             "position": [
                 -6495,
                 7200,
-                297.5
+                -297.5
             ],
             "rotation": [
                 90,
                 0,
-                0
+                180
             ],
             "textureEdits": [
                 true,
@@ -7273,12 +7273,12 @@
             "position": [
                 -2185,
                 7200,
-                297.5
+                -297.5
             ],
             "rotation": [
                 90,
                 0,
-                0
+                180
             ],
             "textureEdits": [
                 true,

@@ -19,6 +19,8 @@ static TemplateCfg::ColorType Char2ColorType(char c)
         return TemplateCfg::ColorType::ColorType_Y;
     case 'Z':
         return TemplateCfg::ColorType::ColorType_Z;
+    case 'O':
+        return TemplateCfg::ColorType::ColorType_O;
     default:
         return TemplateCfg::ColorType::ColorType_B;
     }

@@ -10,6 +10,8 @@
 
 #include <QSurfaceFormat>
 
+#include <mysql/MySQLManager.hpp>
+
 int main(int argc, char *argv[])
 {
 #ifndef _DEBUG
@@ -23,6 +25,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
 
     QApplication app(argc, argv);
+
+    // MySQLManager::initialize();
+    // MySQLManager::initialize();
+    // MySQLManager::initialize();
 
     QString cd = QCoreApplication::applicationDirPath();
     

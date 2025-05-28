@@ -57,7 +57,7 @@ void TextureSetPanel::initTemplateSelector()
 
 void TextureSetPanel::initValidators()
 {
-    characterValidator.setRegularExpression(QRegularExpression("."));
+    characterValidator.setRegularExpression(QRegularExpression(".*"));
 
     letterValidator.setRegularExpression(QRegularExpression("[a-zA-Z ]*"));
 

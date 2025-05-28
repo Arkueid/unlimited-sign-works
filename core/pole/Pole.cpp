@@ -1,6 +1,6 @@
-#include <pole/Pole.hpp>
+﻿#include <pole/Pole.hpp>
 
-Pole::Pole(): parts(0), type(PoleType_Single)
+Pole::Pole(): parts(0), type(PoleType_Single), id(0)
 {
 }
 
@@ -45,4 +45,14 @@ void Pole::removePart(Part *part)
 {
     parts.erase(std::find(parts.begin(), parts.end(), part));
     delete part;
+}
+
+int Pole::getId()
+{
+    return id;
+}
+
+void Pole::setId(int id)
+{
+    this->id = id;
 }

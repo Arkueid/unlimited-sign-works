@@ -87,6 +87,7 @@
         "coroutine": "cpp",
         "qmessagebox": "cpp",
         "qfile": "cpp",
-        "qopenglfunctions": "cpp"
+        "qopenglfunctions": "cpp",
+        "qsqldatabase": "cpp"
     }
 }

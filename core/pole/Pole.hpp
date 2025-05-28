@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <string>
 
@@ -16,6 +16,8 @@ enum PoleType
 
 class Pole
 {
+private:
+    int id;
 protected:
     int type;
     std::string name;
@@ -38,4 +40,8 @@ public:
     void addPart(Part* part);
 
     void removePart(Part* part);
+
+    int getId();
+
+    void setId(int id);
 };
