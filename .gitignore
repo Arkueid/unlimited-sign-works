@@ -5,4 +5,7 @@ x64
 shit/a.cpp
 shit/a.h
 
+shit/c.cpp
+shit/c.h
+
 # git rm --cached shit -r
