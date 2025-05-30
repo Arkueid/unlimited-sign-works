@@ -2,4 +2,7 @@ build
 x64
 .qt
 
-docs
+shit/a.cpp
+shit/a.h
+
+# git rm --cached shit -r
