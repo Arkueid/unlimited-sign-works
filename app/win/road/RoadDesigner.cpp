@@ -13,8 +13,12 @@
 #include <climits>
 #include <algorithm>
 
-RoadDesigner::RoadDesigner(QWidget *parent, const QString &fileName) : QWidget(parent), ui(new Ui::RoadDesigner), minDateTime(LLONG_MAX), maxDateTime(LLONG_MIN),
-                                                                       roadFileName(fileName)
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <mysql/MySQLManager.hpp>
+
+RoadDesigner::RoadDesigner(QWidget *parent, const QString &fileName, int roadId) : QWidget(parent), ui(new Ui::RoadDesigner), minDateTime(LLONG_MAX), maxDateTime(LLONG_MIN),
+                                                                       roadFileName(fileName), roadId(roadId)
 {
     ui->setupUi(this);
 
@@ -99,23 +103,59 @@ void RoadDesigner::onRemovePoleRequested()
 
 void RoadDesigner::onSaveBtnClicked()
 {
-    QFileDialog dialog(this);
-    dialog.setNameFilter("Road JSON (*.json)");
-    dialog.setAcceptMode(QFileDialog::AcceptSave);
-    dialog.setFileMode(QFileDialog::AnyFile);
-    QDir dir = QDir::current();
-    dir.cdUp();
-    dir.cdUp();
-    // ../../assets/roads
-    QString dirPath = dir.absoluteFilePath("assets/roads");
-
-    dialog.setDirectory(dirPath);
-    dialog.selectFile(ui->roadName->text() + ".json");
-    if (dialog.exec())
+    QString roadName = ui->roadName->text();
+    if (roadName.isEmpty())
     {
-        QString filePath = dialog.selectedFiles().first();
-        // qDebug() << "Saving to: " << filePath;
-        toJsonFile(filePath);
+        QMessageBox::warning(this, "错误", "请输入道路名称");
+        return;
+    }
+
+    QSqlDatabase db = MySQLManager::getDatabase();
+    QSqlQuery query(db);
+    query.prepare("select id from road where name = ?");
+    query.addBindValue(roadName);
+    if (!query.exec())
+    {
+        qDebug() << query.lastError();
+        return;
+    }
+
+    if (query.next())
+    {
+        const int id = query.value(0).toInt();
+        if (QMessageBox::Ok != QMessageBox::question(this, "警告", "道路已存在，是否覆盖？"))
+        {
+            return;
+        }
+
+        QJsonObject root;
+        toJson(root);
+        QJsonDocument doc(root);
+        query.prepare("update road set json_data = ? where id = ?");
+        query.addBindValue(QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+        query.addBindValue(id);
+        if (!query.exec())
+        {
+            qDebug() << query.lastError();
+        }
+        return;
+    }
+    else 
+    {
+        QJsonObject root;
+        toJson(root);
+        QJsonDocument doc(root);
+        query.prepare("insert into road(name, json_data) values(?, ?)");
+        query.addBindValue(roadName);
+        query.addBindValue(QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+        if (!query.exec())
+        {
+            qDebug() << query.lastError();
+        }
+        else 
+        {
+            QMessageBox::information(this, "提示", "道路保存成功");
+        }
     }
 }
 
@@ -254,12 +294,27 @@ void RoadDesigner::addPole(Pole *pole, float peg, bool isLeft, const QString &sl
 
 void RoadDesigner::onSceneInitialized()
 {
-    if (roadFileName.isEmpty())
+    if (!roadFileName.isEmpty())
     {
-        return;
+        fromJsonFile(roadFileName);
     }
-
-    fromJsonFile(roadFileName);
+    else if (roadId > 0)
+    {
+        QSqlDatabase db = MySQLManager::getDatabase();
+        QSqlQuery query(db);
+        query.prepare("select json_data from road where id = ?");
+        query.addBindValue(roadId);
+        if (query.exec())
+        {
+            query.next();
+            QJsonDocument doc = QJsonDocument::fromJson(query.value(0).toByteArray());
+            fromJson(doc.object());
+        }
+        else 
+        {
+            qDebug() << query.lastError();
+        }
+    }
 }
 
 void RoadDesigner::onEditBtnClicked()

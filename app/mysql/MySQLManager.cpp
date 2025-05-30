@@ -1,9 +1,5 @@
 ﻿#include "MySQLManager.hpp"
 
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QMessageBox>
-
 void MySQLManager::initialize()
 {
     if (!QSqlDatabase::contains("mysql"))
@@ -22,7 +18,7 @@ void MySQLManager::initialize()
             return;
         }
 
-        db.exec("insert ignore into roadbim.texture (id, path, is_private) values"
+        db.exec("insert ignore into texture (id, path, is_private) values"
                  "(0, 'panel/CN_road_sign.png', false),"
                  "(1, 'panel/CN_road_sign2.png', false),"
                  "(2, 'metal/metal1.bmp', false),"
@@ -37,12 +33,7 @@ void MySQLManager::initialize()
     }
 }
 
-void MySQLManager::savePole(Pole *pole)
+QSqlDatabase MySQLManager::getDatabase()
 {
-    QSqlDatabase db = QSqlDatabase::database("mysql");
-
-}
-
-void MySQLManager::saveRoad(const QString &name, QVector<Pole *> &poles)
-{
+    return QSqlDatabase::database("mysql");
 }

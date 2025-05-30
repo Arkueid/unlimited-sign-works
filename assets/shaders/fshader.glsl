@@ -30,7 +30,7 @@ void main()
     vec3 diffuse = diff * lightColor * texColor;
 
     // 镜面光计算
-    vec3 viewDir = normalize(cameraPos - FragPos);
+    vec3 viewDir = normalize(lightPos - FragPos);
     vec3 reflectDir = reflect(-lightDirNorm, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = spec * lightColor * texColor;

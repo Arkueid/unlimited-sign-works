@@ -18,6 +18,8 @@ class RoadDesigner : public QWidget
 
     const QString& roadFileName;
 
+    int roadId;
+
 private slots:
     void onAddPoleRequested();
 
@@ -40,7 +42,7 @@ private slots:
     void onPoleModified(Pole* pole, float peg, const QString& slot, bool isLeft);
 
 public:
-    RoadDesigner(QWidget *parent = nullptr, const QString& fileName = "");
+    RoadDesigner(QWidget *parent = nullptr, const QString& fileName = "", int roadId = -1);
     ~RoadDesigner() override;
 
     QLineEdit* getRoadNameLineEdit();

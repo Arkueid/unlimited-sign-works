@@ -70,7 +70,7 @@ private slots:
 	void onSceneInitialized();
 
 public:
-	explicit PoleDesigner(QWidget* parent = nullptr, const QString& poleJsonPath = "");
+	explicit PoleDesigner(QWidget* parent = nullptr, const QString& poleJsonPath = "", int poleId = -1);
 	~PoleDesigner() override;
 
 	QLineEdit* getPoleNameLineEdit();

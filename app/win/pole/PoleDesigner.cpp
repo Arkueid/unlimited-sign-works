@@ -10,8 +10,9 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <mysql/MySQLManager.hpp>
+#include <QJsonDocument>
 
-PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidget(parent),
+PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath, int poleId) : QWidget(parent),
 																		   ui(new Ui::PoleDesigner),
 																		   cube(nullptr),
 																		   cylinder(nullptr),
@@ -23,7 +24,7 @@ PoleDesigner::PoleDesigner(QWidget *parent, const QString &poleJsonPath) : QWidg
 {
 	ui->setupUi(this);
 
-	ui->poleScene->loadPole(poleJsonPath);
+	ui->poleScene->loadPole(poleJsonPath, poleId);
 
 	ui->leftSplitter->setStretchFactor(0, 1);
 	ui->leftSplitter->setStretchFactor(1, 8);
@@ -678,46 +679,57 @@ void PoleDesigner::onPoleTypeChanged(int index)
 	ui->poleScene->getPole()->setType(index);
 }
 
-
 void PoleDesigner::onSaveBtnClicked()
 {
-	QFileDialog dialog(this);
-	dialog.setNameFilter("Pole JSON (*.json)");
-	dialog.setAcceptMode(QFileDialog::AcceptSave);
-	dialog.setFileMode(QFileDialog::AnyFile);
-	QDir dir = QDir::current();
-	dir.cdUp();
-	dir.cdUp();
-	// ../../assets/poles
 	int type = ui->poleType->currentIndex();
-	QString dirPath = dir.absoluteFilePath("assets/poles");
-	switch (type)
+	const QString &name = ui->poleName->text();
+	
+	QSqlDatabase db = MySQLManager::getDatabase();
+	QSqlQuery query(db);
+	query.prepare("select id from road_sign_meta where name = ? and type = ?");
+	query.addBindValue(name);
+	query.addBindValue(type);
+	if (!query.exec())
 	{
-	case PoleType_Single:
-		dirPath += "/single";
-		break;
-	case PoleType_Double:
-		dirPath += "/double";
-		break;
-	case PoleType_Gate:
-		dirPath += "/gate";
-		break;
-	case PoleType_SingleArm:
-		dirPath += "/single-arm";
-		break;
-	case PoleType_DoubleArm:
-		dirPath += "/double-arm";
-		break;
+		qDebug() << query.lastError().text();
+		return;
 	}
-	dialog.setDirectory(dirPath);
-	dialog.selectFile(ui->poleScene->getPoleName() + ".json");
-	if (dialog.exec())
-	{
-		QString filePath = dialog.selectedFiles().first();
-		// qDebug() << "Saving to: " << filePath;
-		PoleJsonSerializer::toJsonFile(ui->poleScene->getPole(), filePath);
+	QJsonObject json;
+	PoleJsonSerializer::toJson(ui->poleScene->getPole(), json);
 
-		// MySQLManager::savePole(ui->poleScene->getPole());
+	QJsonDocument doc(json);
+	if (query.next())
+	{
+		const int id = query.value(0).toInt();
+		if (QMessageBox::StandardButton::Ok != QMessageBox::warning(this, "提示", "同名标识牌已存在，是否覆盖？", QMessageBox::StandardButton::Ok, QMessageBox::StandardButton::Cancel))
+		{
+			query.prepare("update road_sign_meta set name = ?, type = ?, json_data = ? where id = ?");
+			query.addBindValue(name);
+			query.addBindValue(type);
+			query.addBindValue(id);
+			query.addBindValue(doc.toJson());
+			if (!query.exec())
+			{
+				qDebug() << query.lastError().text();
+				return;
+			}
+		}
+	}
+	else
+	{
+		query.prepare("insert into road_sign_meta(name, type, json_data) values(?, ?, ?)");
+		query.addBindValue(name);
+		query.addBindValue(type);
+		query.addBindValue(QString::fromUtf8(doc.toJson(QJsonDocument::Compact)));
+		if (!query.exec())
+		{
+			qDebug() << query.lastError().text();
+			return;
+		}
+		else 
+		{
+			QMessageBox::information(this, "提示", "保存成功！");
+		}
 	}
 }
 

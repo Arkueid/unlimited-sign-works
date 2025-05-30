@@ -21,6 +21,9 @@ public slots:
     void onTexBaseRequested();
 
     void onTabClosed(int index);
+
+    void onOpenRoadBaseRequested();
+    void onOpenPoleBaseRequested();
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

@@ -7,6 +7,9 @@
 #include <win/pole/PoleDesigner.hpp>
 #include <win/road/RoadDesigner.hpp>
 
+#include <win/DBDialog.hpp>
+#include <mysql/MySQLManager.hpp>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -31,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(ui->actionOpenRoad, &QAction::triggered, this, &MainWindow::onOpenRoadRequested);
     connect(ui->clbOpenRoad, &QCommandLinkButton::clicked, this, &MainWindow::onOpenRoadRequested);
+
+    connect(ui->actionOpenRoadBase, &QAction::triggered, this, &MainWindow::onOpenRoadBaseRequested);
+    connect(ui->actionOpenPoleBase, &QAction::triggered, this, &MainWindow::onOpenPoleBaseRequested);
 }
 
 MainWindow::~MainWindow()
@@ -142,4 +148,57 @@ void MainWindow::onTabClosed(int index)
     // qDebug() << "Closing tab " << index;
     ui->tabs->removeTab(index);
     widget->deleteLater();
+}
+void MainWindow::onOpenRoadBaseRequested()
+{
+    QVector<QPair<int, QString>> roads;
+    QSqlDatabase db = MySQLManager::getDatabase();
+    QSqlQuery query(db);
+    query.exec("select id, name from road");
+    while (query.next())
+    {
+        roads.push_back(QPair<int, QString>(query.value(0).toInt(), query.value(1).toString()));
+    }
+    DBDialog dialog(roads, this);
+    dialog.setWindowTitle("道路");
+    connect(&dialog, &DBDialog::openBtnClicked, this,
+            [this](int id)
+            {
+                RoadDesigner *designer = new RoadDesigner(ui->tabs, "", id);
+                const int index = ui->tabs->addTab(designer, "Open Road");
+                connect(designer->getRoadNameLineEdit(), &QLineEdit::textChanged,
+                        [=](const QString &name)
+                        {
+                            ui->tabs->setTabText(index, name);
+                        });
+                ui->tabs->setCurrentIndex(index);
+            });
+    dialog.exec();
+}
+
+void MainWindow::onOpenPoleBaseRequested()
+{
+    QVector<QPair<int, QString>> poles;
+    QSqlDatabase db = MySQLManager::getDatabase();
+    QSqlQuery query(db);
+    query.exec("select id, name from road_sign_meta");
+    while (query.next())
+    {
+        poles.push_back(QPair<int, QString>(query.value(0).toInt(), query.value(1).toString()));
+    }
+    DBDialog dialog(poles, this);
+    dialog.setWindowTitle("标识牌");
+    connect(&dialog, &DBDialog::openBtnClicked, this,
+            [this](int id)
+            {
+                PoleDesigner *designer = new PoleDesigner(ui->tabs, "", id);
+                const int index = ui->tabs->addTab(designer, designer->getPoleNameLineEdit()->text());
+                connect(designer->getPoleNameLineEdit(), &QLineEdit::textChanged,
+                        [=](const QString &name)
+                        {
+                            ui->tabs->setTabText(index, name);
+                        });
+                ui->tabs->setCurrentIndex(index);
+            });
+    dialog.exec();
 }

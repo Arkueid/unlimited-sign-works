@@ -88,6 +88,7 @@
         "qmessagebox": "cpp",
         "qfile": "cpp",
         "qopenglfunctions": "cpp",
-        "qsqldatabase": "cpp"
+        "qsqldatabase": "cpp",
+        "deque": "cpp"
     }
 }

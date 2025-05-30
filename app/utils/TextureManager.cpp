@@ -1,6 +1,6 @@
 #include <utils/TextureManager.hpp>
 #include <QDebug>
-#include <sqlite3/SQLite.hpp>
+#include <mysql/MySQLManager.hpp>
 #include <QFile>
 #include <QDir>
 #include <QMessageBox>
@@ -97,24 +97,22 @@ void TextureManager::loadTexturesPaths()
 {
     texturePaths.clear();
 
-    sqlite3 *db = SQLite::getInstance();
+    QSqlDatabase db = MySQLManager::getDatabase();
 
-    sqlite3_stmt *stmt;
-    if (sqlite3_prepare(db, "select id, name, is_private from texture order by id asc", -1, &stmt, nullptr) == SQLITE_OK)
+    QSqlQuery query(db);
+    if (!query.exec("select * from texture order by id asc"))
     {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            const int id = sqlite3_column_int(stmt, 0);
-            bool unique = sqlite3_column_int(stmt, 2) == 1;
-            texturePaths[id] = {QString::fromUtf8(reinterpret_cast<const char *>(sqlite3_column_text(stmt, 1))), unique};
-        }
+        qDebug() << "Error while loading textures: " << query.lastError().text();
+        return;
     }
-    else
+
+    while (query.next()) 
     {
-        const char *errMsg = sqlite3_errmsg(db);
-        qDebug() << "Error while loading texture paths: " << errMsg;
+        const int id = query.value(0).toInt();
+        const QString &textureName = query.value(1).toString();
+        const bool unique = query.value(2).toBool();
+        texturePaths[id] = {textureName, unique};
     }
-    sqlite3_finalize(stmt);
 }
 
 int TextureManager::registerTexture(const QString &externalPath, const QString &textureName, bool unique)
@@ -131,53 +129,27 @@ int TextureManager::registerTexture(const QString &externalPath, const QString &
         QFile::copy(externalPath, "../../assets/textures/" + textureName);
     }
 
-    sqlite3 *db = SQLite::getInstance();
+    QSqlDatabase db = MySQLManager::getDatabase();
 
     std::string textureNameStr = textureName.toUtf8().toStdString();
-    sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, "insert into texture (name, is_private) values (?, ?);", -1, &stmt, nullptr) == SQLITE_OK)
+
+    QSqlQuery  query(db);
+    query.prepare("insert into texture (path, is_private) values (?, ?);");
+    query.bindValue(0, textureName);
+    query.bindValue(1, unique);
+    if (query.exec()) 
     {
-        sqlite3_bind_text(stmt, 1, textureNameStr.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_int(stmt, 2, unique ? 1 : 0);
-        int ret = sqlite3_step(stmt);
-        if (ret != SQLITE_DONE)
-        {
-            const char *errMsg = sqlite3_errmsg(db);
-            qDebug() << "Error while registering texture: " << errMsg;
-        }
-        sqlite3_finalize(stmt);
+        int id = query.lastInsertId().toInt();
+        texturePaths[id] = {textureName, unique};
+        emit texturesSignals->texturesUpdated();
+        return id;
     }
-    else
+    else 
     {
-        const char *errMsg = sqlite3_errmsg(db);
-        qDebug() << "Error while registering texture: " << errMsg;
+        qDebug() << "Error while registering texture: " << query.lastError().text();
     }
 
-    int id;
-    if (sqlite3_prepare_v2(db, "select id from texture where name = ?;", -1, &stmt, nullptr) == SQLITE_OK)
-    {
-        sqlite3_bind_text(stmt, 1, textureNameStr.c_str(), -1, SQLITE_STATIC);
-        if (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            id = sqlite3_column_int(stmt, 0);
-        }
-        else
-        {
-            const char *errMsg = sqlite3_errmsg(db);
-            qDebug() << "Error while getting texture id: " << errMsg;
-        }
-        sqlite3_finalize(stmt);
-    }
-    else
-    {
-        const char *errMsg = sqlite3_errmsg(db);
-        qDebug() << "Error while getting texture id: " << errMsg;
-    }
-
-    texturePaths[id] = {textureName, unique};
-
-    emit texturesSignals->texturesUpdated();
-    return id;
+    return -1;
 }
 bool TextureManager::unregisterTexture(const QString &textureName)
 {
@@ -202,25 +174,13 @@ bool TextureManager::unregisterTexture(const QString &textureName)
         QFile::remove(filePath);
     }
 
-    sqlite3 *db = SQLite::getInstance();
-    sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, "delete from texture where name = ?;", -1, &stmt, nullptr) == SQLITE_OK)
+    QSqlDatabase db = MySQLManager::getDatabase();
+    QSqlQuery query(db);
+    query.prepare("delete from texture where id = ?");
+    query.bindValue(0, key);
+    if (!query.exec())
     {
-        std::string textureNameStr = textureName.toUtf8().toStdString();
-        sqlite3_bind_text(stmt, 1, textureNameStr.c_str(), -1, SQLITE_STATIC);
-        int ret = sqlite3_step(stmt);
-        if (ret != SQLITE_DONE)
-        {
-            const char *errMsg = sqlite3_errmsg(db);
-            qDebug() << "Error while unregistering texture: " << errMsg;
-            return false;
-        }
-        sqlite3_finalize(stmt);
-    }
-    else
-    {
-        const char* errMsg = sqlite3_errmsg(db);
-        qDebug() << "Error while unregistering texture: " << errMsg;
+        qDebug() << "Error while unregistering texture: " << query.lastError().text();
         return false;
     }
 

@@ -182,6 +182,7 @@
     <addaction name="actionNewPole"/>
     <addaction name="separator"/>
     <addaction name="actionOpenPole"/>
+    <addaction name="actionOpenPoleBase"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -196,6 +197,7 @@
     </property>
     <addaction name="actionNewRoad"/>
     <addaction name="actionOpenRoad"/>
+    <addaction name="actionOpenRoadBase"/>
    </widget>
    <addaction name="menu_3"/>
    <addaction name="menu"/>
@@ -235,13 +237,35 @@
    </property>
   </action>
   <action name="actionNewRoad">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
+   </property>
    <property name="text">
     <string>新建</string>
    </property>
   </action>
   <action name="actionOpenRoad">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+   </property>
    <property name="text">
     <string>打开</string>
+   </property>
+  </action>
+  <action name="actionOpenRoadBase">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::NetworkWireless"/>
+   </property>
+   <property name="text">
+    <string>打开库</string>
+   </property>
+  </action>
+  <action name="actionOpenPoleBase">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::NetworkWireless"/>
+   </property>
+   <property name="text">
+    <string>打开库</string>
    </property>
   </action>
  </widget>

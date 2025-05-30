@@ -13,6 +13,9 @@
 #include <QDir>
 #include <QMessageBox>
 
+#include <mysql/MySQLManager.hpp>
+#include <QJsonDocument>
+
 PoleAddPanel::PoleAddPanel(QWidget *parent, bool modify) : QDialog(parent), ui(new Ui::PoleAddPanel), doubleValidator(new QDoubleValidator), bases(0),
 														   textureSelcted(false), poleLoaded(false), slotValidator(new QRegularExpressionValidator),
 														   modify(modify), poleTypeChanged(false), baseTypeChanged(false), poleChanged(true)
@@ -231,37 +234,23 @@ void PoleAddPanel::onPoleTypeChanged(int index)
 
 	hidePanels();
 
-	QDir dir = QDir::current();
-	dir.cdUp();
-	dir.cdUp();
-	dirPath = dir.absoluteFilePath("assets/poles");
-	switch (index)
-	{
-	case PoleType_Single:
-		dirPath += "/single";
-		break;
-	case PoleType_Double:
-		dirPath += "/double";
-		break;
-	case PoleType_Gate:
-		dirPath += "/gate";
-		break;
-	case PoleType_SingleArm:
-		dirPath += "/single-arm";
-		break;
-	case PoleType_DoubleArm:
-		dirPath += "/double-arm";
-		break;
-	}
+	poleType = index;
+
 	ui->poleSelector->disconnect();
 	ui->poleSelector->clear();
-	dir = QDir(dirPath);
-	for (auto &f : dir.entryList(QDir::Files))
+	
+	QSqlDatabase db = MySQLManager::getDatabase();
+	QSqlQuery query(db);
+	query.prepare("select name from road_sign_meta where type = ?");
+	query.bindValue(0, index);
+	if (!query.exec())
 	{
-		if (f.endsWith(".json"))
-		{
-			ui->poleSelector->addItem(f.replace(".json", ""));
-		}
+		qDebug() << query.lastError();
+		return;
+	}
+	while (query.next())
+	{
+		ui->poleSelector->addItem(query.value(0).toString());
 	}
 
 	ui->poleSelector->setPlaceholderText("未选择");
@@ -280,9 +269,20 @@ void PoleAddPanel::onPoleSelected(int index)
 {
 	bases.clear();
 
-	QDir dir(dirPath);
-
-	Pole *pole = PoleJsonSerializer::fromJsonFile(dir.absoluteFilePath(ui->poleSelector->currentText() + ".json"));
+	QSqlDatabase db = MySQLManager::getDatabase();
+	QSqlQuery query(db);
+	query.prepare("select json_data from road_sign_meta where name = ? and type = ?");
+	query.bindValue(0, ui->poleSelector->currentText());
+	query.bindValue(1, poleType);
+	if (!query.exec())
+	{
+		qDebug() << query.lastError();
+		return;
+	}
+	query.next();
+	QJsonDocument jsonDoc = QJsonDocument::fromJson(query.value(0).toByteArray());
+	QJsonObject json = jsonDoc.object();
+	Pole *pole = PoleJsonSerializer::fromJson(json);
 
 	int didx = 0;
 	for (auto &part : pole->getParts())

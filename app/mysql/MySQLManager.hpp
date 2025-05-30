@@ -7,6 +7,8 @@
 #include <base/RoundedCube.hpp>
 #include <base/RoundedRegTriPrism.hpp>
 
+#include <QSqlDatabase>
+#include <QSqlError>
 #include <QSqlQuery>
 
 class MySQLManager 
@@ -14,7 +16,5 @@ class MySQLManager
 
 public:
     static void initialize();
-    static void savePole(Pole* pole);
-    static void saveRoad(const QString& name, QVector<Pole*>& poles);
-
+    static QSqlDatabase getDatabase();
 };

@@ -4,7 +4,7 @@
 
 #include <win/MainWindow.hpp>
 
-#include <sqlite3/SQLite.hpp>
+#include <mysql/MySQLManager.hpp>
 
 #include <utils/TextureManager.hpp>
 
@@ -26,14 +26,10 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-    // MySQLManager::initialize();
-    // MySQLManager::initialize();
-    // MySQLManager::initialize();
+    MySQLManager::initialize();
 
     QString cd = QCoreApplication::applicationDirPath();
     
-    SQLite::initialize(cd + "/../../settings.db");
-
     TextureManager::initSignals();
     TextureManager::loadTexturesPaths();
 
@@ -43,7 +39,6 @@ int main(int argc, char *argv[])
     QApplication::connect(&app, &QApplication::aboutToQuit,
                           []()
                           {
-                              SQLite::dispose();
                               TextureManager::destroySignals();
                               TextureManager::checkTextureLeak();
                           });

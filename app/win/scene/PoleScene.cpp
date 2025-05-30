@@ -2,6 +2,7 @@
 
 #include <QTime>
 #include <QKeyEvent>
+#include <QJsonDocument>
 
 #include <utils/TextureManager.hpp>
 #include <utils/VertexBufferManager.hpp>
@@ -10,6 +11,8 @@
 #include <pole/Pole89.hpp>
 
 #include <utils/PoleJsonSerializer.hpp>
+
+#include <mysql/MySQLManager.hpp>
 
 PoleScene::PoleScene(QWidget *parent) : QOpenGLWidget(parent),
                                         camera(QVector3D(0.0f, 0.0f, 1.0f), QVector3D(0.0f, 1.0f, 0.0f), -90.0f, 0.0f),
@@ -43,16 +46,34 @@ PoleScene::~PoleScene()
     doneCurrent();
 }
 
-void PoleScene::loadPole(const QString &poleJsonPath)
+void PoleScene::loadPole(const QString &poleJsonPath, int poleId)
 {
-    if (poleJsonPath.isEmpty())
+    if (!poleJsonPath.isEmpty())
+    {
+        pole = PoleJsonSerializer::fromJsonFile(poleJsonPath);
+    }
+    else if (poleId > 0)
+    {
+        QSqlDatabase db = MySQLManager::getDatabase();
+        QSqlQuery query(db);
+        query.prepare("select json_data from road_sign_meta where id = ?");
+        query.addBindValue(poleId);
+        if (!query.exec())
+        {
+            qDebug() << "PoleScene::loadPole: " << query.lastError().text();
+        }
+        else 
+        {
+            query.next();
+            QJsonDocument doc = QJsonDocument::fromJson(query.value(0).toByteArray());
+            QJsonObject obj = doc.object();
+            pole = PoleJsonSerializer::fromJson(obj);
+        }
+    }
+    else 
     {
         pole = new Pole();
         pole->setName("New Pole");
-    }
-    else
-    {
-        pole = PoleJsonSerializer::fromJsonFile(poleJsonPath);
     }
 }
 

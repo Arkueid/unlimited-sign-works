@@ -96,6 +96,8 @@ private:
 
     QString dirPath;
 
+    int poleType;
+
     QStringList cubeSizes;
     QStringList cylinderSizes;
 

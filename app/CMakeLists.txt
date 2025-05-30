@@ -35,11 +35,6 @@ add_executable(usw
     win/MainWindow.hpp
     win/MainWindow.cpp
 
-    sqlite3/sqlite3.h
-    sqlite3/sqlite3.c
-    sqlite3/SQLite.hpp
-    sqlite3/SQLite.cpp
-
     mysql/MySQLManager.hpp
     mysql/MySQLManager.cpp
 
@@ -100,6 +95,10 @@ add_executable(usw
     win/road/DateTimeDialog.cpp
 
     win/road/Common.hpp
+
+    win/DBDialog.ui
+    win/DBDialog.hpp
+    win/DBDialog.cpp
 
     logo.rc
 )

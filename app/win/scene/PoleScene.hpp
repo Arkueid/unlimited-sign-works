@@ -51,7 +51,7 @@ public:
     explicit PoleScene(QWidget *parent = nullptr);
     ~PoleScene() override;
 
-    void loadPole(const QString& poleJsonPath);
+    void loadPole(const QString& poleJsonPath, int poleId = -1);
 
     void selectPart(PartDrawable* drawable);
 
