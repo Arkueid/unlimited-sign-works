@@ -21,7 +21,7 @@ void BoardScene::paintEvent(QPaintEvent *event)
     {
         return;
     }
-    
+
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing, true);
 
@@ -188,42 +188,35 @@ const QString &BoardScene::getText(int index) const
 
 void BoardScene::exportImage(const QString &path)
 {
-
+    // 设置图片格式
     QImage image(originImage.width() * 1.1, originImage.height() * 1.1, QImage::Format_ARGB32);
-
     QPainter painter(&image);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing, true);
-
     QPixmap scaledSrc = originImage.scaled(image.width(), image.height(), Qt::KeepAspectRatio);
-    painter.drawPixmap(0, 0, scaledSrc);
-
+    painter.drawPixmap(0, 0, scaledSrc); // 绘制底图
     if (cfg != nullptr)
     {
         float scaleX = image.width() / cfg->getWidth();
         float scaleY = image.height() / cfg->getHeight();
-
         const QVector<TemplateCfg::Rect *> &rects = cfg->getRects();
-
         for (int i = 0; i < texts.size(); i++)
-        {
-            TemplateCfg::Rect *rect = rects[i];
-
-            const QString &text = texts[i];
+        {                                       // 逐一绘制文字背景和文本
+            TemplateCfg::Rect *rect = rects[i]; // 获取文字对应的矩形区域
+            const QString &text = texts[i];     // 获取文字
             if (!text.isEmpty())
             {
-                QRect fontRect(rect->x * scaleX - 2, rect->y * scaleY - 2, rect->w * scaleX + 4, rect->h * scaleY + 4);
-                painter.fillRect(fontRect, getColor(rect->background));
-
-                painter.setPen(getColor(rect->foreground));
+                QRect fontRect(rect->x * scaleX - 2, rect->y * scaleY - 2,
+                               rect->w * scaleX + 4, rect->h * scaleY + 4); // 校正矩形区域长宽误差
+                painter.fillRect(fontRect, getColor(rect->background));     // 填充背景色
+                painter.setPen(getColor(rect->foreground));                 // 设置文本颜色
                 QFont font = painter.font();
-                font.setPointSize(rect->h * scaleY * 0.5);
+                font.setPointSize(rect->h * scaleY * 0.5); // 设置字体大小
                 painter.setFont(font);
-                painter.drawText(fontRect, Qt::AlignCenter, text);
+                painter.drawText(fontRect, Qt::AlignCenter, text); // 绘制文字
             }
         }
     }
-
-    image.save(path);
+    image.save(path); // 保存图片为.png文件
 }
 
 TemplateCfg::RectType BoardScene::getRectType(int index) const

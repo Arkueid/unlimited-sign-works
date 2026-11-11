@@ -8,7 +8,7 @@ constexpr long long NOT_COMPLETE = -1;
 struct PoleRoadData
 {
     long long completeDateTime; // 完成时间
-    QString slot; // 编号
+    QString slot; // 桩号文本
     float peg; // 桩号
     bool isLeft; // 是否面向左侧行车
 };

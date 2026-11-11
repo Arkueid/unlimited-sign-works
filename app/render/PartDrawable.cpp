@@ -36,23 +36,23 @@ void PartDrawable::updatePart()
 }
 void PartDrawable::draw(QOpenGLShaderProgram& program, QMatrix4x4& transform)
 {
-	QMatrix4x4 model = transform * getModelMatrix();
-	program.setUniformValue("model", model);
-	program.setUniformValue("normalMatrix", model.normalMatrix());
-	vertexBuffer->bind();
-	glEnableVertexAttribArray(0);
+	QMatrix4x4 model = transform * getModelMatrix(); 
+	program.setUniformValue("model", model); // 设置部件位置
+	program.setUniformValue("normalMatrix", model.normalMatrix()); // 设置表面法线变换
+	vertexBuffer->bind(); // 绑定顶点缓冲对象
+	glEnableVertexAttribArray(0); // 指定三维坐标信息
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Vertex), (void*)0);
-	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(1); // 指定法线信息
 	glVertexAttribPointer(1, 3, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, nx));
-	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(2); // 指定纹理坐标信息
 	glVertexAttribPointer(2, 2, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, u));
 	const std::vector<int> textureRefs = part->getTextureRefs();
 	QOpenGLTexture* texture;
-	for (int i = 0; i < part->getDrawableCount(); i++)
+	for (int i = 0; i < part->getDrawableCount(); i++) // 逐一绘制几何面
 	{
 		glActiveTexture(GL_TEXTURE0);
-		texture = TextureManager::getTexture(textureRefs[i]);
-		texture->bind();
+		texture = TextureManager::getTexture(textureRefs[i]); // 从纹理管理器中获取纹理
+		texture->bind(); // 绑定纹理
 		glDrawArrays(GL_TRIANGLES, part->getDrawableOffset(i), part->getDrawableSize(i));
 		texture->release();
 	}

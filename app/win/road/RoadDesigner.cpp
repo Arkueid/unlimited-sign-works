@@ -325,14 +325,14 @@ void RoadDesigner::onEditBtnClicked()
     {
         return;
     }
-
+    // 获取选中的标识牌节点索引
     const int index = ui->nodeTree->indexOfTopLevelItem(item);
+    // 向编辑面板传递要修改的标识牌数据
     panel->setPole(ui->roadScene->getPoleDrawable(index)->getPole(),
         poleRoadData[index].slot.split("（").first(), poleRoadData[index].isLeft);
-
-    panel->show();
-
+    // 将面板的提交操作绑定到标识牌修改的业务逻辑上
     connect(panel, &PoleAddPanel::poleSubmitted, this, &RoadDesigner::onPoleModified);
+    panel->show();  // 显示标识牌编辑面板
 }
 
 void RoadDesigner::onPoleModified(Pole *pole, float peg, const QString &slot, bool isLeft)

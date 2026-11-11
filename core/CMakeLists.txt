@@ -21,10 +21,6 @@ add_library(core STATIC
     part/Part.cpp
 
     core.hpp
-        ../shit/a.cpp
-        ../shit/a.h
-        ../shit/c.cpp
-        ../shit/c.h
 )
 
 target_include_directories(core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

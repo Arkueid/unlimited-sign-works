@@ -14,10 +14,10 @@
 
 int main(int argc, char *argv[])
 {
-#ifndef _DEBUG
+#if 0
     // 抗锯齿，电脑有点掉帧了，暂时关闭
     QSurfaceFormat fmt;
-    fmt.setSamples(4);
+    fmt.setSamples(4);  // 四个采样点，图形边界处会更平滑
     QSurfaceFormat::setDefaultFormat(fmt);
 #endif
     // 所有窗口共享OpenGL上下文
@@ -28,13 +28,8 @@ int main(int argc, char *argv[])
 
     MySQLManager::initialize();
 
-    QString cd = QCoreApplication::applicationDirPath();
-    
     TextureManager::initSignals();
     TextureManager::loadTexturesPaths();
-
-    MainWindow w;
-    w.show();
 
     QApplication::connect(&app, &QApplication::aboutToQuit,
                           []()
@@ -42,6 +37,9 @@ int main(int argc, char *argv[])
                               TextureManager::destroySignals();
                               TextureManager::checkTextureLeak();
                           });
+
+    MainWindow w;
+    w.show();
 
     return app.exec();
 }

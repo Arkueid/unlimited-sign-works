@@ -99,7 +99,7 @@ void RoadScene::paintGL()
 
     roadScene->render(projection, view);
 
-    // axis.draw(projection, view);
+    axis.draw(projection, view);
 
     program.bind();
     program.setUniformValue("projection", projection);

@@ -172,14 +172,14 @@ Cylinder::Cylinder(float d, float h, float precision) : d(d), h(h), precision(pr
     indexCount = index;
 }
 
-Cylinder::~Cylinder()
+Cylinder::~Cylinder() // 圆柱体销毁时调用
 {
     instances.erase(std::find(instances.begin(), instances.end(), this));
     delete[] vertices;
 }
 
-Cylinder *Cylinder::create(float d, float h, float precision)
-{
+Cylinder *Cylinder::create(float d, float h, float precision) // 创建圆柱体
+{ 
     for (int i = 0; i < instances.size(); i++)
     {
         if (instances[i]->d == d && instances[i]->h == h && instances[i]->precision == precision)

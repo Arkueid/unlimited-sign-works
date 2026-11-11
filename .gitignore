@@ -1,11 +1,6 @@
 build
 x64
 .qt
-
-shit/a.cpp
-shit/a.h
-
-shit/c.cpp
-shit/c.h
-
-# git rm --cached shit -r
+assets/data
+.idea
+.vscode

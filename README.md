@@ -7,6 +7,10 @@
 
 基于 Qt 6.8.2 + OpenGL 3.3 的高速公路标识牌建模系统
 
+![main-page](./docs/main-page.png)
+
+![road-view](./docs/road-view.png)
+
 ![开始页](./docs/pv-开始页.png)
 
 ![标识牌建模1](./docs/pv-标识牌建模.png)
